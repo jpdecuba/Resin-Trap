@@ -16,6 +16,7 @@ public class Main extends Application {
         OverviewController overview = loader.getController();
         this.Stage = primaryStage;
         Scene scene = new Scene(root);
+        scene.getStylesheets().add("http://fonts.googleapis.com/css?family=Roboto");
         scene.getStylesheets().add("Resources/style.css");
         Stage.setTitle("Achmea");
         Stage.setScene(scene);
