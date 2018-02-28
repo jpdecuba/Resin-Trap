@@ -4,6 +4,7 @@ package HoneyPot.logging;
 import HoneyPot.honeyrj.HoneyRJ;
 import HoneyPot.lowinteraction.LIModuleThread;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -25,31 +26,34 @@ public class LogFile {
 	private String end;
 	private Date started;
 	private Date stopped;
+	private LIModuleThread loggingForThread;
 	
-//	public LogFile(LIModuleThread loggingForThread) throws LoggingException {
-//		_logRecords = new ArrayList<LogRecord>();
-//
-//		String filename = loggingForThread.getLoggingDirectory().getPath() + "\\" + loggingForThread.getProtocol() + "_" +loggingForThread.getStartedTime().getTime() + ".log";
-//		try {
-//			_logFilePrinter = new PrintStream(new FileOutputStream(filename, false));
-//		} catch (FileNotFoundException e) {
-//			throw new LoggingException("failed to create log file");
-//		}
-//	}
+	public LogFile(LIModuleThread loggingForThread) throws Exception {
+		this.loggingForThread = loggingForThread;
+		String path = System.getenv("APPDATA") + "/Honeypot/";
+		new File(path).mkdirs();
+		_logRecords = new ArrayList<LogRecord>();
+
+		String filename = path + loggingForThread.getProtocol() + "_" +loggingForThread.getStartedTime().getTime() + ".log";
+		try {
+			_logFilePrinter = new PrintStream(new FileOutputStream(filename, false));
+			setBeginningLogInfo();
+		} catch (FileNotFoundException e) {
+			throw new Exception("failed to create log file");
+		}
+	}
 	
 	/**
 	 * call upon the beginning of a connection to put basic information into the start of the log record
 	 * records a started logging time
-	 * @param start String to describe the start of the connection
 	 */
-	public void setBeginningLogInfo(String start) {
+	public void setBeginningLogInfo() {
 		started = new Date();
-		this.start = start;
-		
+
+		writeLogLine(loggingForThread.toString());
 		writeLogLine("***********************************************");
 		writeLogLine("*****Started at: " + started + "*******");
 		writeLogLine("TIMESTAMP,SRC_IP:PRT,DST_IP:PRT,PACKET");
-	
 	}
 
 	/**
@@ -64,12 +68,9 @@ public class LogFile {
 	/**
 	 * call upon the end of a connection to put basic information into the end of the log record
 	 * records a stopped logging time
-	 * @param end String to describe the end of the connection
 	 */
-	public void setEndingLogInfo(String end) {
-		this.end = end;
+	public void setEndingLogInfo() {
 		this.stopped = new Date();
-		writeLogLine(end);
 		writeLogLine("*****Stopped at: " + stopped + "*******");
 		writeLogLine("***********************************************");
 		closeLogFile();
@@ -102,7 +103,7 @@ public class LogFile {
 		
 		out.println("***********************************************");
 		out.println("*****Started at: " + started + "*******");
-		out.println(start);
+		//out.println(start);
 		out.println("TIMESTAMP,                   SRC_IP:PRT,    DST_IP:PRT,    PACKET");
 							
 		
@@ -125,6 +126,4 @@ public class LogFile {
 		_logFilePrinter.flush();
 		_logFilePrinter.close();
 	}
-	
-
 }

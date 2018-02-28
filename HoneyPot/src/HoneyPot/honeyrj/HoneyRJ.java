@@ -68,11 +68,11 @@ public class HoneyRJ {
 		_services = new HashMap<Integer, LIModule>();
 		//_logs = new HashMap<Integer, TreeMap<Date,LogFile>>();
 		
-		_logging_dir = new File(logDir + "rj_" + new Date().getTime() + "_log");
+		/*_logging_dir = new File(logDir + "rj_" + new Date().getTime() + "_log");
 		//File loggingDir = 
 		if(!_logging_dir.exists()) {
 			if(!_logging_dir.mkdir())		throw new HoneyRJException("Failed to create log directory");
-		}
+		}*/
 	}
 	
 	/**
