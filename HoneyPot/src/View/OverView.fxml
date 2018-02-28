@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchor" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.OverviewController">
+    <children>
+        <AnchorPane fx:id="menuPane" prefHeight="${menuPane.parent.height}" prefWidth="200.0" style="-fx-background-color: #282828;">
+            <children>
+                <JFXButton alignment="BASELINE_LEFT" buttonType="RAISED" graphicTextGap="15.0" layoutX="0" layoutY="0" mnemonicParsing="false" prefHeight="68.0" prefWidth="200.0" style="-fx-background-color: achmea; -fx-font-family: Roboto; -fx-font-size: 18; -fx-background-radius: 0;" text="Overview" textFill="WHITE">
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="HOME" size="22" strokeType="OUTSIDE" strokeWidth="0.0" />
+                    </graphic>
+                </JFXButton>
+                <JFXButton alignment="BASELINE_LEFT" buttonType="RAISED" graphicTextGap="15.0" layoutX="0" layoutY="68.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="200.0" style="-fx-background-color: achmea; -fx-font-family: Roboto; -fx-font-size: 18; -fx-background-radius: 0;" text="Services" textFill="WHITE">
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SERVER" size="22" strokeType="OUTSIDE" strokeWidth="0.0" />
+                    </graphic>
+                </JFXButton>
+            </children>
+        </AnchorPane>
+
+    </children>
+</AnchorPane>
