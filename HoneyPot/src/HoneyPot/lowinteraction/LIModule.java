@@ -4,11 +4,13 @@ package HoneyPot.lowinteraction;
 
 
 import HoneyPot.honeyrj.HoneyRJ;
+import HoneyPot.logging.LogConnection;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.TreeMap;
 
@@ -29,6 +31,12 @@ public class LIModule implements Runnable {
 	 * the socket that listens for connections
 	 */
 	private ServerSocket _server;
+
+	private ArrayList<LogConnection> logsfile = new ArrayList<>();
+
+	public void addLog(LogConnection logConnection){
+		logsfile.add(logConnection);
+	}
 	
 	/**
 	 * return the port this Module listens on (as defined by the protocol)
