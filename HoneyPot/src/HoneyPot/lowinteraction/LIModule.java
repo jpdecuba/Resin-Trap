@@ -10,9 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * An LIModule listens on a port specified by a LIProtocol and launches threads to handle client connections.
@@ -32,10 +30,9 @@ public class LIModule implements Runnable {
 	 */
 	private ServerSocket _server;
 
-	private ArrayList<LogConnection> logsfile = new ArrayList<>();
-
+	private Set<LogConnection> logsFile;
 	public void addLog(LogConnection logConnection){
-		logsfile.add(logConnection);
+		logsFile.add(logConnection);
 	}
 	
 	/**
@@ -86,6 +83,7 @@ public class LIModule implements Runnable {
 	public LIModule(LIProtocol protocol) {
 		_protocol = protocol;
 		//_logFiles = new TreeMap<Date, LogFile>();
+		logsFile = new HashSet<>();
 		_thread = null;
         numberConnections = 0; //might be used later.
 	}

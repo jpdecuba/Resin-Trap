@@ -1,10 +1,11 @@
 package HoneyPot.logging;
 
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class LogConnection {
+public class LogConnection implements Serializable {
 
 
     private InetAddress srcIP;

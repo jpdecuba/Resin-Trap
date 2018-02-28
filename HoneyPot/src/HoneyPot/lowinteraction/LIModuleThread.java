@@ -6,6 +6,7 @@ import HoneyPot.honeyrj.HoneyRJ;
 import HoneyPot.logging.LogConnection;
 import HoneyPot.logging.LogFile;
 import HoneyPot.logging.LogRecord;
+import javafx.application.Platform;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -237,6 +238,7 @@ public class LIModuleThread implements Runnable {
 		System.out.println(logs.message());
 		_parent.addLog(logs);
 		_logFile.setEndingLogInfo();
+		new Thread(new LISerializeThread(logs)).start();
 	}
 
 
