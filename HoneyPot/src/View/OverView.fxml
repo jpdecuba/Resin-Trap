@@ -5,42 +5,64 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.ToolBar?>
 <?import com.jfoenix.controls.JFXToolbar?>
+<?import javafx.scene.layout.HBox?>
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.OverviewController">
     <children>
-
-        <AnchorPane AnchorPane.topAnchor="0" fx:id="menuPane" prefHeight="${menuPane.parent.height}" prefWidth="260.0"
-                    style="-fx-background-color: achmea;">
+        <HBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0">
             <children>
-                <VBox AnchorPane.leftAnchor="0" alignment="CENTER" AnchorPane.topAnchor="100"
-                      AnchorPane.rightAnchor="0">
+                <AnchorPane fx:id="menuPane" prefHeight="${menuPane.parent.height}"
+                            prefWidth="260.0"
+                            style="-fx-background-color: achmea;">
                     <children>
-                        <JFXButton fx:id="overviewBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="0"
-                                   layoutY="0" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0"
-                                   style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
-                                   text="%greeting" textFill="WHITE">
-                            <graphic>
-                                <FontAwesomeIconView fill="WHITE" glyphName="HOME" size="22" strokeType="OUTSIDE"
-                                                     strokeWidth="0.0"/>
-                            </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="servicesBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="0"
-                                   layoutY="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="240.0"
-                                   style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
-                                   text="SERVICES" textFill="WHITE">
-                            <graphic>
-                                <FontAwesomeIconView fill="WHITE" glyphName="SERVER" size="22" strokeType="OUTSIDE"
-                                                     strokeWidth="0.0"/>
-                            </graphic>
-                        </JFXButton>
+                        <VBox AnchorPane.leftAnchor="0" alignment="CENTER" AnchorPane.topAnchor="100"
+                              AnchorPane.rightAnchor="0">
+                            <children>
+                                <JFXButton fx:id="overviewBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0"
+                                           layoutX="0"
+                                           layoutY="0" mnemonicParsing="false" prefHeight="50.0"
+                                           prefWidth="240.0"
+                                           style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
+                                           text="%overview" textFill="WHITE">
+                                    <graphic>
+                                        <FontAwesomeIconView fill="WHITE" glyphName="HOME" size="22"
+                                                             strokeType="OUTSIDE"
+                                                             strokeWidth="0.0"/>
+                                    </graphic>
+                                </JFXButton>
+                                <JFXButton fx:id="servicesBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0"
+                                           layoutX="0"
+                                           layoutY="50.0" mnemonicParsing="false" prefHeight="50.0"
+                                           prefWidth="240.0"
+                                           style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
+                                           text="%services" textFill="WHITE">
+                                    <graphic>
+                                        <FontAwesomeIconView fill="WHITE" glyphName="SERVER" size="22"
+                                                             strokeType="OUTSIDE"
+                                                             strokeWidth="0.0"/>
+                                    </graphic>
+                                </JFXButton>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+                <VBox fx:id="VB" prefHeight="${VB.parent.height}" HBox.hgrow="ALWAYS" >
+                    <children>
+                        <JFXToolbar fx:id="toolbar" prefWidth="${toolbar.parent.width}"
+                                    prefHeight="25" style="-fx-background-color: WHITE">
+                        </JFXToolbar>
+                        <AnchorPane fx:id="mainPane" prefWidth="${mainPane.parent.width}"
+                                    VBox.vgrow="ALWAYS"
+                                    style="-fx-background-color: WHITE;">
+                            <children>
+
+                            </children>
+                        </AnchorPane>
+
                     </children>
                 </VBox>
             </children>
-        </AnchorPane>
-        <JFXToolbar fx:id="toolbar" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0"
-                    prefHeight="25" style="-fx-background-color: transparent">
-        </JFXToolbar>
+        </HBox>
     </children>
 </AnchorPane>

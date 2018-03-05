@@ -3,7 +3,6 @@ package Controller;
 import Main.Main;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToolbar;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -32,7 +31,8 @@ public class OverviewController implements Initializable {
     JFXButton overviewBtn;
     @FXML
     JFXButton servicesBtn;
-
+    @FXML
+    AnchorPane menuPane;
     Stage stage;
 
     public void setStageAndSetupListeners(Stage stage) {
@@ -41,17 +41,17 @@ public class OverviewController implements Initializable {
         WindowButtons wb2 = new WindowButtons(stage);
         toolbar.setRightItems(wb2, wb);
         Button en = addLanguageBtns("en.png");
-        Button nl = addLanguageBtns("nl.jpg");
+        Button nl = addLanguageBtns("nl.png");
         toolbar.setLeftItems(en, nl);
     }
 
     private void loadView(String lang) {
         try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
-                Parent root = loader.load();
-                OverviewController overview = loader.getController();
-                overview.setStageAndSetupListeners(this.stage);
-                Main.switchPage(root, "Achmea");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
+            Parent root = loader.load();
+            OverviewController overview = loader.getController();
+            overview.setStageAndSetupListeners(this.stage);
+            Main.switchPage(root, "Achmea");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -65,7 +65,7 @@ public class OverviewController implements Initializable {
         Image img = new Image("/Resources/" + lang);
         ImageView toggleImage = new ImageView(img);
         toggleImage.setFitWidth(20);
-        toggleImage.setFitHeight(20);
+        toggleImage.setFitHeight(15);
         btn.setGraphic(toggleImage);
         btn.setStyle("-fx-background-color: transparent; -fx-text-fill: achmeaPink; -fx-alignment: bottom-center");
         btn.setOnAction(new EventHandler<ActionEvent>() {
