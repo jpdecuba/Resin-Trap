@@ -1,10 +1,16 @@
 package HoneyPot.honeyrj;
 
 
+import HoneyPot.logging.LogConnection;
+import HoneyPot.lowinteraction.LIDeserializeThread;
 import HoneyPot.lowinteraction.LIModule;
 import HoneyPot.lowinteraction.LIProtocol;
 import HoneyPot.protocol.FtpProtocol;
 import HoneyPot.protocol.IrcProtocol;
+
+import java.io.File;
+import java.util.Set;
+import java.util.concurrent.*;
 
 public class HoneyRJMain {
 
@@ -49,10 +55,31 @@ public class HoneyRJMain {
 		System.out.println(ftpM.isStarted());
 		honeyrj.ResumeNewConnections(ftpM);
 
-
 		System.out.println(ftpM.isStarted());
+		if(ftpM.isStarted())
+		{
+			System.out.println(ftpM.getPort());
+		}
 
+		File file = new File(System.getenv("APPDATA") + "/Honeypot/AllLogs.txt");
+		if(file.exists())
+		{
+			try {
+				ExecutorService executorService = Executors.newSingleThreadExecutor();
+				Future<Set<LogConnection>> future = executorService.submit(new LIDeserializeThread());
+				Set<LogConnection> logs = future.get();
+				for (LogConnection log : logs)
+				{
+					System.out.println(log.message() + "\n\n");
+				}
+				System.out.println("Eind");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			}
 
+		}
 
 
 
