@@ -1,9 +1,10 @@
 package HoneyPot.logging;
 
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.util.Date;
 
-public class LogRecord {
+public class LogRecord implements Serializable {
 	private Date Timestamp;
 	private String Packet;
 	private boolean Rcvd;
