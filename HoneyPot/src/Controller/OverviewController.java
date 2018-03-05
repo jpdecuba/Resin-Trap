@@ -47,11 +47,11 @@ public class OverviewController implements Initializable {
 
     private void loadView(String lang) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
-            Parent root = loader.load();
-            OverviewController overview = loader.getController();
-            overview.setStageAndSetupListeners(this.stage);
-            Main.switchPage(root, "Achmea");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
+                Parent root = loader.load();
+                OverviewController overview = loader.getController();
+                overview.setStageAndSetupListeners(this.stage);
+                Main.switchPage(root, "Achmea");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -73,9 +73,9 @@ public class OverviewController implements Initializable {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if (lang.equals("en.png")) {
-                    loadView("en, EN");
+                    loadView("en");
                 } else {
-                    loadView("nl, NL");
+                    loadView("nl");
                 }
             }
         });
