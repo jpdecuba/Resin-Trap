@@ -1,9 +1,11 @@
 package HoneyPot.logging;
 
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class LogConnection {
+public class LogConnection implements Serializable {
 
 
     private InetAddress srcIP;
@@ -15,7 +17,19 @@ public class LogConnection {
 
     private ArrayList<LogRecord> LogRecords = new ArrayList();
 
-    public LogConnection(InetAddress srcIP, InetAddress dstIP, int srcPort, int dstPort, String protocol) {
+	public InetAddress getDstIP() {
+		return dstIP;
+	}
+
+	public int getDstPort() {
+		return dstPort;
+	}
+
+	public String getProtocol() {
+		return Protocol;
+	}
+
+	public LogConnection(InetAddress srcIP, InetAddress dstIP, int srcPort, int dstPort, String protocol) {
         this.srcIP = srcIP;
         this.dstIP = dstIP;
         this.srcPort = srcPort;

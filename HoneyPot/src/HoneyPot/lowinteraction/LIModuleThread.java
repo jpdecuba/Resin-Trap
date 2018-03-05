@@ -4,14 +4,15 @@ package HoneyPot.lowinteraction;
 
 import HoneyPot.honeyrj.HoneyRJ;
 import HoneyPot.logging.LogConnection;
+import HoneyPot.logging.LogFile;
 import HoneyPot.logging.LogRecord;
+import javafx.application.Platform;
 
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
@@ -43,7 +44,7 @@ public class LIModuleThread implements Runnable {
 	/**
 	 * The logfile
 	 */
-	//private LogFile _logFile;
+	private LogFile _logFile;
 	//store some basic info later to make logging easier.
 	/**
 	 * Store the local IP address from the socket for reference
@@ -94,14 +95,6 @@ public class LIModuleThread implements Runnable {
 		} catch (Exception ignored) {
 
 		}
-		
-		_startTime = new Date();
-//		try {
-//			_logFile = new LogFile(this);
-//		} catch (LoggingException e) {
-//			throw new LIModuleException("Failed to create log file");
-//		}
-		
 		//store some basic information.
 		localIP = _socket.getLocalAddress();
 		remoteIP = _socket.getInetAddress();
@@ -113,6 +106,14 @@ public class LIModuleThread implements Runnable {
 		System.out.println("remotePort:  " + remotePort);
 
 		logs = new LogConnection(localIP, remoteIP,localPort,remotePort,_protocol.toString());
+		_startTime = new Date();
+		try {
+			_logFile = new LogFile(this);
+	} catch (Exception e) {
+		throw new LIModuleException("Failed to create log file");
+	}
+		
+
 
 	}
 	
@@ -223,23 +224,21 @@ public class LIModuleThread implements Runnable {
 	private void AddRcvdLogRecord(String packet) {
 		LogRecord r = new LogRecord(new Date(),packet,true);
 		logs.AddLogRecord(r);
-
+		_logFile.add(r);
 	}
 
 
 	private void AddSendLogRecord(String packet) {
 		LogRecord r = new LogRecord(new Date(),packet,false);
-
 		logs.AddLogRecord(r);
-
 	}
 
 
 	private void LogRecord(){
-
 		System.out.println(logs.message());
-
-
+		_parent.addLog(logs);
+		_logFile.setEndingLogInfo();
+		new Thread(new LISerializeThread(logs)).start();
 	}
 
 
@@ -251,7 +250,9 @@ public class LIModuleThread implements Runnable {
 		return _protocol;
 	}
 
-
-
-
+	@Override
+	public String toString()
+	{
+		return "Local IP: " + localIP + "	Remote IP: " + remoteIP + "	Local Port: " + localPort + "	Remote Port: " + remotePort;
+	}
 }
