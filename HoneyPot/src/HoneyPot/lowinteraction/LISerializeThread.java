@@ -1,6 +1,7 @@
 package HoneyPot.lowinteraction;
 
 import HoneyPot.logging.LogConnection;
+import com.sun.corba.se.impl.orbutil.ObjectWriter;
 
 import java.io.*;
 import java.util.HashSet;
@@ -24,10 +25,16 @@ public class LISerializeThread implements Runnable {
 	public void run()
 	{
 		try {
+			File file = new File(path + fileName);
+			if(!file.exists())
+			{
+				file.createNewFile();
+			}
 
-			OutputStream outputStream = new FileOutputStream(this.path + this.fileName);
+			OutputStream outputStream = new FileOutputStream(this.path + this.fileName, true);
 			BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream);
 			ObjectOutputStream objectWriter = new ObjectOutputStream(bufferedOutputStream);
+
 
 			objectWriter.writeObject(this.log);
 			objectWriter.close();
@@ -38,6 +45,7 @@ public class LISerializeThread implements Runnable {
 			e.printStackTrace();
 		}
 		finally {
+
 			Thread.currentThread().interrupt();
 		}
 	}

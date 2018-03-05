@@ -23,6 +23,8 @@ public class LIDeserializeThread implements Callable<Set<LogConnection>> {
 			while (object != null)
 			{
 				logs.add((LogConnection)object);
+
+				objectReader = new ObjectInputStream(bufferedInputStream);
 				object = objectReader.readObject();
 			}
 		} catch (FileNotFoundException e) {
