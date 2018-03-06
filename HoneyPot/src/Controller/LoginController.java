@@ -1,4 +1,90 @@
 package Controller;
 
+import Main.Main;
+import Model.WindowButtons;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXToolbar;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class LoginController {
+    @FXML
+    AnchorPane anchor;
+    @FXML
+    JFXToolbar toolbar;
+    @FXML
+    JFXButton overviewBtn;
+    @FXML
+    JFXButton servicesBtn;
+    @FXML
+    AnchorPane menuPane;
+    Stage stage;
+
+    public void GoRegister() {
+        throw new NotImplementedException();
+    }
+
+    public void Login() {
+        throw new NotImplementedException();
+    }
+
+    public void setStageAndSetupListeners(Stage stage) {
+        this.stage = stage;
+        WindowButtons wb = new WindowButtons();
+        WindowButtons wb2 = new WindowButtons(stage);
+        toolbar.setRightItems(wb2, wb);
+        Button en = addLanguageBtns("en.png");
+        Button nl = addLanguageBtns("nl.png");
+        toolbar.setLeftItems(en, nl);
+    }
+
+    private void loadView(String lang) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LoginView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
+            Parent root = loader.load();
+            LoginController loginCon = loader.getController();
+            loginCon.setStageAndSetupListeners(this.stage);
+            Main.switchPage(root, "Achmea");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Button addLanguageBtns(String lang) {
+        Button btn = new Button("");
+        btn.setMaxSize(25, 25);
+        btn.setMinSize(25, 25);
+        btn.setPrefSize(25, 25);
+        Image img = new Image("/Resources/" + lang);
+        ImageView toggleImage = new ImageView(img);
+        toggleImage.setFitWidth(20);
+        toggleImage.setFitHeight(15);
+        btn.setGraphic(toggleImage);
+        btn.setStyle("-fx-background-color: transparent; -fx-text-fill: achmeaPink; -fx-alignment: bottom-center");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if (lang.equals("en.png")) {
+                    loadView("en");
+                } else {
+                    loadView("nl");
+                }
+            }
+        });
+        return btn;
+    }
 }

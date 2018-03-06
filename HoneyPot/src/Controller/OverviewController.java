@@ -1,5 +1,7 @@
 package Controller;
 
+import HoneyPot.logging.LogRecord;
+import HoneyPot.lowinteraction.LIModule;
 import Main.Main;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToolbar;
@@ -16,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -81,5 +84,32 @@ public class OverviewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         overviewBtn.setDefaultButton(true);
+    }
+
+
+    private int GetServiceson(){
+
+        int i = 0;
+        for(LIModule item : Main.Services){
+
+            if(item.isStarted()){
+                i++;
+            }
+        }
+        return i;
+    }
+
+
+    private int GetTotalConnections(){
+
+        int i = 0;
+        for(LIModule item : Main.Services){
+                 i =+ item.getNumberOfActiveConnections();
+        }
+        return i;
+    }
+
+    private Date getDatelastlog(){
+        return  Main.honeypot.getLogs().getLast().getDate();
     }
 }

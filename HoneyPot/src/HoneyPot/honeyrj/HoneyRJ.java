@@ -208,6 +208,11 @@ public class HoneyRJ {
 
 	public LinkedList<LogConnection> getLogs() {
 		LinkedList<LogConnection> list = new LinkedList<>(logs);
+		if(list.size() <= 0)
+		{
+			return null;
+		}
+
 		return list;
 	}
 }
