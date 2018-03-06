@@ -2,14 +2,19 @@ package HoneyPot.honeyrj;
 
 
 
+import HoneyPot.logging.LogConnection;
+import HoneyPot.lowinteraction.LIDeserializeThread;
 import HoneyPot.lowinteraction.LIModule;
+import sun.rmi.runtime.Log;
 
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * 
@@ -20,6 +25,8 @@ import java.util.TreeMap;
  */
 public class HoneyRJ {
 	private File _logging_dir;
+
+	private Set<LogConnection> logs = new HashSet<>();
 	
 	public File getLoggingDirectory() {
 		return _logging_dir;
@@ -57,6 +64,7 @@ public class HoneyRJ {
 	 */
 	public HoneyRJ() throws HoneyRJException {
 		this(DEFAULT_LOG_DIR);
+		getLogsfromdir();
 	}
 	
 	/**
@@ -173,4 +181,33 @@ public class HoneyRJ {
 		}
 	}
 
+
+
+	private void getLogsfromdir(){
+
+
+		File file = new File(System.getenv("APPDATA") + "/Honeypot/AllLogs.txt");
+		if(file.exists())
+		{
+			try {
+				ExecutorService executorService = Executors.newSingleThreadExecutor();
+				Future<Set<LogConnection>> future = executorService.submit(new LIDeserializeThread());
+				logs = future.get();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
+
+	public void addLog(LogConnection log){
+		logs.add(log);
+	}
+
+	public LinkedList<LogConnection> getLogs() {
+		LinkedList<LogConnection> list = new LinkedList<>(logs);
+		return list;
+	}
 }

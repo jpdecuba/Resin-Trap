@@ -3,9 +3,6 @@ package HoneyPot.protocol;
 import HoneyPot.lowinteraction.LIHelper;
 import HoneyPot.lowinteraction.LIProtocol;
 import HoneyPot.lowinteraction.TALK_FIRST;
-import sun.awt.geom.AreaOp;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
@@ -30,6 +27,8 @@ public class SmtpProtocol implements LIProtocol {
 
     private String emailfrom = "";
     private String emailsend = "";
+
+    private String domain = "exampledomain.com";
 
 
 
@@ -123,7 +122,7 @@ public class SmtpProtocol implements LIProtocol {
 
         }else {
 
-            return LIHelper.vectorFromString("220-server1.exampledomain.com ESMTP Exim 4.66");
+            return LIHelper.vectorFromString("220-smtp."+ domain +" ESMTP Exim 4.66");
         }
         return LIHelper.vectorFromString("500 Syntax error, command unrecognised");
     }

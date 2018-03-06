@@ -1,5 +1,6 @@
 package Controller;
 
+import HoneyPot.lowinteraction.LIModule;
 import Main.Main;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToolbar;
@@ -85,5 +86,28 @@ public class OverviewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         overviewBtn.setDefaultButton(true);
+    }
+
+
+    private int GetServiceson(){
+
+        int i = 0;
+        for(LIModule item : Main.Services){
+
+            if(item.isStarted()){
+                i++;
+            }
+        }
+        return i;
+    }
+
+
+    private int GetTotalConnections(){
+
+        int i = 0;
+        for(LIModule item : Main.Services){
+                 i =+ item.getNumberOfActiveConnections();
+        }
+        return i;
     }
 }
