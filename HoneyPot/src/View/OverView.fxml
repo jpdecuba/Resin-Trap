@@ -59,8 +59,8 @@
                                     VBox.vgrow="ALWAYS"
                                     style="-fx-background-color: WHITE;">
                             <children>
-                                <VBox alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="200"
-                                      AnchorPane.rightAnchor="200" AnchorPane.topAnchor="25">
+                                <VBox alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="175"
+                                      AnchorPane.rightAnchor="175" AnchorPane.topAnchor="25">
                                     <children>
                                         <HBox alignment="CENTER">
                                             <children>
