@@ -51,7 +51,7 @@ public class OverviewController implements Initializable {
     public void setStageAndSetupListeners(Stage stage) {
         this.stage = stage;
         WindowButtons wb = new WindowButtons();
-        WindowButtons wb2 = new WindowButtons(stage);
+        WindowButtons wb2 = new WindowButtons(anchor);
         toolbar.setRightItems(wb2, wb);
         Button en = addLanguageBtns("en.png");
         Button nl = addLanguageBtns("nl.png");
@@ -66,8 +66,8 @@ public class OverviewController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
             Parent root = loader.load();
-            OverviewController overview = loader.getController();
-            overview.setStageAndSetupListeners(this.stage);
+            OverviewController overviewCon = loader.getController();
+			overviewCon.setStageAndSetupListeners(this.stage);
             Main.switchPage(root, "Achmea");
         } catch (IOException e) {
             e.printStackTrace();
