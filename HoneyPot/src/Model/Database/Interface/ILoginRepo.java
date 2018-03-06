@@ -4,5 +4,5 @@ import Model.User;
 
 public interface ILoginRepo {
 	User Validate(User user);
-	Boolean Logout(User user);
+	Boolean Logout(String name);
 }
