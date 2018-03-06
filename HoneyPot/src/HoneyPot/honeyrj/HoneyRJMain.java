@@ -9,6 +9,9 @@ import HoneyPot.protocol.FtpProtocol;
 import HoneyPot.protocol.IrcProtocol;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.*;
 
@@ -34,9 +37,9 @@ public class HoneyRJMain {
 
 	private static void createSampleProtocols() {
 		LIProtocol ftpP = new FtpProtocol();
-		LIModule ftpM = new LIModule(ftpP);
+		LIModule ftpM = new LIModule(ftpP,honeyrj);
 		LIProtocol ircP = new IrcProtocol();
-		LIModule ircM = new LIModule(ircP);
+		LIModule ircM = new LIModule(ircP,honeyrj);
 		honeyrj.RegisterService(ftpM);
 		honeyrj.RegisterService(ircM);
 		honeyrj.startPort(21);
@@ -61,7 +64,7 @@ public class HoneyRJMain {
 			System.out.println(ftpM.getPort());
 		}
 
-		File file = new File(System.getenv("APPDATA") + "/Honeypot/AllLogs.txt");
+/*		File file = new File(System.getenv("APPDATA") + "/Honeypot/AllLogs.txt");
 		if(file.exists())
 		{
 			try {
@@ -79,7 +82,13 @@ public class HoneyRJMain {
 				e.printStackTrace();
 			}
 
-		}
+		}*/
+
+
+
+		LinkedList<LogConnection> list = new LinkedList<>(honeyrj.getLogs());
+		System.out.println(list.get(1).message());
+
 
 
 

@@ -35,11 +35,11 @@ public class Main extends Application {
     //HoneyPot Services
 
     private static LIProtocol ftpP = new FtpProtocol();
-    private static LIModule ftpM = new LIModule(ftpP);
+    private static LIModule ftpM;
     private static LIProtocol SmtpP = new SmtpProtocol();
-    private static LIModule SmtpM = new LIModule(SmtpP);
+    private static LIModule SmtpM;
     private static LIProtocol MysqlP = new MySQLProtocol();
-    private static LIModule MysqlM = new LIModule(MysqlP);
+    private static LIModule MysqlM;
 
 
     @Override
@@ -97,6 +97,9 @@ public class Main extends Application {
 
 
     public static void StartHoneypotServices(){
+        MysqlM = new LIModule(MysqlP,honeypot);
+        SmtpM = new LIModule(SmtpP,honeypot);
+        ftpM = new LIModule(ftpP,honeypot);
 
         honeypot.RegisterService(ftpM);
         honeypot.RegisterService(SmtpM);
