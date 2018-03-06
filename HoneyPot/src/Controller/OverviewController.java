@@ -110,6 +110,9 @@ public class OverviewController implements Initializable {
     }
 
     private Date getDatelastlog(){
-        return  Main.honeypot.getLogs().getLast().getDate();
+        if(Main.honeypot.getLogs() != null) {
+            return Main.honeypot.getLogs().getLast().getDate();
+        }
+        return new Date(0000);
     }
 }
