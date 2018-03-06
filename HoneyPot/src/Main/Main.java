@@ -19,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -30,9 +31,11 @@ public class Main extends Application {
 
     //Honeypot
 
-    private static HoneyRJ honeypot = null;
+    public static HoneyRJ honeypot = null;
 
     //HoneyPot Services
+
+    public static ArrayList<LIModule> Services = new ArrayList<>();
 
     private static LIProtocol ftpP = new FtpProtocol();
     private static LIModule ftpM;
@@ -77,6 +80,8 @@ public class Main extends Application {
             }
         });
         Stage.show();
+        launchHoneypot();
+        StartHoneypotServices();
     }
 
     public static void switchPage(Parent parent, String title)
@@ -101,17 +106,13 @@ public class Main extends Application {
         SmtpM = new LIModule(SmtpP,honeypot);
         ftpM = new LIModule(ftpP,honeypot);
 
-        honeypot.RegisterService(ftpM);
-        honeypot.RegisterService(SmtpM);
-        honeypot.RegisterService(MysqlM);
-        honeypot.startPort(21);
-        honeypot.startPort(25);
-        honeypot.startPort(3306);
+        Services.add(MysqlM);
+        Services.add(SmtpM);
+        Services.add(ftpM);
+        for(LIModule item : Services){
+            honeypot.RegisterService(item);
+            honeypot.startPort(item.getPort());
+        }
     }
 
-
-    public static void StopServices(LIModule module){
-        honeypot.DeRegisterService(module);
-
-    }
 }
