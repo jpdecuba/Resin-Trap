@@ -21,6 +21,7 @@ import java.util.*;
  *
  */
 public class LIModule implements Runnable {
+
 	/**
 	 * a reference to the protocol that this Module should run
 	 */
@@ -32,7 +33,7 @@ public class LIModule implements Runnable {
 
 	private Set<LogConnection> logsFile;
 	public void addLog(LogConnection logConnection){
-		logsFile.add(logConnection);
+		_parent.addLog(logConnection);
 	}
 	
 	/**
@@ -80,12 +81,23 @@ public class LIModule implements Runnable {
 	 * @param protocol LIProtcol object to implement here
 	 * @see LIProtocol 
 	 */
-	public LIModule(LIProtocol protocol) {
+	/*public LIModule(LIProtocol protocol) {
 		_protocol = protocol;
 		//_logFiles = new TreeMap<Date, LogFile>();
 		logsFile = new HashSet<>();
 		_thread = null;
         numberConnections = 0; //might be used later.
+	}*/
+
+
+	public LIModule(LIProtocol protocol, HoneyRJ honeyRJ) {
+		_protocol = protocol;
+		//_logFiles = new TreeMap<Date, LogFile>();
+		logsFile = new HashSet<>();
+		_thread = null;
+		numberConnections = 0; //might be used later.
+
+		_parent = honeyRJ;
 	}
 
 	/**
@@ -257,6 +269,8 @@ public class LIModule implements Runnable {
 	{
 		return numberConnections;
 	}
+
+
 
 
 
