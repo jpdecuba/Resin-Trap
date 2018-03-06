@@ -59,9 +59,14 @@
                                     VBox.vgrow="ALWAYS"
                                     style="-fx-background-color: WHITE;">
                             <children>
-                                <VBox alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="175"
-                                      AnchorPane.rightAnchor="175" AnchorPane.topAnchor="25">
+                                <VBox alignment="CENTER_LEFT" AnchorPane.bottomAnchor="100" AnchorPane.leftAnchor="175"
+                                      AnchorPane.rightAnchor="175" AnchorPane.topAnchor="25" spacing="15">
                                     <children>
+                                        <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 28; -fx-text-fill: #424242"
+                                               text="%overview2"></Label>
+                                        <Region prefHeight="25"></Region>
+                                        <Separator></Separator>
+                                        <Region prefHeight="25"></Region>
                                         <HBox alignment="CENTER">
                                             <children>
                                                 <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
