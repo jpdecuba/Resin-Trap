@@ -55,7 +55,10 @@ public class OverviewController implements Initializable {
         Button en = addLanguageBtns("en.png");
         Button nl = addLanguageBtns("nl.png");
         toolbar.setLeftItems(en, nl);
-        statusLbl.setText(Main.);
+        statusLbl.setText(Main.StatusCheck().toString());
+        threatLbl.setText(getDatelastlog().toString());
+        servicesLbl.setText(String.valueOf(GetServiceson()));
+        connectionsLbl.setText(String.valueOf(GetTotalConnections()));
     }
 
     private void loadView(String lang) {
