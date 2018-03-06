@@ -68,15 +68,11 @@ public class OverviewController implements Initializable {
         toggleImage.setFitHeight(15);
         btn.setGraphic(toggleImage);
         btn.setStyle("-fx-background-color: transparent; -fx-text-fill: achmeaPink; -fx-alignment: bottom-center");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                if (lang.equals("en.png")) {
-                    loadView("en");
-                } else {
-                    loadView("nl");
-                }
+        btn.setOnAction(actionEvent -> {
+            if (lang.equals("en.png")) {
+                loadView("en");
+            } else {
+                loadView("nl");
             }
         });
         return btn;
