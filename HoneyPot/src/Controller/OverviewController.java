@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -36,6 +37,14 @@ public class OverviewController implements Initializable {
     JFXButton servicesBtn;
     @FXML
     AnchorPane menuPane;
+    @FXML
+    Label statusLbl;
+    @FXML
+    Label threatLbl;
+    @FXML
+    Label servicesLbl;
+    @FXML
+    Label connectionsLbl;
     Stage stage;
 
     public void setStageAndSetupListeners(Stage stage) {
@@ -46,6 +55,7 @@ public class OverviewController implements Initializable {
         Button en = addLanguageBtns("en.png");
         Button nl = addLanguageBtns("nl.png");
         toolbar.setLeftItems(en, nl);
+        statusLbl.setText(Main.);
     }
 
     private void loadView(String lang) {
