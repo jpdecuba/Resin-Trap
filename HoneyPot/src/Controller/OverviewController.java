@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -122,10 +123,12 @@ public class OverviewController implements Initializable {
         return i;
     }
 
-    private Date getDatelastlog(){
+    private String getDatelastlog(){
         if(Main.honeypot.getLogs() != null) {
-            return Main.honeypot.getLogs().getLast().getDate();
+            SimpleDateFormat ft =
+                    new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
+            return ft.format(Main.honeypot.getLogs().getLast().getDate());
         }
-        return new Date(0000);
+        return "No logs";
     }
 }

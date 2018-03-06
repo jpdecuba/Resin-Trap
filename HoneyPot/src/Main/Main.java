@@ -53,6 +53,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        launchHoneypot();
+        StartHoneypotServices();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"));
         loader.setResources(ResourceBundle.getBundle("bundles.UIResources", new Locale("en", "EN")));
         Parent root = loader.load();
@@ -86,8 +89,7 @@ public class Main extends Application {
             }
         });
         Stage.show();
-        launchHoneypot();
-        StartHoneypotServices();
+
     }
 
     public static void switchPage(Parent parent, String title)
