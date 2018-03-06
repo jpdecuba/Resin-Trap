@@ -5,6 +5,7 @@ package HoneyPot.honeyrj;
 import HoneyPot.logging.LogConnection;
 import HoneyPot.lowinteraction.LIDeserializeThread;
 import HoneyPot.lowinteraction.LIModule;
+import Model.Status;
 import sun.rmi.runtime.Log;
 
 
@@ -66,6 +67,9 @@ public class HoneyRJ {
 		this(DEFAULT_LOG_DIR);
 		getLogsfromdir();
 	}
+
+
+
 	
 	/**
 	 * 
@@ -215,4 +219,8 @@ public class HoneyRJ {
 
 		return list;
 	}
+
+
+
+
 }

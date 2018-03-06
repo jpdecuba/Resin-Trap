@@ -9,6 +9,7 @@ import HoneyPot.protocol.FtpProtocol;
 import HoneyPot.protocol.MySQLProtocol;
 import HoneyPot.protocol.SmtpProtocol;
 import Model.ResizeHelper;
+import Model.Status;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +43,12 @@ public class Main extends Application {
     private static LIModule SmtpM;
     private static LIProtocol MysqlP = new MySQLProtocol();
     private static LIModule MysqlM;
+
+    //Status
+
+    private static Status status;
+
+    private static int ConnectionAlert = 5;
 
 
     @Override
@@ -112,6 +119,29 @@ public class Main extends Application {
             honeypot.RegisterService(item);
             honeypot.startPort(item.getPort());
         }
+    }
+
+
+    public static Status StatusCheck(){
+        int start = 0;
+        int connections = 0;
+
+        for(LIModule item : Services){
+            if(item.isStarted()){
+                start++;
+            }
+            connections =+ item.getNumberOfActiveConnections();
+        }
+
+        if(connections >= ConnectionAlert){
+            return status.ALERT;
+        }
+
+        if(start == 0){
+            return status.OFF;
+        }
+
+        return status.OK;
     }
 
 }
