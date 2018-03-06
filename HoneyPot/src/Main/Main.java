@@ -6,7 +6,6 @@ import HoneyPot.honeyrj.HoneyRJException;
 import HoneyPot.lowinteraction.LIModule;
 import HoneyPot.lowinteraction.LIProtocol;
 import HoneyPot.protocol.FtpProtocol;
-import HoneyPot.protocol.IrcProtocol;
 import HoneyPot.protocol.MySQLProtocol;
 import HoneyPot.protocol.SmtpProtocol;
 import Model.ResizeHelper;

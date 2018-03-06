@@ -20,4 +20,28 @@ public class User {
 		this.roleId = roleId;
 		this.session = session;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public int getSession() {
+		return session;
+	}
+
+	public void setSession(int session) {
+		this.session = session;
+	}
 }
