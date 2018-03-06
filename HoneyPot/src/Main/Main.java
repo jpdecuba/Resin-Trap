@@ -39,7 +39,7 @@ public class Main extends Application {
     public static ArrayList<LIModule> Services = new ArrayList<>();
 
     private static LIProtocol ftpP = new FtpProtocol();
-    private static LIModule ftpM;
+    public static LIModule ftpM;
     private static LIProtocol SmtpP = new SmtpProtocol();
     private static LIModule SmtpM;
     private static LIProtocol MysqlP = new MySQLProtocol();
@@ -49,7 +49,7 @@ public class Main extends Application {
 
     private static Status status;
 
-    private static int ConnectionAlert = 5;
+    public static int ConnectionAlert = 5;
 
 
     @Override

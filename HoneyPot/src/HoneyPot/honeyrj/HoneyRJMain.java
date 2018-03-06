@@ -52,11 +52,18 @@ public class HoneyRJMain {
 
 
 		System.out.println(ftpM.isStarted());
+		honeyrj.PauseNewConnections(ftpM);
+
+
+		System.out.println(honeyrj.ServiceisStarted(21));
+
 
 		honeyrj.PauseNewConnections(ftpM);
 
 		System.out.println(ftpM.isStarted());
 		honeyrj.ResumeNewConnections(ftpM);
+
+		System.out.println(honeyrj.getNumberOfActiveConnections(21));
 
 		System.out.println(ftpM.isStarted());
 		if(ftpM.isStarted())
@@ -89,6 +96,8 @@ public class HoneyRJMain {
 		/*LinkedList<LogConnection> list = new LinkedList<>(honeyrj.getLogs());
 		System.out.println(list.get(0).message());
 		System.out.println(list.get(0).getDate());*/
+
+
 
 
 

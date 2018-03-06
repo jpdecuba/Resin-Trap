@@ -36,7 +36,7 @@ public class HoneyRJ {
 	/**
 	 * HashMap of all service modules
 	 */
-	private HashMap<Integer, LIModule> _services;
+	public HashMap<Integer, LIModule> _services;
 	/**
 	 * all the logs we have collected
 	 */
@@ -219,6 +219,22 @@ public class HoneyRJ {
 
 		return list;
 	}
+
+
+	public int getNumberOfActiveConnections(int port ){
+
+        return  _services.get(port).getNumberOfActiveConnections();
+
+
+    }
+
+
+    public boolean ServiceisStarted(int port ){
+
+        return _services.get(port).isStarted();
+
+
+    }
 
 
 
