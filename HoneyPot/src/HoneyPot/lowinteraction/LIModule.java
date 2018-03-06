@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.SocketException;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * An LIModule listens on a port specified by a LIProtocol and launches threads to handle client connections.
@@ -35,6 +37,8 @@ public class LIModule implements Runnable {
 	public void addLog(LogConnection logConnection){
 		_parent.addLog(logConnection);
 	}
+
+	private ExecutorService cachedPool = Executors.newCachedThreadPool();
 	
 	/**
 	 * return the port this Module listens on (as defined by the protocol)
@@ -57,7 +61,7 @@ public class LIModule implements Runnable {
 	 */
 	private HoneyRJ _parent;
 	
-    private int numberConnections; //might be used later to limit # of connections at once.
+    protected int numberConnections; //might be used later to limit # of connections at once.
 	
     /**
      * a internal reference to the thread this module is running in
@@ -121,10 +125,13 @@ public class LIModule implements Runnable {
 			while (listening) { //allow us to temporary stop listening subject to limitation mentioned above
 				try {
 					new Thread(new LIModuleThread(_server.accept(), this)).start();
-                   // numberConnections++;
+                    numberConnections++;
+
 				} catch (SocketException e) {
 					//let us die because someone stopped us
 					//e.printStackTrace();
+					numberConnections--;
+
 				} catch (IOException e1) {
 					//let us die and retry loop
 					//e1.printStackTrace();
@@ -138,6 +145,7 @@ public class LIModule implements Runnable {
 					//prevent a DOS attack and high cpu during pause state
 				}
 			}
+
 			try {
 				Thread.sleep(HoneyRJ.TIME_WAIT_CONNECTION);
 			} catch (InterruptedException ignored) {
@@ -146,7 +154,7 @@ public class LIModule implements Runnable {
 		}
 		
 		//if we got here, the thread is dead, let us die
-		
+
 	}
 
 	/**
