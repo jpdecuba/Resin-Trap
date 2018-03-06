@@ -87,7 +87,8 @@ public class HoneyRJMain {
 
 
 		LinkedList<LogConnection> list = new LinkedList<>(honeyrj.getLogs());
-		System.out.println(list.get(1).message());
+		System.out.println(list.get(0).message());
+		System.out.println(list.get(0).getDate());
 
 
 

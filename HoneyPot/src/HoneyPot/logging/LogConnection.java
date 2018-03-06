@@ -13,6 +13,8 @@ public class LogConnection implements Serializable {
     private int srcPort;
     private int dstPort;
 
+    private Date date;
+
     private String Protocol;
 
     private ArrayList<LogRecord> LogRecords = new ArrayList();
@@ -35,6 +37,8 @@ public class LogConnection implements Serializable {
         this.srcPort = srcPort;
         this.dstPort = dstPort;
         Protocol = protocol;
+
+        date = new Date();
     }
 
 
@@ -54,5 +58,9 @@ public class LogConnection implements Serializable {
         }
 
         return sb.toString();
+    }
+
+    public Date getDate() {
+        return date;
     }
 }
