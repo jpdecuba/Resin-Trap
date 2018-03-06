@@ -7,6 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import com.jfoenix.controls.JFXToolbar?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.Region?>
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.OverviewController">
     <children>
@@ -47,7 +50,7 @@
                         </VBox>
                     </children>
                 </AnchorPane>
-                <VBox fx:id="VB" prefHeight="${VB.parent.height}" HBox.hgrow="ALWAYS" >
+                <VBox fx:id="VB" prefHeight="${VB.parent.height}" HBox.hgrow="ALWAYS">
                     <children>
                         <JFXToolbar fx:id="toolbar" prefWidth="${toolbar.parent.width}"
                                     prefHeight="25" style="-fx-background-color: WHITE">
@@ -56,10 +59,53 @@
                                     VBox.vgrow="ALWAYS"
                                     style="-fx-background-color: WHITE;">
                             <children>
-
+                                <VBox alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="200"
+                                      AnchorPane.rightAnchor="200" AnchorPane.topAnchor="25">
+                                    <children>
+                                        <HBox alignment="CENTER">
+                                            <children>
+                                                <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
+                                                       text="Status:"></Label>
+                                                <Region HBox.hgrow="ALWAYS"></Region>
+                                                <Label fx:id="statusLbl"
+                                                       style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; "
+                                                       text="IDKYET"></Label>
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER">
+                                            <children>
+                                                <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
+                                                       text="Last threat:"></Label>
+                                                <Region HBox.hgrow="ALWAYS"></Region>
+                                                <Label fx:id="threatLbl"
+                                                       style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; "
+                                                       text="IDKYET"></Label>
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER">
+                                            <children>
+                                                <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
+                                                       text="Services on:"></Label>
+                                                <Region HBox.hgrow="ALWAYS"></Region>
+                                                <Label fx:id="servicesLbl"
+                                                       style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; "
+                                                       text="IDKYET"></Label>
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER">
+                                            <children>
+                                                <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
+                                                       text="Total connections:"></Label>
+                                                <Region HBox.hgrow="ALWAYS"></Region>
+                                                <Label fx:id="connectionsLbl"
+                                                       style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; "
+                                                       text="IDKYET"></Label>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
                             </children>
                         </AnchorPane>
-
                     </children>
                 </VBox>
             </children>
