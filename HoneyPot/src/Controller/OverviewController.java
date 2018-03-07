@@ -188,7 +188,7 @@ public class OverviewController implements Initializable {
             if(item.isStarted()){
                 start++;
             }
-            connections =+ item.getNumberOfActiveConnections();
+            connections += item.getNumberOfActiveConnections();
         }
 
         if(connections >= Main.ConnectionAlert){

@@ -133,16 +133,17 @@ public class Main extends Application {
             if(item.isStarted()){
                 start++;
             }
-            connections =+ item.getNumberOfActiveConnections();
+            connections += item.getNumberOfActiveConnections();
         }
-
-        if(connections >= ConnectionAlert){
-            return status.ALERT;
-        }
-
         if(start == 0){
             return status.OFF;
         }
+
+        if(connections > ConnectionAlert){
+            return status.ALERT;
+        }
+
+
 
         return status.OK;
     }

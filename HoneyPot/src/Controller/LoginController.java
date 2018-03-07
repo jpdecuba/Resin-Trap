@@ -80,6 +80,8 @@ public class LoginController implements Initializable {
 
         if(loginModel.Login( user) != null) {
             GoToOverview();
+        }else {
+            Snack
         }
     }
 
