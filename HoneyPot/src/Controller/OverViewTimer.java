@@ -20,7 +20,6 @@ public class OverViewTimer extends TimerTask {
     public void run() {
 
         Platform.runLater(()->{
-
             item.statusLbl.setText(item.StatusCheck().toString());
             item.connectionsLbl.setText(String.valueOf(item.GetTotalConnections()));
             item.threatLbl.setText(item.getDatelastlog());

@@ -4,10 +4,7 @@ import Main.Main;
 import Model.Database.LoginModel;
 import Model.User;
 import Model.WindowButtons;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXToolbar;
+import com.jfoenix.controls.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -49,9 +46,13 @@ public class LoginController implements Initializable {
     String nameView = "/view/LoginView.fxml";
     String title = "placeholder title";
 
+    JFXSnackbar snackbar;
+    int currentConnections = 0;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		loginModel = new LoginModel();
+        snackbar = new JFXSnackbar(anchor);
 	}
 
 	public void GoToRegister(){
@@ -80,6 +81,8 @@ public class LoginController implements Initializable {
 
         if(loginModel.Login( user) != null) {
             GoToOverview();
+        }else {
+            snackbar.show("Username or password is wrong",3000);
         }
     }
 
