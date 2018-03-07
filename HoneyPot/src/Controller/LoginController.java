@@ -1,50 +1,97 @@
 package Controller;
 
 import Main.Main;
+import Model.Database.LoginModel;
+import Model.User;
 import Model.WindowButtons;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToolbar;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class LoginController {
+public class LoginController implements Initializable {
     @FXML
     AnchorPane anchor;
     @FXML
     JFXToolbar toolbar;
     @FXML
-    JFXButton overviewBtn;
+    JFXButton loginBtn;
     @FXML
-    JFXButton servicesBtn;
+    JFXButton registerBtn;
+    @FXML
+	JFXTextField loginUsernameField;
+    @FXML
+	JFXPasswordField loginPasswordField;
     @FXML
     AnchorPane menuPane;
+
+    LoginModel loginModel;
+
     Stage stage;
 
-    public void GoRegister() {
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		loginModel = new LoginModel();
+	}
+
+	@FXML
+	public void btnClick(ActionEvent e) throws IOException {
+		JFXButton button = (JFXButton) e.getSource();
+		if (button == loginBtn)
+		{
+			if(loginModel.Login(new User(loginUsernameField.getText(), loginPasswordField.getText())) != null)
+			{
+				Platform.runLater(() -> {
+					try {
+					String lang = "en";
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
+					Parent root = null;
+					root = loader.load();
+					OverviewController overviewCon = loader.getController();
+					overviewCon.setStageAndSetupListeners(this.stage);
+					Main.switchPage(root, "Login");
+					}
+					 catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				});
+			}
+		}
+		else if (button == registerBtn)
+		{
+
+		}
+	}
+
+    public void ChangeView()  {
         throw new NotImplementedException();
     }
 
-    public void Login() {
+    public void Register()  {
         throw new NotImplementedException();
     }
 
     public void setStageAndSetupListeners(Stage stage) {
         this.stage = stage;
         WindowButtons wb = new WindowButtons();
-        WindowButtons wb2 = new WindowButtons(stage);
+        WindowButtons wb2 = new WindowButtons(anchor);
         toolbar.setRightItems(wb2, wb);
         Button en = addLanguageBtns("en.png");
         Button nl = addLanguageBtns("nl.png");
@@ -57,7 +104,7 @@ public class LoginController {
             Parent root = loader.load();
             LoginController loginCon = loader.getController();
             loginCon.setStageAndSetupListeners(this.stage);
-            Main.switchPage(root, "Achmea");
+            Main.switchPage(root, "Login");
         } catch (IOException e) {
             e.printStackTrace();
         }

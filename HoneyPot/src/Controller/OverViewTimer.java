@@ -25,8 +25,7 @@ public class OverViewTimer extends TimerTask {
             item.connectionsLbl.setText(String.valueOf(item.GetTotalConnections()));
             item.threatLbl.setText(item.getDatelastlog());
             item.servicesLbl.setText(String.valueOf(item.GetServiceson()));
-
-            System.out.println(item.GetTotalConnections());
+            item.Timeframes();
         });
 
 

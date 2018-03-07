@@ -5,7 +5,7 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class LogConnection implements Serializable {
+public class LogConnection implements Serializable, Comparable<LogConnection> {
 
 
     private InetAddress srcIP;
@@ -62,5 +62,11 @@ public class LogConnection implements Serializable {
 
     public Date getDate() {
         return date;
+    }
+
+
+    @Override
+    public int compareTo(LogConnection o) {
+        return getDate().compareTo(o.getDate());
     }
 }
