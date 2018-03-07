@@ -144,4 +144,12 @@ public class Main extends Application {
         return status.OK;
     }
 
+    public static void Shutdown(){
+        for(LIModule item : Services) {
+            honeypot.DeRegisterService(item);
+        }
+
+
+    }
+
 }

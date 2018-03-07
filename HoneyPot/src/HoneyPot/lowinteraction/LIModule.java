@@ -124,7 +124,8 @@ public class LIModule implements Runnable {
 		while(_thread == thisThread) { //while running (so we can stop later)
 			while (listening) { //allow us to temporary stop listening subject to limitation mentioned above
 				try {
-					new Thread(new LIModuleThread(_server.accept(), this)).start();
+                    cachedPool.submit(new LIModuleThread(_server.accept(), this));
+					//new Thread(new LIModuleThread(_server.accept(), this)).start();
                     numberConnections++;
 
 				} catch (SocketException e) {
@@ -215,6 +216,8 @@ public class LIModule implements Runnable {
 	 */
 	public void stopInteractionModule() {
 		listening = false;
+
+
 		
 		try {
 			if(_server != null) {

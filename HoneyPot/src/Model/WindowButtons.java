@@ -1,5 +1,6 @@
 package Model;
 
+import Main.Main;
 import com.jfoenix.controls.JFXButton;
 import com.sun.imageio.plugins.common.I18N;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -38,6 +39,7 @@ public class WindowButtons extends HBox {
 
             @Override
             public void handle(ActionEvent actionEvent) {
+                Main.Shutdown();
                 Platform.exit();
             }
         });
