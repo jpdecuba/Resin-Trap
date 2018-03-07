@@ -3,7 +3,7 @@ package Model.Database.Repository;
 import Model.Database.Interface.ILoginRepo;
 import Model.User;
 
-public class LoginRepo{
+public class LoginRepo implements ILoginRepo{
 
 	private ILoginRepo context;
 
@@ -16,8 +16,10 @@ public class LoginRepo{
 		return this.context.Validate(user);
 	}
 
-
-	public Boolean Logout(String name) {
+	public boolean Logout(String name) {
 		return this.context.Logout(name);
 	}
+
+    @Override
+    public boolean Register(User user) { return this.context.Register(user); }
 }
