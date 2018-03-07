@@ -7,6 +7,7 @@ import Main.Main;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToolbar;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +41,8 @@ public class OverviewController implements Initializable {
     @FXML
     JFXButton servicesBtn;
     @FXML
+    JFXButton loginBtn;
+    @FXML
     AnchorPane menuPane;
     @FXML
     Label statusLbl;
@@ -51,6 +54,35 @@ public class OverviewController implements Initializable {
     Label connectionsLbl;
     Stage stage;
 
+    @FXML
+    public void changePage(ActionEvent event){
+        try {
+            JFXButton source = (JFXButton) event.getSource();
+            if (source == overviewBtn){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+                Parent root = loader.load();
+                OverviewController overview = loader.getController();
+                overview.setStageAndSetupListeners(this.stage);
+                Main.switchPage(root, "Achmea");
+            } else if (source == loginBtn){
+                FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/View/LoginView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+                Parent root2 = loader2.load();
+                LoginController overview2 = loader2.getController();
+                overview2.setStageAndSetupListeners(this.stage);
+                Main.switchPage(root2, "Achmea");
+            }
+            else if (source == servicesBtn){
+                FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/View/ServicesView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+                Parent root2 = loader2.load();
+                //LoginController overview2 = loader2.getController();
+                //overview2.setStageAndSetupListeners(this.stage);
+                Main.switchPage(root2, "Achmea");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setStageAndSetupListeners(Stage stage) {
         this.stage = stage;
         WindowButtons wb = new WindowButtons();
@@ -59,17 +91,13 @@ public class OverviewController implements Initializable {
         Button en = addLanguageBtns("en.png");
         Button nl = addLanguageBtns("nl.png");
         toolbar.setLeftItems(en, nl);
-        /*statusLbl.setText(Main.StatusCheck().toString());
-        threatLbl.setText(getDatelastlog().toString());
-        servicesLbl.setText(String.valueOf(GetServiceson()));
-        connectionsLbl.setText(String.valueOf(GetTotalConnections()));*/
-
         Timer timer = new Timer();
         timer.schedule(new OverViewTimer(this), 0,5000);
     }
 
     private void loadView(String lang) {
         try {
+            Main.lang = lang;
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
             Parent root = loader.load();
             OverviewController overviewCon = loader.getController();
@@ -172,5 +200,22 @@ public class OverviewController implements Initializable {
         }
 
         return Status.OK;
+    }
+
+
+
+    public int Timeframes(){
+        int i = 0;
+        if(Main.honeypot.getLogs() != null) {
+
+            for(LogConnection item : Main.honeypot.getLogs()){
+
+                System.out.println("log: " + i + " :" + item.getDate());
+                i++;
+            }
+
+            }
+
+        return i;
     }
 }
