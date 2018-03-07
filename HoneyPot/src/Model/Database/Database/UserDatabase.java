@@ -15,14 +15,14 @@ public class UserDatabase implements ILoginRepo {
 		User user1 = null;
 		try
 		{
-			String sql = "SELECT id, roleId FROM [dbo].[User] WHERE name = ? AND password = ? AND session = 0";
+			String sql = "SELECT id, roleId FROM Account WHERE name = ? AND password = ? AND [online] = 0";
 			PreparedStatement statement = Database.connection().prepareStatement(sql);
 			statement.setString(1, user.getName());
 			statement.setString(2, user.getPassword());
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				user1 = new User(rs.getInt(1), user.getName(), user.getPassword(), rs.getInt(2), 1);
-				sql = "UPDATE [dbo].[User] SET session = ? WHERE name = ?";
+				sql = "UPDATE Account SET [online] = ? WHERE name = ?";
 				statement = Database.connection().prepareStatement(sql);
 				statement.setInt(1, 1);
 				statement.setString(2, user.getName());
@@ -41,7 +41,7 @@ public class UserDatabase implements ILoginRepo {
 	public boolean Logout(String name) {
 		try
 		{
-			String sql = "UPDATE [dbo].[User] SET session = 0 WHERE name = ?";
+			String sql = "UPDATE Account SET [online] = 0 WHERE name = ?";
 			PreparedStatement statement = Database.connection().prepareStatement(sql);
 			statement.setString(1, name);
 			statement.execute();
@@ -57,7 +57,7 @@ public class UserDatabase implements ILoginRepo {
 	@Override
 	public boolean Register(User user) {
 		try{
-			String sql = "INSERT INTO [dbo].[User] (name, password, roleId, session) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO Account (name, password, roleID, [online]) VALUES (?, ?, ?, ?)";
 			PreparedStatement statement = Database.connection().prepareStatement(sql);
 			statement.setString(1, user.getName());
 			statement.setString(2, user.getPassword());
