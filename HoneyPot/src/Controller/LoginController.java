@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToolbar;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -57,12 +58,20 @@ public class LoginController implements Initializable {
 		{
 			if(loginModel.Login(new User(loginUsernameField.getText(), loginPasswordField.getText())) != null)
 			{
-				String lang = "en";
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
-				Parent root = loader.load();
-				OverviewController overviewCon = loader.getController();
-				overviewCon.setStageAndSetupListeners(this.stage);
-				Main.switchPage(root, "Login");
+				Platform.runLater(() -> {
+					try {
+					String lang = "en";
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
+					Parent root = null;
+					root = loader.load();
+					OverviewController overviewCon = loader.getController();
+					overviewCon.setStageAndSetupListeners(this.stage);
+					Main.switchPage(root, "Login");
+					}
+					 catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				});
 			}
 		}
 		else if (button == registerBtn)
