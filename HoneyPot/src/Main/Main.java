@@ -18,6 +18,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -69,7 +70,7 @@ public class Main extends Application {
         loader.setResources(ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
         Parent root = loader.load();
         OverviewController Overview = loader.getController();
-
+        this.Stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/Resources/Ducky.png")));
         Stage.initStyle(StageStyle.UNDECORATED);
         Scene scene = new Scene(root);
         scene.getStylesheets().add("http://fonts.googleapis.com/css?family=Roboto");
@@ -139,16 +140,17 @@ public class Main extends Application {
             if(item.isStarted()){
                 start++;
             }
-            connections =+ item.getNumberOfActiveConnections();
+            connections += item.getNumberOfActiveConnections();
         }
-
-        if(connections >= ConnectionAlert){
-            return status.ALERT;
-        }
-
         if(start == 0){
             return status.OFF;
         }
+
+        if(connections > ConnectionAlert){
+            return status.ALERT;
+        }
+
+
 
         return status.OK;
     }

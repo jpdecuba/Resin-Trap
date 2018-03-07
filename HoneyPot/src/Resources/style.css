@@ -2,3 +2,14 @@
     achmea: #cc0000;
     achmeaPink: #c15683;
 }
+
+.jfx-snackbar-content {
+    -fx-background-color: achmeaPink;
+}
+
+.jfx-snackbar-toast {
+    -fx-text-fill: White;
+    -fx-font-family: Roboto-Thin;
+    -fx-font-size: 14;
+    -fx-alignment: center-left;
+}

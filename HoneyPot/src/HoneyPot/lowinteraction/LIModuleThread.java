@@ -236,7 +236,7 @@ public class LIModuleThread implements Runnable {
 
 
 	private void LogRecord(){
-		System.out.println(logs.message());
+		//System.out.println(logs.message());
 		_parent.addLog(logs);
 		_logFile.setEndingLogInfo();
 		new Thread(new LISerializeThread(logs)).start();

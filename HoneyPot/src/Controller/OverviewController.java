@@ -4,7 +4,9 @@ import HoneyPot.logging.LogConnection;
 import HoneyPot.lowinteraction.LIModule;
 import Main.Main;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXToolbar;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,12 +44,15 @@ public class OverviewController implements Initializable {
     @FXML
     Label threatLbl;
     @FXML
-    Label servicesLbl;
+    Label timeframeLbl;
     @FXML
     Label connectionsLbl;
+    Stage stage;
+    static JFXSnackbar snackbar;
+    int currentConnections = 0;
 
     @FXML
-    public void changePage(ActionEvent event){
+    public void changePage(ActionEvent event) {
         try {
             JFXButton source = (JFXButton) event.getSource();
 			String path = "";
@@ -82,46 +87,41 @@ public class OverviewController implements Initializable {
 		Timer timer = new Timer();
 		timer.schedule(new OverViewTimer(this), 0,5000);
 		Main.manager.setToolbar(this.toolbar);
+        snackbar = new JFXSnackbar(anchor);
     }
 
 
-    public int GetServiceson(){
+
+
+
+    public int GetTotalConnections() {
 
         int i = 0;
-        for(LIModule item : Main.Services){
+        for (LIModule item : Main.Services) {
 
-            if(item.isStarted()){
-                i++;
-            }
+            i += item.getNumberOfActiveConnections();
+
         }
+        if (currentConnections < i)
+        {
+            snackbar.show("New connection has been made!", "Okay", event -> snackbar.close());
+        }
+        currentConnections = i;
         return i;
     }
 
-
-    public int GetTotalConnections(){
-
-        int i = 0;
-        for(LIModule item : Main.Services){
-
-                 i += item.getNumberOfActiveConnections();
-
-        }
-
-        return i;
-    }
-
-    public String getDatelastlog(){
-        if(Main.honeypot.getLogs() != null) {
+    public String getDatelastlog() {
+        if (Main.honeypot.getLogs() != null) {
             SimpleDateFormat ft =
                     new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
             Date date = null;
-            for(LogConnection item :  Main.honeypot.getLogs()){
-                if(date == null) {
+            for (LogConnection item : Main.honeypot.getLogs()) {
+                if (date == null) {
                     date = item.getDate();
                 }
-                    if (item.getDate().after(date)) {
-                        date = item.getDate();
-                    }
+                if (item.getDate().after(date)) {
+                    date = item.getDate();
+                }
 
             }
             return ft.format(date);
@@ -130,41 +130,39 @@ public class OverviewController implements Initializable {
     }
 
 
-    public static Status StatusCheck(){
+    public static Status StatusCheck() {
         int start = 0;
         int connections = 0;
 
-        for(LIModule item : Main.Services){
-            if(item.isStarted()){
+        for (LIModule item : Main.Services) {
+            if (item.isStarted()) {
                 start++;
             }
-            connections =+ item.getNumberOfActiveConnections();
+            connections += item.getNumberOfActiveConnections();
         }
 
-        if(connections >= Main.ConnectionAlert){
+        if (connections >= Main.ConnectionAlert) {
             return Status.ALERT;
         }
 
-        if(start == 0){
+        if (start == 0) {
             return Status.OFF;
         }
-
         return Status.OK;
     }
 
 
-
-    public int Timeframes(){
+    public int Timeframes() {
         int i = 0;
-        if(Main.honeypot.getLogs() != null) {
+        if (Main.honeypot.getLogs() != null) {
 
-            for(LogConnection item : Main.honeypot.getLogs()){
-
-                System.out.println("log: " + i + " :" + item.getDate());
-                i++;
+            for (LogConnection item : Main.honeypot.getLogs()) {
+                if (item.getDate().getTime() >= new Date(System.currentTimeMillis() - 3600 * 1000).getTime()) {
+                    i++;
+                }
             }
 
-            }
+        }
 
         return i;
     }

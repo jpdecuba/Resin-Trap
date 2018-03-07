@@ -4,10 +4,7 @@ import Main.Main;
 import Model.Database.LoginModel;
 import Model.User;
 import Model.WindowButtons;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXToolbar;
+import com.jfoenix.controls.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,7 +17,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,62 +24,75 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
-    @FXML
-    AnchorPane anchor;
-    @FXML
-    JFXToolbar toolbar;
-    @FXML
-    JFXButton loginBtn;
-    @FXML
-    JFXButton registerBtn;
-    @FXML
-	JFXTextField loginUsernameField;
-    @FXML
-	JFXPasswordField loginPasswordField;
-    @FXML
-    AnchorPane menuPane;
+    //Login GUI elements
+    @FXML AnchorPane anchor;
+    @FXML JFXToolbar toolbar;
+    @FXML JFXButton loginBtn;
+    @FXML JFXButton goToRegisterBtn;
+    @FXML JFXTextField loginUsernameField;
+    @FXML JFXPasswordField loginPasswordField;
+    @FXML AnchorPane menuPane;
+
+    //Register GUI elements
+    @FXML JFXButton goToLoginBtn;
+    @FXML JFXButton registerBtn;
+    @FXML JFXTextField registerUsernameField;
+    @FXML JFXPasswordField registerPasswordField;
+    @FXML JFXPasswordField registerConfirmField;
 
     LoginModel loginModel;
-
+    JFXSnackbar snackbar;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		loginModel = new LoginModel();
+        snackbar = new JFXSnackbar(anchor);
 	}
 
-	@FXML
-	public void btnClick(ActionEvent e) throws IOException {
-		JFXButton button = (JFXButton) e.getSource();
-		if (button == loginBtn)
-		{
-			if(loginModel.Login(new User(loginUsernameField.getText(), loginPasswordField.getText())) != null)
-			{
-				Platform.runLater(() -> {
-					try {
-					String lang = "en";
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
-					Parent root = null;
-					root = loader.load();
-					OverviewController overviewCon = loader.getController();
-					//overviewCon.setStageAndSetupListeners();
-					Main.switchPage(root, "Achmea");
-					}
-					 catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				});
-			}
-		}
-		else if (button == registerBtn)
-		{
+	public void GoToRegister(){
+	    nameView = "/view/RegisterView.fxml";
+	    title = "Register";
+	    loadView(language);
+    }
 
-		}
-	}
+    public void GoToLogin()  {
+	    nameView = "/view/LoginView.fxml";
+        title = "Login";
+        loadView(language);
+    }
 
-    public void ChangeView()  {
-        throw new NotImplementedException();
+    public void GoToOverview(){
+        nameView = "/View/OverView.fxml";
+        title = "Overview";
+        loadView(language);
+    }
+
+    public void Login(){
+        String username = loginUsernameField.getText();
+        String password = loginPasswordField.getText();
+
+        User user = new User(username, password);
+
+        if(loginModel.Login( user) != null) {
+            GoToOverview();
+        }else {
+            snackbar.show("Username or password is wrong",3000);
+        }
     }
 
     public void Register()  {
-        throw new NotImplementedException();
+        String username = registerUsernameField.getText();
+        String password = registerPasswordField.getText();
+        String confirm = registerConfirmField.getText();
+
+        if(password.equals(confirm)){
+            User user = new User(username, password);
+            if(loginModel.Register(user)){
+                GoToLogin();
+            }else {
+                snackbar.show("Failed",3000);
+            }
+        }else {
+            snackbar.show("Password is not equal",3000);
+        }
     }
 }
