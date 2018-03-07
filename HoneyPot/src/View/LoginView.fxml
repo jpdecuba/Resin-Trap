@@ -73,7 +73,7 @@
                                         <Region VBox.vgrow="ALWAYS"/>
                                         <HBox>
                                             <children>
-                                                <Region prefWidth="40"/>
+                                                <Region HBox.hgrow="ALWAYS"/>
                                                 <JFXButton fx:id="registerBtn" alignment="CENTER" buttonType="RAISED"
                                                            contentDisplay="CENTER" mnemonicParsing="false"
                                                            onAction="#btnClick" minWidth="100"
