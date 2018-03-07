@@ -41,6 +41,14 @@ public class LoginController {
         throw new NotImplementedException();
     }
 
+    public void ChangeView()  {
+        throw new NotImplementedException();
+    }
+
+    public void Register()  {
+        throw new NotImplementedException();
+    }
+
     public void setStageAndSetupListeners(Stage stage) {
         this.stage = stage;
         WindowButtons wb = new WindowButtons();
