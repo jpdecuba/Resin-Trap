@@ -86,7 +86,7 @@ public class OverviewController implements Initializable {
     public void setStageAndSetupListeners(Stage stage) {
         this.stage = stage;
         WindowButtons wb = new WindowButtons();
-        WindowButtons wb2 = new WindowButtons(anchor);
+        WindowButtons wb2 = new WindowButtons(stage);
         toolbar.setRightItems(wb2, wb);
         Button en = addLanguageBtns("en.png");
         Button nl = addLanguageBtns("nl.png");
