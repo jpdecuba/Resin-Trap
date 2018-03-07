@@ -43,7 +43,7 @@ public class LoginController implements Initializable {
     LoginModel loginModel;
     Stage stage;
     String language = "en";
-    String nameView = "/view/LoginView.fxml";
+    String nameView = "/View/OverView.fxml";
     String title = "placeholder title";
 
     JFXSnackbar snackbar;
@@ -68,7 +68,7 @@ public class LoginController implements Initializable {
     }
 
     public void GoToOverview(){
-        nameView = "/view/OverviewView.fxml";
+        nameView = "/View/OverView.fxml";
         title = "Overview";
         loadView(language);
     }
@@ -95,7 +95,11 @@ public class LoginController implements Initializable {
             User user = new User(username, password);
             if(loginModel.Register(user)){
                 GoToLogin();
+            }else {
+                snackbar.show("Failed",3000);
             }
+        }else {
+            snackbar.show("Password is not equal",3000);
         }
     }
 

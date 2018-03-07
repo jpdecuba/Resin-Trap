@@ -132,11 +132,11 @@ public class ServicesController implements Initializable {
     }
 
     public void TurnOff(LIModule module){
-        honeypot.DeRegisterService(module);
+        Main.honeypot.DeRegisterService(module);
     }
 
     public void StartUp(LIModule module){
-        honeypot.DeRegisterService(module);
+        Main.honeypot.DeRegisterService(module);
     }
 
 
