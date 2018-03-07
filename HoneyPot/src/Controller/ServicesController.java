@@ -1,5 +1,7 @@
 package Controller;
 
+import HoneyPot.logging.LogConnection;
+import HoneyPot.lowinteraction.LIModule;
 import Main.Main;
 import Model.WindowButtons;
 import com.jfoenix.controls.JFXButton;
@@ -10,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -18,9 +19,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.Timer;
+import java.util.*;
+
+import static Main.Main.honeypot;
 
 public class ServicesController implements Initializable {
     @FXML
@@ -116,4 +117,47 @@ public class ServicesController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
+
+    public int GetServiceson() {
+
+        int i = 0;
+        for (LIModule item : Main.Services) {
+
+            if (item.isStarted()) {
+                i++;
+            }
+        }
+        return i;
+    }
+
+    public void TurnOff(LIModule module){
+        honeypot.DeRegisterService(module);
+    }
+
+    public void StartUp(LIModule module){
+        honeypot.DeRegisterService(module);
+    }
+
+
+    public boolean isStarted(LIModule module){
+        return module.isStarted();
+    }
+
+    public int GetConnections(LIModule module){
+        return module.getNumberOfActiveConnections();
+    }
+
+    public LinkedList<LogConnection> GetLogs(LIModule module){
+
+        LinkedList<LogConnection> logs = Main.honeypot.getLogs();
+        LinkedList<LogConnection> Servicelogs = new LinkedList<>();
+        for (LogConnection item : logs){
+            if(item.getProtocol().equals(module.getProtocol().toString())){
+                Servicelogs.add(item);
+            }
+        }
+        return logs;
+    }
+
 }

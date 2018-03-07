@@ -139,17 +139,7 @@ public class OverviewController implements Initializable {
     }
 
 
-    public int GetServiceson() {
 
-        int i = 0;
-        for (LIModule item : Main.Services) {
-
-            if (item.isStarted()) {
-                i++;
-            }
-        }
-        return i;
-    }
 
 
     public int GetTotalConnections() {
