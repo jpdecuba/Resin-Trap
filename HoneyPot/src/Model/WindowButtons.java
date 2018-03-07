@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
@@ -47,7 +48,7 @@ public class WindowButtons extends HBox {
 
     }
 
-    public WindowButtons(Stage stage) {
+    public WindowButtons(AnchorPane anchor) {
         Button maxBtn = new Button("");
         this.setStyle("-fx-alignment: center");
         maxBtn.setMaxSize(25, 25);
@@ -65,10 +66,14 @@ public class WindowButtons extends HBox {
             public void handle(ActionEvent actionEvent) {
                 Screen screen = Screen.getPrimary();
                 Rectangle2D bounds = screen.getVisualBounds();
-                stage.setX(bounds.getMinX());
-                stage.setY(bounds.getMinY());
-                stage.setWidth(bounds.getWidth());
-                stage.setHeight(bounds.getHeight());
+                anchor.setLayoutX(bounds.getMinX());
+                anchor.setLayoutY(bounds.getMinY());
+                anchor.setPrefWidth(bounds.getWidth());
+                anchor.setPrefHeight(bounds.getHeight());
+				anchor.setMinWidth(bounds.getWidth());
+				anchor.setMinHeight(bounds.getHeight());
+				anchor.setMaxWidth(bounds.getWidth());
+				anchor.setMaxHeight(bounds.getHeight());
             }
         });
 
