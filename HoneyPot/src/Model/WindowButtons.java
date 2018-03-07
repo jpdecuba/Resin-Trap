@@ -48,7 +48,7 @@ public class WindowButtons extends HBox {
 
     }
 
-    public WindowButtons(AnchorPane anchor) {
+    public WindowButtons(Stage stage) {
         Button maxBtn = new Button("");
         this.setStyle("-fx-alignment: center");
         maxBtn.setMaxSize(25, 25);
@@ -66,14 +66,10 @@ public class WindowButtons extends HBox {
             public void handle(ActionEvent actionEvent) {
                 Screen screen = Screen.getPrimary();
                 Rectangle2D bounds = screen.getVisualBounds();
-                anchor.setLayoutX(bounds.getMinX());
-                anchor.setLayoutY(bounds.getMinY());
-                anchor.setPrefWidth(bounds.getWidth());
-                anchor.setPrefHeight(bounds.getHeight());
-				anchor.setMinWidth(bounds.getWidth());
-				anchor.setMinHeight(bounds.getHeight());
-				anchor.setMaxWidth(bounds.getWidth());
-				anchor.setMaxHeight(bounds.getHeight());
+                stage.setX(bounds.getMinX());
+                stage.setY(bounds.getMinY());
+                stage.setWidth(bounds.getWidth());
+                stage.setHeight(bounds.getHeight());
             }
         });
 

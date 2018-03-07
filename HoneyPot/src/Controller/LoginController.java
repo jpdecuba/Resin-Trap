@@ -20,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -91,7 +92,7 @@ public class LoginController implements Initializable {
     public void setStageAndSetupListeners(Stage stage) {
         this.stage = stage;
         WindowButtons wb = new WindowButtons();
-        WindowButtons wb2 = new WindowButtons(anchor);
+        WindowButtons wb2 = new WindowButtons(stage);
         toolbar.setRightItems(wb2, wb);
         Button en = addLanguageBtns("en.png");
         Button nl = addLanguageBtns("nl.png");
