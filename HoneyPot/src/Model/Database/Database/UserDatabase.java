@@ -6,6 +6,7 @@ import Model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class UserDatabase implements ILoginRepo {
 
@@ -37,7 +38,7 @@ public class UserDatabase implements ILoginRepo {
 	}
 
 	@Override
-	public Boolean Logout(String name) {
+	public boolean Logout(String name) {
 		try
 		{
 			String sql = "UPDATE [dbo].[User] SET session = 0 WHERE name = ?";
@@ -51,5 +52,21 @@ public class UserDatabase implements ILoginRepo {
 			ex.printStackTrace();
 		}
 		return false;
+	}
+
+	@Override
+	public boolean Register(User user) {
+		try{
+			String sql = "INSERT INTO [dbo].[User] (name, password, roleId, session) VALUES (?, ?, ?, ?)";
+			PreparedStatement statement = Database.connection().prepareStatement(sql);
+			statement.setString(1, user.getName());
+			statement.setString(2, user.getPassword());
+			statement.setInt(3, user.getRoleId());
+			statement.setInt(4, 0);
+			statement.execute();
+			return true;
+		} catch(SQLException sqle){
+			return false;
+		}
 	}
 }
