@@ -104,9 +104,9 @@
                                         <Region VBox.vgrow="ALWAYS"/>
                                         <HBox>
                                             <children>
-                                                <JFXButton fx:id="backToLoginBtn" alignment="CENTER" buttonType="RAISED"
+                                                <JFXButton fx:id="goToLoginBtn" alignment="CENTER" buttonType="RAISED"
                                                            contentDisplay="CENTER" mnemonicParsing="false"
-                                                           onAction="#ChangeView" prefWidth="100"
+                                                           onAction="#GoToLogin" prefWidth="100"
                                                            style="-fx-background-color: achmea; -fx-font-family: 'Roboto-Condensed'; -fx-font-size: 13pt;"
                                                            text="Back" textFill="white">
                                                     <font>
