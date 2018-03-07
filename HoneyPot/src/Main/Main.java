@@ -16,6 +16,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -61,6 +62,7 @@ public class Main extends Application {
         Parent root = loader.load();
         OverviewController Overview = loader.getController();
         this.Stage = primaryStage;
+        this.Stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/Resources/Ducky.png")));
 		Overview.setStageAndSetupListeners(Stage);
         Stage.initStyle(StageStyle.UNDECORATED);
         Scene scene = new Scene(root);
