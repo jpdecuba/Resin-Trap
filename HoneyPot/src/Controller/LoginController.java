@@ -45,8 +45,6 @@ public class LoginController implements Initializable {
 
     LoginModel loginModel;
 
-    Stage stage;
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		loginModel = new LoginModel();
@@ -66,8 +64,8 @@ public class LoginController implements Initializable {
 					Parent root = null;
 					root = loader.load();
 					OverviewController overviewCon = loader.getController();
-					overviewCon.setStageAndSetupListeners(this.stage);
-					Main.switchPage(root, "Login");
+					//overviewCon.setStageAndSetupListeners();
+					Main.switchPage(root, "Achmea");
 					}
 					 catch (IOException e1) {
 						e1.printStackTrace();
@@ -87,52 +85,5 @@ public class LoginController implements Initializable {
 
     public void Register()  {
         throw new NotImplementedException();
-    }
-
-    public void setStageAndSetupListeners(Stage stage) {
-        this.stage = stage;
-        WindowButtons wb = new WindowButtons();
-        WindowButtons wb2 = new WindowButtons(anchor);
-        toolbar.setRightItems(wb2, wb);
-        Button en = addLanguageBtns("en.png");
-        Button nl = addLanguageBtns("nl.png");
-        toolbar.setLeftItems(en, nl);
-    }
-
-    private void loadView(String lang) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LoginView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
-            Parent root = loader.load();
-            LoginController loginCon = loader.getController();
-            loginCon.setStageAndSetupListeners(this.stage);
-            Main.switchPage(root, "Login");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Button addLanguageBtns(String lang) {
-        Button btn = new Button("");
-        btn.setMaxSize(25, 25);
-        btn.setMinSize(25, 25);
-        btn.setPrefSize(25, 25);
-        Image img = new Image("/Resources/" + lang);
-        ImageView toggleImage = new ImageView(img);
-        toggleImage.setFitWidth(20);
-        toggleImage.setFitHeight(15);
-        btn.setGraphic(toggleImage);
-        btn.setStyle("-fx-background-color: transparent; -fx-text-fill: achmeaPink; -fx-alignment: bottom-center");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                if (lang.equals("en.png")) {
-                    loadView("en");
-                } else {
-                    loadView("nl");
-                }
-            }
-        });
-        return btn;
     }
 }

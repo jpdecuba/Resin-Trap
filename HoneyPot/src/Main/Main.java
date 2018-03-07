@@ -1,6 +1,5 @@
 package Main;
 
-import Controller.LoginController;
 import Controller.OverviewController;
 import HoneyPot.honeyrj.HoneyRJ;
 import HoneyPot.honeyrj.HoneyRJException;
@@ -9,13 +8,17 @@ import HoneyPot.lowinteraction.LIProtocol;
 import HoneyPot.protocol.FtpProtocol;
 import HoneyPot.protocol.MySQLProtocol;
 import HoneyPot.protocol.SmtpProtocol;
+import Model.ControllerManager;
 import Model.ResizeHelper;
 import Model.Status;
+import Model.WindowButtons;
+import com.jfoenix.controls.JFXToolbar;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -25,10 +28,12 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Main extends Application {
-    static Stage Stage;
+    public static Stage Stage;
     private double xOffset = 0;
     private double yOffset = 0;
     public static String lang = "en";
+    public static JFXToolbar toolbar;
+    public static ControllerManager manager;
 
     //Honeypot
 
@@ -56,17 +61,20 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         launchHoneypot();
         StartHoneypotServices();
+		this.Stage = primaryStage;
+		toolbar = new JFXToolbar();
+        this.manager = new ControllerManager();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"));
         loader.setResources(ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
         Parent root = loader.load();
         OverviewController Overview = loader.getController();
-        this.Stage = primaryStage;
-		Overview.setStageAndSetupListeners(Stage);
+
         Stage.initStyle(StageStyle.UNDECORATED);
         Scene scene = new Scene(root);
         scene.getStylesheets().add("http://fonts.googleapis.com/css?family=Roboto");
         scene.getStylesheets().add("Resources/style.css");
-        Stage.setTitle("Achema");
+        Stage.setTitle("Achmea");
         Stage.setScene(scene);
         Stage.setMinWidth(900);
         Stage.setMinHeight(600);
@@ -149,8 +157,21 @@ public class Main extends Application {
         for(LIModule item : Services) {
             honeypot.DeRegisterService(item);
         }
-
-
     }
 
+
+	public static void ChangeButtons(String view, String title)
+	{
+		for (int i = 0; i < toolbar.getLeftItems().size(); i++)
+		{
+			Button btn = (Button)toolbar.getLeftItems().get(i);
+			btn.setOnAction(actionEvent -> {
+				if (lang.equals("en.png")) {
+					manager.loadView("en", view, title);
+				} else {
+					manager.loadView("nl", view, title);
+				}
+			});
+		}
+	}
 }
