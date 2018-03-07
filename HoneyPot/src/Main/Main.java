@@ -1,5 +1,6 @@
 package Main;
 
+import Controller.LoginController;
 import Controller.OverviewController;
 import HoneyPot.honeyrj.HoneyRJ;
 import HoneyPot.honeyrj.HoneyRJException;
@@ -55,17 +56,17 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         launchHoneypot();
         StartHoneypotServices();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LoginView.fxml"));
         loader.setResources(ResourceBundle.getBundle("bundles.UIResources", new Locale("en", "EN")));
         Parent root = loader.load();
-        OverviewController overview = loader.getController();
+        LoginController login = loader.getController();
         this.Stage = primaryStage;
-        overview.setStageAndSetupListeners(Stage);
+		login.setStageAndSetupListeners(Stage);
         Stage.initStyle(StageStyle.UNDECORATED);
         Scene scene = new Scene(root);
         scene.getStylesheets().add("http://fonts.googleapis.com/css?family=Roboto");
         scene.getStylesheets().add("Resources/style.css");
-        Stage.setTitle("Achmea");
+        Stage.setTitle("Login");
         Stage.setScene(scene);
         Stage.setMinWidth(900);
         Stage.setMinHeight(600);
@@ -142,6 +143,14 @@ public class Main extends Application {
         }
 
         return status.OK;
+    }
+
+    public static void Shutdown(){
+        for(LIModule item : Services) {
+            honeypot.DeRegisterService(item);
+        }
+
+
     }
 
 }

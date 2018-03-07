@@ -20,37 +20,6 @@
                 <AnchorPane fx:id="menuPane" prefHeight="${menuPane.parent.height}"
                             prefWidth="260.0"
                             style="-fx-background-color: achmea;">
-                    <children>
-                        <VBox AnchorPane.leftAnchor="0" alignment="CENTER" AnchorPane.topAnchor="100"
-                              AnchorPane.rightAnchor="0">
-                            <children>
-                                <JFXButton fx:id="overviewBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0"
-                                           layoutX="0"
-                                           layoutY="0" mnemonicParsing="false" prefHeight="50.0"
-                                           prefWidth="240.0"
-                                           style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
-                                           text="%overview" textFill="WHITE">
-                                    <graphic>
-                                        <FontAwesomeIconView fill="WHITE" glyphName="HOME" size="22"
-                                                             strokeType="OUTSIDE"
-                                                             strokeWidth="0.0"/>
-                                    </graphic>
-                                </JFXButton>
-                                <JFXButton fx:id="servicesBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0"
-                                           layoutX="0"
-                                           layoutY="50.0" mnemonicParsing="false" prefHeight="50.0"
-                                           prefWidth="240.0"
-                                           style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
-                                           text="%services" textFill="WHITE">
-                                    <graphic>
-                                        <FontAwesomeIconView fill="WHITE" glyphName="SERVER" size="22"
-                                                             strokeType="OUTSIDE"
-                                                             strokeWidth="0.0"/>
-                                    </graphic>
-                                </JFXButton>
-                            </children>
-                        </VBox>
-                    </children>
                 </AnchorPane>
                 <VBox fx:id="VB" prefHeight="${VB.parent.height}" HBox.hgrow="ALWAYS" >
                     <children>
@@ -79,7 +48,7 @@
                                                 <FontAwesomeIconView fill="#cc0000" glyphName="USER" size="25"
                                                                      strokeType="OUTSIDE" strokeWidth="0.0"/>
                                                 <JFXTextField fx:id="loginUsernameField" alignment="BASELINE_LEFT"
-                                                              focusColor="#cc0000" labelFloat="true" promptText="Username"
+                                                              focusColor="#cc0000" labelFloat="true" promptText="%username"
                                                               HBox.hgrow="ALWAYS">
                                                     <font>
                                                         <Font size="16.0"/>
@@ -94,7 +63,7 @@
                                                                      strokeType="OUTSIDE" strokeWidth="0.0"/>
                                                 <JFXPasswordField fx:id="loginPasswordField" alignment="BASELINE_LEFT"
                                                                   focusColor="#cc0000" labelFloat="true"
-                                                                  promptText="Password" HBox.hgrow="ALWAYS">
+                                                                  promptText="%password" HBox.hgrow="ALWAYS">
                                                     <font>
                                                         <Font size="16.0"/>
                                                     </font>
@@ -104,12 +73,12 @@
                                         <Region VBox.vgrow="ALWAYS"/>
                                         <HBox>
                                             <children>
-                                                <Region prefWidth="30"/>
-                                                <JFXButton alignment="CENTER" buttonType="RAISED"
+                                                <Region prefWidth="40"/>
+                                                <JFXButton fx:id="registerBtn" alignment="CENTER" buttonType="RAISED"
                                                            contentDisplay="CENTER" mnemonicParsing="false"
-                                                           onAction="#GoRegister" prefWidth="100"
+                                                           onAction="#btnClick" minWidth="100"
                                                            style="-fx-background-color: achmea; -fx-font-family: 'Roboto-Condensed'; -fx-font-size: 13pt;"
-                                                           text="Register" textFill="white">
+                                                           text="%register" textFill="white">
                                                     <font>
                                                         <Font size="14.0"/>
                                                     </font>
@@ -117,9 +86,9 @@
                                                 <Region HBox.hgrow="ALWAYS"/>
                                                 <JFXButton fx:id="loginBtn" alignment="CENTER" buttonType="RAISED"
                                                            contentDisplay="CENTER" mnemonicParsing="false"
-                                                           onAction="#Login" prefWidth="100"
+                                                           onAction="#btnClick" minWidth="100"
                                                            style="-fx-background-color: achmea; -fx-font-family: 'Roboto-Condensed'; -fx-font-size: 13pt;"
-                                                           text="Login" textFill="white">
+                                                           text="%login" textFill="white">
                                                     <font>
                                                         <Font size="14.0"/>
                                                     </font>
