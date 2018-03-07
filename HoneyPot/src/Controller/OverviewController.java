@@ -7,6 +7,7 @@ import Main.Main;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToolbar;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,6 +52,31 @@ public class OverviewController implements Initializable {
     Label connectionsLbl;
     Stage stage;
 
+    @FXML
+    public void changePage(ActionEvent event){
+        try {
+            JFXButton source = (JFXButton) event.getSource();
+            switch (source.getText()) {
+                case "OVERVIEW":
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+                    Parent root = loader.load();
+                    OverviewController overview = loader.getController();
+                    overview.setStageAndSetupListeners(this.stage);
+                    Main.switchPage(root, "Achmea");
+                    break;
+                case "LOGIN":
+                    FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/View/LoginView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+                    Parent root2 = loader2.load();
+                    LoginController overview2 = loader2.getController();
+                    overview2.setStageAndSetupListeners(this.stage);
+                    Main.switchPage(root2, "Achmea");
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setStageAndSetupListeners(Stage stage) {
         this.stage = stage;
         WindowButtons wb = new WindowButtons();
@@ -59,11 +85,6 @@ public class OverviewController implements Initializable {
         Button en = addLanguageBtns("en.png");
         Button nl = addLanguageBtns("nl.png");
         toolbar.setLeftItems(en, nl);
-        /*statusLbl.setText(Main.StatusCheck().toString());
-        threatLbl.setText(getDatelastlog().toString());
-        servicesLbl.setText(String.valueOf(GetServiceson()));
-        connectionsLbl.setText(String.valueOf(GetTotalConnections()));*/
-
         Timer timer = new Timer();
         timer.schedule(new OverViewTimer(this), 0,5000);
     }

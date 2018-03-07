@@ -27,7 +27,7 @@ public class Main extends Application {
     static Stage Stage;
     private double xOffset = 0;
     private double yOffset = 0;
-
+    public static String lang = "en";
 
     //Honeypot
 
@@ -56,7 +56,7 @@ public class Main extends Application {
         launchHoneypot();
         StartHoneypotServices();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"));
-        loader.setResources(ResourceBundle.getBundle("bundles.UIResources", new Locale("en", "EN")));
+        loader.setResources(ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
         Parent root = loader.load();
         OverviewController overview = loader.getController();
         this.Stage = primaryStage;
