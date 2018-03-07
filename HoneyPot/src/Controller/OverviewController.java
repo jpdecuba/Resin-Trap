@@ -173,4 +173,21 @@ public class OverviewController implements Initializable {
 
         return Status.OK;
     }
+
+
+
+    public int Timeframes(){
+        int i = 0;
+        if(Main.honeypot.getLogs() != null) {
+
+            for(LogConnection item : Main.honeypot.getLogs()){
+
+                System.out.println("log: " + i + " :" + item.getDate());
+                i++;
+            }
+
+            }
+
+        return i;
+    }
 }

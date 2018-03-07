@@ -211,7 +211,10 @@ public class HoneyRJ {
 	}
 
 	public LinkedList<LogConnection> getLogs() {
-		LinkedList<LogConnection> list = new LinkedList<>(logs);
+        LinkedList<LogConnection> list = new LinkedList<>(logs);
+
+		Collections.sort(list);
+
 		if(list.size() <= 0)
 		{
 			return null;
