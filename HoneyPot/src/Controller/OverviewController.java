@@ -49,7 +49,7 @@ public class OverviewController implements Initializable {
     @FXML
     Label threatLbl;
     @FXML
-    Label servicesLbl;
+    Label timeframeLbl;
     @FXML
     Label connectionsLbl;
     Stage stage;
@@ -209,9 +209,9 @@ public class OverviewController implements Initializable {
         if(Main.honeypot.getLogs() != null) {
 
             for(LogConnection item : Main.honeypot.getLogs()){
-
-                System.out.println("log: " + i + " :" + item.getDate());
-                i++;
+                if(item.getDate().getTime() >=  new Date(System.currentTimeMillis() - 3600 * 1000).getTime()) {
+                    i++;
+                }
             }
 
             }

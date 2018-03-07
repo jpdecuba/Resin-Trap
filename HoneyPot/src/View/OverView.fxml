@@ -82,7 +82,7 @@
                                         <HBox alignment="CENTER">
                                             <children>
                                                 <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
-                                                       text="Status:"></Label>
+                                                       text="%status"></Label>
                                                 <Region HBox.hgrow="ALWAYS"></Region>
                                                 <Label fx:id="statusLbl"
                                                        style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; "
@@ -92,7 +92,7 @@
                                         <HBox alignment="CENTER">
                                             <children>
                                                 <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
-                                                       text="Last threat:"></Label>
+                                                       text="%threat"></Label>
                                                 <Region HBox.hgrow="ALWAYS"></Region>
                                                 <Label fx:id="threatLbl"
                                                        style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; "
@@ -102,9 +102,9 @@
                                         <HBox alignment="CENTER">
                                             <children>
                                                 <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
-                                                       text="Services on:"></Label>
+                                                       text="%timeframe"></Label>
                                                 <Region HBox.hgrow="ALWAYS"></Region>
-                                                <Label fx:id="servicesLbl"
+                                                <Label fx:id="timeframeLbl"
                                                        style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; "
                                                        text="IDKYET"></Label>
                                             </children>
@@ -112,7 +112,7 @@
                                         <HBox alignment="CENTER">
                                             <children>
                                                 <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
-                                                       text="Total connections:"></Label>
+                                                       text="%connections"></Label>
                                                 <Region HBox.hgrow="ALWAYS"></Region>
                                                 <Label fx:id="connectionsLbl"
                                                        style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; "
