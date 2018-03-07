@@ -65,7 +65,7 @@ public class Main extends Application {
 		this.Stage = primaryStage;
 		toolbar = new JFXToolbar();
         this.manager = new ControllerManager();
-
+		manager.currentView = "/View/OverView.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"));
         loader.setResources(ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
         Parent root = loader.load();
@@ -161,19 +161,19 @@ public class Main extends Application {
         }
     }
 
-
-	public static void ChangeButtons(String view, String title)
-	{
-		for (int i = 0; i < toolbar.getLeftItems().size(); i++)
-		{
-			Button btn = (Button)toolbar.getLeftItems().get(i);
-			btn.setOnAction(actionEvent -> {
-				if (lang.equals("en.png")) {
-					manager.loadView("en", view, title);
-				} else {
-					manager.loadView("nl", view, title);
-				}
-			});
-		}
-	}
+//
+//	public static void ChangeButtons(String view, String title)
+//	{
+//		for (int i = 0; i < toolbar.getLeftItems().size(); i++)
+//		{
+//			Button btn = (Button)toolbar.getLeftItems().get(i);
+//			btn.setOnAction(actionEvent -> {
+//				if (lang.equals("en.png")) {
+//					manager.loadView("en", view, title);
+//				} else {
+//					manager.loadView("nl", view, title);
+//				}
+//			});
+//		}
+//	}
 }

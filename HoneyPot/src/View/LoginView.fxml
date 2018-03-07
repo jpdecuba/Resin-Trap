@@ -76,7 +76,7 @@
                                                 <Region prefWidth="40"/>
                                                 <JFXButton fx:id="goToRegisterBtn" alignment="CENTER" buttonType="RAISED"
                                                            contentDisplay="CENTER" mnemonicParsing="false"
-                                                           onAction="#GoToRegister" minWidth="100"
+                                                           onAction="#changePage" minWidth="100"
                                                            style="-fx-background-color: achmea; -fx-font-family: 'Roboto-Condensed'; -fx-font-size: 13pt;"
                                                            text="%register" textFill="white">
                                                     <font>
@@ -86,7 +86,7 @@
                                                 <Region HBox.hgrow="ALWAYS"/>
                                                 <JFXButton fx:id="loginBtn" alignment="CENTER" buttonType="RAISED"
                                                            contentDisplay="CENTER" mnemonicParsing="false"
-                                                           onAction="#Login" minWidth="100"
+                                                           onAction="#changePage" minWidth="100"
                                                            style="-fx-background-color: achmea; -fx-font-family: 'Roboto-Condensed'; -fx-font-size: 13pt;"
                                                            text="%login" textFill="white">
                                                     <font>

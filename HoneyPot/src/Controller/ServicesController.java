@@ -46,13 +46,11 @@ public class ServicesController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
                 Parent root = loader.load();
                 OverviewController overview = loader.getController();
-                overview.setStageAndSetupListeners(this.stage);
                 Main.switchPage(root, "Achmea");
             } else if (source == loginBtn){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LoginView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
                 Parent root = loader.load();
                 LoginController overview = loader.getController();
-                overview.setStageAndSetupListeners(this.stage);
                 Main.switchPage(root, "Achmea");
             }
             else if (source == servicesBtn){
@@ -85,7 +83,6 @@ public class ServicesController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
             Parent root = loader.load();
             OverviewController overviewCon = loader.getController();
-            overviewCon.setStageAndSetupListeners(this.stage);
             Main.switchPage(root, "Achmea");
         } catch (IOException e) {
             e.printStackTrace();

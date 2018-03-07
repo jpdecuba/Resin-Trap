@@ -15,6 +15,8 @@ import java.util.ResourceBundle;
 
 public class ControllerManager {
 
+	public String currentView = "";
+
 	public void loadView(String lang, String path, String title) {
 		try {
 			Main.lang = lang;
@@ -48,9 +50,9 @@ public class ControllerManager {
 		btn.setStyle("-fx-background-color: transparent; -fx-text-fill: achmeaPink; -fx-alignment: bottom-center");
 		btn.setOnAction(actionEvent -> {
 			if (lang.equals("en.png")) {
-				loadView("en", "/View/OverView.fxml", "Achmea");
+				loadView("en", currentView, "Achmea");
 			} else {
-				loadView("nl", "/View/OverView.fxml", "Achmea");
+				loadView("nl", currentView, "Achmea");
 			}
 		});
 		return btn;

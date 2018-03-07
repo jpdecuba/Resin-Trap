@@ -47,9 +47,17 @@ public class OverviewController implements Initializable {
     Label timeframeLbl;
     @FXML
     Label connectionsLbl;
-    Stage stage;
     static JFXSnackbar snackbar;
     int currentConnections = 0;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		overviewBtn.setDefaultButton(true);
+		Timer timer = new Timer();
+		timer.schedule(new OverViewTimer(this), 0,5000);
+		Main.manager.setToolbar(this.toolbar);
+		snackbar = new JFXSnackbar(anchor);
+	}
 
     @FXML
     public void changePage(ActionEvent event) {
@@ -70,7 +78,7 @@ public class OverviewController implements Initializable {
             	title = "Achmea";
             }
 
-			Main.ChangeButtons(path, title);
+			Main.manager.currentView = path;
 
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
 			Parent root = loader.load();
@@ -80,19 +88,6 @@ public class OverviewController implements Initializable {
             e.printStackTrace();
         }
     }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        overviewBtn.setDefaultButton(true);
-		Timer timer = new Timer();
-		timer.schedule(new OverViewTimer(this), 0,5000);
-		Main.manager.setToolbar(this.toolbar);
-        snackbar = new JFXSnackbar(anchor);
-    }
-
-
-
-
 
     public int GetTotalConnections() {
 

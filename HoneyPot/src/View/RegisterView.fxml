@@ -106,7 +106,7 @@
                                             <children>
                                                 <JFXButton fx:id="goToLoginBtn" alignment="CENTER" buttonType="RAISED"
                                                            contentDisplay="CENTER" mnemonicParsing="false"
-                                                           onAction="#GoToLogin" prefWidth="100"
+                                                           onAction="#changePage" prefWidth="100"
                                                            style="-fx-background-color: achmea; -fx-font-family: 'Roboto-Condensed'; -fx-font-size: 13pt;"
                                                            text="Back" textFill="white">
                                                     <font>
@@ -116,7 +116,7 @@
                                                 <Region HBox.hgrow="ALWAYS"/>
                                                 <JFXButton fx:id="registerBtn" alignment="CENTER" buttonType="RAISED"
                                                            contentDisplay="CENTER" mnemonicParsing="false"
-                                                           onAction="#Register" prefWidth="100"
+                                                           onAction="#changePage" prefWidth="100"
                                                            style="-fx-background-color: achmea; -fx-font-family: 'Roboto-Condensed'; -fx-font-size: 13pt;"
                                                            text="Register" textFill="white">
                                                     <font>
