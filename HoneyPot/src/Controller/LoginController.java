@@ -91,7 +91,6 @@ public class LoginController implements Initializable {
 	{
 		try
 		{
-			//Main.ChangeButtons(path, title);
 			Main.manager.currentView = path;
 
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));

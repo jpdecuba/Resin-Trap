@@ -21,8 +21,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-import static Main.Main.honeypot;
-
 public class ServicesController implements Initializable {
     @FXML
     AnchorPane anchor;
@@ -42,24 +40,25 @@ public class ServicesController implements Initializable {
     public void changePage(ActionEvent event){
         try {
             JFXButton source = (JFXButton) event.getSource();
+            String path = "";
+            String title = "";
             if (source == overviewBtn){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
-                Parent root = loader.load();
-                OverviewController overview = loader.getController();
-                Main.switchPage(root, "Achmea");
+                path = "/View/OverView.fxml";
+                title = "Achmea";
             } else if (source == loginBtn){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LoginView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
-                Parent root = loader.load();
-                LoginController overview = loader.getController();
-                Main.switchPage(root, "Achmea");
+                path = "/View/LoginView.fxml";
+                title = "Achmea";
             }
             else if (source == servicesBtn){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/ServicesView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
-                Parent root = loader.load();
-                ServicesController overview = loader.getController();
-                overview.setStageAndSetupListeners(this.stage);
-                Main.switchPage(root, "Achmea");
+                path = "/View/ServicesView.fxml";
+                title = "Achmea";
             }
+            Main.manager.currentView = path;
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+            Parent root = loader.load();
+            Main.switchPage(root, title);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
