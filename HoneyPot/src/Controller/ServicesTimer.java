@@ -33,6 +33,7 @@ public class ServicesTimer extends TimerTask {
                 item.GetConnections(module);
                 item.Timeframes(logs);
                 item.getDatelastlog(logs);
+                item.StatusCheck(module);
             }
         });
 
