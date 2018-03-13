@@ -55,7 +55,15 @@ public class ServicesController implements Initializable {
 		{
 			loginBtn.setText(ResourceBundle.getBundle("bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("logout"));
 		}
-		serviceList.getItems().add("test");
+        fillListView();
+    }
+
+    public void fillListView(){
+        serviceList.getItems().clear();
+        for (LIModule mod:
+             GetModules()) {
+            serviceList.getItems().add(mod.getProtocol().toString());
+        }
     }
 
     @FXML
