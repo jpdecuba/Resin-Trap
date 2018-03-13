@@ -45,9 +45,13 @@ public class ServicesController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 		Timer timer = new Timer();
 		//timer.schedule(new ServicesTimer(this), 0,5000);
-		
         Main.manager.setToolbar(this.toolbar);
 		snackbar = new JFXSnackbar(anchor);
+		if(Main.account != null)
+		{
+			//loginBtn.setText("%logout");
+			loginBtn.setText(ResourceBundle.getBundle("bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("logout"));
+		}
     }
 
     @FXML

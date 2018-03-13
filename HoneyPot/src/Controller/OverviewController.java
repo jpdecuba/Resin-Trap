@@ -57,7 +57,7 @@ public class OverviewController implements Initializable {
 		snackbar = new JFXSnackbar(anchor);
 		if(Main.account != null)
 		{
-			loginBtn.setText("Logout");
+			loginBtn.setText(ResourceBundle.getBundle("bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("logout"));
 		}
 	}
 
