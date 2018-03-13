@@ -36,11 +36,13 @@ public class LoginController implements Initializable {
     @FXML JFXPasswordField registerPasswordField;
     @FXML JFXPasswordField registerConfirmField;
 
-    LoginModel loginModel;
+    //Services GUI elements
+	@FXML JFXButton overviewBtn;
+	@FXML JFXButton servicesBtn;
+
     JFXSnackbar snackbar;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		loginModel = new LoginModel();
 		Main.manager.setToolbar(this.toolbar);
         snackbar = new JFXSnackbar(anchor);
 	}
@@ -61,6 +63,14 @@ public class LoginController implements Initializable {
 			{
 				return;
 			}
+		}
+		else if (button == overviewBtn){
+			path = "/View/OverView.fxml";
+			title = "Achmea";
+		}
+		else if (button == servicesBtn){
+			path = "/View/ServicesView.fxml";
+			title = "Achmea";
 		}
 		else if (button == goToRegisterBtn)
 		{
@@ -107,9 +117,9 @@ public class LoginController implements Initializable {
         String username = loginUsernameField.getText();
         String password = loginPasswordField.getText();
 
-        User user = new User(username, password);
-
-        if(loginModel.Login( user) != null) {
+		User user = Main.loginModel.Login( new User(username, password));
+        if(user != null) {
+			Main.account = user;
             return true;
         }else {
             snackbar.show("Username or password is wrong",3000);
@@ -124,7 +134,7 @@ public class LoginController implements Initializable {
 
 		if (password.equals(confirm)) {
 			User user = new User(username, password);
-			if (loginModel.Register(user)) {
+			if (Main.loginModel.Register(user)) {
 
 				return true;
 

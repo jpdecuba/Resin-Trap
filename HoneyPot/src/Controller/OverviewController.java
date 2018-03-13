@@ -55,6 +55,10 @@ public class OverviewController implements Initializable {
 		timer.schedule(new OverViewTimer(this), 0,5000);
 		Main.manager.setToolbar(this.toolbar);
 		snackbar = new JFXSnackbar(anchor);
+		if(Main.account != null)
+		{
+			loginBtn.setText("Logout");
+		}
 	}
 
     @FXML
@@ -68,6 +72,18 @@ public class OverviewController implements Initializable {
 				path = "/View/OverView.fxml";
 				title = "Achmea";
             } else if (source == loginBtn){
+            	if(loginBtn.getText() == "Logout")
+				{
+					if(Main.loginModel.Logout(Main.account.getName()))
+					{
+						Main.account = null;
+					}
+					else
+					{
+						snackbar.show("Failed to logout", 3000);
+						return;
+					}
+				}
             	path = "/View/LoginView.fxml";
             	title = "Login";
             }
@@ -154,7 +170,6 @@ public class OverviewController implements Initializable {
                     i++;
                 }
             }
-
         }
 
         return i;
