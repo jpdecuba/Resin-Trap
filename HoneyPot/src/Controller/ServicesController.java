@@ -1,5 +1,7 @@
 package Controller;
 
+import HoneyPot.logging.LogConnection;
+import HoneyPot.lowinteraction.LIModule;
 import Main.Main;
 import Model.WindowButtons;
 import com.jfoenix.controls.JFXButton;
@@ -10,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -18,9 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.Timer;
+import java.util.*;
 
 public class ServicesController implements Initializable {
     @FXML
@@ -41,26 +40,25 @@ public class ServicesController implements Initializable {
     public void changePage(ActionEvent event){
         try {
             JFXButton source = (JFXButton) event.getSource();
+            String path = "";
+            String title = "";
             if (source == overviewBtn){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
-                Parent root = loader.load();
-                OverviewController overview = loader.getController();
-                overview.setStageAndSetupListeners(this.stage);
-                Main.switchPage(root, "Achmea");
+                path = "/View/OverView.fxml";
+                title = "Achmea";
             } else if (source == loginBtn){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LoginView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
-                Parent root = loader.load();
-                LoginController overview = loader.getController();
-                overview.setStageAndSetupListeners(this.stage);
-                Main.switchPage(root, "Achmea");
+                path = "/View/LoginView.fxml";
+                title = "Achmea";
             }
             else if (source == servicesBtn){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/ServicesView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
-                Parent root = loader.load();
-                ServicesController overview = loader.getController();
-                overview.setStageAndSetupListeners(this.stage);
-                Main.switchPage(root, "Achmea");
+                path = "/View/ServicesView.fxml";
+                title = "Achmea";
             }
+            Main.manager.currentView = path;
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+            Parent root = loader.load();
+            Main.switchPage(root, title);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,7 +82,6 @@ public class ServicesController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
             Parent root = loader.load();
             OverviewController overviewCon = loader.getController();
-            overviewCon.setStageAndSetupListeners(this.stage);
             Main.switchPage(root, "Achmea");
         } catch (IOException e) {
             e.printStackTrace();
@@ -116,4 +113,47 @@ public class ServicesController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
+
+    public int GetServiceson() {
+
+        int i = 0;
+        for (LIModule item : Main.Services) {
+
+            if (item.isStarted()) {
+                i++;
+            }
+        }
+        return i;
+    }
+
+    public void TurnOff(LIModule module){
+        Main.honeypot.DeRegisterService(module);
+    }
+
+    public void StartUp(LIModule module){
+        Main.honeypot.DeRegisterService(module);
+    }
+
+
+    public boolean isStarted(LIModule module){
+        return module.isStarted();
+    }
+
+    public int GetConnections(LIModule module){
+        return module.getNumberOfActiveConnections();
+    }
+
+    public LinkedList<LogConnection> GetLogs(LIModule module){
+
+        LinkedList<LogConnection> logs = Main.honeypot.getLogs();
+        LinkedList<LogConnection> Servicelogs = new LinkedList<>();
+        for (LogConnection item : logs){
+            if(item.getProtocol().equals(module.getProtocol().toString())){
+                Servicelogs.add(item);
+            }
+        }
+        return logs;
+    }
+
 }
