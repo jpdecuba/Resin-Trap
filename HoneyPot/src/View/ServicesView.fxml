@@ -16,7 +16,9 @@
     <children>
         <HBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <children>
-                <AnchorPane fx:id="menuPane" prefHeight="${menuPane.parent.height}" prefWidth="260.0"
+                <AnchorPane fx:id="menuPane" prefHeight="${menuPane.parent.height}"
+                            prefWidth="260.0"
+                            minWidth="260.0"
                             style="-fx-background-color: achmea;">
                     <children>
                         <VBox alignment="CENTER" AnchorPane.bottomAnchor="100" AnchorPane.leftAnchor="0"

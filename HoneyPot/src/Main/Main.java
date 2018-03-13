@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -99,6 +100,14 @@ public class Main extends Application {
                 }
             }
         });
+		Main.Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent we) {
+				if(Main.account != null)
+				{
+					Main.loginModel.Logout(Main.account.getName());
+				}
+			}
+		});
         Stage.show();
     }
 
