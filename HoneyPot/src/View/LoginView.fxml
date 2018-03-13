@@ -19,6 +19,7 @@
             <children>
                 <AnchorPane fx:id="menuPane" prefHeight="${menuPane.parent.height}"
                             prefWidth="260.0"
+                            minWidth="260.0"
                             style="-fx-background-color: achmea;">
                 </AnchorPane>
                 <VBox fx:id="VB" prefHeight="${VB.parent.height}" HBox.hgrow="ALWAYS" >
