@@ -43,8 +43,12 @@ public class WindowButtons extends HBox {
 
             @Override
             public void handle(ActionEvent actionEvent) {
+                if(Main.account != null)
+                {
+                    Main.loginModel.Logout(Main.account.getName());
+                }
                 Main.Shutdown();
-                Platform.exit();
+                System.exit(0);
             }
         });
         this.getChildren().add(closeBtn);

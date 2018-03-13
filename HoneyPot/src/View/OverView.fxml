@@ -14,27 +14,17 @@
     <children>
         <HBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0">
             <children>
+
                 <AnchorPane fx:id="menuPane" prefHeight="${menuPane.parent.height}"
                             prefWidth="260.0"
                             minWidth="260.0"
                             style="-fx-background-color: achmea;">
                     <children>
                         <VBox AnchorPane.leftAnchor="0" alignment="CENTER" AnchorPane.topAnchor="100"
-                              AnchorPane.rightAnchor="0">
+                              AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="100">
                             <children>
-                                <JFXButton fx:id="loginBtn" onAction="#changePage" alignment="BASELINE_LEFT" graphicTextGap="20.0"
-                                           layoutX="0"
-                                           layoutY="50.0" mnemonicParsing="false" prefHeight="50.0"
-                                           prefWidth="240.0"
-                                           style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
-                                           text="%login2" textFill="WHITE">
-                                    <graphic>
-                                        <FontAwesomeIconView fill="WHITE" glyphName="USER" size="22"
-                                                             strokeType="OUTSIDE"
-                                                             strokeWidth="0.0"/>
-                                    </graphic>
-                                </JFXButton>
-                                <JFXButton fx:id="overviewBtn" onAction="#changePage" alignment="BASELINE_LEFT" graphicTextGap="17.0"
+                                <JFXButton fx:id="overviewBtn" onAction="#changePage" alignment="BASELINE_LEFT"
+                                           graphicTextGap="17.0"
                                            layoutX="0"
                                            layoutY="0" mnemonicParsing="false" prefHeight="50.0"
                                            prefWidth="240.0"
@@ -46,7 +36,8 @@
                                                              strokeWidth="0.0"/>
                                     </graphic>
                                 </JFXButton>
-                                <JFXButton fx:id="servicesBtn" onAction="#changePage" alignment="BASELINE_LEFT" graphicTextGap="15.0"
+                                <JFXButton fx:id="servicesBtn" onAction="#changePage" alignment="BASELINE_LEFT"
+                                           graphicTextGap="15.0"
                                            layoutX="0"
                                            layoutY="50.0" mnemonicParsing="false" prefHeight="50.0"
                                            prefWidth="240.0"
@@ -58,74 +49,85 @@
                                                              strokeWidth="0.0"/>
                                     </graphic>
                                 </JFXButton>
+                                <Region VBox.vgrow="ALWAYS"></Region>
+                                <JFXButton fx:id="loginBtn" onAction="#changePage" alignment="BASELINE_LEFT"
+                                           graphicTextGap="20.0"
+                                           layoutX="0"
+                                           layoutY="50.0" mnemonicParsing="false" prefHeight="50.0"
+                                           prefWidth="240.0"
+                                           style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
+                                           text="%login2" textFill="WHITE">
+                                    <graphic>
+                                        <FontAwesomeIconView fill="WHITE" glyphName="USER" size="22"
+                                                             strokeType="OUTSIDE"
+                                                             strokeWidth="0.0"/>
+                                    </graphic>
+                                </JFXButton>
                             </children>
                         </VBox>
                     </children>
                 </AnchorPane>
-                <VBox fx:id="VB" prefHeight="${VB.parent.height}" HBox.hgrow="ALWAYS">
+
+                <AnchorPane fx:id="mainPane" prefHeight="${mainPane.parent.height}" HBox.hgrow="ALWAYS"
+                            style="-fx-background-color: WHITE;">
                     <children>
-                        <JFXToolbar fx:id="toolbar" prefWidth="${toolbar.parent.width}"
-                                    prefHeight="25" style="-fx-background-color: WHITE">
-                        </JFXToolbar>
-                        <AnchorPane fx:id="mainPane" prefWidth="${mainPane.parent.width}"
-                                    VBox.vgrow="ALWAYS"
-                                    style="-fx-background-color: WHITE;">
+                        <VBox alignment="CENTER_LEFT" AnchorPane.bottomAnchor="100" AnchorPane.leftAnchor="175"
+                              AnchorPane.rightAnchor="175" AnchorPane.topAnchor="25" spacing="15">
                             <children>
-                                <VBox alignment="CENTER_LEFT" AnchorPane.bottomAnchor="100" AnchorPane.leftAnchor="175"
-                                      AnchorPane.rightAnchor="175" AnchorPane.topAnchor="25" spacing="15">
+                                <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 28; -fx-text-fill: #424242"
+                                       text="%overview2"></Label>
+                                <Region prefHeight="25"></Region>
+                                <Separator></Separator>
+                                <Region prefHeight="25"></Region>
+                                <HBox alignment="CENTER">
                                     <children>
-                                        <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 28; -fx-text-fill: #424242"
-                                               text="%overview2"></Label>
-                                        <Region prefHeight="25"></Region>
-                                        <Separator></Separator>
-                                        <Region prefHeight="25"></Region>
-                                        <HBox alignment="CENTER">
-                                            <children>
-                                                <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
-                                                       text="%status"></Label>
-                                                <Region HBox.hgrow="ALWAYS"></Region>
-                                                <Label fx:id="statusLbl"
-                                                       style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; "
-                                                       text="IDKYET"></Label>
-                                            </children>
-                                        </HBox>
-                                        <HBox alignment="CENTER">
-                                            <children>
-                                                <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
-                                                       text="%threat"></Label>
-                                                <Region HBox.hgrow="ALWAYS"></Region>
-                                                <Label fx:id="threatLbl"
-                                                       style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; "
-                                                       text="IDKYET"></Label>
-                                            </children>
-                                        </HBox>
-                                        <HBox alignment="CENTER">
-                                            <children>
-                                                <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
-                                                       text="%timeframe"></Label>
-                                                <Region HBox.hgrow="ALWAYS"></Region>
-                                                <Label fx:id="timeframeLbl"
-                                                       style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; "
-                                                       text="IDKYET"></Label>
-                                            </children>
-                                        </HBox>
-                                        <HBox alignment="CENTER">
-                                            <children>
-                                                <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
-                                                       text="%connections"></Label>
-                                                <Region HBox.hgrow="ALWAYS"></Region>
-                                                <Label fx:id="connectionsLbl"
-                                                       style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; "
-                                                       text="IDKYET"></Label>
-                                            </children>
-                                        </HBox>
+                                        <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
+                                               text="%status"></Label>
+                                        <Region HBox.hgrow="ALWAYS"></Region>
+                                        <Label fx:id="statusLbl"
+                                               style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; "
+                                               text="IDKYET"></Label>
                                     </children>
-                                </VBox>
+                                </HBox>
+                                <HBox alignment="CENTER">
+                                    <children>
+                                        <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
+                                               text="%threat"></Label>
+                                        <Region HBox.hgrow="ALWAYS"></Region>
+                                        <Label fx:id="threatLbl"
+                                               style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; "
+                                               text="IDKYET"></Label>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER">
+                                    <children>
+                                        <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
+                                               text="%timeframe"></Label>
+                                        <Region HBox.hgrow="ALWAYS"></Region>
+                                        <Label fx:id="timeframeLbl"
+                                               style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; "
+                                               text="IDKYET"></Label>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER">
+                                    <children>
+                                        <Label style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; -fx-font-weight: BOLD"
+                                               text="%connections"></Label>
+                                        <Region HBox.hgrow="ALWAYS"></Region>
+                                        <Label fx:id="connectionsLbl"
+                                               style=" -fx-font-family: Roboto-Regular; -fx-font-size: 16; "
+                                               text="IDKYET"></Label>
+                                    </children>
+                                </HBox>
                             </children>
-                        </AnchorPane>
+                        </VBox>
                     </children>
-                </VBox>
+                </AnchorPane>
             </children>
         </HBox>
+        <JFXToolbar AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0"
+                    fx:id="toolbar" prefWidth="${toolbar.parent.width}"
+                    prefHeight="25" style="-fx-background-color: transparent">
+        </JFXToolbar>
     </children>
 </AnchorPane>

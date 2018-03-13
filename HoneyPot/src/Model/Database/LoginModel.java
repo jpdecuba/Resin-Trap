@@ -18,7 +18,7 @@ public class LoginModel {
 		return this.loginRepo.Validate(user);
 	}
 
-	public boolean Loggout(String name){ return this.loginRepo.Logout(name); }
+	public boolean Logout(String name){ return this.loginRepo.Logout(name); }
 
 	public boolean Register(User user){ return loginRepo.Register(user); }
 }

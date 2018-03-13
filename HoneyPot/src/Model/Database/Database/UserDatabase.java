@@ -21,7 +21,7 @@ public class UserDatabase implements ILoginRepo {
 			statement.setString(2, user.getPassword());
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
-				user1 = new User(rs.getInt(1), user.getName(), user.getPassword(), rs.getInt(2), 1);
+				user1 = new User(rs.getInt(1), user.getName(), rs.getInt(2), 1);
 				sql = "UPDATE Account SET [online] = ? WHERE name = ?";
 				statement = Database.connection().prepareStatement(sql);
 				statement.setInt(1, 1);

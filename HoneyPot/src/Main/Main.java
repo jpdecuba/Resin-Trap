@@ -8,10 +8,8 @@ import HoneyPot.lowinteraction.LIProtocol;
 import HoneyPot.protocol.FtpProtocol;
 import HoneyPot.protocol.MySQLProtocol;
 import HoneyPot.protocol.SmtpProtocol;
-import Model.ControllerManager;
-import Model.ResizeHelper;
-import Model.Status;
-import Model.WindowButtons;
+import Model.*;
+import Model.Database.LoginModel;
 import com.jfoenix.controls.JFXToolbar;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -23,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -35,6 +34,8 @@ public class Main extends Application {
     public static String lang = "en";
     public static JFXToolbar toolbar;
     public static ControllerManager manager;
+    public static User account;
+    public static LoginModel loginModel;
 
     //Honeypot
 
@@ -60,6 +61,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+    	account = null;
+		loginModel = new LoginModel();
         launchHoneypot();
         StartHoneypotServices();
 		this.Stage = primaryStage;
@@ -97,6 +100,14 @@ public class Main extends Application {
                 }
             }
         });
+		Main.Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent we) {
+				if(Main.account != null)
+				{
+					Main.loginModel.Logout(Main.account.getName());
+				}
+			}
+		});
         Stage.show();
     }
 
