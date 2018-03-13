@@ -43,6 +43,9 @@ public class ServicesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+		Timer timer = new Timer();
+		//timer.schedule(new ServicesTimer(this), 0,5000);
+		
         Main.manager.setToolbar(this.toolbar);
 		snackbar = new JFXSnackbar(anchor);
     }
@@ -142,12 +145,6 @@ public class ServicesController implements Initializable {
             }
         }
         return i;
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        Timer timer = new Timer();
-        //timer.schedule(new ServicesTimer(this), 0,5000);
     }
 
     /**
