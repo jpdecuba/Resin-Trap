@@ -6,6 +6,7 @@ import Main.Main;
 import Model.Status;
 import Model.WindowButtons;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXToolbar;
 import javafx.event.ActionEvent;
@@ -38,6 +39,12 @@ public class ServicesController implements Initializable {
     JFXButton loginBtn;
     @FXML
     AnchorPane menuPane;
+    @FXML
+    JFXListView serviceList;
+    @FXML
+    JFXListView connectionList;
+    @FXML
+    JFXListView iOList;
     Stage stage;
     static JFXSnackbar snackbar;
 
@@ -48,6 +55,7 @@ public class ServicesController implements Initializable {
 		
         Main.manager.setToolbar(this.toolbar);
 		snackbar = new JFXSnackbar(anchor);
+		serviceList.getItems().add("test");
     }
 
     @FXML
