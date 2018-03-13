@@ -5,10 +5,7 @@ import HoneyPot.lowinteraction.LIModule;
 import Main.Main;
 import Model.Status;
 import Model.WindowButtons;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXSnackbar;
-import com.jfoenix.controls.JFXToolbar;
+import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,7 +53,6 @@ public class ServicesController implements Initializable {
 		snackbar = new JFXSnackbar(anchor);
 		if(Main.account != null)
 		{
-			//loginBtn.setText("%logout");
 			loginBtn.setText(ResourceBundle.getBundle("bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("logout"));
 		}
 		serviceList.getItems().add("test");

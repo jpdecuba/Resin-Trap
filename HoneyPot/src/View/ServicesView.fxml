@@ -5,7 +5,6 @@
 <?import com.jfoenix.controls.JFXToolbar?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -65,16 +64,19 @@
                         <HBox alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
                               AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
                             <children>
-                                <VBox alignment="CENTER" prefWidth="260.0" style="-fx-background-color: achmeaPink;"
+                                <VBox alignment="CENTER" prefWidth="260.0"
                                       AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0">
-                                    <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 28; -fx-text-fill: WHITE"
+                                    <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 28; -fx-text-fill: #424242"
                                            text="%services2"/>
                                     <Region prefHeight="50"/>
-                                    <HBox prefHeight="200.0" >
+                                    <HBox prefHeight="200.0">
                                         <children>
-                                            <JFXListView prefWidth="86.67" fx:id="serviceList" style="-fx-background-color: transparent"/>
-                                            <JFXListView prefWidth="86.67" fx:id="connectionList" style="-fx-background-color: transparent"/>
-                                            <JFXListView prefWidth="86.67" fx:id="iOList" style="-fx-background-color: transparent"/>
+                                            <JFXListView  prefWidth="86.67" fx:id="serviceList"
+                                                         style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
+                                            <JFXListView prefWidth="86.67" fx:id="connectionList"
+                                                         style="-fx-background-color: transparent"/>
+                                            <JFXListView prefWidth="86.67" fx:id="iOList"
+                                                         style="-fx-background-color: transparent"/>
                                         </children>
                                     </HBox>
                                 </VBox>
