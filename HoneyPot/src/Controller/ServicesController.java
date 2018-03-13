@@ -3,6 +3,7 @@ package Controller;
 import HoneyPot.logging.LogConnection;
 import HoneyPot.lowinteraction.LIModule;
 import Main.Main;
+import Model.Status;
 import Model.WindowButtons;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
@@ -17,9 +18,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sun.awt.image.ImageWatched;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ServicesController implements Initializable {
@@ -141,15 +144,44 @@ public class ServicesController implements Initializable {
         return i;
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Timer timer = new Timer();
+        //timer.schedule(new ServicesTimer(this), 0,5000);
+    }
+
+    /**
+     * Turns Off the module service
+     * @param module
+     */
     public void TurnOff(LIModule module){
         Main.honeypot.DeRegisterService(module);
     }
 
+    /**
+     * Start up module service
+     * @param module
+     */
     public void StartUp(LIModule module){
         Main.honeypot.DeRegisterService(module);
     }
 
+        public void IO(LIModule module){
 
+        if(module.isStarted()){
+            TurnOff(module);
+        }else {
+            StartUp(module);
+        }
+
+    }
+
+
+    /**
+     * Checking if module is running
+     * @param module
+     * @return boolean
+     */
     public boolean isStarted(LIModule module){
         return module.isStarted();
     }
@@ -169,5 +201,81 @@ public class ServicesController implements Initializable {
         }
         return logs;
     }
+
+
+    /**
+     * Get all the moldules from the main
+     * @return ArrayList<LIModule>
+     */
+    public ArrayList<LIModule> GetModules(){
+
+        return Main.Services;
+    }
+
+    /**
+     * Timeframe of 1 hour of return the amount of logs where create in the last hour
+     * @param logs
+     * @return int
+     */
+    public int Timeframes(LinkedList<LogConnection> logs) {
+        int i = 0;
+        if (logs != null) {
+
+            for (LogConnection item : logs) {
+                if (item.getDate().getTime() >= new Date(System.currentTimeMillis() - 3600 * 1000).getTime()) {
+                    i++;
+                }
+            }
+
+        }
+
+        return i;
+    }
+
+    /**
+     * Get data of the last log file (time)
+     * @param logs
+     * @return String
+     */
+
+    public String getDatelastlog(LinkedList<LogConnection> logs) {
+        if (logs != null) {
+            SimpleDateFormat ft =
+                    new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
+            Date date = null;
+            for (LogConnection item :logs) {
+                if (date == null) {
+                    date = item.getDate();
+                }
+                if (item.getDate().after(date)) {
+                    date = item.getDate();
+                }
+
+            }
+            return ft.format(date);
+        }
+        return "No logs";
+    }
+
+    /**
+     * Returns StatusCheck
+     * @param module
+     * @return Status
+     */
+    //Module status check if it's running
+    public Status StatusCheck(LIModule module) {
+        int connections = module.getNumberOfActiveConnections();
+        if (connections >= Main.ConnectionAlert) {
+            return Status.ALERT;
+        }
+
+        if (module.isStarted()) {
+            return Status.OFF;
+        }
+        return Status.OK;
+    }
+
+
+
 
 }
