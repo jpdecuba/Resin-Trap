@@ -16,9 +16,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sun.awt.image.ImageWatched;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ServicesController implements Initializable {
@@ -112,6 +114,9 @@ public class ServicesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        Timer timer = new Timer();
+        //timer.schedule(new ServicesTimer(this), 0,5000);
+
     }
 
 
@@ -155,5 +160,52 @@ public class ServicesController implements Initializable {
         }
         return logs;
     }
+
+
+    public ArrayList<LIModule> GetModules(){
+
+        return Main.Services;
+    }
+
+
+    public int Timeframes(LinkedList<LogConnection> logs) {
+        int i = 0;
+        if (logs != null) {
+
+            for (LogConnection item : logs) {
+                if (item.getDate().getTime() >= new Date(System.currentTimeMillis() - 3600 * 1000).getTime()) {
+                    i++;
+                }
+            }
+
+        }
+
+        return i;
+    }
+
+
+
+
+    public String getDatelastlog(LinkedList<LogConnection> logs) {
+        if (logs != null) {
+            SimpleDateFormat ft =
+                    new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
+            Date date = null;
+            for (LogConnection item :logs) {
+                if (date == null) {
+                    date = item.getDate();
+                }
+                if (item.getDate().after(date)) {
+                    date = item.getDate();
+                }
+
+            }
+            return ft.format(date);
+        }
+        return "No logs";
+    }
+
+
+
 
 }
