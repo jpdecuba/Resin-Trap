@@ -5,6 +5,7 @@ import HoneyPot.lowinteraction.LIModule;
 import Main.Main;
 import Model.WindowButtons;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXToolbar;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,6 +36,13 @@ public class ServicesController implements Initializable {
     @FXML
     AnchorPane menuPane;
     Stage stage;
+    static JFXSnackbar snackbar;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Main.manager.setToolbar(this.toolbar);
+		snackbar = new JFXSnackbar(anchor);
+    }
 
     @FXML
     public void changePage(ActionEvent event){
@@ -46,6 +54,18 @@ public class ServicesController implements Initializable {
                 path = "/View/OverView.fxml";
                 title = "Achmea";
             } else if (source == loginBtn){
+				if(loginBtn.getText() == "Logout")
+				{
+					if(Main.loginModel.Logout(Main.account.getName()))
+					{
+						Main.account = null;
+					}
+					else
+					{
+						snackbar.show("Failed to logout", 3000);
+						return;
+					}
+				}
                 path = "/View/LoginView.fxml";
                 title = "Achmea";
             }
@@ -108,12 +128,6 @@ public class ServicesController implements Initializable {
         });
         return btn;
     }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
-
 
     public int GetServiceson() {
 

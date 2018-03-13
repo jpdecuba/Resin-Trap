@@ -13,9 +13,9 @@ public class User {
 		this.password = password;
 	}
 
-	public User(int id, String name, String password, int roleId, int session)
+	public User(int id, String name, int roleId, int session)
 	{
-		this(name, password);
+		this(name, "");
 		this.id = id;
 		this.roleId = roleId;
 		this.session = session;
