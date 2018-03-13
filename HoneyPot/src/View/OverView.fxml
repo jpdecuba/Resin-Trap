@@ -67,7 +67,7 @@
                     </children>
                 </AnchorPane>
 
-                <AnchorPane fx:id="mainPane" prefHeight="${VB.parent.height}" HBox.hgrow="ALWAYS"
+                <AnchorPane fx:id="mainPane" prefHeight="${mainPane.parent.height}" HBox.hgrow="ALWAYS"
                             style="-fx-background-color: WHITE;">
                     <children>
                         <VBox alignment="CENTER_LEFT" AnchorPane.bottomAnchor="100" AnchorPane.leftAnchor="175"
