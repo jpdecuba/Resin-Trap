@@ -137,9 +137,11 @@ public class LIModule implements Runnable {
                 } catch (IOException e1) {
                     //let us die and retry loop
                     //e1.printStackTrace();
+                    numberConnections--;
                 } catch (LIModuleException e) {
                     // try again
                     //e.printStackTrace();
+                    numberConnections--;
                 }
                 try {
                     Thread.sleep(HoneyRJ.TIME_WAIT_CONNECTION);
@@ -203,6 +205,7 @@ public class LIModule implements Runnable {
      * @throws IOException if the socket can't be started
      */
     public void startInteractionModule() throws IOException {
+        numberConnections = 0;
         listening = true;
         if (_server == null) //create the socket
             _server = new ServerSocket(_protocol.getPort()); //create socket, let our caller deal with an exception
