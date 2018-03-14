@@ -6,6 +6,7 @@ import Main.Main;
 import Model.Status;
 import Model.WindowButtons;
 import com.jfoenix.controls.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,9 +14,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TreeItem;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import sun.awt.image.ImageWatched;
 
@@ -23,8 +30,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-
 
 public class ServicesController implements Initializable {
     @FXML
@@ -45,19 +50,40 @@ public class ServicesController implements Initializable {
     JFXListView connectionList;
     @FXML
     JFXListView iOList;
+    @FXML
+    JFXListView ipColumn;
+    @FXML
+    JFXListView timeColumn;
+    @FXML
+    JFXListView portColumn;
+    @FXML
+    JFXListView messagesColumn;
+    @FXML
+    Label protocolLbl;
+    @FXML
+    HBox hb;
+    @FXML
+    VBox vb2;
+    @FXML
+    VBox vb1;
     Stage stage;
     static JFXSnackbar snackbar;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-		Timer timer = new Timer();
-		timer.schedule(new ServicesTimer(this), 0,5000);
+        Timer timer = new Timer();
+        timer.schedule(new ServicesTimer(this), 0, 5000);
         Main.manager.setToolbar(this.toolbar);
         snackbar = new JFXSnackbar(anchor);
         if (Main.account != null) {
             loginBtn.setText(ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang.toUpperCase())).getString("logout"));
         }
-
+        ipColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
+        timeColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
+        portColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
+        messagesColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
+        hb.prefHeightProperty().bind(vb2.heightProperty().divide(1.75));
+        vb1.setEffect(new DropShadow(3, Color.rgb(0, 0, 0, 0.8)));
     }
 
     public void fillListView() {
@@ -79,6 +105,47 @@ public class ServicesController implements Initializable {
             serviceList.getItems().add(mod);
             connectionList.getItems().add(mod.getNumberOfActiveConnections());
             iOList.getItems().add(StatusCheck(mod).toString());
+        }
+    }
+
+    @FXML
+    public void clickProtocol(MouseEvent event) {
+        try {
+            JFXListView source = (JFXListView) event.getSource();
+            if(source.getSelectionModel().getSelectedItem().getClass().equals(LIModule.class)){
+                LIModule mod = (LIModule) source.getSelectionModel().getSelectedItem();
+                Platform.runLater(()->{
+                    ipColumn.getItems().clear();
+                    messagesColumn.getItems().clear();
+                    portColumn.getItems().clear();
+                    timeColumn.getItems().clear();
+                    Label l1 = new Label("IP Address");
+                    Label l2 = new Label("Messages");
+                    Label l3 = new Label("Port");
+                    Label l4 = new Label("Time");
+                    l1.setStyle("-fx-font-weight: BOLD");
+                    l2.setStyle("-fx-font-weight: BOLD");
+                    l3.setStyle("-fx-font-weight: BOLD");
+                    l4.setStyle("-fx-font-weight: BOLD");
+                    ipColumn.getItems().add(l1);
+                    messagesColumn.getItems().add(l2);
+                    portColumn.getItems().add(l3);
+                    timeColumn.getItems().add(l4);
+                    for (LogConnection log:
+                         GetLogs(mod)) {
+                        SimpleDateFormat ft =
+                                new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
+                        ipColumn.getItems().add(log.getDstIP());
+                        messagesColumn.getItems().add(log.message());
+                        portColumn.getItems().add(log.getDstPort());
+                        timeColumn.getItems().add(ft.format(log.getDate()));
+                    }
+                    protocolLbl.setText(mod.toString());
+                });
+            }
+
+        }catch (Exception e){
+
         }
     }
 
@@ -213,7 +280,7 @@ public class ServicesController implements Initializable {
      * @param module Service module
      * @return list of Logconnection
      */
-    public LinkedList<LogConnection> GetLogs(LIModule module){
+    public LinkedList<LogConnection> GetLogs(LIModule module) {
 
         LinkedList<LogConnection> logs = Main.honeypot.getLogs();
         LinkedList<LogConnection> Servicelogs = new LinkedList<>();
