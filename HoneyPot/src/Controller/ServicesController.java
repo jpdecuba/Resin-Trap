@@ -57,11 +57,13 @@ public class ServicesController implements Initializable {
         if (Main.account != null) {
             loginBtn.setText(ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang.toUpperCase())).getString("logout"));
         }
-        fillListView();
+
     }
 
     public void fillListView() {
         serviceList.getItems().clear();
+        connectionList.getItems().clear();
+        iOList.getItems().clear();
         Label l1 = new Label("Protocol");
         Label l2 = new Label("Connections");
         Label l3 = new Label("Status");
