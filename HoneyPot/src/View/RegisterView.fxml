@@ -28,7 +28,7 @@
                                 <JFXButton fx:id="overviewBtn" alignment="BASELINE_LEFT" graphicTextGap="17.0"
                                            layoutX="0"
                                            layoutY="0" mnemonicParsing="false" prefHeight="50.0"
-                                           prefWidth="210.0"
+                                           prefWidth="210.0" onAction="#changePage"
                                            style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
                                            text="%overview" textFill="WHITE">
                                     <graphic>
@@ -40,7 +40,7 @@
                                 <JFXButton fx:id="servicesBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0"
                                            layoutX="0"
                                            layoutY="50.0" mnemonicParsing="false" prefHeight="50.0"
-                                           prefWidth="210.0"
+                                           prefWidth="210.0" onAction="#changePage"
                                            style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
                                            text="%services" textFill="WHITE">
                                     <graphic>
