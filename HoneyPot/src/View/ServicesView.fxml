@@ -18,8 +18,8 @@
         <HBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <children>
                 <AnchorPane fx:id="menuPane" prefHeight="${menuPane.parent.height}"
-                            prefWidth="260.0"
-                            minWidth="260.0"
+                            prefWidth="230.0"
+                            minWidth="230.0"
                             style="-fx-background-color: achmea;">
                     <children>
                         <VBox alignment="CENTER" AnchorPane.bottomAnchor="100" AnchorPane.leftAnchor="0"
@@ -27,7 +27,7 @@
                             <children>
                                 <JFXButton fx:id="overviewBtn" alignment="BASELINE_LEFT" graphicTextGap="17.0"
                                            layoutX="0" layoutY="0" mnemonicParsing="false" onAction="#changePage"
-                                           prefHeight="50.0" prefWidth="240.0"
+                                           prefHeight="50.0" prefWidth="210.0"
                                            style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
                                            text="%overview" textFill="WHITE">
                                     <graphic>
@@ -37,7 +37,7 @@
                                 </JFXButton>
                                 <JFXButton fx:id="servicesBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0"
                                            layoutX="0" layoutY="50.0" mnemonicParsing="false" onAction="#changePage"
-                                           prefHeight="50.0" prefWidth="240.0"
+                                           prefHeight="50.0" prefWidth="210.0"
                                            style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
                                            text="%services" textFill="WHITE">
                                     <graphic>
@@ -48,7 +48,7 @@
                                 <Region VBox.vgrow="ALWAYS"/>
                                 <JFXButton fx:id="loginBtn" alignment="BASELINE_LEFT" graphicTextGap="20.0" layoutX="0"
                                            layoutY="50.0" mnemonicParsing="false" onAction="#changePage"
-                                           prefHeight="50.0" prefWidth="240.0"
+                                           prefHeight="50.0" prefWidth="210.0"
                                            style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
                                            text="%login2" textFill="WHITE">
                                     <graphic>
@@ -66,7 +66,8 @@
                         <HBox alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
                               AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
                             <children>
-                                <VBox fx:id="vb1" prefHeight="${vb1.parent.height}" minWidth="300" prefWidth="300"
+                                <VBox fx:id="vb1" minHeight="${vb1.parent.height}" prefHeight="${vb1.parent.height}"
+                                      minWidth="315" prefWidth="315"
                                       alignment="TOP_CENTER" style="-fx-background-color: WHITE">
                                     <Region prefHeight="100"/>
                                     <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 28; -fx-text-fill: #424242"
@@ -74,49 +75,49 @@
                                     <Region prefHeight="50"/>
                                     <HBox prefHeight="200.0">
                                         <children>
-                                            <JFXListView prefWidth="100" fx:id="serviceList"
+                                            <JFXListView prefWidth="105" fx:id="serviceList"
                                                          onMouseClicked="#clickProtocol"
                                                          style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
-                                            <JFXListView prefWidth="100" fx:id="connectionList"
-                                                         style="-fx-background-color: transparent"/>
-                                            <JFXListView prefWidth="100" fx:id="iOList"
-                                                         style="-fx-background-color: transparent"/>
+                                            <JFXListView prefWidth="105" fx:id="connectionList"
+                                                         style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
+                                            <JFXListView prefWidth="105" fx:id="iOList"
+                                                         style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
                                         </children>
                                     </HBox>
                                     <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
                                            text="%selectproto"/>
                                 </VBox>
-                                <VBox fx:id="vb2" prefHeight="${vb2.parent.height}" alignment="TOP_CENTER"
+                                <VBox fx:id="vb2" minHeight="${vb2.parent.height}" prefHeight="${vb2.parent.height}"
+                                      alignment="TOP_CENTER"
                                       HBox.hgrow="ALWAYS">
-                                    <children>
-                                        <Region prefHeight="100"/>
-                                        <HBox alignment="CENTER">
-                                            <children>
-                                                <Label fx:id="protocolLbl"
-                                                       style=" -fx-font-family: Roboto-Thin; -fx-font-size: 28; -fx-text-fill: #424242"
-                                                       text="%protocol"/>
-                                                <Region prefWidth="25"></Region>
-                                                <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
-                                                       text="Off"/>
-                                                <JFXToggleButton fx:id="protoToggle" onAction="#toggleMod"></JFXToggleButton>
-                                                <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
-                                                       text="On"/>
-                                            </children>
-                                        </HBox>
-                                        <Region prefHeight="50"/>
-                                        <HBox fx:id="hb" prefWidth="${hb.parent.width}">
-                                            <JFXListView fx:id="timeColumn"
-                                                         style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
-                                            <JFXListView fx:id="ipColumn"
-                                                         style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
-                                            <JFXListView fx:id="portColumn"
-                                                         style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
-                                            <JFXListView fx:id="messagesColumn"
-                                                         style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
-                                        </HBox>
-                                        <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
-                                               text="%selectlog"/>
-                                    </children>
+                                    <Region prefHeight="100"/>
+                                    <HBox alignment="CENTER">
+                                        <children>
+                                            <Label fx:id="protocolLbl"
+                                                   style=" -fx-font-family: Roboto-Thin; -fx-font-size: 28; -fx-text-fill: #424242"
+                                                   text="%protocol"/>
+                                            <Region prefWidth="25"></Region>
+                                            <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
+                                                   text="Off"/>
+                                            <JFXToggleButton fx:id="protoToggle"
+                                                             onAction="#toggleMod"></JFXToggleButton>
+                                            <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
+                                                   text="On"/>
+                                        </children>
+                                    </HBox>
+                                    <Region prefHeight="50"/>
+                                    <HBox fx:id="hb" prefWidth="${hb.parent.width}">
+                                        <JFXListView fx:id="timeColumn"
+                                                     style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
+                                        <JFXListView fx:id="ipColumn"
+                                                     style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
+                                        <JFXListView fx:id="portColumn"
+                                                     style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
+                                        <JFXListView fx:id="messagesColumn"
+                                                     style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
+                                    </HBox>
+                                    <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
+                                           text="%selectlog"/>
                                 </VBox>
                             </children>
                         </HBox>

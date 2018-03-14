@@ -16,8 +16,8 @@
             <children>
 
                 <AnchorPane fx:id="menuPane" prefHeight="${menuPane.parent.height}"
-                            prefWidth="260.0"
-                            minWidth="260.0"
+                            prefWidth="230.0"
+                            minWidth="230.0"
                             style="-fx-background-color: achmea;">
                     <children>
                         <VBox AnchorPane.leftAnchor="0" alignment="CENTER" AnchorPane.topAnchor="100"
@@ -27,7 +27,7 @@
                                            graphicTextGap="17.0"
                                            layoutX="0"
                                            layoutY="0" mnemonicParsing="false" prefHeight="50.0"
-                                           prefWidth="240.0"
+                                           prefWidth="210.0"
                                            style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
                                            text="%overview" textFill="WHITE">
                                     <graphic>
@@ -40,7 +40,7 @@
                                            graphicTextGap="15.0"
                                            layoutX="0"
                                            layoutY="50.0" mnemonicParsing="false" prefHeight="50.0"
-                                           prefWidth="240.0"
+                                           prefWidth="210.0"
                                            style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
                                            text="%services" textFill="WHITE">
                                     <graphic>
@@ -54,7 +54,7 @@
                                            graphicTextGap="20.0"
                                            layoutX="0"
                                            layoutY="50.0" mnemonicParsing="false" prefHeight="50.0"
-                                           prefWidth="240.0"
+                                           prefWidth="210.0"
                                            style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
                                            text="%login2" textFill="WHITE">
                                     <graphic>
