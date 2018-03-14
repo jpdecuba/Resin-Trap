@@ -100,7 +100,7 @@ public class Main extends Application {
                 }
             }
         });
-		Main.Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		Main.Stage.setOnHiding(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
 				if(Main.account != null)
 				{

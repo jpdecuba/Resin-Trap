@@ -1,22 +1,13 @@
 package Model;
 
 import Main.Main;
-import com.jfoenix.controls.JFXButton;
-import com.sun.imageio.plugins.common.I18N;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -43,10 +34,7 @@ public class WindowButtons extends HBox {
 
             @Override
             public void handle(ActionEvent actionEvent) {
-                if(Main.account != null)
-                {
-                    Main.loginModel.Logout(Main.account.getName());
-                }
+                Main.Stage.close();
                 Main.Shutdown();
                 System.exit(0);
             }
