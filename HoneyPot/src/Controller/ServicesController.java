@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -98,6 +99,8 @@ public class ServicesController implements Initializable {
         portColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
         messagesColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
         dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
+        content.setPrefWidth(600);
+        content.prefHeightProperty().bind(hb2.heightProperty().multiply(0.9));
         button = new JFXButton("Okay");
         hb.prefHeightProperty().bind(vb2.heightProperty().divide(1.75));
         vb1.setEffect(new DropShadow(3, Color.rgb(0, 0, 0, 0.8)));
@@ -141,7 +144,9 @@ public class ServicesController implements Initializable {
                 if (messagesColumn.getSelectionModel().getSelectedItem().getClass().equals(LogConnection.class)) {
                     LogConnection log = (LogConnection) messagesColumn.getSelectionModel().getSelectedItem();
                     if (log.getLogRecords().size() > 0) {
-                        content.setBody(new Text(log.message()));
+                        ScrollPane scrollPane = new ScrollPane();
+                        scrollPane.setContent(new Text(log.message()));
+                        content.setBody(scrollPane);
                         dialog.show();
                         hb2.setVisible(true);
                     }
