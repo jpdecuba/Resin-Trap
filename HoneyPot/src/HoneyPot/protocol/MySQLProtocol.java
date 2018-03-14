@@ -98,4 +98,8 @@ public class MySQLProtocol implements LIProtocol
     public boolean isConnectionOver() {
         return state == killed;
     }
+
+    public String toString(){
+        return "mySQL";
+    }
 }

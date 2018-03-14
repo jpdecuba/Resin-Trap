@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -47,51 +48,57 @@ public class ServicesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-		Timer timer = new Timer();
-		//timer.schedule(new ServicesTimer(this), 0,5000);
+        Timer timer = new Timer();
+        //timer.schedule(new ServicesTimer(this), 0,5000);
         Main.manager.setToolbar(this.toolbar);
-		snackbar = new JFXSnackbar(anchor);
-		if(Main.account != null)
-		{
-			loginBtn.setText(ResourceBundle.getBundle("bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("logout"));
-		}
+        snackbar = new JFXSnackbar(anchor);
+        if (Main.account != null) {
+            loginBtn.setText(ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang.toUpperCase())).getString("logout"));
+        }
         fillListView();
     }
 
-    public void fillListView(){
+    public void fillListView() {
         serviceList.getItems().clear();
-        for (LIModule mod:
-             GetModules()) {
-            serviceList.getItems().add(mod.getProtocol().toString());
+        Label l1 = new Label("Protocol");
+        Label l2 = new Label("Connections");
+        Label l3 = new Label("Status");
+        l1.setStyle("-fx-font-weight: BOLD");
+        l2.setStyle("-fx-font-weight: BOLD");
+        l3.setStyle("-fx-font-weight: BOLD");
+        serviceList.getItems().add(l1);
+        connectionList.getItems().add(l2);
+        iOList.getItems().add(l3);
+        connectionList.setEditable(false);
+        for (LIModule mod :
+                GetModules()) {
+            serviceList.getItems().add(mod);
+            connectionList.getItems().add(mod.getNumberOfActiveConnections());
+            iOList.getItems().add(StatusCheck(mod).toString());
         }
     }
 
     @FXML
-    public void changePage(ActionEvent event){
+    public void changePage(ActionEvent event) {
         try {
             JFXButton source = (JFXButton) event.getSource();
             String path = "";
             String title = "";
-            if (source == overviewBtn){
+            if (source == overviewBtn) {
                 path = "/View/OverView.fxml";
                 title = "Achmea";
-            } else if (source == loginBtn){
-				if(loginBtn.getText() == "Logout")
-				{
-					if(Main.loginModel.Logout(Main.account.getName()))
-					{
-						Main.account = null;
-					}
-					else
-					{
-						snackbar.show("Failed to logout", 3000);
-						return;
-					}
-				}
+            } else if (source == loginBtn) {
+                if (loginBtn.getText() == "Logout") {
+                    if (Main.loginModel.Logout(Main.account.getName())) {
+                        Main.account = null;
+                    } else {
+                        snackbar.show("Failed to logout", 3000);
+                        return;
+                    }
+                }
                 path = "/View/LoginView.fxml";
                 title = "Achmea";
-            }
-            else if (source == servicesBtn){
+            } else if (source == servicesBtn) {
                 path = "/View/ServicesView.fxml";
                 title = "Achmea";
             }
@@ -165,25 +172,27 @@ public class ServicesController implements Initializable {
 
     /**
      * Turns Off the module service
+     *
      * @param module
      */
-    public void TurnOff(LIModule module){
+    public void TurnOff(LIModule module) {
         Main.honeypot.DeRegisterService(module);
     }
 
     /**
      * Start up module service
+     *
      * @param module
      */
-    public void StartUp(LIModule module){
+    public void StartUp(LIModule module) {
         Main.honeypot.DeRegisterService(module);
     }
 
-        public void IO(LIModule module){
+    public void IO(LIModule module) {
 
-        if(module.isStarted()){
+        if (module.isStarted()) {
             TurnOff(module);
-        }else {
+        } else {
             StartUp(module);
         }
 
@@ -192,23 +201,24 @@ public class ServicesController implements Initializable {
 
     /**
      * Checking if module is running
+     *
      * @param module
      * @return boolean
      */
-    public boolean isStarted(LIModule module){
+    public boolean isStarted(LIModule module) {
         return module.isStarted();
     }
 
-    public int GetConnections(LIModule module){
+    public int GetConnections(LIModule module) {
         return module.getNumberOfActiveConnections();
     }
 
-    public LinkedList<LogConnection> GetLogs(LIModule module){
+    public LinkedList<LogConnection> GetLogs(LIModule module) {
 
         LinkedList<LogConnection> logs = Main.honeypot.getLogs();
         LinkedList<LogConnection> Servicelogs = new LinkedList<>();
-        for (LogConnection item : logs){
-            if(item.getProtocol().equals(module.getProtocol().toString())){
+        for (LogConnection item : logs) {
+            if (item.getProtocol().equals(module.getProtocol().toString())) {
                 Servicelogs.add(item);
             }
         }
@@ -218,15 +228,17 @@ public class ServicesController implements Initializable {
 
     /**
      * Get all the moldules from the main
+     *
      * @return ArrayList<LIModule>
      */
-    public ArrayList<LIModule> GetModules(){
+    public ArrayList<LIModule> GetModules() {
 
         return Main.Services;
     }
 
     /**
      * Timeframe of 1 hour of return the amount of logs where create in the last hour
+     *
      * @param logs
      * @return int
      */
@@ -247,6 +259,7 @@ public class ServicesController implements Initializable {
 
     /**
      * Get data of the last log file (time)
+     *
      * @param logs
      * @return String
      */
@@ -256,7 +269,7 @@ public class ServicesController implements Initializable {
             SimpleDateFormat ft =
                     new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
             Date date = null;
-            for (LogConnection item :logs) {
+            for (LogConnection item : logs) {
                 if (date == null) {
                     date = item.getDate();
                 }
@@ -272,6 +285,7 @@ public class ServicesController implements Initializable {
 
     /**
      * Returns StatusCheck
+     *
      * @param module
      * @return Status
      */
@@ -287,8 +301,6 @@ public class ServicesController implements Initializable {
         }
         return Status.OK;
     }
-
-
 
 
 }

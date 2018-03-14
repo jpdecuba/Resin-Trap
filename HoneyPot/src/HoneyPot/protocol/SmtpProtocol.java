@@ -136,4 +136,8 @@ public class SmtpProtocol implements LIProtocol {
     public boolean isConnectionOver() {
         return false;
     }
+
+    public String toString(){
+        return "SMTP";
+    }
 }
