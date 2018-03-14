@@ -222,7 +222,7 @@ public class ServicesController implements Initializable {
                 Servicelogs.add(item);
             }
         }
-        return logs;
+        return Servicelogs;
     }
 
 

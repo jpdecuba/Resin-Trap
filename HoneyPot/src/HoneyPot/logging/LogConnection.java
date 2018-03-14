@@ -89,4 +89,8 @@ public class LogConnection implements Serializable, Comparable<LogConnection> {
     public int compareTo(LogConnection o) {
         return getDate().compareTo(o.getDate());
     }
+
+    public ArrayList<LogRecord> getLogRecords() {
+        return LogRecords;
+    }
 }

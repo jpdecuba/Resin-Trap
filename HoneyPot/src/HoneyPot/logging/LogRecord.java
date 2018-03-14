@@ -21,14 +21,20 @@ public class LogRecord implements Serializable {
 		Packet = packet;
 		Rcvd = rcvd;
 	}
-
+    @Override
 	public String toString() {
 		return "Time: " + Timestamp + "	Packet message:" + Packet + "  ,Received:" + Rcvd;
 	}
 
+    public Date getTimestamp() {
+        return Timestamp;
+    }
 
-	
-	
-	
-	
+    public String getPacket() {
+        return Packet;
+    }
+
+    public boolean isRcvd() {
+        return Rcvd;
+    }
 }
