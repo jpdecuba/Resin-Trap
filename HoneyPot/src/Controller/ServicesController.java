@@ -91,14 +91,10 @@ public class ServicesController implements Initializable {
             if (source == overviewBtn) {
                 path = "/View/OverView.fxml";
                 title = "Achmea";
-            } else if (source == loginBtn) {
-                if (loginBtn.getText() == "Logout") {
-                    if (Main.loginModel.Logout(Main.account.getName())) {
-                        Main.account = null;
-                    } else {
-                        snackbar.show("Failed to logout", 3000);
-                        return;
-                    }
+            } else if (source == loginBtn){
+				if(!Main.CheckForLogout(loginBtn.getText(), snackbar))
+                {
+                    return;
                 }
                 path = "/View/LoginView.fxml";
                 title = "Achmea";

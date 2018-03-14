@@ -10,6 +10,7 @@ import HoneyPot.protocol.MySQLProtocol;
 import HoneyPot.protocol.SmtpProtocol;
 import Model.*;
 import Model.Database.LoginModel;
+import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXToolbar;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -170,6 +171,24 @@ public class Main extends Application {
         for(LIModule item : Services) {
             honeypot.DeRegisterService(item);
         }
+    }
+
+    public static boolean CheckForLogout(String buttonText, JFXSnackbar snackbar)
+    {
+        if(buttonText.equals("LOGOUT"))
+        {
+            if(Main.loginModel.Logout(Main.account.getName()))
+            {
+                Main.account = null;
+                return true;
+            }
+            else
+            {
+                snackbar.show("Failed to logout", 3000);
+				return false;
+            }
+        }
+        return true;
     }
 
 //
