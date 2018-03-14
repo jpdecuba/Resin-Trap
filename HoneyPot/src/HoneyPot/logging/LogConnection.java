@@ -71,6 +71,11 @@ public class LogConnection implements Serializable, Comparable<LogConnection> {
         return sb.toString();
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(getLogRecords().size());
+    }
+
     /**
      * GetDate
      * @return Date
