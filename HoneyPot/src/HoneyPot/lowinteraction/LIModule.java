@@ -224,6 +224,7 @@ public class LIModule implements Runnable {
         try {
             if (_server != null) {
                 _server.close();
+                numberConnections = 0;
             }
         } catch (IOException ignored) {
 
