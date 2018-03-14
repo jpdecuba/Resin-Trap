@@ -131,6 +131,10 @@ public class LoginController implements Initializable {
         return false;
     }
 
+	/**
+	 * Register user
+	 * @return boolean
+	 */
     public boolean Register() {
 		String username = registerUsernameField.getText();
 		String password = registerPasswordField.getText();

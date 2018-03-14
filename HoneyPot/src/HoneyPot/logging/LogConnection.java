@@ -31,6 +31,14 @@ public class LogConnection implements Serializable, Comparable<LogConnection> {
 		return Protocol;
 	}
 
+    /**
+     * LogConnection Constructor
+     * @param srcIP ip of the src
+     * @param dstIP ip of the destination
+     * @param srcPort source port
+     * @param dstPort destination port
+     * @param protocol protocol we used
+     */
 	public LogConnection(InetAddress srcIP, InetAddress dstIP, int srcPort, int dstPort, String protocol) {
         this.srcIP = srcIP;
         this.dstIP = dstIP;
@@ -42,6 +50,10 @@ public class LogConnection implements Serializable, Comparable<LogConnection> {
     }
 
 
+    /**
+     * AddLogRecord to Recordslist
+     * @param Record Record to add
+     */
     public void AddLogRecord(LogRecord Record) {
         LogRecords.add(Record);
     }
@@ -60,11 +72,20 @@ public class LogConnection implements Serializable, Comparable<LogConnection> {
         return sb.toString();
     }
 
+    /**
+     * GetDate
+     * @return Date
+     */
     public Date getDate() {
         return date;
     }
 
 
+    /**
+     * Compareto on date
+     * @param o Logconnection to match
+     * @return int
+     */
     @Override
     public int compareTo(LogConnection o) {
         return getDate().compareTo(o.getDate());

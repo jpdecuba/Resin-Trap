@@ -10,6 +10,12 @@ public class LogRecord implements Serializable {
 	private boolean Rcvd;
 
 
+	/**
+	 * LogRecord Constructor
+	 * @param timestamp time that the packet was send
+	 * @param packet message send
+	 * @param rcvd boolean if it send or received
+	 */
 	public LogRecord(Date timestamp, String packet, boolean rcvd) {
 		Timestamp = timestamp;
 		Packet = packet;

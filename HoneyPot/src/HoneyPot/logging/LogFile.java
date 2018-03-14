@@ -27,7 +27,7 @@ public class LogFile {
 	private Date started;
 	private Date stopped;
 	private LIModuleThread loggingForThread;
-	
+
 	public LogFile(LIModuleThread loggingForThread) throws Exception {
 		this.loggingForThread = loggingForThread;
 		String path = System.getenv("APPDATA") + "/Honeypot/";
@@ -93,7 +93,7 @@ public class LogFile {
 
 	/**
 	 * print the LogRecord to the given PrintStream
-	 * @param out
+	 * @param out  printstream
 	 */
 	public void LogToStream(PrintStream out) {
 		if(started == null) { //sanity check if the thread crashed before logging started
