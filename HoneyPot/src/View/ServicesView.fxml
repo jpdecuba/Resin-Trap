@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ServicesController">
     <children>
@@ -81,7 +82,13 @@
                                     </HBox>
                                 </VBox>
                                 <VBox AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
-                                      HBox.hgrow="ALWAYS"/>
+                                      HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <JFXTreeTableView>
+                                            <
+                                        </JFXTreeTableView>
+                                    </children>
+                                </VBox>
                             </children>
                         </HBox>
                     </children>
