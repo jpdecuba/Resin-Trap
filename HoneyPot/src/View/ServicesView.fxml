@@ -84,7 +84,7 @@
                                         </children>
                                     </HBox>
                                     <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
-                                           text="Select a protocol to show its logs in the grid"/>
+                                           text="%selectproto"/>
                                 </VBox>
                                 <VBox fx:id="vb2" prefHeight="${vb2.parent.height}" alignment="TOP_CENTER"
                                       HBox.hgrow="ALWAYS">
@@ -115,7 +115,7 @@
                                                          style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
                                         </HBox>
                                         <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
-                                               text="Select a log to show all of its messages"/>
+                                               text="%selectlog"/>
                                     </children>
                                 </VBox>
                             </children>

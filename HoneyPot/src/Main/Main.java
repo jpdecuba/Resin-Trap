@@ -30,8 +30,8 @@ import java.util.ResourceBundle;
 
 public class Main extends Application {
     public static Stage Stage;
-    private double xOffset = 0;
-    private double yOffset = 0;
+    private static double xOffset = 0;
+    private static double yOffset = 0;
     public static String lang = "en";
     public static JFXToolbar toolbar;
     public static ControllerManager manager;
@@ -85,22 +85,7 @@ public class Main extends Application {
         Stage.setMinHeight(600);
         ResizeHelper rh = new ResizeHelper();
         rh.addResizeListener(Stage);
-        root.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                xOffset = event.getSceneX();
-                yOffset = event.getSceneY();
-            }
-        });
-        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (yOffset <= 40) {
-                    Stage.setX(event.getScreenX() - xOffset);
-                    Stage.setY(event.getScreenY() - yOffset);
-                }
-            }
-        });
+		SetupRoot(root);
 		Main.Stage.setOnHiding(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
 				if(Main.account != null)
@@ -115,6 +100,7 @@ public class Main extends Application {
     public static void switchPage(Parent parent, String title)
     {
         Main.Stage.getScene().setRoot(parent);
+		SetupRoot(Main.Stage.getScene().getRoot());
         Main.Stage.setTitle(title);
         Main.Stage.show();
     }
@@ -190,6 +176,26 @@ public class Main extends Application {
         }
         return true;
     }
+
+    public static void SetupRoot(Parent root)
+	{
+		root.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				xOffset = event.getSceneX();
+				yOffset = event.getSceneY();
+			}
+		});
+		root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				if (yOffset <= 40) {
+					Stage.setX(event.getScreenX() - xOffset);
+					Stage.setY(event.getScreenY() - yOffset);
+				}
+			}
+		});
+	}
 
 //
 //	public static void ChangeButtons(String view, String title)

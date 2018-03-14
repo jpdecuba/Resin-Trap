@@ -70,8 +70,11 @@ public class ServicesController implements Initializable {
     static JFXSnackbar snackbar;
     LIModule currentMod = null;
 
+    private ResourceBundle resource;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.resource = resources;
         Timer timer = new Timer();
         timer.schedule(new ServicesTimer(this), 0, 5000);
         Main.manager.setToolbar(this.toolbar);
@@ -91,9 +94,9 @@ public class ServicesController implements Initializable {
         serviceList.getItems().clear();
         connectionList.getItems().clear();
         iOList.getItems().clear();
-        Label l1 = new Label("Protocol");
-        Label l2 = new Label("Connections");
-        Label l3 = new Label("Status");
+        Label l1 = new Label(resource.getString("protocol"));
+        Label l2 = new Label(resource.getString("connection"));
+        Label l3 = new Label(resource.getString("stat"));
         l1.setStyle("-fx-font-weight: BOLD");
         l2.setStyle("-fx-font-weight: BOLD");
         l3.setStyle("-fx-font-weight: BOLD");
@@ -120,10 +123,10 @@ public class ServicesController implements Initializable {
                     messagesColumn.getItems().clear();
                     portColumn.getItems().clear();
                     timeColumn.getItems().clear();
-                    Label l1 = new Label("IP Address");
-                    Label l2 = new Label("Messages");
-                    Label l3 = new Label("Port");
-                    Label l4 = new Label("Time");
+                    Label l1 = new Label(resource.getString("ip"));
+                    Label l2 = new Label(resource.getString("message"));
+                    Label l3 = new Label(resource.getString("port"));
+                    Label l4 = new Label(resource.getString("time"));
                     l1.setStyle("-fx-font-weight: BOLD");
                     l2.setStyle("-fx-font-weight: BOLD");
                     l3.setStyle("-fx-font-weight: BOLD");
