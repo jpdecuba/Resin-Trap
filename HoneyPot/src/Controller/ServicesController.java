@@ -158,6 +158,7 @@ public class ServicesController implements Initializable {
 
     @FXML
     public void toggleMod(){
+        if (currentMod != null)
         IO(currentMod);
     }
 
@@ -261,7 +262,8 @@ public class ServicesController implements Initializable {
      * @param module Service module
      */
     public void StartUp(LIModule module) {
-        Main.honeypot.DeRegisterService(module);
+        Main.honeypot.RegisterService(module);
+        Main.honeypot.startPort(module.getPort());
     }
 
     public void IO(LIModule module) {
