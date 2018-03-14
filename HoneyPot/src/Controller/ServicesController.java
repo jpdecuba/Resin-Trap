@@ -24,6 +24,8 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+
+
 public class ServicesController implements Initializable {
     @FXML
     AnchorPane anchor;
@@ -48,8 +50,8 @@ public class ServicesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Timer timer = new Timer();
-        //timer.schedule(new ServicesTimer(this), 0,5000);
+		Timer timer = new Timer();
+		timer.schedule(new ServicesTimer(this), 0,5000);
         Main.manager.setToolbar(this.toolbar);
         snackbar = new JFXSnackbar(anchor);
         if (Main.account != null) {
@@ -213,7 +215,12 @@ public class ServicesController implements Initializable {
         return module.getNumberOfActiveConnections();
     }
 
-    public LinkedList<LogConnection> GetLogs(LIModule module) {
+    /**
+     * Get log from the Service module
+     * @param module
+     * @return LinkedList<LogConnection>
+     */
+    public LinkedList<LogConnection> GetLogs(LIModule module){
 
         LinkedList<LogConnection> logs = Main.honeypot.getLogs();
         LinkedList<LogConnection> Servicelogs = new LinkedList<>();
@@ -284,12 +291,10 @@ public class ServicesController implements Initializable {
     }
 
     /**
-     * Returns StatusCheck
-     *
+     * StatusCheck
      * @param module
      * @return Status
      */
-    //Module status check if it's running
     public Status StatusCheck(LIModule module) {
         int connections = module.getNumberOfActiveConnections();
         if (connections >= Main.ConnectionAlert) {
@@ -297,9 +302,9 @@ public class ServicesController implements Initializable {
         }
 
         if (module.isStarted()) {
-            return Status.OFF;
+            return Status.OK;
         }
-        return Status.OK;
+        return Status.OFF;
     }
 
 
