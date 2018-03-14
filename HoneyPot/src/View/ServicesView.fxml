@@ -10,9 +10,8 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<?import com.jfoenix.controls.JFXTreeTableView?>
-<?import com.jfoenix.controls.JFXTreeTableColumn?>
-<?import com.jfoenix.controls.JFXTreeView?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ServicesController">
     <children>
@@ -67,7 +66,8 @@
                         <HBox alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
                               AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
                             <children>
-                                <VBox fx:id="vb1" prefHeight="${vb1.parent.height}" minWidth="300" prefWidth="300" alignment="TOP_CENTER" style="-fx-background-color: WHITE">
+                                <VBox fx:id="vb1" prefHeight="${vb1.parent.height}" minWidth="300" prefWidth="300"
+                                      alignment="TOP_CENTER" style="-fx-background-color: WHITE">
                                     <Region prefHeight="100"/>
                                     <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 28; -fx-text-fill: #424242"
                                            text="%services2"/>
@@ -90,9 +90,19 @@
                                       HBox.hgrow="ALWAYS">
                                     <children>
                                         <Region prefHeight="100"/>
-                                        <Label fx:id="protocolLbl"
-                                               style=" -fx-font-family: Roboto-Thin; -fx-font-size: 28; -fx-text-fill: #424242"
-                                               text="%protocol"/>
+                                        <HBox alignment="CENTER">
+                                            <children>
+                                                <Label fx:id="protocolLbl"
+                                                       style=" -fx-font-family: Roboto-Thin; -fx-font-size: 28; -fx-text-fill: #424242"
+                                                       text="%protocol"/>
+                                                <Region prefWidth="25"></Region>
+                                                <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
+                                                       text="Off"/>
+                                                <JFXToggleButton fx:id="protoToggle" onAction="#toggleMod"></JFXToggleButton>
+                                                <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
+                                                       text="On"/>
+                                            </children>
+                                        </HBox>
                                         <Region prefHeight="50"/>
                                         <HBox fx:id="hb" prefWidth="${hb.parent.width}">
                                             <JFXListView fx:id="timeColumn"

@@ -14,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TreeItem;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,7 +23,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import sun.awt.image.ImageWatched;
 
 import java.io.IOException;
 import java.net.URL;
@@ -66,8 +64,11 @@ public class ServicesController implements Initializable {
     VBox vb2;
     @FXML
     VBox vb1;
+    @FXML
+    JFXToggleButton protoToggle;
     Stage stage;
     static JFXSnackbar snackbar;
+    LIModule currentMod = null;
 
     private ResourceBundle resource;
 
@@ -115,9 +116,9 @@ public class ServicesController implements Initializable {
     public void clickProtocol(MouseEvent event) {
         try {
             JFXListView source = (JFXListView) event.getSource();
-            if(source.getSelectionModel().getSelectedItem().getClass().equals(LIModule.class)){
+            if (source.getSelectionModel().getSelectedItem().getClass().equals(LIModule.class)) {
                 LIModule mod = (LIModule) source.getSelectionModel().getSelectedItem();
-                Platform.runLater(()->{
+                Platform.runLater(() -> {
                     ipColumn.getItems().clear();
                     messagesColumn.getItems().clear();
                     portColumn.getItems().clear();
@@ -134,8 +135,8 @@ public class ServicesController implements Initializable {
                     messagesColumn.getItems().add(l2);
                     portColumn.getItems().add(l3);
                     timeColumn.getItems().add(l4);
-                    for (LogConnection log:
-                         GetLogs(mod)) {
+                    for (LogConnection log :
+                            GetLogs(mod)) {
                         SimpleDateFormat ft =
                                 new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
                         ipColumn.getItems().add(log.getDstIP());
@@ -143,13 +144,25 @@ public class ServicesController implements Initializable {
                         portColumn.getItems().add(log.getDstPort());
                         timeColumn.getItems().add(ft.format(log.getDate()));
                     }
+                    if (mod.isStarted()){
+                        protoToggle.setSelected(true);
+                    }else {
+                        protoToggle.setSelected(false);
+                    }
                     protocolLbl.setText(mod.toString());
+                    currentMod = mod;
                 });
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
+    }
+
+    @FXML
+    public void toggleMod(){
+        if (currentMod != null)
+        IO(currentMod);
     }
 
     @FXML
@@ -161,9 +174,8 @@ public class ServicesController implements Initializable {
             if (source == overviewBtn) {
                 path = "/View/OverView.fxml";
                 title = "Achmea";
-            } else if (source == loginBtn){
-				if(!Main.CheckForLogout(loginBtn.getText(), snackbar))
-                {
+            } else if (source == loginBtn) {
+                if (!Main.CheckForLogout(loginBtn.getText(), snackbar)) {
                     return;
                 }
                 path = "/View/LoginView.fxml";
@@ -240,6 +252,7 @@ public class ServicesController implements Initializable {
 
     /**
      * Turns Off the module service
+     *
      * @param module Service module
      */
     public void TurnOff(LIModule module) {
@@ -248,6 +261,7 @@ public class ServicesController implements Initializable {
 
     /**
      * Start up module service
+     *
      * @param module Service module
      */
     public void StartUp(LIModule module) {
@@ -268,6 +282,7 @@ public class ServicesController implements Initializable {
 
     /**
      * Checking if module is running
+     *
      * @param module Service module
      * @return true or false if it's started
      */
@@ -281,6 +296,7 @@ public class ServicesController implements Initializable {
 
     /**
      * Get log from the Service module
+     *
      * @param module Service module
      * @return list of Logconnection
      */
@@ -301,6 +317,7 @@ public class ServicesController implements Initializable {
 
     /**
      * Get all the modules from the main
+     *
      * @return list of modules
      */
     public ArrayList<LIModule> GetModules() {
@@ -310,6 +327,7 @@ public class ServicesController implements Initializable {
 
     /**
      * Timeframe of 1 hour of return the amount of logs where create in the last hour
+     *
      * @param logs LinkedList of logConnection items
      * @return about of logs made in 1 hour
      */
@@ -330,6 +348,7 @@ public class ServicesController implements Initializable {
 
     /**
      * Get data of the last log file (time)
+     *
      * @param logs LinkedList of logConnection items
      * @return string of the last log data
      */
@@ -355,6 +374,7 @@ public class ServicesController implements Initializable {
 
     /**
      * StatusCheck
+     *
      * @param module Service module
      * @return returns a status item base of module input
      */
