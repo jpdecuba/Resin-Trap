@@ -136,7 +136,7 @@ public class ServicesController implements Initializable {
                         SimpleDateFormat ft =
                                 new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
                         ipColumn.getItems().add(log.getDstIP());
-                        messagesColumn.getItems().add(log.message());
+                        messagesColumn.getItems().add(log.getLogRecords().size());
                         portColumn.getItems().add(log.getDstPort());
                         timeColumn.getItems().add(ft.format(log.getDate()));
                     }
@@ -284,9 +284,11 @@ public class ServicesController implements Initializable {
 
         LinkedList<LogConnection> logs = Main.honeypot.getLogs();
         LinkedList<LogConnection> Servicelogs = new LinkedList<>();
-        for (LogConnection item : logs) {
-            if (item.getProtocol().equals(module.getProtocol().toString())) {
-                Servicelogs.add(item);
+        if (logs != null) {
+            for (LogConnection item : logs) {
+                if (item.getProtocol().equals(module.getProtocol().toString())) {
+                    Servicelogs.add(item);
+                }
             }
         }
         return Servicelogs;

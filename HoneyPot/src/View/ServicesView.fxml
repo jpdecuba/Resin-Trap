@@ -104,6 +104,8 @@
                                             <JFXListView fx:id="messagesColumn"
                                                          style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
                                         </HBox>
+                                        <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
+                                               text="Select a log to show all of its messages"/>
                                     </children>
                                 </VBox>
                             </children>
