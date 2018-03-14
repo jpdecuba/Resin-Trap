@@ -9,9 +9,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-
-<?import com.jfoenix.controls.JFXSlider?>
 <?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.layout.StackPane?>
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ServicesController">
     <children>
@@ -113,7 +112,7 @@
                                                      style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
                                         <JFXListView fx:id="portColumn"
                                                      style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
-                                        <JFXListView fx:id="messagesColumn"
+                                        <JFXListView fx:id="messagesColumn" onMouseClicked="#clickLog"
                                                      style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
                                     </HBox>
                                     <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
@@ -129,5 +128,16 @@
                     style="-fx-background-color: transparent" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
                     AnchorPane.topAnchor="0">
         </JFXToolbar>
+        <HBox fx:id="hb2" alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <children>
+                <VBox alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+                      AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                    <children>
+                        <StackPane fx:id="stackPane"></StackPane>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
     </children>
 </AnchorPane>

@@ -8,6 +8,7 @@ import Model.WindowButtons;
 import com.jfoenix.controls.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,8 +21,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -61,6 +64,8 @@ public class ServicesController implements Initializable {
     @FXML
     HBox hb;
     @FXML
+    HBox hb2;
+    @FXML
     VBox vb2;
     @FXML
     VBox vb1;
@@ -70,10 +75,16 @@ public class ServicesController implements Initializable {
     static JFXSnackbar snackbar;
     LIModule currentMod = null;
 
+    JFXDialogLayout content = new JFXDialogLayout();
+    @FXML
+    StackPane stackPane;
+    JFXDialog dialog;
+    JFXButton button;
     private ResourceBundle resource;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        hb2.setVisible(false);
         this.resource = resources;
         Timer timer = new Timer();
         timer.schedule(new ServicesTimer(this), 0, 5000);
@@ -86,8 +97,19 @@ public class ServicesController implements Initializable {
         timeColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
         portColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
         messagesColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
+        dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
+        button = new JFXButton("Okay");
         hb.prefHeightProperty().bind(vb2.heightProperty().divide(1.75));
         vb1.setEffect(new DropShadow(3, Color.rgb(0, 0, 0, 0.8)));
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+                hb2.setVisible(false);
+            }
+        });
+        content.setHeading(new Text("Messages"));
+        content.setActions(button);
     }
 
     public void fillListView() {
@@ -109,6 +131,24 @@ public class ServicesController implements Initializable {
             serviceList.getItems().add(mod);
             connectionList.getItems().add(mod.getNumberOfActiveConnections());
             iOList.getItems().add(StatusCheck(mod).toString());
+        }
+    }
+
+    @FXML
+    public void clickLog(MouseEvent event) {
+        try {
+            if (messagesColumn.getSelectionModel().getSelectedItem() != null) {
+                if (messagesColumn.getSelectionModel().getSelectedItem().getClass().equals(LogConnection.class)) {
+                    LogConnection log = (LogConnection) messagesColumn.getSelectionModel().getSelectedItem();
+                    if (log.getLogRecords().size() > 0) {
+                        content.setBody(new Text(log.message()));
+                        dialog.show();
+                        hb2.setVisible(true);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -140,13 +180,13 @@ public class ServicesController implements Initializable {
                         SimpleDateFormat ft =
                                 new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
                         ipColumn.getItems().add(log.getDstIP());
-                        messagesColumn.getItems().add(log.getLogRecords().size());
+                        messagesColumn.getItems().add(log);
                         portColumn.getItems().add(log.getDstPort());
                         timeColumn.getItems().add(ft.format(log.getDate()));
                     }
-                    if (mod.isStarted()){
+                    if (mod.isStarted()) {
                         protoToggle.setSelected(true);
-                    }else {
+                    } else {
                         protoToggle.setSelected(false);
                     }
                     protocolLbl.setText(mod.toString());
@@ -160,9 +200,9 @@ public class ServicesController implements Initializable {
     }
 
     @FXML
-    public void toggleMod(){
+    public void toggleMod() {
         if (currentMod != null)
-        IO(currentMod);
+            IO(currentMod);
     }
 
     @FXML
