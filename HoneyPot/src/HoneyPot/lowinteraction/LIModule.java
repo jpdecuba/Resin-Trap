@@ -113,7 +113,6 @@ public class LIModule implements Runnable {
      */
     public void registerParent(HoneyRJ honey) {
         _parent = honey;
-
     }
 
     /**
@@ -132,15 +131,16 @@ public class LIModule implements Runnable {
                 } catch (SocketException e) {
                     //let us die because someone stopped us
                     //e.printStackTrace();
-                    numberConnections--;
 
                 } catch (IOException e1) {
                     //let us die and retry loop
                     //e1.printStackTrace();
-                    numberConnections--;
+
                 } catch (LIModuleException e) {
                     // try again
                     //e.printStackTrace();
+
+                }finally {
                     numberConnections--;
                 }
                 try {
@@ -222,6 +222,7 @@ public class LIModule implements Runnable {
      */
     public void stopInteractionModule() {
         listening = false;
+        numberConnections = 0;
 
 
         try {
