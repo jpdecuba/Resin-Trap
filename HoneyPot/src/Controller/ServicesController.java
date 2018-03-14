@@ -158,14 +158,10 @@ public class ServicesController implements Initializable {
             if (source == overviewBtn) {
                 path = "/View/OverView.fxml";
                 title = "Achmea";
-            } else if (source == loginBtn) {
-                if (loginBtn.getText() == "Logout") {
-                    if (Main.loginModel.Logout(Main.account.getName())) {
-                        Main.account = null;
-                    } else {
-                        snackbar.show("Failed to logout", 3000);
-                        return;
-                    }
+            } else if (source == loginBtn){
+				if(!Main.CheckForLogout(loginBtn.getText(), snackbar))
+                {
+                    return;
                 }
                 path = "/View/LoginView.fxml";
                 title = "Achmea";
@@ -192,8 +188,6 @@ public class ServicesController implements Initializable {
         Button en = addLanguageBtns("en.png");
         Button nl = addLanguageBtns("nl.png");
         toolbar.setLeftItems(en, nl);
-        Timer timer = new Timer();
-        //timer.schedule(new OverViewTimer(this), 0,5000);
     }
 
     private void loadView(String lang) {
@@ -243,8 +237,7 @@ public class ServicesController implements Initializable {
 
     /**
      * Turns Off the module service
-     *
-     * @param module
+     * @param module Service module
      */
     public void TurnOff(LIModule module) {
         Main.honeypot.DeRegisterService(module);
@@ -252,8 +245,7 @@ public class ServicesController implements Initializable {
 
     /**
      * Start up module service
-     *
-     * @param module
+     * @param module Service module
      */
     public void StartUp(LIModule module) {
         Main.honeypot.DeRegisterService(module);
@@ -272,9 +264,8 @@ public class ServicesController implements Initializable {
 
     /**
      * Checking if module is running
-     *
-     * @param module
-     * @return boolean
+     * @param module Service module
+     * @return true or false if it's started
      */
     public boolean isStarted(LIModule module) {
         return module.isStarted();
@@ -286,9 +277,8 @@ public class ServicesController implements Initializable {
 
     /**
      * Get log from the Service module
-     *
-     * @param module
-     * @return LinkedList<LogConnection>
+     * @param module Service module
+     * @return list of Logconnection
      */
     public LinkedList<LogConnection> GetLogs(LIModule module) {
 
@@ -304,9 +294,8 @@ public class ServicesController implements Initializable {
 
 
     /**
-     * Get all the moldules from the main
-     *
-     * @return ArrayList<LIModule>
+     * Get all the modules from the main
+     * @return list of modules
      */
     public ArrayList<LIModule> GetModules() {
 
@@ -315,9 +304,8 @@ public class ServicesController implements Initializable {
 
     /**
      * Timeframe of 1 hour of return the amount of logs where create in the last hour
-     *
-     * @param logs
-     * @return int
+     * @param logs LinkedList of logConnection items
+     * @return about of logs made in 1 hour
      */
     public int Timeframes(LinkedList<LogConnection> logs) {
         int i = 0;
@@ -336,9 +324,8 @@ public class ServicesController implements Initializable {
 
     /**
      * Get data of the last log file (time)
-     *
-     * @param logs
-     * @return String
+     * @param logs LinkedList of logConnection items
+     * @return string of the last log data
      */
 
     public String getDatelastlog(LinkedList<LogConnection> logs) {
@@ -362,9 +349,8 @@ public class ServicesController implements Initializable {
 
     /**
      * StatusCheck
-     *
-     * @param module
-     * @return Status
+     * @param module Service module
+     * @return returns a status item base of module input
      */
     public Status StatusCheck(LIModule module) {
         int connections = module.getNumberOfActiveConnections();

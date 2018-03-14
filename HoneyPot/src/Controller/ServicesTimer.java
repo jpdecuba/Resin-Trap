@@ -17,7 +17,7 @@ public class ServicesTimer extends TimerTask {
 
     /**
      * ServicesTimer Constructor
-     * @param item
+     * @param item ServidcesDController
      */
     public ServicesTimer(ServicesController item) {
         this.item = item;

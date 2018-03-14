@@ -72,17 +72,9 @@ public class OverviewController implements Initializable {
 				path = "/View/OverView.fxml";
 				title = "Achmea";
             } else if (source == loginBtn){
-            	if(loginBtn.getText() == "Logout")
+				if(!Main.CheckForLogout(loginBtn.getText(), snackbar))
 				{
-					if(Main.loginModel.Logout(Main.account.getName()))
-					{
-						Main.account = null;
-					}
-					else
-					{
-						snackbar.show("Failed to logout", 3000);
-						return;
-					}
+					return;
 				}
             	path = "/View/LoginView.fxml";
             	title = "Login";
@@ -103,7 +95,7 @@ public class OverviewController implements Initializable {
 
     /**
      * Get Total Connection of all services
-     * @return int
+     * @return int of the totaal amount of connections
      */
     public int GetTotalConnections() {
 
@@ -123,7 +115,7 @@ public class OverviewController implements Initializable {
 
     /**
      * Get data of the last log file (time)
-     * @return String
+     * @return string of the last time of the last record that was made
      */
     public String getDatelastlog() {
         if (Main.honeypot.getLogs() != null) {
@@ -147,7 +139,7 @@ public class OverviewController implements Initializable {
 
     /**
      * Statuscheck for all the services
-     * @return Status
+     * @return status of all the services that was made
      */
     public static Status StatusCheck() {
         int start = 0;
@@ -172,7 +164,7 @@ public class OverviewController implements Initializable {
 
     /**
      * Timeframe of 1 hour of return the amount of logs where create in the last hour
-     * @return int
+     * @return int of the amount of logs that where made in the last hour
      */
 
     public int Timeframes() {

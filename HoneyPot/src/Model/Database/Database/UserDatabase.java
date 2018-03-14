@@ -12,7 +12,6 @@ public class UserDatabase implements ILoginRepo {
 
 	@Override
 	public User Validate(User user) {
-		User user1 = null;
 		try
 		{
 			String sql = "SELECT id, roleId FROM Account WHERE name = ? AND password = ? AND [online] = 0";
@@ -21,7 +20,7 @@ public class UserDatabase implements ILoginRepo {
 			statement.setString(2, user.getPassword());
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
-				user1 = new User(rs.getInt(1), user.getName(), rs.getInt(2), 1);
+				User user1 = new User(rs.getInt(1), user.getName(), rs.getInt(2), 1);
 				sql = "UPDATE Account SET [online] = ? WHERE name = ?";
 				statement = Database.connection().prepareStatement(sql);
 				statement.setInt(1, 1);
