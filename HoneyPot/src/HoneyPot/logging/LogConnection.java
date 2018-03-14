@@ -49,8 +49,7 @@ public class LogConnection implements Serializable, Comparable<LogConnection> {
 
     public String message(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Service: "+ Protocol + " Remote ip:" + dstIP + ":" + dstPort);
-        sb.append("\n");
+        sb.append("Service: "+ Protocol + " Remote ip:" + dstIP + ":" + dstPort + "\n");
         for(LogRecord item : LogRecords){
             sb.append("\t");
             sb.append(item.toString());

@@ -72,17 +72,9 @@ public class OverviewController implements Initializable {
 				path = "/View/OverView.fxml";
 				title = "Achmea";
             } else if (source == loginBtn){
-            	if(loginBtn.getText() == "Logout")
+				if(!Main.CheckForLogout(loginBtn.getText(), snackbar))
 				{
-					if(Main.loginModel.Logout(Main.account.getName()))
-					{
-						Main.account = null;
-					}
-					else
-					{
-						snackbar.show("Failed to logout", 3000);
-						return;
-					}
+					return;
 				}
             	path = "/View/LoginView.fxml";
             	title = "Login";
