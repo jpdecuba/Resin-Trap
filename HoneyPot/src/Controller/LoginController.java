@@ -113,6 +113,10 @@ public class LoginController implements Initializable {
 		}
 	}
 
+	/**
+	 * Login Methode
+	 * @return boolean
+	 */
     public boolean Login(){
         String username = loginUsernameField.getText();
         String password = loginPasswordField.getText();

@@ -15,26 +15,18 @@ public class ServicesTimer extends TimerTask {
     private ServicesController item;
 
 
-
+    /**
+     * ServicesTimer Constructor
+     * @param item
+     */
     public ServicesTimer(ServicesController item) {
         this.item = item;
     }
 
     @Override
     public void run() {
-
-
-        ArrayList<LIModule> GetModules = item.GetModules();
-
         Platform.runLater(()->{
-            for(LIModule module : GetModules) {
-                item.isStarted(module);
-                LinkedList<LogConnection> logs = item.GetLogs(module);
-                item.GetConnections(module);
-                item.Timeframes(logs);
-                item.getDatelastlog(logs);
-                item.StatusCheck(module);
-            }
+            item.fillListView();
         });
 
 

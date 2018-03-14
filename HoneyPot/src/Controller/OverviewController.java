@@ -95,6 +95,10 @@ public class OverviewController implements Initializable {
         }
     }
 
+    /**
+     * Get Total Connection of all services
+     * @return int
+     */
     public int GetTotalConnections() {
 
         int i = 0;
@@ -111,6 +115,10 @@ public class OverviewController implements Initializable {
         return i;
     }
 
+    /**
+     * Get data of the last log file (time)
+     * @return String
+     */
     public String getDatelastlog() {
         if (Main.honeypot.getLogs() != null) {
             SimpleDateFormat ft =
@@ -131,6 +139,10 @@ public class OverviewController implements Initializable {
     }
 
 
+    /**
+     * Statuscheck for all the services
+     * @return Status
+     */
     public static Status StatusCheck() {
         int start = 0;
         int connections = 0;
@@ -152,6 +164,10 @@ public class OverviewController implements Initializable {
         return Status.OK;
     }
 
+    /**
+     * Timeframe of 1 hour of return the amount of logs where create in the last hour
+     * @return int
+     */
 
     public int Timeframes() {
         int i = 0;
