@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import com.jfoenix.controls.JFXTreeTableColumn?>
+<?import com.jfoenix.controls.JFXTreeView?>
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ServicesController">
     <children>
@@ -65,14 +67,15 @@
                         <HBox alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
                               AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
                             <children>
-                                <VBox alignment="CENTER" prefWidth="300.0"
-                                      AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0">
+                                <VBox fx:id="vb1" prefHeight="${vb1.parent.height}" minWidth="300" prefWidth="300" alignment="TOP_CENTER" style="-fx-background-color: WHITE">
+                                    <Region prefHeight="100"/>
                                     <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 28; -fx-text-fill: #424242"
                                            text="%services2"/>
                                     <Region prefHeight="50"/>
                                     <HBox prefHeight="200.0">
                                         <children>
-                                            <JFXListView  prefWidth="100" fx:id="serviceList"
+                                            <JFXListView prefWidth="100" fx:id="serviceList"
+                                                         onMouseClicked="#clickProtocol"
                                                          style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
                                             <JFXListView prefWidth="100" fx:id="connectionList"
                                                          style="-fx-background-color: transparent"/>
@@ -80,13 +83,27 @@
                                                          style="-fx-background-color: transparent"/>
                                         </children>
                                     </HBox>
+                                    <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
+                                           text="Select a protocol to show its logs in the grid"/>
                                 </VBox>
-                                <VBox AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
+                                <VBox fx:id="vb2" prefHeight="${vb2.parent.height}" alignment="TOP_CENTER"
                                       HBox.hgrow="ALWAYS">
                                     <children>
-                                        <JFXTreeTableView>
-                                            <
-                                        </JFXTreeTableView>
+                                        <Region prefHeight="100"/>
+                                        <Label fx:id="protocolLbl"
+                                               style=" -fx-font-family: Roboto-Thin; -fx-font-size: 28; -fx-text-fill: #424242"
+                                               text="Protocol"/>
+                                        <Region prefHeight="50"/>
+                                        <HBox fx:id="hb" prefWidth="${hb.parent.width}">
+                                            <JFXListView fx:id="timeColumn"
+                                                         style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
+                                            <JFXListView fx:id="ipColumn"
+                                                         style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
+                                            <JFXListView fx:id="portColumn"
+                                                         style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
+                                            <JFXListView fx:id="messagesColumn"
+                                                         style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
+                                        </HBox>
                                     </children>
                                 </VBox>
                             </children>

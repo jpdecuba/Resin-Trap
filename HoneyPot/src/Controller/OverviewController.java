@@ -91,9 +91,7 @@ public class OverviewController implements Initializable {
             	path = "/View/ServicesView.fxml";
             	title = "Achmea";
             }
-
 			Main.manager.currentView = path;
-
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
 			Parent root = loader.load();
 			Main.switchPage(root, title);
