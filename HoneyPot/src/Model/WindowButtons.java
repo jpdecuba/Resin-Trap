@@ -11,7 +11,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.util.Locale;
+
 public class WindowButtons extends HBox {
+
+    boolean fullscreen;
 
     public WindowButtons() {
         Button closeBtn = new Button("");
@@ -49,17 +54,22 @@ public class WindowButtons extends HBox {
         fa.setFill(Color.valueOf("#c15683"));
         maxBtn.setGraphic(fa);
         fa.setSize("22");
+
+        fullscreen = false;
+
         maxBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: achmeaPink; -fx-alignment: baseline-center");
         maxBtn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent actionEvent) {
-                Screen screen = Screen.getPrimary();
-                Rectangle2D bounds = screen.getVisualBounds();
-                stage.setX(bounds.getMinX());
-                stage.setY(bounds.getMinY());
-                stage.setWidth(bounds.getWidth());
-                stage.setHeight(bounds.getHeight());
+                if (!fullscreen) {
+                    fullscreen = true;
+                    stage.setMaximized(true);
+                }
+                else {
+                    fullscreen = false;
+                    stage.setMaximized(false);
+                }
             }
         });
 
