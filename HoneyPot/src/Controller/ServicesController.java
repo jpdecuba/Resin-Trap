@@ -76,7 +76,7 @@ public class ServicesController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.resource = resources;
         Timer timer = new Timer();
-        timer.schedule(new ServicesTimer(this), 0, 5000);
+        timer.schedule(new ServicesTimer(this), 0, 2000);
         Main.manager.setToolbar(this.toolbar);
         snackbar = new JFXSnackbar(anchor);
         if (Main.account != null) {
