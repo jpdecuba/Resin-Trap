@@ -34,6 +34,21 @@
                                     textFill="WHITE" toggleGroup="$toggleGroup"
                                     style=" -fx-font-family: Roboto-Thin; -fx-font-size: 18; -fx-text-fill: WHITE;"/>
                 </VBox>
+                <VBox AnchorPane.topAnchor="120" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="40"
+                      AnchorPane.rightAnchor="20" alignment="CENTER_LEFT">
+                    <JFXRadioButton fx:id="HomeRBtn" mnemonicParsing="false"
+                                    selected="true" selectedColor="#c15683" unSelectedColor="white"
+                                    text="Home" textFill="WHITE"
+                                    style=" -fx-font-family: Roboto-Thin; -fx-font-size: 18; -fx-text-fill: WHITE">
+                        <toggleGroup>
+                            <ToggleGroup fx:id="toggleGroup2"/>
+                        </toggleGroup>
+                    </JFXRadioButton>
+                    <JFXRadioButton fx:id="small1RBtn" mnemonicParsing="false"
+                                    text="Small Business 1" selectedColor="#c15683" unSelectedColor="white"
+                                    textFill="WHITE" toggleGroup="$toggleGroup2"
+                                    style=" -fx-font-family: Roboto-Thin; -fx-font-size: 18; -fx-text-fill: WHITE;"/>
+                </VBox>
             </AnchorPane>
         </VBox>
         <JFXToolbar fx:id="toolbar" prefHeight="25" prefWidth="${toolbar.parent.width}"
