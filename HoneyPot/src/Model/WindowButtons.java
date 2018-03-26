@@ -1,22 +1,20 @@
 package Model;
 
 import Main.Main;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-
-import java.awt.*;
-import java.util.Locale;
 
 public class WindowButtons extends HBox {
 
     boolean fullscreen;
+    MaterialDesignIconView fa;
+    MaterialDesignIconView fa2;
 
     public WindowButtons() {
         Button closeBtn = new Button("");
@@ -24,10 +22,9 @@ public class WindowButtons extends HBox {
         closeBtn.setMaxSize(25, 25);
         closeBtn.setMinSize(25, 25);
         closeBtn.setPrefSize(25, 25);
-        FontAwesomeIconView fa = new FontAwesomeIconView();
-        fa.setGlyphName("CLOSE");
+        MaterialDesignIconView fa = new MaterialDesignIconView(MaterialDesignIcon.WINDOW_CLOSE);
         fa.setFill(Color.valueOf("#c15683"));
-        fa.setSize("22");
+        fa.setSize("18");
         closeBtn.setGraphic(fa);
         closeBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: achmeaPink; -fx-alignment: bottom-center");
         closeBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -49,11 +46,13 @@ public class WindowButtons extends HBox {
         maxBtn.setMaxSize(25, 25);
         maxBtn.setMinSize(25, 25);
         maxBtn.setPrefSize(25, 25);
-        FontAwesomeIconView fa = new FontAwesomeIconView();
-        fa.setGlyphName("PLUS");
+        fa = new MaterialDesignIconView(MaterialDesignIcon.WINDOW_MAXIMIZE);
+        fa2 = new MaterialDesignIconView(MaterialDesignIcon.WINDOW_RESTORE);
         fa.setFill(Color.valueOf("#c15683"));
+        fa2.setFill(Color.valueOf("#c15683"));
         maxBtn.setGraphic(fa);
-        fa.setSize("22");
+        fa.setSize("18");
+        fa2.setSize("18");
 
         fullscreen = false;
 
@@ -65,10 +64,12 @@ public class WindowButtons extends HBox {
                 if (!fullscreen) {
                     fullscreen = true;
                     stage.setMaximized(true);
+                    maxBtn.setGraphic(fa2);
                 }
                 else {
                     fullscreen = false;
                     stage.setMaximized(false);
+                    maxBtn.setGraphic(fa);
                 }
             }
         });
