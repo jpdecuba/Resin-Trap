@@ -22,7 +22,6 @@ public class ScanThread  implements Callable<Integer> {
             socket.close();
         return port;
         } catch (IOException e) {
-
         }
         return null;
 

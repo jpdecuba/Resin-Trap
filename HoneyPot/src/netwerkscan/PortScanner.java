@@ -31,7 +31,7 @@ public class PortScanner {
                 //e.printStackTrace();
             }
         }
-        exec.shutdown();
+
         return list;
     }
 
@@ -58,7 +58,7 @@ public class PortScanner {
 
             }
         }
-        exec.shutdown();
+
         return list;
 
 
