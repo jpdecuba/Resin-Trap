@@ -6,9 +6,7 @@ import java.util.concurrent.*;
 
 public class PortScanner {
 
-
     private ExecutorService exec = Executors.newFixedThreadPool(1000);
-    //private ExecutorService exec = Executors.newCachedThreadPool();
 
 
     public ArrayList<Integer> ALLPortScan(String ipadress){
