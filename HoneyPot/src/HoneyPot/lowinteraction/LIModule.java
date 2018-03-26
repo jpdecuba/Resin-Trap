@@ -242,6 +242,7 @@ public class LIModule implements Runnable {
 
         }
 
+
         _thread = null;
         _server = null;
     }
