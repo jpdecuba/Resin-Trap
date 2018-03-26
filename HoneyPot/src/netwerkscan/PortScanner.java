@@ -6,11 +6,21 @@ import java.util.concurrent.*;
 
 public class PortScanner {
 
-    private ExecutorService exec = Executors.newFixedThreadPool(1000);
+    private ExecutorService exec = null;
+
+
+
+    private void start(){
+        exec = Executors.newFixedThreadPool(1000);
+    }
+
+    private void stop(){
+        exec.shutdown();
+    }
 
 
     public ArrayList<Integer> ALLPortScan(String ipadress){
-
+        start();
         ArrayList<Integer> list = new ArrayList<>();
         List<Future<Integer>> futures = new ArrayList<Future<Integer>>();
 
@@ -31,13 +41,13 @@ public class PortScanner {
                 //e.printStackTrace();
             }
         }
-
+        stop();
         return list;
     }
 
 
     public ArrayList<Integer> QuickScan(String ipadress) {
-
+        start();
         ArrayList<Integer> list = new ArrayList<>();
         List<Future<Integer>> futures = new ArrayList<Future<Integer>>();
 
@@ -58,7 +68,7 @@ public class PortScanner {
 
             }
         }
-
+        stop();
         return list;
 
 
