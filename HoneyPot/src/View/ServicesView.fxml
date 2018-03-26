@@ -11,6 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.layout.StackPane?>
+<?import com.jfoenix.controls.JFXTreeTableRow?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.TableView?>
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ServicesController">
     <children>
@@ -106,14 +109,10 @@
                                     </HBox>
                                     <Region prefHeight="50"/>
                                     <HBox fx:id="hb" prefWidth="${hb.parent.width}">
-                                        <JFXListView fx:id="timeColumn"
-                                                     style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
-                                        <JFXListView fx:id="ipColumn"
-                                                     style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
-                                        <JFXListView fx:id="portColumn"
-                                                     style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
-                                        <JFXListView fx:id="messagesColumn" onMouseClicked="#clickLog"
-                                                     style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
+                                        <TableView fx:id="table"
+                                                     style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"
+                                        onMouseClicked="#clickLog"/>
+
                                     </HBox>
                                     <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
                                            text="%selectlog"/>
