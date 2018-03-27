@@ -6,6 +6,7 @@ import Main.Main;
 import Model.Status;
 import Model.WindowButtons;
 import com.jfoenix.controls.*;
+import com.sun.javafx.scene.control.skin.TableColumnHeader;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,12 +14,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -29,6 +30,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -53,13 +55,7 @@ public class ServicesController implements Initializable {
     @FXML
     JFXListView iOList;
     @FXML
-    JFXListView ipColumn;
-    @FXML
-    JFXListView timeColumn;
-    @FXML
-    JFXListView portColumn;
-    @FXML
-    JFXListView messagesColumn;
+    TableView table;
     @FXML
     Label protocolLbl;
     @FXML
@@ -83,6 +79,11 @@ public class ServicesController implements Initializable {
     JFXButton button;
     private ResourceBundle resource;
 
+    TableColumn ipColumn;
+    TableColumn timeColumn;
+    TableColumn portColumn;
+    TableColumn messagesColumn;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         hb2.setVisible(false);
@@ -94,25 +95,50 @@ public class ServicesController implements Initializable {
         if (Main.account != null) {
             loginBtn.setText(ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang.toUpperCase())).getString("logout"));
         }
-        ipColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
-        timeColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
-        portColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
-        messagesColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
+
+        createTable();
+
         dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
         content.setPrefWidth(600);
         content.prefHeightProperty().bind(hb2.heightProperty().multiply(0.9));
-        button = new JFXButton("Okay");
+        button = new JFXButton("Close");
         hb.prefHeightProperty().bind(vb2.heightProperty().divide(1.75));
         vb1.setEffect(new DropShadow(3, Color.rgb(0, 0, 0, 0.8)));
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                dialog.close();
                 hb2.setVisible(false);
+                dialog.close();
+
             }
         });
         content.setHeading(new Text("Messages"));
         content.setActions(button);
+    }
+
+    public void createTable() {
+        table.setEditable(true);
+
+        ipColumn = new TableColumn(resource.getString("ip"));
+        ipColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
+        ipColumn.setCellValueFactory(
+                new PropertyValueFactory<TableObject, String>("ip"));
+
+        timeColumn = new TableColumn(resource.getString("time"));
+        timeColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
+        timeColumn.setCellValueFactory(
+                new PropertyValueFactory<TableObject, String>("time"));
+
+        portColumn = new TableColumn(resource.getString("port"));
+        portColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
+        portColumn.setCellValueFactory(
+                new PropertyValueFactory<TableObject, String>("port"));
+
+        messagesColumn = new TableColumn(resource.getString("message"));
+        messagesColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
+        messagesColumn.setCellValueFactory(
+                new PropertyValueFactory<TableObject, String>("message"));
+        table.getColumns().addAll(ipColumn, timeColumn, portColumn, messagesColumn);
     }
 
     public void fillListView() {
@@ -139,23 +165,28 @@ public class ServicesController implements Initializable {
 
     @FXML
     public void clickLog(MouseEvent event) {
-        try {
-            if (messagesColumn.getSelectionModel().getSelectedItem() != null) {
-                if (messagesColumn.getSelectionModel().getSelectedItem().getClass().equals(LogConnection.class)) {
-                    LogConnection log = (LogConnection) messagesColumn.getSelectionModel().getSelectedItem();
-                    if (log.getLogRecords().size() > 0) {
-                        ScrollPane scrollPane = new ScrollPane();
-                        scrollPane.setContent(new Text(log.message()));
-                        content.setBody(scrollPane);
-                        dialog.show();
-                        hb2.setVisible(true);
+        if(event.getClickCount() == 1 && !hb2.isVisible() && dialog.isOverlayClose()){
+            try {
+                if (!(event.getTarget() instanceof TableColumnHeader)) {
+                    if (table.getSelectionModel().getSelectedItem() != null) {
+                        TableObject selectedObject = (TableObject) table.getSelectionModel().getSelectedItem();
+                        LogConnection log = selectedObject.getMessage();
+                        if (log.getLogRecords().size() > 0) {
+                            ScrollPane scrollPane = new ScrollPane();
+                            scrollPane.setContent(new Text(log.message()));
+                            content.setBody(scrollPane);
+                            dialog.show();
+                            hb2.setVisible(true);
+                        }
                     }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
+
+
 
     @FXML
     public void clickProtocol(MouseEvent event) {
@@ -164,30 +195,18 @@ public class ServicesController implements Initializable {
             if (source.getSelectionModel().getSelectedItem().getClass().equals(LIModule.class)) {
                 LIModule mod = (LIModule) source.getSelectionModel().getSelectedItem();
                 Platform.runLater(() -> {
-                    ipColumn.getItems().clear();
-                    messagesColumn.getItems().clear();
-                    portColumn.getItems().clear();
-                    timeColumn.getItems().clear();
-                    Label l1 = new Label(resource.getString("ip"));
-                    Label l2 = new Label(resource.getString("message"));
-                    Label l3 = new Label(resource.getString("port"));
-                    Label l4 = new Label(resource.getString("time"));
-                    l1.setStyle("-fx-font-weight: BOLD");
-                    l2.setStyle("-fx-font-weight: BOLD");
-                    l3.setStyle("-fx-font-weight: BOLD");
-                    l4.setStyle("-fx-font-weight: BOLD");
-                    ipColumn.getItems().add(l1);
-                    messagesColumn.getItems().add(l2);
-                    portColumn.getItems().add(l3);
-                    timeColumn.getItems().add(l4);
+                    table.getItems().clear();
                     for (LogConnection log :
                             GetLogs(mod)) {
                         SimpleDateFormat ft =
                                 new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
-                        ipColumn.getItems().add(log.getDstIP());
-                        messagesColumn.getItems().add(log);
-                        portColumn.getItems().add(log.getDstPort());
-                        timeColumn.getItems().add(ft.format(log.getDate()));
+
+                        TableObject tableO = new TableObject(
+                                log.getDstIP().getHostAddress().toString(),
+                                log,
+                                String.valueOf(log.getDstPort()),
+                                ft.format(log.getDate()));
+                        table.getItems().add(tableO);
                     }
                     if (mod.isStarted()) {
                         protoToggle.setSelected(true);
@@ -435,5 +454,49 @@ public class ServicesController implements Initializable {
         return Status.OFF;
     }
 
+    public class TableObject {
+        public String ip;
+        public LogConnection message;
+        public String port;
+        public String time;
 
+        public TableObject(String ip, LogConnection message, String port, String time) {
+            this.ip = ip;
+            this.message = message;
+            this.port = port;
+            this.time = time;
+        }
+
+        public String getIp() {
+            return ip;
+        }
+
+        public void setIp(String ip) {
+            this.ip = ip;
+        }
+
+        public LogConnection getMessage() {
+            return message;
+        }
+
+        public void setMessage(LogConnection message) {
+            this.message = message;
+        }
+
+        public String getPort() {
+            return port;
+        }
+
+        public void setPort(String port) {
+            this.port = port;
+        }
+
+        public String getTime() {
+            return time;
+        }
+
+        public void setTime(String time) {
+            this.time = time;
+        }
+    }
 }

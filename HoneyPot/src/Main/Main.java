@@ -1,6 +1,7 @@
 package Main;
 
 import Controller.OverviewController;
+import Controller.PresetController;
 import HoneyPot.honeyrj.HoneyRJ;
 import HoneyPot.honeyrj.HoneyRJException;
 import HoneyPot.lowinteraction.LIModule;
@@ -74,10 +75,9 @@ public class Main extends Application {
 		toolbar = new JFXToolbar();
         this.manager = new ControllerManager();
 		manager.currentView = "/View/OverView.fxml";
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/PresetView.fxml"));
         loader.setResources(ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
         Parent root = loader.load();
-        OverviewController Overview = loader.getController();
         this.Stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/Resources/Ducky.png")));
         Stage.initStyle(StageStyle.UNDECORATED);
         Scene scene = new Scene(root);
