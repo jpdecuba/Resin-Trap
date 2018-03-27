@@ -45,9 +45,9 @@ public class HoneyRJMain {
 		BlankProtocol blank = new BlankProtocol(53);
 		LIModule blankm = new LIModule(blank,honeyrj);
 		honeyrj.RegisterService(ftpM);
-		honeyrj.RegisterService(blankm);
+		honeyrj.RegisterService(ircM);
 		honeyrj.startPort(21);
-		honeyrj.startPort(53);
+		honeyrj.startPort(ircM.getPort());
 
 		System.out.println("started");
 
@@ -55,25 +55,8 @@ public class HoneyRJMain {
 
 
 
-		System.out.println(ftpM.isStarted());
-		honeyrj.PauseNewConnections(ftpM);
 
 
-		System.out.println(honeyrj.ServiceisStarted(21));
-
-
-		honeyrj.PauseNewConnections(ftpM);
-
-		System.out.println(ftpM.isStarted());
-		honeyrj.ResumeNewConnections(ftpM);
-
-		System.out.println(honeyrj.getNumberOfActiveConnections(21));
-
-		System.out.println(ftpM.isStarted());
-		if(ftpM.isStarted())
-		{
-			System.out.println(ftpM.getPort());
-		}
 
 /*		File file = new File(System.getenv("APPDATA") + "/Honeypot/AllLogs.txt");
 		if(file.exists())

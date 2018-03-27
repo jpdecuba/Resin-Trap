@@ -70,11 +70,6 @@ public class PortScanner {
         }
         stop();
         return list;
-
-
-
-
-
     }
 
 

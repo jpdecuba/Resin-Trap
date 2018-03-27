@@ -2,10 +2,7 @@ package netwerkscan;
 
 import HoneyPot.lowinteraction.LIModule;
 import HoneyPot.lowinteraction.LIProtocol;
-import HoneyPot.protocol.BlankProtocol;
-import HoneyPot.protocol.FtpProtocol;
-import HoneyPot.protocol.MySQLProtocol;
-import HoneyPot.protocol.SmtpProtocol;
+import HoneyPot.protocol.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +27,9 @@ public class ScannerMain {
         MysqlM = new LIModule(MysqlP,honeypot);
         SmtpM = new LIModule(SmtpP,honeypot);
         ftpM = new LIModule(ftpP,honeypot);
+        LIProtocol ircP = new IrcProtocol();
+        LIModule ircM = new LIModule(ircP,honeypot);
+
 
         blankm = new LIModule(blank,honeypot);
 
@@ -38,6 +38,7 @@ public class ScannerMain {
         Services.add(MysqlM);
         Services.add(SmtpM);
         Services.add(ftpM);
+        Services.add(ircM);
 
 
         /*PortScanner scan = new PortScanner();
@@ -47,8 +48,12 @@ public class ScannerMain {
         PresetsScan presets = new PresetsScan();
 
         List<LIModule> result = presets.QuickScan("Localhost",Services);
-
         System.out.println(result);
+        List<LIModule> result2 = presets.ScanCreateblank("Localhost",Services,honeypot);
+
+
+
+        System.out.println(result2);
 
 
 
