@@ -5,6 +5,7 @@ import HoneyPot.logging.LogConnection;
 import HoneyPot.lowinteraction.LIDeserializeThread;
 import HoneyPot.lowinteraction.LIModule;
 import HoneyPot.lowinteraction.LIProtocol;
+import HoneyPot.protocol.BlankProtocol;
 import HoneyPot.protocol.FtpProtocol;
 import HoneyPot.protocol.IrcProtocol;
 
@@ -40,10 +41,13 @@ public class HoneyRJMain {
 		LIModule ftpM = new LIModule(ftpP,honeyrj);
 		LIProtocol ircP = new IrcProtocol();
 		LIModule ircM = new LIModule(ircP,honeyrj);
+
+		BlankProtocol blank = new BlankProtocol(53);
+		LIModule blankm = new LIModule(blank,honeyrj);
 		honeyrj.RegisterService(ftpM);
-		honeyrj.RegisterService(ircM);
+		honeyrj.RegisterService(blankm);
 		honeyrj.startPort(21);
-		honeyrj.startPort(6667);
+		honeyrj.startPort(53);
 
 		System.out.println("started");
 
