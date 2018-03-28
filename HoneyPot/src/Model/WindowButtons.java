@@ -3,12 +3,18 @@ package Model;
 import Main.Main;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.net.URL;
 
 public class WindowButtons extends HBox {
 
@@ -31,9 +37,11 @@ public class WindowButtons extends HBox {
 
             @Override
             public void handle(ActionEvent actionEvent) {
-                Main.Stage.close();
-                Main.Shutdown();
-                System.exit(0);
+                MinimizeToTray();
+
+                //Main.Stage.(false);
+                //Main.Shutdown();
+                //System.exit(0);
             }
         });
         this.getChildren().add(closeBtn);
@@ -75,5 +83,121 @@ public class WindowButtons extends HBox {
         });
 
         this.getChildren().add(maxBtn);
+    }
+
+    private void MinimizeToTray(){
+        if (!SystemTray.isSupported()) {
+            System.out.println("SystemTray is not supported");
+            return;
+        }
+
+        Platform.setImplicitExit(false);
+        Platform.runLater(new Runnable(){
+            public void run() {
+                hideStage();
+            }
+        });
+
+        final PopupMenu popup = new PopupMenu();
+        final TrayIcon trayIcon =
+                new TrayIcon(createImage("/resources/duckytiny.png", "tray icon"));
+        final SystemTray tray = SystemTray.getSystemTray();
+        //trayIcon.setImageAutoSize(true);
+
+        MenuItem maximizeItem = new MenuItem("Maximize");
+        MenuItem turnOffItem = new MenuItem("Turn off honeypot");
+        MenuItem exitItem = new MenuItem("Exit");
+
+        popup.add(maximizeItem);
+        popup.add(turnOffItem);
+        popup.add(exitItem);
+
+        trayIcon.setPopupMenu(popup);
+
+        try {
+            tray.add(trayIcon);
+        } catch (AWTException e) {
+            System.out.println("TrayIcon could not be added.");
+            return;
+        }
+
+        maximizeItem.addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
+                showStage();
+                tray.remove(trayIcon);
+            }
+        });
+
+        turnOffItem.addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
+                Main.Shutdown();
+            }
+        });
+
+        exitItem.addActionListener(new ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
+                tray.remove(trayIcon);
+                Main.Shutdown();
+                System.exit(0);
+            }
+        });
+
+        trayIcon.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                showStage();
+                tray.remove(trayIcon);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+
+            }
+        });
+    }
+
+    private void showStage() {
+        if (Main.Stage != null) {
+            Platform.setImplicitExit(false);
+            Platform.runLater(new Runnable(){
+                public void run() {
+                    Main.Stage.show();
+                    Main.Stage.toFront();
+                }
+            });
+        }
+    }
+
+    private void hideStage() {
+        if (Main.Stage != null) {
+            Main.Stage.hide();
+        }
+    }
+
+    //Obtain the image URL
+    protected static Image createImage(String path, String description) {
+        URL imageURL = WindowButtons.class.getResource(path);
+
+        if (imageURL == null) {
+            System.err.println("Resource not found: " + path);
+            return null;
+        } else {
+            return (new ImageIcon(imageURL, description)).getImage();
+        }
     }
 }
