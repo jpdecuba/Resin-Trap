@@ -19,7 +19,7 @@
             <Label style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 28; -fx-text-fill: WHITE"
                    text="Preset"/>
             <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 14; -fx-text-fill: WHITE; -fx-label-padding: 20, 0, 20, 0" wrapText="true" minHeight="120"
-                   text="Choose a preset for your honeypot. Express will automatically choose a preset for you based on your network. Custom will let you manually choose from a number of presets."/>
+                   text="%PresetInstruction1"/>
 
             <AnchorPane fx:id="anpane" prefWidth="${anpane.parent.width}">
                 <VBox AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="20"
@@ -42,26 +42,26 @@
                       AnchorPane.rightAnchor="20" alignment="TOP_LEFT">
                     <JFXRadioButton fx:id="homeRBtn" mnemonicParsing="false"
                                     selected="true" selectedColor="WHITE" unSelectedColor="WHITE"
-                                    text="Home" textFill="WHITE" onAction="#toggle2"
+                                    text="%preset1name" textFill="WHITE" onAction="#toggle2"
                                     style=" -fx-font-family: Roboto-Thin; -fx-font-size: 18; -fx-text-fill: WHITE">
                         <toggleGroup>
                             <ToggleGroup fx:id="toggleGroup2"/>
                         </toggleGroup>
                     </JFXRadioButton>
                     <JFXRadioButton fx:id="small1RBtn" mnemonicParsing="false" onAction="#toggle2"
-                                    text="Small Business 1" selectedColor="WHITE" unSelectedColor="WHITE"
+                                    text="%preset2name" selectedColor="WHITE" unSelectedColor="WHITE"
                                     textFill="WHITE" toggleGroup="$toggleGroup2"
                                     style=" -fx-font-family: Roboto-Thin; -fx-font-size: 18; -fx-text-fill: WHITE;"/>
                     <JFXRadioButton fx:id="small2RBtn" mnemonicParsing="false" onAction="#toggle2"
-                                    text="Small Business 2" selectedColor="WHITE" unSelectedColor="WHITE"
+                                    text="%preset3name" selectedColor="WHITE" unSelectedColor="WHITE"
                                     textFill="WHITE" toggleGroup="$toggleGroup2"
                                     style=" -fx-font-family: Roboto-Thin; -fx-font-size: 18; -fx-text-fill: WHITE;"/>
                     <JFXRadioButton fx:id="big1RBtn" mnemonicParsing="false" onAction="#toggle2"
-                                    text="Big Business 1" selectedColor="WHITE" unSelectedColor="WHITE"
+                                    text="%preset4name" selectedColor="WHITE" unSelectedColor="WHITE"
                                     textFill="WHITE" toggleGroup="$toggleGroup2"
                                     style=" -fx-font-family: Roboto-Thin; -fx-font-size: 18; -fx-text-fill: WHITE;"/>
                     <JFXRadioButton fx:id="big2RBtn" mnemonicParsing="false" onAction="#toggle2"
-                                    text="Big Business 2" selectedColor="WHITE" unSelectedColor="WHITE"
+                                    text="%preset5name" selectedColor="WHITE" unSelectedColor="WHITE"
                                     textFill="WHITE" toggleGroup="$toggleGroup2"
                                     style=" -fx-font-family: Roboto-Thin; -fx-font-size: 18; -fx-text-fill: WHITE;"/>
                 </VBox>
