@@ -27,6 +27,7 @@ public interface LIProtocol {
 	 * @return Vector<String> to send to the client on the socket.
 	 */
 	Vector<String> processInput(String messageFromClient);
+
 	
 	/**
 	 * Return the port the protocol listens for connections on

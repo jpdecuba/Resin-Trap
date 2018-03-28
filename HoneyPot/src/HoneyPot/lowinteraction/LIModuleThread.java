@@ -6,8 +6,10 @@ import HoneyPot.honeyrj.HoneyRJ;
 import HoneyPot.logging.LogConnection;
 import HoneyPot.logging.LogFile;
 import HoneyPot.logging.LogRecord;
+import HoneyPot.protocol.DNSProtocol;
 import javafx.application.Platform;
 
+import javax.xml.bind.DatatypeConverter;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -125,13 +127,16 @@ public class LIModuleThread implements Runnable {
 		
 		PrintWriter out = null;
 		BufferedReader in = null;
+		DataOutputStream  outbyte = null;
 		
 
 		try {
 			
 			//create the string reader/writers on the socket
 		    out = new PrintWriter(_socket.getOutputStream(), true);
+			outbyte = new DataOutputStream(_socket.getOutputStream());
 		    in = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
+
 		    
 		    String inputLine; //temporary strings
 		    Vector<String> outputLines;
@@ -139,25 +144,44 @@ public class LIModuleThread implements Runnable {
 		    //allow for varying protocols which have the server talk first or second
 		    switch (_protocol.whoTalksFirst()) {
 		    case SVR_FIRST:
-		    	outputLines = _protocol.processInput(null); //get the first line from the server protocol
-			    
-		    	for(String outputLine : outputLines){
-		    		out.println(outputLine); //send it
-					AddSendLogRecord(outputLine);
+		    	if(!_protocol.getClass().equals(DNSProtocol.class)) {
+					outputLines = _protocol.processInput(null); //get the first line from the server protocol
 
-		    	}
-		    	break;
+					for (String outputLine : outputLines) {
+						out.println(outputLine); //send it
+						AddSendLogRecord(outputLine);
+
+					}
+					break;
+				}else {
+		    		DNSProtocol proto = (DNSProtocol) _protocol;
+		    		outbyte.write(proto.processInputbyte(null));
+				}
 		    case CLIENT_FIRST:
-			    inputLine = in.readLine(); //get the first line from the client
-				AddRcvdLogRecord(inputLine);
+				if(!_protocol.getClass().equals(DNSProtocol.class)) {
+					inputLine = in.readLine(); //get the first line from the client
+					AddRcvdLogRecord(inputLine);
 
-		    	outputLines = _protocol.processInput(inputLine); //process it
-		    	for(String outputLine : outputLines){
-		    		out.println(outputLine); //and reply
-					AddSendLogRecord(outputLine);
+					outputLines = _protocol.processInput(inputLine); //process it
+					for (String outputLine : outputLines) {
+						out.println(outputLine); //and reply
+						AddSendLogRecord(outputLine);
 
-		    	}
-		    	break;
+					}
+					break;
+				}else {
+					DNSProtocol proto = (DNSProtocol) _protocol;
+					DataInputStream inbin = new DataInputStream(
+							new BufferedInputStream(_socket.getInputStream()));
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+					int ch;
+					while((ch = inbin.read()) != -1) {
+						baos.write(ch);
+					}
+
+					outbyte.write(proto.processInputbyte(baos.toByteArray()));
+				}
 		    }
 		    
 		    //now enter the main loop for the rest of the interaction (both cases just sent a message)
