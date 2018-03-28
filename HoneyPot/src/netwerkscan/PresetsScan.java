@@ -3,12 +3,26 @@ package netwerkscan;
 import HoneyPot.honeyrj.HoneyRJ;
 import HoneyPot.lowinteraction.LIModule;
 import HoneyPot.protocol.BlankProtocol;
+import com.sun.corba.se.impl.orbutil.concurrent.Sync;
 import org.omg.CORBA.PRIVATE_MEMBER;
 
+import java.io.IOException;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.*;
 
 public class PresetsScan {
+
+    private int count = 0;
+
+    private boolean bool = true;
+    private  int boolcount = 0;
+
+    private ExecutorService exec = null;
 
     public List<LIModule> QuickScan(String ip, List<LIModule> modules){
         PortScanner scan = new PortScanner();
@@ -74,4 +88,50 @@ public class PresetsScan {
         }
         return returnlist;
     }
+
+    public int checkHosts(){
+        exec = Executors.newCachedThreadPool();
+        List<Future<Integer>> futures = new ArrayList<Future<Integer>>();
+        count = 0;
+        boolcount = 0;
+        bool = true;
+        try {
+            InetAddress localHost = Inet4Address.getLocalHost();
+            String ip = localHost.getHostAddress();
+            String[] parts = ip.split("\\.");
+            final String substring = parts[0] + "." +  parts[1] + "." + parts[2];
+
+        for (int i=1;i<255;i++){
+
+            String host = substring + "." + i;
+
+            Callable worker = new NetwerkScanThread(host);
+            Future<Integer> f = exec.submit(worker);
+            futures.add(f);
+            }
+        }catch (IOException e) {
+
+        }finally {
+            for(Future<?> future : futures) {
+                try {
+                    if(future.get() != null) {
+                        count = count +(Integer) future.get();
+                    }
+                } catch (InterruptedException e) {
+                    //e.printStackTrace();
+                } catch (ExecutionException e) {
+                    //e.printStackTrace();
+                }
+            }
+
+            synchronized (this) {
+                return count;
+            }
+        }
+
+    }
+
+
+
+
 }

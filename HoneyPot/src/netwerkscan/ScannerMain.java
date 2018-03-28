@@ -48,6 +48,8 @@ public class ScannerMain {
 
         PresetsScan presets = new PresetsScan();
 
+        System.out.println(presets.checkHosts());
+
 
 
         List<LIModule> result = presets.QuickScan("Localhost",Services);
