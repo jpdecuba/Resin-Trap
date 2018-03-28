@@ -74,8 +74,8 @@ public class Main extends Application {
 		this.Stage = primaryStage;
 		toolbar = new JFXToolbar();
         this.manager = new ControllerManager();
-		manager.currentView = "/View/OverView.fxml";
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"));
+		manager.currentView = "/View/PresetView.fxml";
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/PresetView.fxml"));
         loader.setResources(ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
         Parent root = loader.load();
         this.Stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/Resources/Ducky.png")));
@@ -121,10 +121,6 @@ public class Main extends Application {
 
     public static void StartHoneypotServices(List<LIModule> list){
         Services.addAll(list);
-        for(LIModule item : Services){
-            honeypot.RegisterService(item);
-            honeypot.startPort(item.getPort());
-        }
     }
 
 
