@@ -48,16 +48,14 @@ public class ScannerMain {
         PresetsScan presets = new PresetsScan();
 
         List<LIModule> result = presets.QuickScan("Localhost",Services);
-        System.out.println(result);
-        List<LIModule> result2 = presets.ScanCreateblank("Localhost",Services,honeypot);
+        System.out.println("quick " + result);
+        List<LIModule> result2 = presets.Totalscan("Localhost",Services);
+        System.out.println("Total " +result2);
 
-
-
-        System.out.println(result2);
-
-
-
-
+        List<LIModule> result3 = presets.QuickScanblank("Localhost",Services,honeypot);
+        System.out.println("quickblank " + result3);
+        List<LIModule> result4 = presets.TotalScanblank("Localhost",Services,honeypot);
+        System.out.println("Totalblank " + result4);
     }
 
 }
