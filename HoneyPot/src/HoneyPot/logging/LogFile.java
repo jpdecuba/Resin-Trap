@@ -34,7 +34,7 @@ public class LogFile {
 		new File(path).mkdirs();
 		_logRecords = new ArrayList<LogRecord>();
 
-		String filename = path + loggingForThread.getProtocol() + "_" +loggingForThread.getStartedTime().getTime() + ".log";
+		String filename = path + loggingForThread.getProtocol().toString() + "_" +loggingForThread.getStartedTime().getTime() + ".log";
 		try {
 			_logFilePrinter = new PrintStream(new FileOutputStream(filename, false));
 			setBeginningLogInfo();

@@ -5,6 +5,7 @@ import HoneyPot.logging.LogConnection;
 import HoneyPot.lowinteraction.LIDeserializeThread;
 import HoneyPot.lowinteraction.LIModule;
 import HoneyPot.lowinteraction.LIProtocol;
+import HoneyPot.protocol.BlankProtocol;
 import HoneyPot.protocol.FtpProtocol;
 import HoneyPot.protocol.IrcProtocol;
 
@@ -40,10 +41,13 @@ public class HoneyRJMain {
 		LIModule ftpM = new LIModule(ftpP,honeyrj);
 		LIProtocol ircP = new IrcProtocol();
 		LIModule ircM = new LIModule(ircP,honeyrj);
+
+		BlankProtocol blank = new BlankProtocol(53);
+		LIModule blankm = new LIModule(blank,honeyrj);
 		honeyrj.RegisterService(ftpM);
 		honeyrj.RegisterService(ircM);
 		honeyrj.startPort(21);
-		honeyrj.startPort(6667);
+		honeyrj.startPort(ircM.getPort());
 
 		System.out.println("started");
 
@@ -51,25 +55,8 @@ public class HoneyRJMain {
 
 
 
-		System.out.println(ftpM.isStarted());
-		honeyrj.PauseNewConnections(ftpM);
 
 
-		System.out.println(honeyrj.ServiceisStarted(21));
-
-
-		honeyrj.PauseNewConnections(ftpM);
-
-		System.out.println(ftpM.isStarted());
-		honeyrj.ResumeNewConnections(ftpM);
-
-		System.out.println(honeyrj.getNumberOfActiveConnections(21));
-
-		System.out.println(ftpM.isStarted());
-		if(ftpM.isStarted())
-		{
-			System.out.println(ftpM.getPort());
-		}
 
 /*		File file = new File(System.getenv("APPDATA") + "/Honeypot/AllLogs.txt");
 		if(file.exists())

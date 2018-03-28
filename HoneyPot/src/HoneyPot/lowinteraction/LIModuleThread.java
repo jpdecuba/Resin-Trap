@@ -91,7 +91,7 @@ public class LIModuleThread implements Runnable {
 		}
 		_parent = parent;
 		try {
-			_protocol = _parent.getProtocol().getClass().newInstance();
+			_protocol = _parent._protocol;
 		} catch (Exception ignored) {
 
 		}
@@ -105,7 +105,7 @@ public class LIModuleThread implements Runnable {
 		System.out.println("localPort:  " + localPort);
 		System.out.println("remotePort:  " + remotePort);
 
-		logs = new LogConnection(localIP, remoteIP,localPort,remotePort,_protocol.toString());
+		logs = new LogConnection(localIP, remoteIP,localPort,remotePort,_parent._protocol.toString());
 		_startTime = new Date();
 		try {
 			_logFile = new LogFile(this);

@@ -6,6 +6,7 @@ import HoneyPot.honeyrj.HoneyRJ;
 import HoneyPot.honeyrj.HoneyRJException;
 import HoneyPot.lowinteraction.LIModule;
 import HoneyPot.lowinteraction.LIProtocol;
+import HoneyPot.protocol.BlankProtocol;
 import HoneyPot.protocol.FtpProtocol;
 import HoneyPot.protocol.MySQLProtocol;
 import HoneyPot.protocol.SmtpProtocol;
@@ -53,6 +54,9 @@ public class Main extends Application {
     private static LIModule SmtpM;
     private static LIProtocol MysqlP = new MySQLProtocol();
     private static LIModule MysqlM;
+
+    private static LIProtocol blank = new BlankProtocol(4444);
+    private static LIModule blankm;
 
     //Status
 
@@ -120,6 +124,10 @@ public class Main extends Application {
         SmtpM = new LIModule(SmtpP,honeypot);
         ftpM = new LIModule(ftpP,honeypot);
 
+        blankm = new LIModule(blank,honeypot);
+
+
+        Services.add(blankm);
         Services.add(MysqlM);
         Services.add(SmtpM);
         Services.add(ftpM);
