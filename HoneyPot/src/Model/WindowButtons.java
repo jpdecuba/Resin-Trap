@@ -145,11 +145,10 @@ public class WindowButtons extends HBox {
         trayIcon.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                if (mouseEvent.getButton() == 0) {
-                    if (mouseEvent.getClickCount() >= 2) {
-                        showStage();
-                        tray.remove(trayIcon);
-                    }
+                if (mouseEvent.getClickCount() == 2 && !mouseEvent.isConsumed()) {
+                    mouseEvent.consume();
+                    showStage();
+                    tray.remove(trayIcon);
                 }
 
             }
