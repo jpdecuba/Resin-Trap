@@ -11,8 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.layout.StackPane?>
-<?import com.jfoenix.controls.JFXTreeTableRow?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.TableView?>
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ServicesController">
@@ -100,11 +98,11 @@
                                                    text="%protocol"/>
                                             <Region prefWidth="25"></Region>
                                             <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
-                                                   text="Off"/>
+                                                   text="%off"/>
                                             <JFXToggleButton fx:id="protoToggle"
                                                              onAction="#toggleMod"></JFXToggleButton>
                                             <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
-                                                   text="On"/>
+                                                   text="%on"/>
                                         </children>
                                     </HBox>
                                     <Region prefHeight="50"/>

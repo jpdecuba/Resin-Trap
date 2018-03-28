@@ -70,7 +70,7 @@ public class Main extends Application {
     	account = null;
 		loginModel = new LoginModel();
         launchHoneypot();
-        StartHoneypotServices();
+        //StartHoneypotServices();
 		this.Stage = primaryStage;
 		toolbar = new JFXToolbar();
         this.manager = new ControllerManager();
