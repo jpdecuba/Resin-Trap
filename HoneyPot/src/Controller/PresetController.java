@@ -69,4 +69,13 @@ public class PresetController implements Initializable {
             presetLbl.setText(ResourceBundle.getBundle("bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString(rb.getText().replaceAll("\\s+","")));
         });
     }
+
+    @FXML
+    public void next(){
+        if (expressRBtn.isSelected()){
+            //express func
+        } else {
+            //check chosen radio button
+        }
+    }
 }
