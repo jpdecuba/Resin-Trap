@@ -73,11 +73,11 @@ public class Main extends Application {
     	account = null;
 		loginModel = new LoginModel();
         launchHoneypot();
-        StartHoneypotServices();
+        //StartHoneypotServices();
 		this.Stage = primaryStage;
 		toolbar = new JFXToolbar();
         this.manager = new ControllerManager();
-		manager.currentView = "/View/OverView.fxml";
+		manager.currentView = "/View/PresetView.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/PresetView.fxml"));
         loader.setResources(ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
         Parent root = loader.load();

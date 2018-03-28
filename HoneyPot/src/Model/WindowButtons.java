@@ -15,12 +15,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class WindowButtons extends HBox {
 
     boolean fullscreen;
     MaterialDesignIconView fa;
     MaterialDesignIconView fa2;
+
+    private ResourceBundle resource;
 
     public WindowButtons() {
         Button closeBtn = new Button("");
@@ -104,10 +108,10 @@ public class WindowButtons extends HBox {
         final SystemTray tray = SystemTray.getSystemTray();
         //trayIcon.setImageAutoSize(true);
 
-        MenuItem maximizeItem = new MenuItem("Maximize");
-        MenuItem turnOffItem = new MenuItem("Turn off honeypot");
-        MenuItem turnOnItem = new MenuItem("Turn on honeypot");
-        MenuItem exitItem = new MenuItem("Exit");
+        MenuItem maximizeItem = new MenuItem(ResourceBundle.getBundle("bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("trayoptionopen"));
+        //MenuItem turnOffItem = new MenuItem("Turn off honeypot");
+        //MenuItem turnOnItem = new MenuItem("Turn on honeypot");
+        MenuItem exitItem = new MenuItem(ResourceBundle.getBundle("bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("trayoptionexit"));
 
         popup.add(maximizeItem);
         //popup.add(turnOffItem);
