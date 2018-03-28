@@ -27,7 +27,7 @@
 
                     <JFXRadioButton fx:id="expressRBtn" mnemonicParsing="false"
                                     selected="true" selectedColor="WHITE" unSelectedColor="WHITE"
-                                    text="Express" textFill="WHITE" onAction="#toggle1"
+                                    text="%express" textFill="WHITE" onAction="#toggle1"
                                     style=" -fx-font-family: Roboto-Thin; -fx-font-size: 18; -fx-text-fill: WHITE">
                         <toggleGroup>
                             <ToggleGroup fx:id="toggleGroup" />
@@ -73,7 +73,7 @@
                        contentDisplay="CENTER" mnemonicParsing="false"
                         minWidth="100" onAction="#next"
                        style="-fx-background-color: WHITE; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 13pt; -fx-text-fill: achmea"
-                       text="Next">
+                       text="%next">
             </JFXButton>
         </VBox>
         <JFXToolbar fx:id="toolbar" prefHeight="25" prefWidth="${toolbar.parent.width}"
