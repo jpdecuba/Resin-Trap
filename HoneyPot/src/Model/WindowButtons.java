@@ -106,11 +106,15 @@ public class WindowButtons extends HBox {
 
         MenuItem maximizeItem = new MenuItem("Maximize");
         MenuItem turnOffItem = new MenuItem("Turn off honeypot");
+        MenuItem turnOnItem = new MenuItem("Turn on honeypot");
         MenuItem exitItem = new MenuItem("Exit");
 
         popup.add(maximizeItem);
-        popup.add(turnOffItem);
+        //popup.add(turnOffItem);
+        //popup.add(turnOnItem);
         popup.add(exitItem);
+
+        //turnOnItem.setEnabled(false);
 
         trayIcon.setPopupMenu(popup);
 
@@ -128,11 +132,21 @@ public class WindowButtons extends HBox {
             }
         });
 
-        turnOffItem.addActionListener(new ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
-                Main.Shutdown();
-            }
-        });
+        //turnOffItem.addActionListener(new ActionListener() {
+        //    public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
+        //        Main.Shutdown();
+        //        turnOnItem.setEnabled(true);
+        //        turnOffItem.setEnabled(false);
+        //    }
+        //});
+
+        //turnOffItem.addActionListener(new ActionListener() {
+        //    public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
+        //        ();
+        //        turnOnItem.setEnabled(true);
+        //        turnOffItem.setEnabled(false);
+        //    }
+        //});
 
         exitItem.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
