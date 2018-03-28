@@ -11,30 +11,25 @@ import java.util.List;
 public class PresetsScan {
 
     public List<LIModule> QuickScan(String ip, List<LIModule> modules){
-
         PortScanner scan = new PortScanner();
-
         List<Integer> openports = scan.QuickScan(ip);
-
         return modulescheck(openports, modules);
-
-
     }
 
 
 
     public List<LIModule> Totalscan(String ip, List<LIModule> modules){
-
         PortScanner scan = new PortScanner();
-
         List<Integer> openports = scan.ALLPortScan(ip);
         return modulescheck(openports, modules);
-
-
-
+    }
+    public List<LIModule> QuickScanblank(String ip, List<LIModule> modules,HoneyRJ honeyrj){
+        PortScanner scan = new PortScanner();
+        List<Integer> openports = scan.QuickScan(ip);
+        return modulescheckBlank(openports, modules,honeyrj);
     }
 
-    public List<LIModule> ScanCreateblank(String ip, List<LIModule> modules,HoneyRJ honeyrj){
+    public List<LIModule> TotalScanblank(String ip, List<LIModule> modules,HoneyRJ honeyrj){
         PortScanner scan = new PortScanner();
         List<Integer> openports = scan.ALLPortScan(ip);
         return modulescheckBlank(openports, modules,honeyrj);
