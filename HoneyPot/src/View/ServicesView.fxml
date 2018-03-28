@@ -121,10 +121,7 @@
                 </AnchorPane>
             </children>
         </HBox>
-        <JFXToolbar fx:id="toolbar" prefHeight="25" prefWidth="${toolbar.parent.width}"
-                    style="-fx-background-color: transparent" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
-                    AnchorPane.topAnchor="0">
-        </JFXToolbar>
+
         <HBox fx:id="hb2" alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
               AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <children>
@@ -136,5 +133,9 @@
                 </VBox>
             </children>
         </HBox>
+        <JFXToolbar fx:id="toolbar" prefHeight="25" prefWidth="${toolbar.parent.width}"
+                    style="-fx-background-color: transparent" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+                    AnchorPane.topAnchor="0">
+        </JFXToolbar>
     </children>
 </AnchorPane>
