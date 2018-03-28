@@ -71,7 +71,7 @@ public class Main extends Application {
 		toolbar = new JFXToolbar();
         this.manager = new ControllerManager();
 		manager.currentView = "/View/OverView.fxml";
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/PresetView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"));
         loader.setResources(ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
         Parent root = loader.load();
         this.Stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/Resources/Ducky.png")));

@@ -20,24 +20,24 @@
             <Region prefHeight="50"/>
             <AnchorPane fx:id="anpane" prefWidth="${anpane.parent.width}">
                 <VBox AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="20"
-                      AnchorPane.rightAnchor="20" alignment="CENTER_LEFT">
+                      AnchorPane.rightAnchor="20" alignment="TOP_LEFT">
                     <JFXRadioButton fx:id="expressRBtn" mnemonicParsing="false"
-                                    selected="true" selectedColor="#c15683" unSelectedColor="white"
+                                    selected="true" selectedColor="WHITE" unSelectedColor="WHITE"
                                     text="Express" textFill="WHITE"
                                     style=" -fx-font-family: Roboto-Thin; -fx-font-size: 18; -fx-text-fill: WHITE">
                         <toggleGroup>
-                            <ToggleGroup fx:id="toggleGroup"/>
+                            <ToggleGroup fx:id="toggleGroup" />
                         </toggleGroup>
                     </JFXRadioButton>
                     <JFXRadioButton fx:id="customRBtn" mnemonicParsing="false"
-                                    text="Custom" selectedColor="#c15683" unSelectedColor="white"
+                                    text="Custom" selectedColor="WHITE" unSelectedColor="WHITE"
                                     textFill="WHITE" toggleGroup="$toggleGroup"
                                     style=" -fx-font-family: Roboto-Thin; -fx-font-size: 18; -fx-text-fill: WHITE;"/>
                 </VBox>
-                <VBox AnchorPane.topAnchor="120" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="40"
-                      AnchorPane.rightAnchor="20" alignment="CENTER_LEFT">
+                <VBox AnchorPane.topAnchor="70" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="50"
+                      AnchorPane.rightAnchor="20" alignment="TOP_LEFT">
                     <JFXRadioButton fx:id="HomeRBtn" mnemonicParsing="false"
-                                    selected="true" selectedColor="#c15683" unSelectedColor="white"
+                                    selected="true" selectedColor="WHITE" unSelectedColor="WHITE"
                                     text="Home" textFill="WHITE"
                                     style=" -fx-font-family: Roboto-Thin; -fx-font-size: 18; -fx-text-fill: WHITE">
                         <toggleGroup>
@@ -45,7 +45,19 @@
                         </toggleGroup>
                     </JFXRadioButton>
                     <JFXRadioButton fx:id="small1RBtn" mnemonicParsing="false"
-                                    text="Small Business 1" selectedColor="#c15683" unSelectedColor="white"
+                                    text="Small Business 1" selectedColor="WHITE" unSelectedColor="WHITE"
+                                    textFill="WHITE" toggleGroup="$toggleGroup2"
+                                    style=" -fx-font-family: Roboto-Thin; -fx-font-size: 18; -fx-text-fill: WHITE;"/>
+                    <JFXRadioButton fx:id="small2RBtn" mnemonicParsing="false"
+                                    text="Small Business 2" selectedColor="WHITE" unSelectedColor="WHITE"
+                                    textFill="WHITE" toggleGroup="$toggleGroup2"
+                                    style=" -fx-font-family: Roboto-Thin; -fx-font-size: 18; -fx-text-fill: WHITE;"/>
+                    <JFXRadioButton fx:id="big1RBtn" mnemonicParsing="false"
+                                    text="Big Business 1" selectedColor="WHITE" unSelectedColor="WHITE"
+                                    textFill="WHITE" toggleGroup="$toggleGroup2"
+                                    style=" -fx-font-family: Roboto-Thin; -fx-font-size: 18; -fx-text-fill: WHITE;"/>
+                    <JFXRadioButton fx:id="big2RBtn" mnemonicParsing="false"
+                                    text="Big Business 2" selectedColor="WHITE" unSelectedColor="WHITE"
                                     textFill="WHITE" toggleGroup="$toggleGroup2"
                                     style=" -fx-font-family: Roboto-Thin; -fx-font-size: 18; -fx-text-fill: WHITE;"/>
                 </VBox>
