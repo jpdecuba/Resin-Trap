@@ -25,6 +25,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -70,7 +71,6 @@ public class Main extends Application {
     	account = null;
 		loginModel = new LoginModel();
         launchHoneypot();
-        //StartHoneypotServices();
 		this.Stage = primaryStage;
 		toolbar = new JFXToolbar();
         this.manager = new ControllerManager();
@@ -119,21 +119,8 @@ public class Main extends Application {
     }
 
 
-    public static void StartHoneypotServices(Preset preset){
-        MysqlM = new LIModule(MysqlP,honeypot);
-        SmtpM = new LIModule(SmtpP,honeypot);
-        ftpM = new LIModule(ftpP,honeypot);
-
-        blankm = new LIModule(blank,honeypot);
-
-        DNSProtocol dns = new DNSProtocol();
-        LIModule dnsM = new LIModule(dns,honeypot);
-
-
-        Services.add(dnsM);
-        Services.add(MysqlM);
-        Services.add(SmtpM);
-        Services.add(ftpM);
+    public static void StartHoneypotServices(List<LIModule> list){
+        Services.addAll(list);
         for(LIModule item : Services){
             honeypot.RegisterService(item);
             honeypot.startPort(item.getPort());
