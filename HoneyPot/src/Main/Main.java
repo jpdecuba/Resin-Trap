@@ -12,6 +12,7 @@ import HoneyPot.protocol.MySQLProtocol;
 import HoneyPot.protocol.SmtpProtocol;
 import Model.*;
 import Model.Database.LoginModel;
+import Model.Preset.Preset;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXToolbar;
 import javafx.application.Application;
@@ -57,6 +58,8 @@ public class Main extends Application {
 
     private static LIProtocol blank = new BlankProtocol(9022);
     private static LIModule blankm;
+
+    private static Preset preset = null;
 
     //Status
 
@@ -119,7 +122,7 @@ public class Main extends Application {
     }
 
 
-    public static void StartHoneypotServices(){
+    public static void StartHoneypotServices(Preset preset){
         MysqlM = new LIModule(MysqlP,honeypot);
         SmtpM = new LIModule(SmtpP,honeypot);
         ftpM = new LIModule(ftpP,honeypot);
