@@ -71,7 +71,7 @@
                    text="%Home"/>
             <JFXButton fx:id="nextBtn" alignment="CENTER" buttonType="RAISED"
                        contentDisplay="CENTER" mnemonicParsing="false"
-                        minWidth="100"
+                        minWidth="100" onAction="#next"
                        style="-fx-background-color: WHITE; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 13pt; -fx-text-fill: achmea"
                        text="Next">
             </JFXButton>
