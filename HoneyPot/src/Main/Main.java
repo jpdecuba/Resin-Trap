@@ -6,10 +6,7 @@ import HoneyPot.honeyrj.HoneyRJ;
 import HoneyPot.honeyrj.HoneyRJException;
 import HoneyPot.lowinteraction.LIModule;
 import HoneyPot.lowinteraction.LIProtocol;
-import HoneyPot.protocol.BlankProtocol;
-import HoneyPot.protocol.FtpProtocol;
-import HoneyPot.protocol.MySQLProtocol;
-import HoneyPot.protocol.SmtpProtocol;
+import HoneyPot.protocol.*;
 import Model.*;
 import Model.Database.LoginModel;
 import com.jfoenix.controls.JFXSnackbar;
@@ -75,7 +72,7 @@ public class Main extends Application {
 		toolbar = new JFXToolbar();
         this.manager = new ControllerManager();
 		manager.currentView = "/View/OverView.fxml";
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/PresetView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"));
         loader.setResources(ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
         Parent root = loader.load();
         this.Stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/Resources/Ducky.png")));
@@ -126,8 +123,11 @@ public class Main extends Application {
 
         blankm = new LIModule(blank,honeypot);
 
+        DNSProtocol dns = new DNSProtocol();
+        LIModule dnsM = new LIModule(dns,honeypot);
 
-        Services.add(blankm);
+
+        Services.add(dnsM);
         Services.add(MysqlM);
         Services.add(SmtpM);
         Services.add(ftpM);
