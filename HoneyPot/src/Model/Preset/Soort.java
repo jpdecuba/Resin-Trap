@@ -1,7 +1,7 @@
 package Model.Preset;
 
 public enum Soort {
-    Custom,
+    Express,
     Home,
     Company_Small,
     Company_Big
