@@ -24,19 +24,11 @@ import java.util.Timer;
 
 import Model.*;
 
-public class OverviewController implements Initializable {
+public class OverviewController extends BaseController implements Initializable {
     @FXML
     AnchorPane anchor;
     @FXML
     JFXToolbar toolbar;
-    @FXML
-    JFXButton overviewBtn;
-    @FXML
-    JFXButton servicesBtn;
-    @FXML
-    JFXButton loginBtn;
-    @FXML
-    JFXButton adminBtn;
     @FXML
     AnchorPane menuPane;
     @FXML
@@ -47,7 +39,6 @@ public class OverviewController implements Initializable {
     Label timeframeLbl;
     @FXML
     Label connectionsLbl;
-    static JFXSnackbar snackbar;
     int currentConnections = 0;
 
 	@Override
@@ -62,42 +53,6 @@ public class OverviewController implements Initializable {
 			loginBtn.setText(ResourceBundle.getBundle("bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("logout"));
 		}
 	}
-
-    @FXML
-    public void changePage(ActionEvent event) {
-        try {
-            JFXButton source = (JFXButton) event.getSource();
-			String path = "";
-			String title = "";
-
-            if (source == overviewBtn){
-				path = "/View/OverView.fxml";
-				title = "Achmea";
-            } else if (source == loginBtn){
-				if(!Main.CheckForLogout(loginBtn.getText(), snackbar))
-				{
-					return;
-				}
-            	path = "/View/LoginView.fxml";
-            	title = "Login";
-            }
-            else if (source == servicesBtn){
-            	path = "/View/ServicesView.fxml";
-            	title = "Achmea";
-            }
-            else if (source == adminBtn){
-                path = "/View/AdminView.fxml";
-                title = "Achmea";
-            }
-			Main.manager.currentView = path;
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
-			Parent root = loader.load();
-			Main.switchPage(root, title);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Get Total Connection of all services

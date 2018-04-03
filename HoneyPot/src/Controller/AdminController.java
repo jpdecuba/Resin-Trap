@@ -18,7 +18,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 
-public class AdminController implements Initializable  {
+public class AdminController extends BaseController implements Initializable  {
 
     private ResourceBundle resource;
 
@@ -27,16 +27,7 @@ public class AdminController implements Initializable  {
     @FXML
     JFXToolbar toolbar;
     @FXML
-    JFXButton overviewBtn;
-    @FXML
-    JFXButton servicesBtn;
-    @FXML
-    JFXButton loginBtn;
-    @FXML
-    JFXButton adminBtn;
-    @FXML
     AnchorPane mainPane;
-    static JFXSnackbar snackbar;
     final static String smpt = "SMTP";
     final static String ftp = "FTP";
     final static String irc = "IRC";
@@ -105,39 +96,5 @@ public class AdminController implements Initializable  {
         return lc;
     }
 
-    @FXML
-    public void changePage(ActionEvent event) {
-        try {
-            JFXButton source = (JFXButton) event.getSource();
-            String path = "";
-            String title = "";
 
-            if (source == overviewBtn){
-                path = "/View/OverView.fxml";
-                title = "Achmea";
-            } else if (source == loginBtn){
-                if(!Main.CheckForLogout(loginBtn.getText(), snackbar))
-                {
-                    return;
-                }
-                path = "/View/LoginView.fxml";
-                title = "Login";
-            }
-            else if (source == servicesBtn){
-                path = "/View/ServicesView.fxml";
-                title = "Achmea";
-            }
-            else if (source == adminBtn){
-                path = "/View/AdminView.fxml";
-                title = "Achmea";
-            }
-            Main.manager.currentView = path;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
-            Parent root = loader.load();
-            Main.switchPage(root, title);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
