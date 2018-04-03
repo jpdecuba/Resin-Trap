@@ -36,7 +36,7 @@ public class OverviewController implements Initializable {
     @FXML
     JFXButton loginBtn;
     @FXML
-    JFXButton dashBtn;
+    JFXButton adminBtn;
     @FXML
     AnchorPane menuPane;
     @FXML
@@ -85,7 +85,7 @@ public class OverviewController implements Initializable {
             	path = "/View/ServicesView.fxml";
             	title = "Achmea";
             }
-            else if (source == dashBtn){
+            else if (source == adminBtn){
                 path = "/View/AdminView.fxml";
                 title = "Achmea";
             }

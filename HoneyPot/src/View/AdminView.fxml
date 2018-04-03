@@ -41,13 +41,13 @@
                                                              strokeType="OUTSIDE" strokeWidth="0.0"/>
                                     </graphic>
                                 </JFXButton>
-                                <JFXButton fx:id="dashBtn" alignment="BASELINE_LEFT" graphicTextGap="17.0"
+                                <JFXButton fx:id="adminBtn" alignment="BASELINE_LEFT" graphicTextGap="17.0"
                                            layoutX="0" layoutY="0" mnemonicParsing="false" onAction="#changePage"
                                            prefHeight="50.0" prefWidth="210.0"
                                            style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
-                                           text="Dashboard" textFill="WHITE">
+                                           text="%admin" textFill="WHITE">
                                     <graphic>
-                                        <FontAwesomeIconView fill="WHITE" glyphName="HOME" size="22"
+                                        <FontAwesomeIconView fill="WHITE" glyphName="BAR_CHART" size="22"
                                                              strokeType="OUTSIDE" strokeWidth="0.0"/>
                                     </graphic>
                                 </JFXButton>
