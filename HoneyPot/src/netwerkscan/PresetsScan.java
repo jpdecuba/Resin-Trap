@@ -19,8 +19,6 @@ public class PresetsScan {
 
     private int count = 0;
 
-    private boolean bool = true;
-    private  int boolcount = 0;
 
     private ExecutorService exec = null;
 
@@ -93,8 +91,7 @@ public class PresetsScan {
         exec = Executors.newCachedThreadPool();
         List<Future<Integer>> futures = new ArrayList<Future<Integer>>();
         count = 0;
-        boolcount = 0;
-        bool = true;
+
         try {
             InetAddress localHost = Inet4Address.getLocalHost();
             String ip = localHost.getHostAddress();
@@ -123,6 +120,7 @@ public class PresetsScan {
                     //e.printStackTrace();
                 }
             }
+            exec.shutdown();
 
             synchronized (this) {
                 return count;
