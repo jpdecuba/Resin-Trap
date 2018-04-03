@@ -1,17 +1,28 @@
 package Controller;
 
+import Main.Main;
+import com.jfoenix.controls.JFXButton;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class AdminController implements Initializable  {
 
-    final static String smpt = "SMPT";
+    @FXML
+    AnchorPane mainPane;
+    final static String smpt = "SMTP";
     final static String ftp = "FTP";
     final static String irc = "IRC";
     final static String mysql = "MySQL";
@@ -21,6 +32,7 @@ public class AdminController implements Initializable  {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         BarChart bc = CreateBarChart();
+        mainPane.getChildren().add(bc);
     }
 
     public BarChart<String,Number> CreateBarChart() {
@@ -42,6 +54,11 @@ public class AdminController implements Initializable  {
 
         bc.getData().addAll(series1);
         return bc;
+
+    }
+
+    @FXML
+    public void changePage(ActionEvent event) {
 
     }
 }
