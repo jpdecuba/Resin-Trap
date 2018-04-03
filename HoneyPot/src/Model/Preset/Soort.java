@@ -1,6 +1,8 @@
 package Model.Preset;
 
-public enum Soort {
+import java.io.Serializable;
+
+public enum Soort implements Serializable {
     Express,
     Home,
     Company_Small,

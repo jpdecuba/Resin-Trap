@@ -1,5 +1,6 @@
 package Model;
 
+import FileSave.SaveFiles;
 import Main.Main;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
@@ -156,6 +157,8 @@ public class WindowButtons extends HBox {
             public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
                 tray.remove(trayIcon);
                 Main.Shutdown();
+                SaveFiles file = new SaveFiles();
+                file.WritePreferences(Main.pref);
                 System.exit(0);
             }
         });

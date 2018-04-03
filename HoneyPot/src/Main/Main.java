@@ -1,7 +1,7 @@
 package Main;
 
-import Controller.OverviewController;
-import Controller.PresetController;
+import FileSave.Preferences;
+import FileSave.SaveFiles;
 import HoneyPot.honeyrj.HoneyRJ;
 import HoneyPot.honeyrj.HoneyRJException;
 import HoneyPot.lowinteraction.LIModule;
@@ -18,7 +18,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -36,8 +35,9 @@ public class Main extends Application {
     public static String lang = "en";
     public static JFXToolbar toolbar;
     public static ControllerManager manager;
-    public static User account;
     public static LoginModel loginModel;
+
+    public static Preferences pref;
 
     //Honeypot
 
@@ -57,8 +57,6 @@ public class Main extends Application {
     private static LIProtocol blank = new BlankProtocol(9022);
     private static LIModule blankm;
 
-    private static Preset preset = null;
-
     //Status
 
     private static Status status;
@@ -66,9 +64,25 @@ public class Main extends Application {
     public static int ConnectionAlert = 5;
 
 
+    public static void setAccount(User account) {
+        pref.setAccount(account);
+    }
+
+    public static User GetAccount() {
+        return pref.getAccount();
+    }
+
+    public static Preset getPreset() {
+        return pref.getPreset();
+    }
+
+    public static void setPreset(Preset preset) {
+       pref.setPreset(preset);
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-    	account = null;
+    	//account = null;
 		loginModel = new LoginModel();
         launchHoneypot();
 		this.Stage = primaryStage;
@@ -90,14 +104,18 @@ public class Main extends Application {
         ResizeHelper rh = new ResizeHelper();
         rh.addResizeListener(Stage);
 		SetupRoot(root);
+        SaveFiles file = new SaveFiles();
+        pref = file.ReadPreferences();
 		Main.Stage.setOnHiding(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
-				if(Main.account != null)
+				if(Main.GetAccount() != null)
 				{
-					Main.loginModel.Logout(Main.account.getName());
+					Main.loginModel.Logout(Main.GetAccount().getName());
 				}
 			}
 		});
+
+
         Stage.show();
     }
 
@@ -157,9 +175,9 @@ public class Main extends Application {
     {
         if(buttonText.equals("LOGOUT"))
         {
-            if(Main.loginModel.Logout(Main.account.getName()))
+            if(Main.loginModel.Logout(Main.GetAccount().getName()))
             {
-                Main.account = null;
+                Main.setAccount(null);
                 return true;
             }
             else

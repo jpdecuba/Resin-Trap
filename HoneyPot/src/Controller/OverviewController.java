@@ -57,7 +57,7 @@ public class OverviewController implements Initializable {
 		timer.schedule(new OverViewTimer(this), 0,5000);
 		Main.manager.setToolbar(this.toolbar);
 		snackbar = new JFXSnackbar(anchor);
-		if(Main.account != null)
+		if(Main.GetAccount() != null)
 		{
 			loginBtn.setText(ResourceBundle.getBundle("bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("logout"));
 		}

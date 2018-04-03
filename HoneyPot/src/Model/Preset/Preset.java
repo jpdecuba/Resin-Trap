@@ -8,9 +8,10 @@ import HoneyPot.protocol.SmtpProtocol;
 import Main.Main;
 
 import javax.naming.LimitExceededException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Preset {
+public class Preset  implements Serializable{
     private String naam = "default preset";
     private Soort soort = Soort.Express;
     private Type type = Type.None;
