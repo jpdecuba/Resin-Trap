@@ -9,10 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -20,7 +17,11 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+
 public class AdminController implements Initializable  {
+
+    private ResourceBundle resource;
+
     @FXML
     AnchorPane anchor;
     @FXML
@@ -45,10 +46,15 @@ public class AdminController implements Initializable  {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.resource = resources;
+
         BarChart bc = CreateBarChart();
         mainPane.getChildren().add(bc);
         Main.manager.setToolbar(this.toolbar);
         snackbar = new JFXSnackbar(anchor);
+        LineChart lc = CreateLineChart();
+        mainPane.getChildren().add(lc);
+
     }
 
     public BarChart<String,Number> CreateBarChart() {
@@ -71,7 +77,32 @@ public class AdminController implements Initializable  {
 
         bc.getData().addAll(series1);
         return bc;
+    }
 
+    public LineChart<String,Number> CreateLineChart() {
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        final LineChart<String,Number> lc =
+                new LineChart<>(xAxis,yAxis);
+        lc.setTitle("Threats per day");
+        xAxis.setLabel("Day");
+        yAxis.setLabel("Threats");
+
+        XYChart.Series series1 = new XYChart.Series();
+        series1.setName("March");
+        series1.getData().add(new XYChart.Data("Day 1", 25601.34));
+        series1.getData().add(new XYChart.Data("Day 2", 20148.82));
+        series1.getData().add(new XYChart.Data("Day 3", 10000));
+        series1.getData().add(new XYChart.Data("Day 4", 35407.15));
+        series1.getData().add(new XYChart.Data("Day 5", 12000));
+        series1.getData().add(new XYChart.Data("Day 6", 25601.34));
+        series1.getData().add(new XYChart.Data("Day 7", 20148.82));
+        series1.getData().add(new XYChart.Data("Day 8", 10000));
+        series1.getData().add(new XYChart.Data("Day 9", 35407.15));
+        series1.getData().add(new XYChart.Data("Day 10", 12000));
+
+        lc.getData().addAll(series1);
+        return lc;
     }
 
     @FXML
