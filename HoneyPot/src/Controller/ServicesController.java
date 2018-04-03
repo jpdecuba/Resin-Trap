@@ -33,17 +33,11 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class ServicesController implements Initializable {
+public class ServicesController extends BaseController implements Initializable {
     @FXML
     AnchorPane anchor;
     @FXML
     JFXToolbar toolbar;
-    @FXML
-    JFXButton overviewBtn;
-    @FXML
-    JFXButton servicesBtn;
-    @FXML
-    JFXButton loginBtn;
     @FXML
     AnchorPane menuPane;
     @FXML
@@ -67,7 +61,6 @@ public class ServicesController implements Initializable {
     @FXML
     JFXToggleButton protoToggle;
     Stage stage;
-    static JFXSnackbar snackbar;
     LIModule currentMod = null;
 
     JFXDialogLayout content = new JFXDialogLayout();
@@ -256,36 +249,6 @@ public class ServicesController implements Initializable {
     public void toggleMod() {
         if (currentMod != null)
             IO(currentMod);
-    }
-
-    @FXML
-    public void changePage(ActionEvent event) {
-        try {
-            JFXButton source = (JFXButton) event.getSource();
-            String path = "";
-            String title = "";
-            if (source == overviewBtn) {
-                path = "/View/OverView.fxml";
-                title = "Achmea";
-            } else if (source == loginBtn) {
-                if (!Main.CheckForLogout(loginBtn.getText(), snackbar)) {
-                    return;
-                }
-                path = "/View/LoginView.fxml";
-                title = "Achmea";
-            } else if (source == servicesBtn) {
-                path = "/View/ServicesView.fxml";
-                title = "Achmea";
-            }
-            Main.manager.currentView = path;
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
-            Parent root = loader.load();
-            Main.switchPage(root, title);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void setStageAndSetupListeners(Stage stage) {
