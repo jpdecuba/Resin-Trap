@@ -19,7 +19,6 @@ public class DNSProtocol implements LIProtocol {
 
     @Override
     public Vector<String> processInput(String messageFromClient) {
-
         return null;
     }
 

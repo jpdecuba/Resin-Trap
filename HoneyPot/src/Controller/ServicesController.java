@@ -86,6 +86,8 @@ public class ServicesController implements Initializable {
 
     ScrollPane scrollPane;
 
+    protected LIModule selectedMod;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         hb2.setVisible(false);
@@ -179,23 +181,7 @@ public class ServicesController implements Initializable {
                 if (!(event.getTarget() instanceof TableColumnHeader)) {
                     if (table.getSelectionModel().getSelectedItem() != null) {
                         TableObject selectedObject = (TableObject) table.getSelectionModel().getSelectedItem();
-                        LogConnection log = selectedObject.getMessage();
-                        if (log.getLogRecords().size() > 0) {
-
-
-                            Platform.runLater(new Runnable() {
-                                @Override
-                                public void run() {
-
-                                    scrollPane.setContent(new Text(log.message()));
-                                    content.setBody(scrollPane);
-                                    dialog.show();
-                                    hb2.setVisible(true);
-                                    System.out.println("Opening");
-                                    System.out.println("Open: " + hb2.isVisible());
-                                }
-                            });
-                        }
+                        LogUpdate(selectedObject);
                     }
                 }
             } catch (Exception e) {
@@ -205,6 +191,27 @@ public class ServicesController implements Initializable {
     }
 
 
+    public void LogUpdate(TableObject selectedObject){
+
+        LogConnection log = selectedObject.getMessage();
+        if (log.getLogRecords().size() > 0) {
+
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    scrollPane.setContent(new Text(log.message()));
+                    content.setBody(scrollPane);
+                    dialog.show();
+                    hb2.setVisible(true);
+                    System.out.println("Opening");
+                    System.out.println("Open: " + hb2.isVisible());
+                }
+            });
+        }
+    }
+
+
+
 
     @FXML
     public void clickProtocol(MouseEvent event) {
@@ -212,33 +219,40 @@ public class ServicesController implements Initializable {
             JFXListView source = (JFXListView) event.getSource();
             if (source.getSelectionModel().getSelectedItem().getClass().equals(LIModule.class)) {
                 LIModule mod = (LIModule) source.getSelectionModel().getSelectedItem();
-                Platform.runLater(() -> {
-                    table.getItems().clear();
-                    for (LogConnection log :
-                            GetLogs(mod)) {
-                        SimpleDateFormat ft =
-                                new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
-
-                        TableObject tableO = new TableObject(
-                                log.getDstIP().getHostAddress().toString(),
-                                log,
-                                String.valueOf(log.getDstPort()),
-                                ft.format(log.getDate()));
-                        table.getItems().add(tableO);
-                    }
-                    if (mod.isStarted()) {
-                        protoToggle.setSelected(true);
-                    } else {
-                        protoToggle.setSelected(false);
-                    }
-                    protocolLbl.setText(mod.toString());
-                    currentMod = mod;
-                });
+                selectedMod = mod;
+                GridUpdate(mod);
             }
 
         } catch (Exception e) {
 
         }
+    }
+
+    protected void GridUpdate(LIModule mod){
+
+        Platform.runLater(() -> {
+            table.getItems().clear();
+            for (LogConnection log :
+                    GetLogs(mod)) {
+                SimpleDateFormat ft =
+                        new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
+
+                TableObject tableO = new TableObject(
+                        log.getDstIP().getHostAddress().toString(),
+                        log,
+                        String.valueOf(log.getDstPort()),
+                        ft.format(log.getDate()));
+                table.getItems().add(tableO);
+            }
+            if (mod.isStarted()) {
+                protoToggle.setSelected(true);
+            } else {
+                protoToggle.setSelected(false);
+            }
+            protocolLbl.setText(mod.toString());
+            currentMod = mod;
+        });
+
     }
 
     @FXML

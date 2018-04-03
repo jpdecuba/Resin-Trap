@@ -27,6 +27,10 @@ public class ServicesTimer extends TimerTask {
     public void run() {
         Platform.runLater(()->{
             item.fillListView();
+            if(item.selectedMod != null) {
+                item.GridUpdate(item.selectedMod);
+            }
+
         });
 
 
