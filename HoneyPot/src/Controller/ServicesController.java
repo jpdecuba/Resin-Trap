@@ -84,9 +84,12 @@ public class ServicesController implements Initializable {
     TableColumn portColumn;
     TableColumn messagesColumn;
 
+    ScrollPane scrollPane;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         hb2.setVisible(false);
+        scrollPane = new ScrollPane();
         this.resource = resources;
         Timer timer = new Timer();
         timer.schedule(new ServicesTimer(this), 0, 2000);
@@ -99,6 +102,7 @@ public class ServicesController implements Initializable {
         createTable();
 
         dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
+        dialog.setOverlayClose(false);
         content.setPrefWidth(600);
         content.prefHeightProperty().bind(hb2.heightProperty().multiply(0.9));
         button = new JFXButton("Close");
@@ -107,8 +111,14 @@ public class ServicesController implements Initializable {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                hb2.setVisible(false);
-                dialog.close();
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        Main.Stage.show();
+                        dialog.close();
+                        hb2.setVisible(false);
+                    }
+                });
 
             }
         });
@@ -163,20 +173,28 @@ public class ServicesController implements Initializable {
         }
     }
 
-    @FXML
     public void clickLog(MouseEvent event) {
-        if(event.getClickCount() == 1 && !hb2.isVisible() && dialog.isOverlayClose()){
+        if(event.getClickCount() == 2 && !hb2.isVisible()){
             try {
                 if (!(event.getTarget() instanceof TableColumnHeader)) {
                     if (table.getSelectionModel().getSelectedItem() != null) {
                         TableObject selectedObject = (TableObject) table.getSelectionModel().getSelectedItem();
                         LogConnection log = selectedObject.getMessage();
                         if (log.getLogRecords().size() > 0) {
-                            ScrollPane scrollPane = new ScrollPane();
-                            scrollPane.setContent(new Text(log.message()));
-                            content.setBody(scrollPane);
-                            dialog.show();
-                            hb2.setVisible(true);
+
+
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    scrollPane.setContent(new Text(log.message()));
+                                    content.setBody(scrollPane);
+                                    dialog.show();
+                                    hb2.setVisible(true);
+                                    System.out.println("Opening");
+                                    System.out.println("Open: " + hb2.isVisible());
+                                }
+                            });
                         }
                     }
                 }
