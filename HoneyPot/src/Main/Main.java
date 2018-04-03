@@ -121,10 +121,6 @@ public class Main extends Application {
 
     public static void StartHoneypotServices(List<LIModule> list){
         Services.addAll(list);
-        for(LIModule item : Services){
-            honeypot.RegisterService(item);
-            honeypot.startPort(item.getPort());
-        }
     }
 
 
