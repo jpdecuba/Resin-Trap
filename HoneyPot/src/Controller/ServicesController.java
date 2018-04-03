@@ -19,7 +19,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -30,7 +29,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -181,7 +179,7 @@ public class ServicesController implements Initializable {
                 if (!(event.getTarget() instanceof TableColumnHeader)) {
                     if (table.getSelectionModel().getSelectedItem() != null) {
                         TableObject selectedObject = (TableObject) table.getSelectionModel().getSelectedItem();
-                        LogUpdate(selectedObject);
+                        LogMessage(selectedObject);
                     }
                 }
             } catch (Exception e) {
@@ -191,7 +189,7 @@ public class ServicesController implements Initializable {
     }
 
 
-    public void LogUpdate(TableObject selectedObject){
+    private void LogMessage(TableObject selectedObject){
 
         LogConnection log = selectedObject.getMessage();
         if (log.getLogRecords().size() > 0) {
@@ -220,7 +218,7 @@ public class ServicesController implements Initializable {
             if (source.getSelectionModel().getSelectedItem().getClass().equals(LIModule.class)) {
                 LIModule mod = (LIModule) source.getSelectionModel().getSelectedItem();
                 selectedMod = mod;
-                GridUpdate(mod);
+                LogGridUpdate(mod);
             }
 
         } catch (Exception e) {
@@ -228,8 +226,7 @@ public class ServicesController implements Initializable {
         }
     }
 
-    protected void GridUpdate(LIModule mod){
-
+    protected void LogGridUpdate(LIModule mod){
         Platform.runLater(() -> {
             table.getItems().clear();
             for (LogConnection log :
