@@ -8,6 +8,9 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.LineChart?>
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminController">
     <children>
@@ -41,7 +44,7 @@
                                                              strokeType="OUTSIDE" strokeWidth="0.0"/>
                                     </graphic>
                                 </JFXButton>
-                                <JFXButton fx:id="adminBtn" alignment="BASELINE_LEFT" graphicTextGap="17.0"
+                                <JFXButton fx:id="adminBtn" alignment="BASELINE_LEFT" graphicTextGap="12.0"
                                            layoutX="0" layoutY="0" mnemonicParsing="false" onAction="#changePage"
                                            prefHeight="50.0" prefWidth="210.0"
                                            style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
@@ -68,6 +71,8 @@
                 </AnchorPane>
                 <AnchorPane fx:id="mainPane" prefHeight="${mainPane.parent.height}" style="-fx-background-color: WHITE;"
                             HBox.hgrow="ALWAYS">
+                    <VBox fx:id="vb" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.topAnchor="25">
+                    </VBox>
                 </AnchorPane>
             </children>
         </HBox>

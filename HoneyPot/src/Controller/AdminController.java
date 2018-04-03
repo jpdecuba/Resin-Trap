@@ -11,6 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.chart.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,7 +37,8 @@ public class AdminController implements Initializable  {
     @FXML
     JFXButton adminBtn;
     @FXML
-    AnchorPane mainPane;
+    VBox vb;
+
     static JFXSnackbar snackbar;
     final static String smpt = "SMTP";
     final static String ftp = "FTP";
@@ -49,11 +52,10 @@ public class AdminController implements Initializable  {
         this.resource = resources;
 
         BarChart bc = CreateBarChart();
-        mainPane.getChildren().add(bc);
         Main.manager.setToolbar(this.toolbar);
         snackbar = new JFXSnackbar(anchor);
         LineChart lc = CreateLineChart();
-        mainPane.getChildren().add(lc);
+        vb.getChildren().addAll(lc, bc);
 
     }
 
@@ -65,8 +67,8 @@ public class AdminController implements Initializable  {
         bc.setTitle("Threats by protocol");
         xAxis.setLabel("Protocol");
         yAxis.setLabel("Threats");
-        bc.prefHeightProperty().bind(mainPane.heightProperty());
-        bc.prefWidthProperty().bind(mainPane.widthProperty());
+        bc.prefHeightProperty().bind(vb.heightProperty().divide(2));
+        bc.prefWidthProperty().bind(vb.widthProperty());
         XYChart.Series series1 = new XYChart.Series();
         series1.setName("March");
         series1.getData().add(new XYChart.Data(smpt, 25601.34));
@@ -87,7 +89,8 @@ public class AdminController implements Initializable  {
         lc.setTitle("Threats per day");
         xAxis.setLabel("Day");
         yAxis.setLabel("Threats");
-
+        lc.prefHeightProperty().bind(vb.heightProperty().divide(2));
+        lc.prefWidthProperty().bind(vb.widthProperty());
         XYChart.Series series1 = new XYChart.Series();
         series1.setName("March");
         series1.getData().add(new XYChart.Data("Day 1", 25601.34));
