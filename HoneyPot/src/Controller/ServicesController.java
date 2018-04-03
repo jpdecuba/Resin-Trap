@@ -19,7 +19,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -30,7 +29,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -85,6 +83,8 @@ public class ServicesController implements Initializable {
     TableColumn messagesColumn;
 
     ScrollPane scrollPane;
+
+    protected LIModule selectedMod;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -179,23 +179,7 @@ public class ServicesController implements Initializable {
                 if (!(event.getTarget() instanceof TableColumnHeader)) {
                     if (table.getSelectionModel().getSelectedItem() != null) {
                         TableObject selectedObject = (TableObject) table.getSelectionModel().getSelectedItem();
-                        LogConnection log = selectedObject.getMessage();
-                        if (log.getLogRecords().size() > 0) {
-
-
-                            Platform.runLater(new Runnable() {
-                                @Override
-                                public void run() {
-
-                                    scrollPane.setContent(new Text(log.message()));
-                                    content.setBody(scrollPane);
-                                    dialog.show();
-                                    hb2.setVisible(true);
-                                    System.out.println("Opening");
-                                    System.out.println("Open: " + hb2.isVisible());
-                                }
-                            });
-                        }
+                        LogMessage(selectedObject);
                     }
                 }
             } catch (Exception e) {
@@ -205,6 +189,27 @@ public class ServicesController implements Initializable {
     }
 
 
+    private void LogMessage(TableObject selectedObject){
+
+        LogConnection log = selectedObject.getMessage();
+        if (log.getLogRecords().size() > 0) {
+
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    scrollPane.setContent(new Text(log.message()));
+                    content.setBody(scrollPane);
+                    dialog.show();
+                    hb2.setVisible(true);
+                    System.out.println("Opening");
+                    System.out.println("Open: " + hb2.isVisible());
+                }
+            });
+        }
+    }
+
+
+
 
     @FXML
     public void clickProtocol(MouseEvent event) {
@@ -212,33 +217,39 @@ public class ServicesController implements Initializable {
             JFXListView source = (JFXListView) event.getSource();
             if (source.getSelectionModel().getSelectedItem().getClass().equals(LIModule.class)) {
                 LIModule mod = (LIModule) source.getSelectionModel().getSelectedItem();
-                Platform.runLater(() -> {
-                    table.getItems().clear();
-                    for (LogConnection log :
-                            GetLogs(mod)) {
-                        SimpleDateFormat ft =
-                                new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
-
-                        TableObject tableO = new TableObject(
-                                log.getDstIP().getHostAddress().toString(),
-                                log,
-                                String.valueOf(log.getDstPort()),
-                                ft.format(log.getDate()));
-                        table.getItems().add(tableO);
-                    }
-                    if (mod.isStarted()) {
-                        protoToggle.setSelected(true);
-                    } else {
-                        protoToggle.setSelected(false);
-                    }
-                    protocolLbl.setText(mod.toString());
-                    currentMod = mod;
-                });
+                selectedMod = mod;
+                LogGridUpdate(mod);
             }
 
         } catch (Exception e) {
 
         }
+    }
+
+    protected void LogGridUpdate(LIModule mod){
+        Platform.runLater(() -> {
+            table.getItems().clear();
+            for (LogConnection log :
+                    GetLogs(mod)) {
+                SimpleDateFormat ft =
+                        new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
+
+                TableObject tableO = new TableObject(
+                        log.getDstIP().getHostAddress().toString(),
+                        log,
+                        String.valueOf(log.getDstPort()),
+                        ft.format(log.getDate()));
+                table.getItems().add(tableO);
+            }
+            if (mod.isStarted()) {
+                protoToggle.setSelected(true);
+            } else {
+                protoToggle.setSelected(false);
+            }
+            protocolLbl.setText(mod.toString());
+            currentMod = mod;
+        });
+
     }
 
     @FXML
