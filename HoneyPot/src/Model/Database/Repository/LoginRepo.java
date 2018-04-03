@@ -16,6 +16,11 @@ public class LoginRepo implements ILoginRepo{
 		return this.context.Validate(user);
 	}
 
+	public boolean RegisterAdmin(User user)
+	{
+		return this.context.RegisterAdmin(user);
+	}
+
 	public boolean Logout(String name) {
 		return this.context.Logout(name);
 	}

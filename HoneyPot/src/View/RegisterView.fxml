@@ -12,6 +12,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import javafx.scene.layout.Region?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
     <children>
@@ -64,7 +65,7 @@
                             <children>
                                 <VBox alignment="CENTER" spacing="15" AnchorPane.bottomAnchor="100"
                                       AnchorPane.leftAnchor="200" AnchorPane.rightAnchor="200"
-                                      AnchorPane.topAnchor="85">
+                                      AnchorPane.topAnchor="30">
                                     <children>
                                         <Label fx:id="registerErrorLbl" style="-fx-font-family: 'Roboto Regular';"
                                                text="Test" textFill="RED" visible="false">
@@ -72,6 +73,13 @@
                                                 <Font size="14.0"/>
                                             </font>
                                         </Label>
+                                        <Region VBox.vgrow="ALWAYS"/>
+                                            <JFXComboBox fx:id="registerUserRoleField" onAction="#ChangeRole"
+                                                         focusColor="#cc0000" labelFloat="true" promptText="%role"
+                                                         VBox.vgrow="ALWAYS" style="-fx-alignment: baseline-left; -fx-font-size: 15.0" prefWidth="${registerUserRoleField.parent.width}">
+
+                                            </JFXComboBox>
+                                        <Region VBox.vgrow="ALWAYS"/>
                                         <JFXTextField fx:id="registerUsernameField" alignment="BASELINE_LEFT"
                                                       focusColor="cc0000" labelFloat="true" promptText="Username">
                                             <font>
@@ -102,6 +110,14 @@
                                                 <Font size="16.0"/>
                                             </font>
                                         </JFXPasswordField>
+                                        <Region VBox.vgrow="ALWAYS"/>
+                                        <JFXTextField fx:id="codeField" alignment="BASELINE_LEFT"
+                                                      focusColor="cc0000" labelFloat="true"
+                                                      promptText="Code" VBox.vgrow="ALWAYS">
+                                            <font>
+                                                <Font size="16.0"/>
+                                            </font>
+                                        </JFXTextField>
                                         <Region VBox.vgrow="ALWAYS"/>
                                         <HBox>
                                             <children>

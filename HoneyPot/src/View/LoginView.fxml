@@ -12,6 +12,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import javafx.scene.layout.Region?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LoginController">
     <children>
@@ -75,6 +76,8 @@
                                                 <Font size="14.0"/>
                                             </font>
                                         </Label>
+
+
                                         <HBox alignment="BASELINE_LEFT" spacing="5">
                                             <children>
                                                 <FontAwesomeIconView fill="#cc0000" glyphName="USER" size="25"
