@@ -6,6 +6,7 @@ import HoneyPot.logging.LogConnection;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.SocketException;
 import java.util.*;
@@ -154,14 +155,15 @@ public class LIModule implements Runnable {
 
                 }
                 try {
-                    Thread.sleep(HoneyRJ.TIME_WAIT_CONNECTION);
+
+                    Thread.sleep(_parent.TIME_WAIT_CONNECTION);
                 } catch (InterruptedException ignored) {
                     //prevent a DOS attack and high cpu during pause state
                 }
             }
 
             try {
-                Thread.sleep(HoneyRJ.TIME_WAIT_CONNECTION);
+                Thread.sleep(_parent.TIME_WAIT_CONNECTION);
             } catch (InterruptedException ignored) {
                 //prevent a DOS attack and high cpu during pause state
             }

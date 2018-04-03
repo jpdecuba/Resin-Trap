@@ -6,6 +6,7 @@ import HoneyPot.honeyrj.HoneyRJ;
 import HoneyPot.logging.LogConnection;
 import HoneyPot.logging.LogFile;
 import HoneyPot.logging.LogRecord;
+import HoneyPot.protocol.BlankProtocol;
 import HoneyPot.protocol.DNSProtocol;
 import javafx.application.Platform;
 
@@ -93,7 +94,12 @@ public class LIModuleThread implements Runnable {
 		}
 		_parent = parent;
 		try {
-			_protocol = _parent._protocol;
+			if(_parent.getProtocol().getClass().equals(BlankProtocol.class))
+			{
+				_protocol = new BlankProtocol(_parent.getPort());
+			}else {
+				_protocol = _parent.getProtocol().getClass().newInstance();
+			}
 		} catch (Exception ignored) {
 
 		}
@@ -127,14 +133,13 @@ public class LIModuleThread implements Runnable {
 		
 		PrintWriter out = null;
 		BufferedReader in = null;
-		DataOutputStream  outbyte = null;
 		
 
 		try {
 			
 			//create the string reader/writers on the socket
 		    out = new PrintWriter(_socket.getOutputStream(), true);
-			outbyte = new DataOutputStream(_socket.getOutputStream());
+
 		    in = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
 
 		    
@@ -144,7 +149,7 @@ public class LIModuleThread implements Runnable {
 		    //allow for varying protocols which have the server talk first or second
 		    switch (_protocol.whoTalksFirst()) {
 		    case SVR_FIRST:
-		    	if(!_protocol.getClass().equals(DNSProtocol.class)) {
+		    	/*if(!_protocol.getClass().equals(DNSProtocol.class)) {*/
 					outputLines = _protocol.processInput(null); //get the first line from the server protocol
 
 					for (String outputLine : outputLines) {
@@ -153,12 +158,9 @@ public class LIModuleThread implements Runnable {
 
 					}
 					break;
-				}else {
-		    		DNSProtocol proto = (DNSProtocol) _protocol;
-		    		outbyte.write(proto.processInputbyte(null));
-				}
+
 		    case CLIENT_FIRST:
-				if(!_protocol.getClass().equals(DNSProtocol.class)) {
+				//if(!_protocol.getClass().equals(DNSProtocol.class)) {
 					inputLine = in.readLine(); //get the first line from the client
 					AddRcvdLogRecord(inputLine);
 
@@ -169,19 +171,7 @@ public class LIModuleThread implements Runnable {
 
 					}
 					break;
-				}else {
-					DNSProtocol proto = (DNSProtocol) _protocol;
-					DataInputStream inbin = new DataInputStream(
-							new BufferedInputStream(_socket.getInputStream()));
-					ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-					int ch;
-					while((ch = inbin.read()) != -1) {
-						baos.write(ch);
-					}
-
-					outbyte.write(proto.processInputbyte(baos.toByteArray()));
-				}
 		    }
 		    
 		    //now enter the main loop for the rest of the interaction (both cases just sent a message)

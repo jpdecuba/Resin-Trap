@@ -14,3 +14,29 @@
     -fx-alignment: center-left;
 }
 
+.default-color0.chart-series-line { -fx-stroke: achmea; }
+.default-color1.chart-series-line { -fx-stroke: achmeaPink; }
+.default-color2.chart-series-line { -fx-stroke: #dda0dd; }
+
+.default-color0.chart-line-symbol { -fx-background-color: achmea, achmea; }
+.default-color1.chart-line-symbol { -fx-background-color: achmeaPink, white; }
+.default-color2.chart-line-symbol { -fx-background-color: #dda0dd, white; }
+
+.default-color0.chart-bar {
+    -fx-background-color: achmea;
+}
+.data0.chart-bar {
+    -fx-background-color: achmea;
+}
+.data1.chart-bar {
+    -fx-background-color: achmea;
+}
+.data2.chart-bar {
+    -fx-background-color: achmea;
+}
+.data3.chart-bar {
+    -fx-background-color: achmea;
+}
+.data4.chart-bar {
+    -fx-background-color: achmea;
+}

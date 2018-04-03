@@ -147,7 +147,8 @@ public class LoginController implements Initializable {
 		User user = Main.loginModel.Login( new User(username, password));
 
         if(user != null) {
-			Main.account = user;
+			Main.setAccount(user);
+
             return true;
         }else {
             snackbar.show("Username or password is wrong",3000);

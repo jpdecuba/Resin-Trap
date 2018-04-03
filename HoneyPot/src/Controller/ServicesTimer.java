@@ -1,12 +1,7 @@
 package Controller;
 
-import HoneyPot.logging.LogConnection;
-import HoneyPot.lowinteraction.LIModule;
 import javafx.application.Platform;
-import javafx.scene.control.Label;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.TimerTask;
 
 public class ServicesTimer extends TimerTask {
@@ -27,6 +22,10 @@ public class ServicesTimer extends TimerTask {
     public void run() {
         Platform.runLater(()->{
             item.fillListView();
+            if(item.selectedMod != null) {
+                item.LogGridUpdate(item.selectedMod);
+            }
+
         });
 
 
