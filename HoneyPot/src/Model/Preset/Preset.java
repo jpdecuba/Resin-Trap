@@ -1,10 +1,7 @@
 package Model.Preset;
 
 import HoneyPot.lowinteraction.LIModule;
-import HoneyPot.protocol.FtpProtocol;
-import HoneyPot.protocol.IrcProtocol;
-import HoneyPot.protocol.MySQLProtocol;
-import HoneyPot.protocol.SmtpProtocol;
+import HoneyPot.protocol.*;
 import Main.Main;
 
 import javax.naming.LimitExceededException;
@@ -32,8 +29,10 @@ public class Preset  implements Serializable{
         LIModule mFTP = new LIModule(new FtpProtocol(), Main.honeypot);
         LIModule mIRC = new LIModule(new IrcProtocol(), Main.honeypot);
         LIModule mSMTP = new LIModule(new SmtpProtocol(), Main.honeypot);
+        LIModule mDNS = new LIModule(new DNSProtocol(), Main.honeypot);
 
         services.add(mSQL);
+        services.add(mDNS);
         services.add(mFTP);
         services.add(mIRC);
         services.add(mSMTP);

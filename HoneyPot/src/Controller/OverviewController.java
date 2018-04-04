@@ -49,6 +49,7 @@ public class OverviewController extends BaseController implements Initializable 
 		Main.manager.setToolbar(this.toolbar);
 		snackbar = new JFXSnackbar(anchor);
 		Main.ChangeLoginButton(loginBtn);
+		Main.ChangeAdminButton(adminBtn);
 	}
 
     /**

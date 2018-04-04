@@ -218,6 +218,19 @@ public class Main extends Application {
 		}
 	}
 
+	public static void ChangeAdminButton(JFXButton button)
+	{
+		boolean enable = false;
+		User account = Main.GetAccount();
+		if(account != null) {
+			if (account.getRole() == UserRole.Admin) {
+				enable = true;
+			}
+		}
+		button.setDisable(!enable);
+		button.setVisible(enable);
+	}
+
 //
 //	public static void ChangeButtons(String view, String title)
 //	{
