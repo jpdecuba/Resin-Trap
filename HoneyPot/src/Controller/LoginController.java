@@ -3,6 +3,7 @@ package Controller;
 import Main.Main;
 import Model.Database.LoginModel;
 import Model.User;
+import Model.UserRole;
 import Model.WindowButtons;
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
@@ -32,9 +33,11 @@ public class LoginController implements Initializable {
     //Register GUI elements
     @FXML JFXButton goToLoginBtn;
     @FXML JFXButton registerBtn;
+	@FXML JFXComboBox registerUserRoleField;
     @FXML JFXTextField registerUsernameField;
     @FXML JFXPasswordField registerPasswordField;
     @FXML JFXPasswordField registerConfirmField;
+    @FXML JFXTextField codeField;
 
     //Services GUI elements
 	@FXML JFXButton overviewBtn;
@@ -45,6 +48,12 @@ public class LoginController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		Main.manager.setToolbar(this.toolbar);
         snackbar = new JFXSnackbar(anchor);
+        if(registerUserRoleField != null) {
+			for (UserRole role : UserRole.values()) {
+				registerUserRoleField.getItems().add(role);
+			}
+			registerUserRoleField.getSelectionModel().select(0);
+		}
 	}
 
 	@FXML
@@ -97,6 +106,21 @@ public class LoginController implements Initializable {
 		switchPage(path, title);
 	}
 
+	@FXML
+	public void ChangeRole()
+	{
+		switch ((UserRole)registerUserRoleField.getSelectionModel().getSelectedItem())
+		{
+			case User:
+				codeField.setDisable(false);
+				break;
+			default:
+				codeField.setText("");
+				codeField.setDisable(true);
+				break;
+		}
+	}
+
 	private void switchPage(String path, String title)
 	{
 		try
@@ -120,8 +144,8 @@ public class LoginController implements Initializable {
     public boolean Login(){
         String username = loginUsernameField.getText();
         String password = loginPasswordField.getText();
-
 		User user = Main.loginModel.Login( new User(username, password));
+
         if(user != null) {
 			Main.setAccount(user);
 
@@ -140,10 +164,34 @@ public class LoginController implements Initializable {
 		String username = registerUsernameField.getText();
 		String password = registerPasswordField.getText();
 		String confirm = registerConfirmField.getText();
+		String code = codeField.getText();
+		UserRole role = (UserRole) registerUserRoleField.getSelectionModel().getSelectedItem();
+		if(role == null)
+		{
+			snackbar.show("The role chosen is invalid",3000);
+			return false;
+		}
 
 		if (password.equals(confirm)) {
-			User user = new User(username, password);
-			if (Main.loginModel.Register(user)) {
+			User user = null;
+			boolean register = false;
+			switch (role)
+			{
+				case User:
+					if(code.trim() == "")
+					{
+						snackbar.show("Fill in a code", 3000);
+						return false;
+					}
+					user = new User(username, password, role, code);
+					register = Main.loginModel.Register(user);
+					break;
+				case Admin:
+					user = new User(username, password, role);
+					register = Main.loginModel.RegisterAdmin(user);
+					break;
+			}
+			if (register) {
 
 				return true;
 
