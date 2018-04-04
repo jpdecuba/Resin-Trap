@@ -12,11 +12,11 @@ import java.util.regex.Pattern;
 /**
  * An implementation of IRC for HoneyRJ
  * @author Todd Schiller
- *
+ * @editor Bart van Dongen
  */
 public class IrcProtocol implements LIProtocol {
 
-	private String myName = "hubbard.freenode.net";
+	private String myName = "*.freenode.net";
 	private final String myFakeHostName = "freenode.club.cc.cmu.edu";
 	private String nickName = null;
 	private String userName = null;
