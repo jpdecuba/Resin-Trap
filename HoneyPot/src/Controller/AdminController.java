@@ -56,9 +56,9 @@ public class AdminController extends BaseController implements Initializable  {
         final NumberAxis yAxis = new NumberAxis();
         final BarChart<String,Number> bc =
                 new BarChart<>(xAxis,yAxis);
-        bc.setTitle("Threats by protocol");
-        xAxis.setLabel("Protocol");
-        yAxis.setLabel("Threats");
+        bc.setTitle(resource.getString("barcharttitle"));
+        xAxis.setLabel(resource.getString("protocollabel"));
+        yAxis.setLabel(resource.getString("threatslabel"));
         bc.prefHeightProperty().bind(vb.heightProperty().divide(2));
         bc.prefWidthProperty().bind(vb.widthProperty());
         XYChart.Series series1 = new XYChart.Series();
@@ -76,9 +76,9 @@ public class AdminController extends BaseController implements Initializable  {
         final NumberAxis yAxis = new NumberAxis();
         final LineChart<String,Number> lc =
                 new LineChart<>(xAxis,yAxis);
-        lc.setTitle("Threats per day");
-        xAxis.setLabel("Day");
-        yAxis.setLabel("Threats");
+        lc.setTitle(resource.getString("linecharttitle"));
+        xAxis.setLabel(resource.getString("daylabel"));
+        yAxis.setLabel(resource.getString("threatslabel"));
         lc.prefHeightProperty().bind(vb.heightProperty().divide(2));
         lc.prefWidthProperty().bind(vb.widthProperty());
         XYChart.Series series1 = new XYChart.Series();
