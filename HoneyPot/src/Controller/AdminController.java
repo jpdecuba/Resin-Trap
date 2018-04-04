@@ -47,6 +47,7 @@ public class AdminController extends BaseController implements Initializable  {
         snackbar = new JFXSnackbar(anchor);
         LineChart lc = CreateLineChart();
         vb.getChildren().addAll(lc, bc);
+        Main.ChangeLoginButton(loginBtn);
 
     }
 

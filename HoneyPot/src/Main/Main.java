@@ -10,6 +10,7 @@ import HoneyPot.protocol.*;
 import Model.*;
 import Model.Database.LoginModel;
 import Model.Preset.Preset;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXToolbar;
 import javafx.application.Application;
@@ -207,6 +208,14 @@ public class Main extends Application {
 				}
 			}
 		});
+	}
+
+	public static void ChangeLoginButton(JFXButton button)
+	{
+		if(Main.GetAccount() != null)
+		{
+			button.setText(ResourceBundle.getBundle("bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("logout"));
+		}
 	}
 
 //
