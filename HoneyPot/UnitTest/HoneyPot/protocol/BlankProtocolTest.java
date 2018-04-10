@@ -12,7 +12,6 @@ public class BlankProtocolTest {
 
     @org.junit.Before
     public void setUp() throws Exception {
-
         proto = new BlankProtocol(5000);
     }
 
@@ -24,12 +23,10 @@ public class BlankProtocolTest {
     @org.junit.Test
     public void processInput() {
         assertEquals(LIHelper.vectorFromString("1.3.2"),proto.processInput(null));
-
     }
 
     @org.junit.Test
     public void getPort() {
-
         assertEquals(5000,proto.getPort());
     }
 
