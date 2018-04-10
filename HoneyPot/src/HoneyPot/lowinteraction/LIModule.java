@@ -69,8 +69,11 @@ public class LIModule implements ILIModule,Runnable,Serializable {
         return numberConnections;
     }
 
-    public void setNumberConnections(int numberConnections) {
-        this.numberConnections = numberConnections;
+    public void setNumberConnectionsmin() {
+        this.numberConnections--;
+    }
+    public void setNumberConnectionsPlus() {
+        this.numberConnections++;
     }
 
     /**

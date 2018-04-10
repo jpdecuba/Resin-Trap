@@ -20,8 +20,8 @@ public interface ILIModule  extends Serializable{
     public void addLog(LogConnection logConnection);
     public int getNumberConnections() ;
 
-    public void setNumberConnections(int numberConnections) ;
-
+    public void setNumberConnectionsmin() ;
+    public void setNumberConnectionsPlus() ;
     public int getPort();
 
     public void registerParent(HoneyRJ honey);
@@ -43,7 +43,7 @@ public interface ILIModule  extends Serializable{
 
     @Override
     public String toString() ;
-    
+
      boolean isStarted() ;
 
     public File getLoggingDirectory();
