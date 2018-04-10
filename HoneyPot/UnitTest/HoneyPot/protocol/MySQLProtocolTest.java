@@ -2,18 +2,20 @@ package HoneyPot.protocol;
 
 import HoneyPot.lowinteraction.LIHelper;
 import HoneyPot.lowinteraction.TALK_FIRST;
-import org.junit.Assert;
+import org.junit.Test;
+
+import java.util.Vector;
 
 import static org.junit.Assert.*;
 
-public class SmtpProtocolTest {
+public class MySQLProtocolTest {
 
-    private SmtpProtocol proto;
+    private MySQLProtocol proto;
 
     @org.junit.Before
     public void setUp() throws Exception {
 
-        proto = new SmtpProtocol();
+        proto = new MySQLProtocol();
     }
 
     @org.junit.Test
@@ -23,8 +25,7 @@ public class SmtpProtocolTest {
 
     @org.junit.Test
     public void processInput() {
-
-        assertEquals(LIHelper.vectorFromString("Note that all text commands must be first on line and end with ';'\n" +
+        Vector<String> result = LIHelper.vectorFromString("Note that all text commands must be first on line and end with ';'\n" +
                 "?         (\\?) Synonym for `help'.\n" +
                 "clear     (\\c) Clear the current input statement.\n" +
                 "connect   (\\r) Reconnect to the server. Optional arguments are db and host.\n" +
@@ -47,21 +48,20 @@ public class SmtpProtocolTest {
                 "nowarning (\\w) Don't show warnings after every statement.\n" +
                 "resetconnection(\\x) Clean session context.\n" +
                 "\n" +
-                "For server side help, type 'help contents'"),proto.processInput("help"));
-        assertEquals(LIHelper.vectorFromString("221 closing connection"),proto.processInput("quit"));
+                "For server side help, type 'help contents'");
+
+        assertEquals(result,proto.processInput("help"));
 
     }
 
     @org.junit.Test
     public void getPort() {
 
-        assertEquals(25,proto.getPort());
+        assertEquals(3306,proto.getPort());
     }
-
-
 
     @org.junit.Test
     public void Stringtest() {
-        assertEquals("SMTP",proto.toString());
+        assertEquals("mySQL",proto.toString());
     }
 }
