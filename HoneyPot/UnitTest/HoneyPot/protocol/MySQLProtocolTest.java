@@ -49,14 +49,12 @@ public class MySQLProtocolTest {
                 "resetconnection(\\x) Clean session context.\n" +
                 "\n" +
                 "For server side help, type 'help contents'");
-
         assertEquals(result,proto.processInput("help"));
 
     }
 
     @org.junit.Test
     public void getPort() {
-
         assertEquals(3306,proto.getPort());
     }
 
