@@ -101,7 +101,7 @@ public class HoneyRJ {
 		}
 		return true;
 	}
-	
+
 	
 	/**
 	 * grabs the port # from the module and starts the local copy
