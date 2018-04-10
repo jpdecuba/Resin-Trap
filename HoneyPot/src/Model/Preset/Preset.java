@@ -61,7 +61,6 @@ public class Preset  implements Serializable{
                 }
                 break;
 
-
             case Company_Small:
                 switch (type) {
 
@@ -76,7 +75,6 @@ public class Preset  implements Serializable{
                             }
                         }
                         break;
-
 
                     case Type_2:
                         for(ILIModule m : services){
@@ -95,7 +93,6 @@ public class Preset  implements Serializable{
                 }
                 break;
 
-
             case Company_Big:
                 switch (type) {
 
@@ -110,7 +107,6 @@ public class Preset  implements Serializable{
                         }
                         break;
 
-
                     case Type_2:
                         for(ILIModule m : services){
                             if(
@@ -122,11 +118,9 @@ public class Preset  implements Serializable{
                         }
                         break;
 
-
                     default: return;
                 }
                 break;
-
 
             default: return;
         }
