@@ -1,5 +1,7 @@
 package HoneyPot.logging;
 
+import HoneyPot.logging.LogConnection;
+import HoneyPot.logging.LogRecord;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +36,7 @@ public class LogTest {
     public void Message(){
         logConnection.AddLogRecord(rec);
         Assert.assertEquals("Service: FTP Remote ip:/127.0.0.2:60\n\t" +
-        "Time: Thu Feb 28 13:24:56 CET 2013	Packet message:teststring  ,Received:true\n", logConnection.message());
+                "Time: Thu Feb 28 13:24:56 CET 2013	Packet message:teststring  ,Received:true\n", logConnection.message());
     }
 
     @Test
