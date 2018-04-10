@@ -43,7 +43,7 @@ public class LIModuleThread implements Runnable {
 	/**
 	 * Our parent thread/module
 	 */
-	private LIModule _parent;
+	private ILIModule _parent;
 	/**
 	 * The logfile
 	 */
@@ -82,7 +82,7 @@ public class LIModuleThread implements Runnable {
 	 * @param parent LIModule that called us
 	 * @throws LIModuleException  upon failure to initialize
 	 */
-	public LIModuleThread(Socket accept, LIModule parent) throws LIModuleException  {
+	public LIModuleThread(Socket accept, ILIModule parent) throws LIModuleException  {
 		//initialize
 		_socket = accept;
 		
@@ -113,7 +113,7 @@ public class LIModuleThread implements Runnable {
 		System.out.println("localPort:  " + localPort);
 		System.out.println("remotePort:  " + remotePort);
 
-		logs = new LogConnection(localIP, remoteIP,localPort,remotePort,_parent._protocol.toString());
+		logs = new LogConnection(localIP, remoteIP,localPort,remotePort,_parent.getProtocol().toString());
 		_startTime = new Date();
 		try {
 			_logFile = new LogFile(this);
