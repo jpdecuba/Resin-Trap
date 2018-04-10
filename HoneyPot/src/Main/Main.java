@@ -177,7 +177,7 @@ public class Main extends Application {
 
     public static void Shutdown(){
         for(ILIModule item : Services) {
-            honeypot.DeRegisterService(item);
+            honeypot.ShutdownService(item);
         }
     }
 

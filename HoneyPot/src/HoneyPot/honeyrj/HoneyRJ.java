@@ -148,6 +148,19 @@ public class HoneyRJ  implements Serializable{
 		}
 		
 	}
+
+
+	public boolean ShutdownService(ILIModule moduleToBeDisconnected) {
+		int port = moduleToBeDisconnected.getPort();
+		if(_services.containsKey(port) && moduleToBeDisconnected == _services.get(port)) {
+			moduleToBeDisconnected.shutdownInteractionModule();
+			_services.remove(port);
+			return true;
+		} else {
+			return false;
+		}
+
+	}
 	
 	/**
 	 * Pause the given module from accepting connections

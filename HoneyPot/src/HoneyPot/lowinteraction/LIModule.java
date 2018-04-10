@@ -76,6 +76,21 @@ public class LIModule implements ILIModule,Runnable,Serializable {
         this.numberConnections++;
     }
 
+    private boolean OnorOff = false;
+
+
+    public boolean OnorOff(){
+        return OnorOff;
+    }
+    private void SetOff(){
+        OnorOff = false;
+
+    }
+    private void SetOn(){
+        OnorOff = true;
+
+    }
+
     /**
 
      * a internal reference to the thread this module is running in
@@ -122,7 +137,7 @@ public class LIModule implements ILIModule,Runnable,Serializable {
      * Allows this module to be created in memory but not yet registered to a HoneyRJ
      *
      * @param honey parent HoneyRJ
-     * @see HoneyRJ#RegisterService(LIModule)
+     * @see HoneyRJ# RegisterService(LIModule)
      */
     public void registerParent(HoneyRJ honey) {
         _parent = honey;
@@ -230,6 +245,7 @@ public class LIModule implements ILIModule,Runnable,Serializable {
      */
     public void startInteractionModule() throws IOException {
         listening = true;
+        SetOn();
         if (_server == null) //create the socket
             _server = new ServerSocket(_protocol.getPort()); //create socket, let our caller deal with an exception
 //			_server.set
@@ -244,6 +260,26 @@ public class LIModule implements ILIModule,Runnable,Serializable {
      * Stops listening, stores the log into the HoneyRJ parent and stops the thread.
      */
     public void stopInteractionModule() {
+        listening = false;
+        numberConnections = 0;
+        SetOff();
+
+
+        try {
+            if (_server != null) {
+                _server.close();
+            }
+        } catch (IOException ignored) {
+
+        }
+
+
+        _thread = null;
+        _server = null;
+    }
+
+
+    public void shutdownInteractionModule() {
         listening = false;
         numberConnections = 0;
 

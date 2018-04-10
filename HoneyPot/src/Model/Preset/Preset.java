@@ -16,6 +16,8 @@ public class Preset  implements Serializable{
     private ArrayList<ILIModule> services = new ArrayList<ILIModule>();
     private transient  PresetsScan scanner;
 
+    private ArrayList<Integer> ports;
+
     public Preset(){
         scanner = new PresetsScan();
     }
@@ -26,7 +28,25 @@ public class Preset  implements Serializable{
         FillServices();
     }
     public void Start(){
-        FillServices();
+        ports = new ArrayList<>();
+        for(ILIModule m : services) {
+
+            if(m.OnorOff()){
+                ports.add(m.getPort());
+            }
+
+        }
+
+
+
+        //Main.StartHoneypotServices(services);
+        InitializeServices();
+        for (ILIModule m : services){
+            if(!ports.contains(m.getPort())){
+                Main.honeypot.DeRegisterService(m);
+            }
+        }
+        Main.StartHoneypotServices(services);
     }
 
     private void ExpressFill(){

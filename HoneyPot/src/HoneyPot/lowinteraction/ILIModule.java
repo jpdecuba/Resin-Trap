@@ -36,8 +36,12 @@ public interface ILIModule  extends Serializable{
 
     public void startInteractionModule() throws IOException ;
 
+    public boolean OnorOff();
 
-    public void stopInteractionModule() ;
+
+
+    public void stopInteractionModule();
+    public void shutdownInteractionModule() ;
 
     public LIProtocol getProtocol();
 
