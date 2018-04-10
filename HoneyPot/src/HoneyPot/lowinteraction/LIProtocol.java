@@ -50,5 +50,7 @@ public interface LIProtocol extends Serializable{
      * @return false if the protocol is still expecting input from the client.
      */
     boolean isConnectionOver();
+
+
 }
 

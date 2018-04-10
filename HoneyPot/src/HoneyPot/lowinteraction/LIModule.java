@@ -65,7 +65,16 @@ public class LIModule implements ILIModule,Runnable,Serializable {
 
     protected int numberConnections; //might be used later to limit # of connections at once.
 
+    public int getNumberConnections() {
+        return numberConnections;
+    }
+
+    public void setNumberConnections(int numberConnections) {
+        this.numberConnections = numberConnections;
+    }
+
     /**
+
      * a internal reference to the thread this module is running in
      *
      * @see Thread
