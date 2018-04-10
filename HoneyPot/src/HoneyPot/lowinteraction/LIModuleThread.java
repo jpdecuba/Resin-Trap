@@ -231,7 +231,7 @@ public class LIModuleThread implements Runnable {
         } finally {
             //report what is available of the log back to the parent
             LogRecord();
-            _parent.numberConnections--;
+            _parent.setNumberConnectionsmin();
         }
     }
 
