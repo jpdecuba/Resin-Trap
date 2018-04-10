@@ -98,9 +98,10 @@ public class HoneyRJ {
 			_services.get(portToStart).startInteractionModule();
 		} catch (IOException e) {
 			return false; //FAILED TO START THREAD/server
-		} 
+		}
 		return true;
 	}
+	
 	
 	/**
 	 * grabs the port # from the module and starts the local copy

@@ -105,7 +105,6 @@ public class PresetController implements Initializable {
             }
         }
 
-        Main.StartHoneypotServices(preset.getServices());
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
             Parent root = loader.load();

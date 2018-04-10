@@ -81,14 +81,14 @@
                                             </JFXComboBox>
                                         <Region VBox.vgrow="ALWAYS"/>
                                         <JFXTextField fx:id="registerUsernameField" alignment="BASELINE_LEFT"
-                                                      focusColor="cc0000" labelFloat="true" promptText="Username">
+                                                      focusColor="cc0000" labelFloat="true" promptText="%username">
                                             <font>
                                                 <Font size="16.0"/>
                                             </font>
                                         </JFXTextField>
                                         <Region VBox.vgrow="ALWAYS"/>
                                         <JFXTextField fx:id="registerEmailField" alignment="BASELINE_LEFT"
-                                                      focusColor="cc0000" labelFloat="true" promptText="Email"
+                                                      focusColor="cc0000" labelFloat="true" promptText="%email"
                                                       VBox.vgrow="ALWAYS">
                                             <font>
                                                 <Font size="16.0"/>
@@ -96,7 +96,7 @@
                                         </JFXTextField>
                                         <Region VBox.vgrow="ALWAYS"/>
                                         <JFXPasswordField fx:id="registerPasswordField" alignment="BASELINE_LEFT"
-                                                          focusColor="cc0000" labelFloat="true" promptText="Password"
+                                                          focusColor="cc0000" labelFloat="true" promptText="%password"
                                                           VBox.vgrow="ALWAYS">
                                             <font>
                                                 <Font size="16.0"/>
@@ -105,7 +105,7 @@
                                         <Region VBox.vgrow="ALWAYS"/>
                                         <JFXPasswordField fx:id="registerConfirmField" alignment="BASELINE_LEFT"
                                                           focusColor="cc0000" labelFloat="true"
-                                                          promptText="Confirm Password" VBox.vgrow="ALWAYS">
+                                                          promptText="%confirmpassword" VBox.vgrow="ALWAYS">
                                             <font>
                                                 <Font size="16.0"/>
                                             </font>
@@ -123,9 +123,9 @@
                                             <children>
                                                 <JFXButton fx:id="goToLoginBtn" alignment="CENTER" buttonType="RAISED"
                                                            contentDisplay="CENTER" mnemonicParsing="false"
-                                                           onAction="#changePage" prefWidth="100"
+                                                           onAction="#changePage" minWidth="100"
                                                            style="-fx-background-color: achmea; -fx-font-family: 'Roboto-Condensed'; -fx-font-size: 13pt;"
-                                                           text="Back" textFill="white">
+                                                           text="%back" textFill="white">
                                                     <font>
                                                         <Font size="14.0"/>
                                                     </font>
@@ -133,9 +133,9 @@
                                                 <Region HBox.hgrow="ALWAYS"/>
                                                 <JFXButton fx:id="registerBtn" alignment="CENTER" buttonType="RAISED"
                                                            contentDisplay="CENTER" mnemonicParsing="false"
-                                                           onAction="#changePage" prefWidth="100"
+                                                           onAction="#changePage" minWidth="100"
                                                            style="-fx-background-color: achmea; -fx-font-family: 'Roboto-Condensed'; -fx-font-size: 13pt;"
-                                                           text="Register" textFill="white">
+                                                           text="%register" textFill="white">
                                                     <font>
                                                         <Font size="14.0"/>
                                                     </font>

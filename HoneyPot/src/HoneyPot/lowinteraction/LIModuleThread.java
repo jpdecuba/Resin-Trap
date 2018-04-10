@@ -128,98 +128,115 @@ public class LIModuleThread implements Runnable {
 	/**
 	 * thread run method: starts the actual interaction with the client through Streams/Buffers
 	 */
-	public void run() {
-		//_logFile.setBeginningLogInfo("*****Protocol " + _protocol + " is starting a connection to " + _socket.getInetAddress() + " using local port " + _socket.getLocalPort() + "****");
-		
-		PrintWriter out = null;
-		BufferedReader in = null;
-		
+    public void run() {
+        //_logFile.setBeginningLogInfo("*****Protocol " + _protocol + " is starting a connection to " + _socket.getInetAddress() + " using local port " + _socket.getLocalPort() + "****");
 
-		try {
-			
-			//create the string reader/writers on the socket
-		    out = new PrintWriter(_socket.getOutputStream(), true);
-
-		    in = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
-
-		    
-		    String inputLine; //temporary strings
-		    Vector<String> outputLines;
-		    
-		    //allow for varying protocols which have the server talk first or second
-		    switch (_protocol.whoTalksFirst()) {
-		    case SVR_FIRST:
-		    	/*if(!_protocol.getClass().equals(DNSProtocol.class)) {*/
-					outputLines = _protocol.processInput(null); //get the first line from the server protocol
-
-					for (String outputLine : outputLines) {
-						out.println(outputLine); //send it
-						AddSendLogRecord(outputLine);
-
-					}
-					break;
-
-		    case CLIENT_FIRST:
-				//if(!_protocol.getClass().equals(DNSProtocol.class)) {
-					inputLine = in.readLine(); //get the first line from the client
-					AddRcvdLogRecord(inputLine);
-
-					outputLines = _protocol.processInput(inputLine); //process it
-					for (String outputLine : outputLines) {
-						out.println(outputLine); //and reply
-						AddSendLogRecord(outputLine);
-
-					}
-					break;
-
-		    }
-		    
-		    //now enter the main loop for the rest of the interaction (both cases just sent a message)
-		    while ((new Date().getTime() - (_startTime.getTime()) <= HoneyRJ.DEFAULT_TIME_OUT_MS) && (inputLine = in.readLine()) != null) { //loop recieving messages
-				AddRcvdLogRecord(inputLine);
-
-		    	
-		    	//parse and reply
-		    	outputLines = _protocol.processInput(inputLine);
-		    	for(String outputLine : outputLines){
-		    		if (outputLine != null){
-		    			out.println(outputLine);
-						AddSendLogRecord(outputLine);
-		    			//_logFile.add(createSentLogEntry(outputLine)); //log the sent message
-		    		}
-		    	}
-				if (_protocol.isConnectionOver()) //if the protocol think the connection is over, stop listening to the client
-				    break;
-		    }
-		    //clean up the connection
-		    out.close();
-		    in.close();
+        PrintWriter out = null;
+        BufferedReader in = null;
+        DataOutputStream  outbyte = null;
 
 
-		} catch (SocketTimeoutException e ){
-			if (out != null){
-				out.close();
-			}
-			try {
-				if (in != null) {
-					in.close();
-				}
-				_socket.close();
-			} catch (IOException ignored) {
+        try {
 
-			}
-			//Last
-		} catch (IOException e) {
-			//e.printStackTrace();
-		    //_logFile.setEndingLogInfo("*****Protocol " + _protocol + " FAILED talking to " + _socket.getInetAddress() + " using local port " + _socket.getLocalPort() +", connection closed.****");
-		} finally {
-			//report what is available of the log back to the parent
-			LogRecord();
-			_parent.numberConnections--;
-		}	
-	}
-	
-	/**
+            //create the string reader/writers on the socket
+            out = new PrintWriter(_socket.getOutputStream(), true);
+            outbyte = new DataOutputStream(_socket.getOutputStream());
+            in = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
+
+
+            String inputLine; //temporary strings
+            Vector<String> outputLines;
+
+            //allow for varying protocols which have the server talk first or second
+            switch (_protocol.whoTalksFirst()) {
+                case SVR_FIRST:
+                    if(!_protocol.getClass().equals(DNSProtocol.class)) {
+                        outputLines = _protocol.processInput(null); //get the first line from the server protocol
+
+                        for (String outputLine : outputLines) {
+                            out.println(outputLine); //send it
+                            AddSendLogRecord(outputLine);
+
+                        }
+                        break;
+                    }else {
+                        DNSProtocol proto = (DNSProtocol) _protocol;
+                        outbyte.write(proto.processInputbyte(null));
+                    }
+                case CLIENT_FIRST:
+                    if(!_protocol.getClass().equals(DNSProtocol.class)) {
+                        inputLine = in.readLine(); //get the first line from the client
+                        AddRcvdLogRecord(inputLine);
+
+                        outputLines = _protocol.processInput(inputLine); //process it
+                        for (String outputLine : outputLines) {
+                            out.println(outputLine); //and reply
+                            AddSendLogRecord(outputLine);
+
+                        }
+                        break;
+                    }else {
+                        DNSProtocol proto = (DNSProtocol) _protocol;
+                        DataInputStream inbin = new DataInputStream(
+                                new BufferedInputStream(_socket.getInputStream()));
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+                        int ch;
+                        while((ch = inbin.read()) != -1) {
+                            baos.write(ch);
+                        }
+
+                        outbyte.write(proto.processInputbyte(baos.toByteArray()));
+                    }
+            }
+
+            //now enter the main loop for the rest of the interaction (both cases just sent a message)
+            while ((new Date().getTime() - (_startTime.getTime()) <= HoneyRJ.DEFAULT_TIME_OUT_MS) && (inputLine = in.readLine()) != null) { //loop recieving messages
+                AddRcvdLogRecord(inputLine);
+
+
+                //parse and reply
+                outputLines = _protocol.processInput(inputLine);
+                for(String outputLine : outputLines){
+                    if (outputLine != null){
+                        out.println(outputLine);
+                        AddSendLogRecord(outputLine);
+                        //_logFile.add(createSentLogEntry(outputLine)); //log the sent message
+                    }
+                }
+                if (_protocol.isConnectionOver()) //if the protocol think the connection is over, stop listening to the client
+                    break;
+            }
+            //clean up the connection
+            out.close();
+            in.close();
+
+
+        } catch (SocketTimeoutException e ){
+            if (out != null){
+                out.close();
+            }
+            try {
+                if (in != null) {
+                    in.close();
+                }
+                _socket.close();
+            } catch (IOException ignored) {
+
+            }
+            //Last
+        } catch (IOException e) {
+            //e.printStackTrace();
+            //_logFile.setEndingLogInfo("*****Protocol " + _protocol + " FAILED talking to " + _socket.getInetAddress() + " using local port " + _socket.getLocalPort() +", connection closed.****");
+        } finally {
+            //report what is available of the log back to the parent
+            LogRecord();
+            _parent.numberConnections--;
+        }
+    }
+
+
+    /**
 	 * make a LogRecord object for a received packet
 	 * @param packet String
 	 * @return LogRecord with appropriate information
