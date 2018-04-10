@@ -1,5 +1,6 @@
 package Model.Preset;
 
+import HoneyPot.lowinteraction.ILIModule;
 import HoneyPot.lowinteraction.LIModule;
 import HoneyPot.protocol.*;
 import Main.Main;
@@ -12,8 +13,8 @@ import java.util.ArrayList;
 public class Preset  implements Serializable{
     private Soort soort = Soort.Express;
     private Type type = Type.None;
-    private ArrayList<LIModule> services = new ArrayList<LIModule>();
-    private PresetsScan scanner;
+    private ArrayList<ILIModule> services = new ArrayList<ILIModule>();
+    private transient  PresetsScan scanner;
 
     public Preset(){
         scanner = new PresetsScan();
@@ -22,6 +23,9 @@ public class Preset  implements Serializable{
     public void SetTypeAndSoort(Type t, Soort s){
         this.type = t;
         this.soort = s;
+        FillServices();
+    }
+    public void Start(){
         FillServices();
     }
 
@@ -46,7 +50,7 @@ public class Preset  implements Serializable{
         switch(soort){
 
             case Home:
-                for(LIModule m : services){
+                for(ILIModule m : services){
                     if(
                         m.getProtocol().getClass().equals(MySQLProtocol.class) ||
                         m.getProtocol().getClass().equals(SmtpProtocol.class) ||
@@ -62,7 +66,7 @@ public class Preset  implements Serializable{
                 switch (type) {
 
                     case Type_1:
-                        for(LIModule m : services){
+                        for(ILIModule m : services){
                             if(
                                 m.getProtocol().getClass().equals(IrcProtocol.class) ||
                                 m.getProtocol().getClass().equals(MySQLProtocol.class) ||
@@ -75,7 +79,7 @@ public class Preset  implements Serializable{
 
 
                     case Type_2:
-                        for(LIModule m : services){
+                        for(ILIModule m : services){
                             if(
                                 m.getProtocol().getClass().equals(IrcProtocol.class) ||
                                 m.getProtocol().getClass().equals(SmtpProtocol.class) ||
@@ -96,7 +100,7 @@ public class Preset  implements Serializable{
                 switch (type) {
 
                     case Type_1:
-                        for(LIModule m : services){
+                        for(ILIModule m : services){
                             if(
                                 m.getProtocol().getClass().equals(IrcProtocol.class) ||
                                 m.getProtocol().getClass().equals(MySQLProtocol.class)
@@ -108,7 +112,7 @@ public class Preset  implements Serializable{
 
 
                     case Type_2:
-                        for(LIModule m : services){
+                        for(ILIModule m : services){
                             if(
                                 m.getProtocol().getClass().equals(IrcProtocol.class) ||
                                 m.getProtocol().getClass().equals(SmtpProtocol.class)
@@ -144,13 +148,13 @@ public class Preset  implements Serializable{
         services.add(mIRC);
         services.add(mSMTP);
 
-        for (LIModule m: services) {
+        for (ILIModule m: services) {
             Main.honeypot.RegisterService(m);
             Main.honeypot.startPort(m.getPort());
         }
     }
 
-    public ArrayList<LIModule> getServices() {
+    public ArrayList<ILIModule> getServices() {
         return services;
     }
 }

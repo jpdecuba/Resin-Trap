@@ -1,6 +1,7 @@
 package Controller;
 
 import HoneyPot.logging.LogConnection;
+import HoneyPot.lowinteraction.ILIModule;
 import HoneyPot.lowinteraction.LIModule;
 import Main.Main;
 import Model.Status;
@@ -157,7 +158,7 @@ public class ServicesController extends BaseController implements Initializable 
         connectionList.getItems().add(l2);
         iOList.getItems().add(l3);
         connectionList.setEditable(false);
-        for (LIModule mod :
+        for (ILIModule mod :
                 GetModules()) {
             serviceList.getItems().add(mod);
             connectionList.getItems().add(mod.getNumberOfActiveConnections());
@@ -296,7 +297,7 @@ public class ServicesController extends BaseController implements Initializable 
     public int GetServiceson() {
 
         int i = 0;
-        for (LIModule item : Main.Services) {
+        for (ILIModule item : Main.Services) {
 
             if (item.isStarted()) {
                 i++;
@@ -310,7 +311,7 @@ public class ServicesController extends BaseController implements Initializable 
      *
      * @param module Service module
      */
-    public void TurnOff(LIModule module) {
+    public void TurnOff(ILIModule module) {
         Main.honeypot.DeRegisterService(module);
     }
 
@@ -319,12 +320,12 @@ public class ServicesController extends BaseController implements Initializable 
      *
      * @param module Service module
      */
-    public void StartUp(LIModule module) {
+    public void StartUp(ILIModule module) {
         Main.honeypot.RegisterService(module);
         Main.honeypot.startPort(module.getPort());
     }
 
-    public void IO(LIModule module) {
+    public void IO(ILIModule module) {
 
         if (module.isStarted()) {
             TurnOff(module);
@@ -341,11 +342,11 @@ public class ServicesController extends BaseController implements Initializable 
      * @param module Service module
      * @return true or false if it's started
      */
-    public boolean isStarted(LIModule module) {
+    public boolean isStarted(ILIModule module) {
         return module.isStarted();
     }
 
-    public int GetConnections(LIModule module) {
+    public int GetConnections(ILIModule module) {
         return module.getNumberOfActiveConnections();
     }
 
@@ -355,7 +356,7 @@ public class ServicesController extends BaseController implements Initializable 
      * @param module Service module
      * @return list of Logconnection
      */
-    public LinkedList<LogConnection> GetLogs(LIModule module) {
+    public LinkedList<LogConnection> GetLogs(ILIModule module) {
 
         LinkedList<LogConnection> logs = Main.honeypot.getLogs();
         LinkedList<LogConnection> Servicelogs = new LinkedList<>();
@@ -375,7 +376,7 @@ public class ServicesController extends BaseController implements Initializable 
      *
      * @return list of modules
      */
-    public ArrayList<LIModule> GetModules() {
+    public ArrayList<ILIModule> GetModules() {
 
         return Main.Services;
     }
@@ -433,7 +434,7 @@ public class ServicesController extends BaseController implements Initializable 
      * @param module Service module
      * @return returns a status item base of module input
      */
-    public Status StatusCheck(LIModule module) {
+    public Status StatusCheck(ILIModule module) {
         int connections = module.getNumberOfActiveConnections();
         if (connections >= Main.ConnectionAlert) {
             return Status.ALERT;

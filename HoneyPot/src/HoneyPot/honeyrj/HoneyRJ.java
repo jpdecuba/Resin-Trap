@@ -3,6 +3,7 @@ package HoneyPot.honeyrj;
 
 
 import HoneyPot.logging.LogConnection;
+import HoneyPot.lowinteraction.ILIModule;
 import HoneyPot.lowinteraction.LIDeserializeThread;
 import HoneyPot.lowinteraction.LIModule;
 import Model.Status;
@@ -11,6 +12,7 @@ import sun.rmi.runtime.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -24,7 +26,7 @@ import java.util.concurrent.Future;
  * @author Eric Peter
  * @see LIModule
  */
-public class HoneyRJ {
+public class HoneyRJ  implements Serializable{
 	private File _logging_dir;
 
 	private Set<LogConnection> logs = new HashSet<>();
@@ -36,7 +38,7 @@ public class HoneyRJ {
 	/**
 	 * HashMap of all service modules
 	 */
-	public HashMap<Integer, LIModule> _services;
+	public HashMap<Integer, ILIModule> _services;
 	/**
 	 * all the logs we have collected
 	 */
@@ -77,7 +79,7 @@ public class HoneyRJ {
 	 * @throws HoneyRJException if the log directory can't be created
 	 */
 	public HoneyRJ(String logDir) throws HoneyRJException {
-		_services = new HashMap<Integer, LIModule>();
+		_services = new HashMap<Integer, ILIModule>();
 		//_logs = new HashMap<Integer, TreeMap<Date,LogFile>>();
 		
 		/*_logging_dir = new File(logDir + "rj_" + new Date().getTime() + "_log");
@@ -107,7 +109,7 @@ public class HoneyRJ {
 	 * grabs the port # from the module and starts the local copy
 	 * @see HoneyRJ#startPort(int)
 	 */
-	public boolean startModule(LIModule moduleToStart) {
+	public boolean startModule(ILIModule moduleToStart) {
 		return startPort(moduleToStart.getProtocol().getPort());
 	}
 	
@@ -118,7 +120,7 @@ public class HoneyRJ {
 	 * @see LIModule#registerParent(HoneyRJ)
 	 */
 	@SuppressWarnings("UnusedReturnValue")
-	public boolean RegisterService(LIModule moduleToBeConnected) {
+	public boolean RegisterService(ILIModule moduleToBeConnected) {
 		if(_services.containsKey(moduleToBeConnected.getPort())) { //already have a service registered on this port
 			return false;
 		} else {
@@ -135,7 +137,7 @@ public class HoneyRJ {
 	 * @param moduleToBeDisconnected
 	 * @return true on success, false if the module isn't in the HoneyRJ
 	 */
-	public boolean DeRegisterService(LIModule moduleToBeDisconnected) {
+	public boolean DeRegisterService(ILIModule moduleToBeDisconnected) {
 		int port = moduleToBeDisconnected.getPort();
 		if(_services.containsKey(port) && moduleToBeDisconnected == _services.get(port)) {
 			moduleToBeDisconnected.stopInteractionModule();
@@ -152,7 +154,7 @@ public class HoneyRJ {
 	 * @param moduleToPause
 	 * @return true on success, false if the module isn't in the HoneyRJ
 	 */
-	public boolean PauseNewConnections(LIModule moduleToPause) {
+	public boolean PauseNewConnections(ILIModule moduleToPause) {
 		if(_services.containsKey(moduleToPause.getPort()) && moduleToPause == _services.get(moduleToPause.getPort())) {
 			moduleToPause.pauseListeningForConnections();
 			return true;
@@ -164,7 +166,7 @@ public class HoneyRJ {
 	 * @param moduleToResume
 	 * @return true on success, false if the module isn't in the HoneyRJ
 	 */
-	public boolean ResumeNewConnections(LIModule moduleToResume) {
+	public boolean ResumeNewConnections(ILIModule moduleToResume) {
 		if(_services.containsKey(moduleToResume.getPort()) && moduleToResume == _services.get(moduleToResume.getPort())) {
 			moduleToResume.resumeListeningForConnections();
 			return true;

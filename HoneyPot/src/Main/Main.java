@@ -4,6 +4,7 @@ import FileSave.Preferences;
 import FileSave.SaveFiles;
 import HoneyPot.honeyrj.HoneyRJ;
 import HoneyPot.honeyrj.HoneyRJException;
+import HoneyPot.lowinteraction.ILIModule;
 import HoneyPot.lowinteraction.LIModule;
 import HoneyPot.lowinteraction.LIProtocol;
 import HoneyPot.protocol.*;
@@ -46,7 +47,7 @@ public class Main extends Application {
 
     //HoneyPot Services
 
-    public static ArrayList<LIModule> Services = new ArrayList<>();
+    public static ArrayList<ILIModule> Services = new ArrayList<>();
 
     private static LIProtocol ftpP = new FtpProtocol();
     public static LIModule ftpM;
@@ -86,11 +87,20 @@ public class Main extends Application {
     	//account = null;
 		loginModel = new LoginModel();
         launchHoneypot();
+        SaveFiles file = new SaveFiles();
+        pref = file.ReadPreferences();
 		this.Stage = primaryStage;
 		toolbar = new JFXToolbar();
         this.manager = new ControllerManager();
-		manager.currentView = "/View/PresetView.fxml";
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/PresetView.fxml"));
+        FXMLLoader loader;
+        if(getPreset() == null) {
+            manager.currentView = "/View/PresetView.fxml";
+            loader = new FXMLLoader(getClass().getResource("/View/PresetView.fxml"));
+        }else {
+            manager.currentView = "/View/OverView.fxml";
+            loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"));
+            getPreset().Start();
+        }
         loader.setResources(ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
         Parent root = loader.load();
         this.Stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/Resources/Ducky.png")));
@@ -105,8 +115,7 @@ public class Main extends Application {
         ResizeHelper rh = new ResizeHelper();
         rh.addResizeListener(Stage);
 		SetupRoot(root);
-        SaveFiles file = new SaveFiles();
-        pref = file.ReadPreferences();
+
 		Main.Stage.setOnHiding(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
 				if(Main.GetAccount() != null)
@@ -138,7 +147,7 @@ public class Main extends Application {
     }
 
 
-    public static void StartHoneypotServices(List<LIModule> list){
+    public static void StartHoneypotServices(List<ILIModule> list){
         Services.addAll(list);
     }
 
@@ -147,7 +156,7 @@ public class Main extends Application {
         int start = 0;
         int connections = 0;
 
-        for(LIModule item : Services){
+        for(ILIModule item : Services){
             if(item.isStarted()){
                 start++;
             }
@@ -167,7 +176,7 @@ public class Main extends Application {
     }
 
     public static void Shutdown(){
-        for(LIModule item : Services) {
+        for(ILIModule item : Services) {
             honeypot.DeRegisterService(item);
         }
     }

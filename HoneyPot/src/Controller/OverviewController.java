@@ -1,6 +1,7 @@
 package Controller;
 
 import HoneyPot.logging.LogConnection;
+import HoneyPot.lowinteraction.ILIModule;
 import HoneyPot.lowinteraction.LIModule;
 import Main.Main;
 import com.jfoenix.controls.JFXButton;
@@ -59,7 +60,7 @@ public class OverviewController extends BaseController implements Initializable 
     public int GetTotalConnections() {
 
         int i = 0;
-        for (LIModule item : Main.Services) {
+        for (ILIModule item : Main.Services) {
 
             i += item.getNumberOfActiveConnections();
 
@@ -104,7 +105,7 @@ public class OverviewController extends BaseController implements Initializable 
         int start = 0;
         int connections = 0;
 
-        for (LIModule item : Main.Services) {
+        for (ILIModule item : Main.Services) {
             if (item.isStarted()) {
                 start++;
             }

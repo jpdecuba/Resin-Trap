@@ -1,5 +1,6 @@
 package HoneyPot.lowinteraction;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Vector;
  * @author Eric Peter
  *
  */
-public interface LIProtocol {
+public interface LIProtocol extends Serializable{
 	
 	/**
 	 * The return value of this method specifies if the server sends the first message in the protocol (SVR_FIRST) or if the client does (CLIENT_FIRST)

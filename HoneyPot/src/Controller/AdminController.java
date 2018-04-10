@@ -1,6 +1,7 @@
 package Controller;
 
 import HoneyPot.logging.LogConnection;
+import HoneyPot.lowinteraction.ILIModule;
 import HoneyPot.lowinteraction.LIModule;
 import Main.Main;
 import com.jfoenix.controls.JFXButton;
@@ -63,7 +64,7 @@ public class AdminController extends BaseController implements Initializable  {
         bc.prefWidthProperty().bind(vb.widthProperty());
         XYChart.Series series1 = new XYChart.Series();
         series1.setName("April");
-        for (LIModule mod :
+        for (ILIModule mod :
                 Main.Services) {
             series1.getData().add(new XYChart.Data(mod.getProtocol().toString(), GetLogs(mod)));
         }
@@ -99,7 +100,7 @@ public class AdminController extends BaseController implements Initializable  {
         return lc;
     }
 
-    public int GetLogs(LIModule module) {
+    public int GetLogs(ILIModule module) {
 
         LinkedList<LogConnection> logs = Main.honeypot.getLogs();
         int logsAmount = 0;

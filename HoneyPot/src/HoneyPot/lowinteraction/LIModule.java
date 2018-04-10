@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
  * @see HoneyRJ
  * @see LIModuleThread
  */
-public class LIModule implements Runnable {
+public class LIModule implements ILIModule,Runnable,Serializable {
 
     /**
      * a reference to the protocol that this Module should run
@@ -38,7 +38,7 @@ public class LIModule implements Runnable {
         _parent.addLog(logConnection);
     }
 
-    private ExecutorService cachedPool = Executors.newCachedThreadPool();
+    private transient ExecutorService cachedPool = Executors.newCachedThreadPool();
 
     /**
      * return the port this Module listens on (as defined by the protocol)
