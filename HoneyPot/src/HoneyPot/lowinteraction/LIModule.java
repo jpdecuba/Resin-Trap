@@ -137,7 +137,7 @@ public class LIModule implements ILIModule,Runnable,Serializable {
      * Allows this module to be created in memory but not yet registered to a HoneyRJ
      *
      * @param honey parent HoneyRJ
-     * @see HoneyRJ# RegisterService(LIModule)
+     * @see HoneyRJ#(LIModule)
      */
     public void registerParent(HoneyRJ honey) {
         _parent = honey;
