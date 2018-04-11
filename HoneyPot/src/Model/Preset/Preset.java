@@ -25,7 +25,10 @@ public class Preset  implements Serializable{
     public void SetTypeAndSoort(Type t, Soort s){
         this.type = t;
         this.soort = s;
-        FillServices();
+        if (soort == Soort.Express)
+            ExpressFill();
+        else
+            FillServices();
     }
     public void Start(){
         ports = new ArrayList<>();
@@ -51,7 +54,6 @@ public class Preset  implements Serializable{
 
     private void ExpressFill(){
         int hosts = scanner.checkHosts();
-        System.out.println(hosts);
         if (hosts <= 25){
             soort = Soort.Home;
         } else if(hosts <= 50) {
