@@ -49,7 +49,7 @@ public class Preset  implements Serializable{
         Main.StartHoneypotServices(services);
     }
 
-    private void ExpressFill(){
+    public void ExpressFill(){
         int hosts = scanner.checkHosts();
         System.out.println(hosts);
         if (hosts <= 25){
