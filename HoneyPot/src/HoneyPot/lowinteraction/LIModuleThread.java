@@ -8,6 +8,7 @@ import HoneyPot.logging.LogFile;
 import HoneyPot.logging.LogRecord;
 import HoneyPot.protocol.BlankProtocol;
 import HoneyPot.protocol.DNSProtocol;
+import Model.Database.Database.Database;
 import javafx.application.Platform;
 
 import javax.xml.bind.DatatypeConverter;
@@ -271,6 +272,9 @@ public class LIModuleThread implements Runnable {
 		_parent.addLog(logs);
 		_logFile.setEndingLogInfo();
 		new Thread(new LISerializeThread(logs)).start();
+		if(Database.connection() != null){
+			new Thread(new LISerializeDBThread(logs)).start();
+		}
 	}
 
 
