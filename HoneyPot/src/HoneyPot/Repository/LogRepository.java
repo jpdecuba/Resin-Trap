@@ -3,6 +3,8 @@ package HoneyPot.Repository;
 import HoneyPot.logging.LogConnection;
 import Model.User;
 
+import java.util.Set;
+
 public class LogRepository implements ILogSerialisation{
 
     private ILogSerialisation context;
@@ -19,7 +21,7 @@ public class LogRepository implements ILogSerialisation{
     }
 
     @Override
-    public Iterable<LogConnection> GetAllLogsForService(String service) {
-        return null;
+    public Set<LogConnection> GetAllLogs() {
+        return context.GetAllLogs();
     }
 }

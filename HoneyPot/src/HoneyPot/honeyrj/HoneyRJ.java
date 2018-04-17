@@ -4,8 +4,10 @@ package HoneyPot.honeyrj;
 
 import HoneyPot.logging.LogConnection;
 import HoneyPot.lowinteraction.ILIModule;
+import HoneyPot.lowinteraction.LIDeserializeDBThread;
 import HoneyPot.lowinteraction.LIDeserializeThread;
 import HoneyPot.lowinteraction.LIModule;
+import Model.Database.Database.Database;
 import Model.Status;
 import sun.rmi.runtime.Log;
 
@@ -204,14 +206,13 @@ public class HoneyRJ  implements Serializable{
 
 
 	private void getLogsfromdir(){
-
-
 		File file = new File(System.getenv("APPDATA") + "/Honeypot/AllLogs.txt");
 		if(file.exists())
 		{
 			try {
+				Future<Set<LogConnection>> future = null;
 				ExecutorService executorService = Executors.newSingleThreadExecutor();
-				Future<Set<LogConnection>> future = executorService.submit(new LIDeserializeThread());
+				future = executorService.submit(new LIDeserializeThread());
 				logs = future.get();
 			} catch (InterruptedException e) {
 				e.printStackTrace();

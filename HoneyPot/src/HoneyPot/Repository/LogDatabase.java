@@ -4,10 +4,13 @@ import HoneyPot.logging.LogConnection;
 import Model.Database.Database.Database;
 import Model.User;
 
+import java.net.InetAddress;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LogDatabase implements ILogSerialisation{
 
@@ -35,14 +38,17 @@ public class LogDatabase implements ILogSerialisation{
     }
 
     @Override
-    public Iterable<LogConnection> GetAllLogsForService(String service) {
+    public Set<LogConnection> GetAllLogs() {
+        Set<LogConnection> logs = new HashSet<LogConnection>();
         try{
-            String sql = "SELECT * FROM ServerLog WHERE ? = 1";
+            String sql = "SELECT * FROM ServerLog";
             PreparedStatement statement = Database.connection().prepareStatement(sql);
-            statement.setInt(1, 0);
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
-
+                LogConnection log = new LogConnection(null, null, 0, rs.getInt(4), rs.getString(2));
+                if(log != null){
+                    logs.add(log);
+                }
             }
         } catch (SQLException sqle){
             sqle.printStackTrace();
