@@ -41,11 +41,11 @@ public class LogDatabase implements ILogSerialisation{
     public Set<LogConnection> GetAllLogs() {
         Set<LogConnection> logs = new HashSet<LogConnection>();
         try{
-            String sql = "SELECT * FROM ServerLog";
+            String sql = "SELECT * FROM ServerLogs";
             PreparedStatement statement = Database.connection().prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
-                LogConnection log = new LogConnection(null, null, 0, rs.getInt(4), rs.getString(2));
+                LogConnection log = new LogConnection(null, null, 0, rs.getInt("Port"), rs.getString("Service"));
                 if(log != null){
                     logs.add(log);
                 }

@@ -7,6 +7,7 @@ import HoneyPot.lowinteraction.ILIModule;
 import HoneyPot.lowinteraction.LIDeserializeDBThread;
 import HoneyPot.lowinteraction.LIDeserializeThread;
 import HoneyPot.lowinteraction.LIModule;
+import Main.Main;
 import Model.Database.Database.Database;
 import Model.Status;
 import sun.rmi.runtime.Log;
@@ -69,7 +70,22 @@ public class HoneyRJ  implements Serializable{
 	 */
 	public HoneyRJ() throws HoneyRJException {
 		this(DEFAULT_LOG_DIR);
-		getLogsfromdir();
+		if(Database.connection() != null || Main.GetAccount().getName() != null){
+		    try{
+                Future<Set<LogConnection>> future = null;
+                ExecutorService executorService = Executors.newSingleThreadExecutor();
+                future = executorService.submit(new LIDeserializeDBThread());
+                logs = future.get();
+            } catch (InterruptedException | ExecutionException e){
+		        e.printStackTrace();
+            }
+
+        }
+
+        if(logs == null){
+            getLogsfromdir();
+        }
+
 	}
 
 
