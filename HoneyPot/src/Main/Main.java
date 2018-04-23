@@ -103,7 +103,7 @@ public class Main extends Application {
         }
         loader.setResources(ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
         Parent root = loader.load();
-        this.Stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/Resources/Ducky.png")));
+        this.Stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/Resources/ResinTrap.png")));
         Stage.initStyle(StageStyle.UNDECORATED);
         Scene scene = new Scene(root);
         scene.getStylesheets().add("http://fonts.googleapis.com/css?family=Roboto");
