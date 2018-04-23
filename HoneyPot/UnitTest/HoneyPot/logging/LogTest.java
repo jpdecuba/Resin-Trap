@@ -1,7 +1,8 @@
 package HoneyPot.logging;
 
-import HoneyPot.logging.LogConnection;
-import HoneyPot.logging.LogRecord;
+
+import Client.HoneyPot.logging.LogConnection;
+import Client.HoneyPot.logging.LogRecord;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

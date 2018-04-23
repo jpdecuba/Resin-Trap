@@ -1,11 +1,12 @@
 package HoneyPot.honeyrj;
 
-import HoneyPot.lowinteraction.LIModule;
-import HoneyPot.lowinteraction.LIProtocol;
-import HoneyPot.protocol.BlankProtocol;
-import HoneyPot.protocol.FtpProtocol;
-import HoneyPot.protocol.IrcProtocol;
-import HoneyPot.protocol.MySQLProtocol;
+
+import Client.HoneyPot.honeyrj.HoneyRJ;
+import Client.HoneyPot.lowinteraction.LIModule;
+import Client.HoneyPot.lowinteraction.LIProtocol;
+import Client.HoneyPot.protocol.BlankProtocol;
+import Client.HoneyPot.protocol.FtpProtocol;
+import Client.HoneyPot.protocol.IrcProtocol;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

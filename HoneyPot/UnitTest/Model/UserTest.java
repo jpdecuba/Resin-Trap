@@ -1,5 +1,7 @@
 package Model;
 
+import Client.Model.User;
+import Client.Model.UserRole;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

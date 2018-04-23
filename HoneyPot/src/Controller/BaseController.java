@@ -1,7 +1,7 @@
 package Controller;
 
-import HoneyPot.lowinteraction.ILIModule;
-import Main.Main;
+import Client.HoneyPot.lowinteraction.ILIModule;
+import Client.Main.Main;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXToolbar;
@@ -47,7 +47,7 @@ public class BaseController {
             String title = "";
 
             if (source == overviewBtn){
-                path = "/View/HelpView.fxml";
+                path = "/View/OverView.fxml";
                 title = "Achmea";
             } else if (source == loginBtn){
                 if(!Main.CheckForLogout(loginBtn.getText(), snackbar))
@@ -91,7 +91,21 @@ public class BaseController {
         if (currentConnections < i)
         {
 			Platform.runLater(() -> {
-				snackbar.show("New connection has been made!", "Okay", event -> snackbar.close());
+				snackbar.show("New connection has been made!", "Help", 3000, event -> {
+				    try {
+                        snackbar.close();
+                        String path = "/View/HelpView.fxml";
+                        String title = "Achmea";
+                        Main.manager.currentView = path;
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+                        Parent root = loader.load();
+                        Main.switchPage(root, title);
+                        timer = new Timer();
+                        timer.schedule(new ControllerTimer(this), 0, 5000);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
 			});
         }
         currentConnections = i;
