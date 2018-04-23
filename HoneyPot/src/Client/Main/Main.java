@@ -104,8 +104,10 @@ public class Main extends Application {
         this.Stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/Client/Resources/ResinTrap.png")));
         Stage.initStyle(StageStyle.UNDECORATED);
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("http://fonts.googleapis.com/css?family=Roboto");
+
         scene.getStylesheets().add("/Client/Resources/style.css");
+        scene.getStylesheets().add("http://fonts.googleapis.com/css?family=Roboto");
+        scene.getStylesheets().add("http://fonts.googleapis.com/css?family=Roboto+Condensed");
         Stage.setTitle("Achmea");
         Stage.setScene(scene);
         Stage.setMinWidth(900);
