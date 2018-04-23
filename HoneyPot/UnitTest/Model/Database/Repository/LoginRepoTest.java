@@ -1,8 +1,9 @@
 package Model.Database.Repository;
 
-import Model.Database.Database.LoginDatabase;
-import Model.User;
-import Model.UserRole;
+import Client.Model.Database.Database.LoginDatabase;
+import Client.Model.Database.Repository.LoginRepo;
+import Client.Model.User;
+import Client.Model.UserRole;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
