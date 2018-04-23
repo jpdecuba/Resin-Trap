@@ -5,6 +5,7 @@ import Model.Database.Database.Database;
 import Model.User;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,12 +46,12 @@ public class LogDatabase implements ILogSerialisation{
             PreparedStatement statement = Database.connection().prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
-                LogConnection log = new LogConnection(null, null, 0, rs.getInt("Port"), rs.getString("Service"));
+                LogConnection log = new LogConnection(null, InetAddress.getByName(rs.getString("RemoteIP").substring(1)), 0, rs.getInt("Port"), rs.getString("Service"));
                 if(log != null){
                     logs.add(log);
                 }
             }
-        } catch (SQLException sqle){
+        } catch (SQLException | UnknownHostException sqle){
             sqle.printStackTrace();
         }
         return null;
