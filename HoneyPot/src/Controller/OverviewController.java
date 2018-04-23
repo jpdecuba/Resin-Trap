@@ -48,6 +48,7 @@ public class OverviewController extends BaseController implements Initializable 
 		Timer timer = new Timer();
 		timer.schedule(new OverViewTimer(this), 0,5000);
 		Main.manager.setToolbar(this.toolbar);
+		Main.manager.currentView = "OverView.fxml";
 		snackbar = new JFXSnackbar(anchor);
 		Main.ChangeLoginButton(loginBtn);
 		Main.ChangeAdminButton(adminBtn);
