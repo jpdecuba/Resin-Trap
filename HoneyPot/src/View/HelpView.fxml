@@ -80,7 +80,9 @@
 
                 <AnchorPane fx:id="mainPane" prefHeight="${mainPane.parent.height}" HBox.hgrow="ALWAYS"
                             style="-fx-background-color: WHITE;">
-                    <Label text="Help" style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 18;"></Label>
+                    <VBox alignment="TOP_CENTER" AnchorPane.topAnchor="75" AnchorPane.bottomAnchor="75" AnchorPane.leftAnchor="75" AnchorPane.rightAnchor="75">
+                        <Label text="Help" style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 28;"></Label>
+                    </VBox>
                 </AnchorPane>
             </children>
         </HBox>
