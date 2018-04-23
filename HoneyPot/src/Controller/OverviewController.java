@@ -40,38 +40,16 @@ public class OverviewController extends BaseController implements Initializable 
     Label timeframeLbl;
     @FXML
     Label connectionsLbl;
-    int currentConnections = 0;
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		overviewBtn.setDefaultButton(true);
-		Timer timer = new Timer();
-		timer.schedule(new OverViewTimer(this), 0,5000);
 		Main.manager.setToolbar(this.toolbar);
 		snackbar = new JFXSnackbar(anchor);
 		Main.ChangeLoginButton(loginBtn);
 		Main.ChangeAdminButton(adminBtn);
 	}
-
-    /**
-     * Get Total Connection of all services
-     * @return int of the totaal amount of connections
-     */
-    public int GetTotalConnections() {
-
-        int i = 0;
-        for (ILIModule item : Main.Services) {
-
-            i += item.getNumberOfActiveConnections();
-
-        }
-        if (currentConnections < i)
-        {
-            snackbar.show("New connection has been made!", "Okay", event -> snackbar.close());
-        }
-        currentConnections = i;
-        return i;
-    }
 
     /**
      * Get data of the last log file (time)
