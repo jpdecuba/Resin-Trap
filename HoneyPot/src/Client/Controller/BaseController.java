@@ -11,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -32,6 +31,12 @@ public class BaseController {
     static JFXSnackbar snackbar;
     int currentConnections = 0;
     Timer timer;
+
+	public BaseController()
+	{
+		timer = new Timer();
+		timer.schedule(new ControllerTimer(this), 0,5000);
+	}
 
     @FXML
     public void changePage(ActionEvent event) {
@@ -61,10 +66,9 @@ public class BaseController {
                 title = "Achmea";
             }
             Main.manager.currentView = path;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("Client.bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("Client/bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
             Parent root = loader.load();
             Main.switchPage(root, title);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
