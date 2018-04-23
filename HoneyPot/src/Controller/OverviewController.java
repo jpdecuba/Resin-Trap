@@ -46,7 +46,7 @@ public class OverviewController extends BaseController implements Initializable 
 	public void initialize(URL location, ResourceBundle resources) {
 		overviewBtn.setDefaultButton(true);
 		Main.manager.setToolbar(this.toolbar);
-		Main.manager.currentView = "OverView.fxml";
+		Main.manager.currentView = "/View/OverView.fxml";
 		snackbar = new JFXSnackbar(anchor);
 		Main.ChangeLoginButton(loginBtn);
 		Main.ChangeAdminButton(adminBtn);
