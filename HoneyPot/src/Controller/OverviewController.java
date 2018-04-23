@@ -50,8 +50,8 @@ public class OverviewController extends BaseController implements Initializable 
 		snackbar = new JFXSnackbar(anchor);
 		Main.ChangeLoginButton(loginBtn);
 		Main.ChangeAdminButton(adminBtn);
-		timer = new Timer();
-		timer.schedule(new OverViewTimer(this), 0,5000);
+		//Timer timer1 = new Timer();
+		//timer1.schedule(new OverViewTimer(this), 0,5000);
 	}
 
     /**
