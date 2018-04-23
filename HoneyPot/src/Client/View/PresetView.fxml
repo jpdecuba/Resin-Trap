@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+
+<?import com.jfoenix.controls.JFXToolbar?>
+<?import javafx.scene.control.Label?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import com.jfoenix.controls.JFXButton?>
+<AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Controller.PresetController">
+    <children>
+        <AnchorPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+                    AnchorPane.topAnchor="0" style="-fx-background-color: WHITE;">
+        </AnchorPane>
+        <VBox fx:id="centerPane" AnchorPane.rightAnchor="250" AnchorPane.leftAnchor="250" AnchorPane.bottomAnchor="0"
+              AnchorPane.topAnchor="0" spacing="10"
+              style="-fx-background-color: achmea;" HBox.hgrow="ALWAYS" alignment="TOP_CENTER">
+            <Region prefHeight="75"/>
+            <Label style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 28; -fx-text-fill: WHITE"
+                   text="Preset"/>
+            <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 14; -fx-text-fill: WHITE; -fx-label-padding: 20, 0, 20, 0" wrapText="true" minHeight="120"
+                   text="%PresetInstruction1"/>
+
+            <AnchorPane fx:id="anpane" prefWidth="${anpane.parent.width}">
+                <VBox AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="20"
+                      AnchorPane.rightAnchor="20" alignment="TOP_LEFT">
+
+                    <JFXRadioButton fx:id="expressRBtn" mnemonicParsing="false"
+                                    selected="true" selectedColor="WHITE" unSelectedColor="WHITE"
+                                    text="%express" textFill="WHITE" onAction="#toggle1"
+                                    style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 18; -fx-text-fill: WHITE">
+                        <toggleGroup>
+                            <ToggleGroup fx:id="toggleGroup" />
+                        </toggleGroup>
+                    </JFXRadioButton>
+                    <JFXRadioButton fx:id="customRBtn" mnemonicParsing="false" onAction="#toggle1"
+                                    text="Custom" selectedColor="WHITE" unSelectedColor="WHITE"
+                                    textFill="WHITE" toggleGroup="$toggleGroup"
+                                    style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 18; -fx-text-fill: WHITE;"/>
+                </VBox>
+                <VBox fx:id="vb" AnchorPane.topAnchor="60" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="50"
+                      AnchorPane.rightAnchor="20" alignment="TOP_LEFT">
+                    <JFXRadioButton fx:id="homeRBtn" mnemonicParsing="false"
+                                    selected="true" selectedColor="WHITE" unSelectedColor="WHITE"
+                                    text="%preset1name" textFill="WHITE" onAction="#toggle2"
+                                    style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 18; -fx-text-fill: WHITE">
+                        <toggleGroup>
+                            <ToggleGroup fx:id="toggleGroup2"/>
+                        </toggleGroup>
+                    </JFXRadioButton>
+                    <JFXRadioButton fx:id="small1RBtn" mnemonicParsing="false" onAction="#toggle2"
+                                    text="%preset2name" selectedColor="WHITE" unSelectedColor="WHITE"
+                                    textFill="WHITE" toggleGroup="$toggleGroup2"
+                                    style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 18; -fx-text-fill: WHITE;"/>
+                    <JFXRadioButton fx:id="small2RBtn" mnemonicParsing="false" onAction="#toggle2"
+                                    text="%preset3name" selectedColor="WHITE" unSelectedColor="WHITE"
+                                    textFill="WHITE" toggleGroup="$toggleGroup2"
+                                    style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 18; -fx-text-fill: WHITE;"/>
+                    <JFXRadioButton fx:id="big1RBtn" mnemonicParsing="false" onAction="#toggle2"
+                                    text="%preset4name" selectedColor="WHITE" unSelectedColor="WHITE"
+                                    textFill="WHITE" toggleGroup="$toggleGroup2"
+                                    style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 18; -fx-text-fill: WHITE;"/>
+                    <JFXRadioButton fx:id="big2RBtn" mnemonicParsing="false" onAction="#toggle2"
+                                    text="%preset5name" selectedColor="WHITE" unSelectedColor="WHITE"
+                                    textFill="WHITE" toggleGroup="$toggleGroup2"
+                                    style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 18; -fx-text-fill: WHITE;"/>
+                </VBox>
+
+            </AnchorPane>
+            <Label fx:id="presetLbl" style=" -fx-font-family: Roboto-Thin; -fx-font-size: 13; -fx-text-fill: WHITE" wrapText="true"
+                   text="%Home"/>
+            <JFXButton fx:id="nextBtn" alignment="CENTER" buttonType="RAISED"
+                       contentDisplay="CENTER" mnemonicParsing="false"
+                        minWidth="100" onAction="#next"
+                       style="-fx-background-color: WHITE; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 13pt; -fx-text-fill: achmea"
+                       text="%next">
+            </JFXButton>
+        </VBox>
+        <JFXToolbar fx:id="toolbar" prefHeight="25" prefWidth="${toolbar.parent.width}"
+                    style="-fx-background-color: transparent" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+                    AnchorPane.topAnchor="0">
+        </JFXToolbar>
+    </children>
+</AnchorPane>

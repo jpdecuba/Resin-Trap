@@ -1,7 +1,9 @@
 package HoneyPot.protocol;
 
-import HoneyPot.lowinteraction.LIHelper;
-import HoneyPot.lowinteraction.TALK_FIRST;
+
+import Client.HoneyPot.lowinteraction.LIHelper;
+import Client.HoneyPot.lowinteraction.TALK_FIRST;
+import Client.HoneyPot.protocol.BlankProtocol;
 import org.junit.Before;
 
 import static org.junit.Assert.*;

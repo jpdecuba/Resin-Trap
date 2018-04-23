@@ -1,8 +1,8 @@
 package HoneyPot.protocol;
 
-import HoneyPot.lowinteraction.LIHelper;
-import HoneyPot.lowinteraction.TALK_FIRST;
-import org.junit.Test;
+import Client.HoneyPot.lowinteraction.LIHelper;
+import Client.HoneyPot.lowinteraction.TALK_FIRST;
+import Client.HoneyPot.protocol.MySQLProtocol;
 
 import java.util.Vector;
 
