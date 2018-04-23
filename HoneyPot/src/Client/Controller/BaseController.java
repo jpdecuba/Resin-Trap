@@ -78,7 +78,7 @@ public class BaseController {
      * Get Total Connection of all services
      * @return int of the totaal amount of connections
      */
-    public int GetTotalConnections(boolean overview) {
+    public int GetTotalConnections() {
 
         int i = 0;
         for (ILIModule item : Main.Services) {
@@ -86,16 +86,16 @@ public class BaseController {
             i += item.getNumberOfActiveConnections();
 
         }
-        if (currentConnections < i && overview == false)
+        if (currentConnections < i)
         {
             Platform.runLater(() -> {
                 snackbar.show("New connection has been made!", "Help", 3000, event -> {
                     try {
                         snackbar.close();
-                        String path = "/View/HelpView.fxml";
+                        String path = "/Client/View/HelpView.fxml";
                         String title = "Achmea";
                         Main.manager.currentView = path;
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("Client/bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
                         Parent root = loader.load();
                         Main.switchPage(root, title);
                         timer = new Timer();

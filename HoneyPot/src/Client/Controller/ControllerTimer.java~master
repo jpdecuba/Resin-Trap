@@ -24,10 +24,10 @@ public class ControllerTimer extends TimerTask {
 	public void run() {
 
 		int connections = controller.GetTotalConnections();
+		OverviewController overviewController = (OverviewController)controller;
 		if(overview)
 		{
 			Platform.runLater(()-> {
-				OverviewController overviewController = (OverviewController)controller;
 				overviewController.statusLbl.setText(overviewController.StatusCheck().toString());
 				overviewController.connectionsLbl.setText(String.valueOf(connections));
 				overviewController.threatLbl.setText(overviewController.getDatelastlog());
