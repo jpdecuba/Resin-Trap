@@ -63,10 +63,8 @@ public class BaseController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
             Parent root = loader.load();
             Main.switchPage(root, title);
-			Platform.runLater(() -> {
-				timer = new Timer();
-				timer.schedule(new ControllerTimer(this), 0,5000);
-			});
+			timer = new Timer();
+			timer.schedule(new ControllerTimer(this), 0,5000);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -76,7 +74,7 @@ public class BaseController {
      * Get Total Connection of all services
      * @return int of the totaal amount of connections
      */
-    public int GetTotalConnections() {
+    public int GetTotalConnections(boolean overview) {
 
         int i = 0;
         for (ILIModule item : Main.Services) {
@@ -84,9 +82,11 @@ public class BaseController {
             i += item.getNumberOfActiveConnections();
 
         }
-        if (currentConnections < i)
+        if (currentConnections < i && overview == false)
         {
-            snackbar.show("New connection has been made!", "Okay", event -> snackbar.close());
+			Platform.runLater(() -> {
+				snackbar.show("New connection has been made!", "Okay", event -> snackbar.close());
+			});
         }
         currentConnections = i;
         return i;

@@ -240,6 +240,10 @@ public class HoneyRJ  implements Serializable{
 	}
 
 	public void addLog(LogConnection log){
+		if(logs == null)
+		{
+			logs = new HashSet<>();
+		}
 		logs.add(log);
 	}
 

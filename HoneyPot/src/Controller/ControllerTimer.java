@@ -16,6 +16,6 @@ public class ControllerTimer extends TimerTask {
 
 	@Override
 	public void run() {
-		controller.GetTotalConnections();
+		controller.GetTotalConnections(false);
 	}
 }

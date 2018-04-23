@@ -22,7 +22,7 @@ public class OverViewTimer extends TimerTask {
         Platform.runLater(()->{
 
             item.statusLbl.setText(item.StatusCheck().toString());
-            item.connectionsLbl.setText(String.valueOf(item.GetTotalConnections()));
+            item.connectionsLbl.setText(String.valueOf(item.GetTotalConnections(true)));
             item.threatLbl.setText(item.getDatelastlog());
             item.timeframeLbl.setText(String.valueOf(item.Timeframes()));
         });
