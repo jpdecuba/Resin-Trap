@@ -75,6 +75,7 @@ public class ServicesController extends BaseController implements Initializable 
     TableColumn timeColumn;
     TableColumn portColumn;
     TableColumn messagesColumn;
+    TableColumn accountColumn;
 
     ScrollPane scrollPane;
 
@@ -141,7 +142,14 @@ public class ServicesController extends BaseController implements Initializable 
         messagesColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
         messagesColumn.setCellValueFactory(
                 new PropertyValueFactory<TableObject, String>("message"));
-        table.getColumns().addAll(ipColumn, timeColumn, portColumn, messagesColumn);
+
+
+        accountColumn = new TableColumn(resource.getString("account"));
+        accountColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
+        accountColumn.setCellValueFactory(
+                new PropertyValueFactory<TableObject, String>("account"));
+
+        table.getColumns().addAll(ipColumn, timeColumn, portColumn, messagesColumn,accountColumn);
     }
 
     public void fillListView() {
@@ -226,12 +234,12 @@ public class ServicesController extends BaseController implements Initializable 
                     GetLogs(mod)) {
                 SimpleDateFormat ft =
                         new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
-
                 TableObject tableO = new TableObject(
                         log.getDstIP().getHostAddress().toString(),
                         log,
                         String.valueOf(log.getDstPort()),
-                        ft.format(log.getDate()));
+                        ft.format(log.getDate()),
+                        log.getUsername());
                 table.getItems().add(tableO);
             }
             if (mod.isStarted()) {
@@ -451,12 +459,14 @@ public class ServicesController extends BaseController implements Initializable 
         public LogConnection message;
         public String port;
         public String time;
+        public String account;
 
-        public TableObject(String ip, LogConnection message, String port, String time) {
+        public TableObject(String ip, LogConnection message, String port, String time, String account) {
             this.ip = ip;
             this.message = message;
             this.port = port;
             this.time = time;
+            this.account = account;
         }
 
         public String getIp() {
@@ -487,8 +497,10 @@ public class ServicesController extends BaseController implements Initializable 
             return time;
         }
 
-        public void setTime(String time) {
-            this.time = time;
-        }
+        public void setTime(String time) { this.time = time; }
+
+        public String getAccount() { return account; }
+
+        public void setAccount(String account) { this.account = account; }
     }
 }
