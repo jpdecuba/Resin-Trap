@@ -92,10 +92,10 @@ public class BaseController {
                 snackbar.show("New connection has been made!", "Help", 3000, event -> {
                     try {
                         snackbar.close();
-                        String path = "/Client/View/HelpView.fxml";
+                        String path = "/View/HelpView.fxml";
                         String title = "Achmea";
                         Main.manager.currentView = path;
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("Client/bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("CLient/bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
                         Parent root = loader.load();
                         Main.switchPage(root, title);
                         timer = new Timer();

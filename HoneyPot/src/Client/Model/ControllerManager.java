@@ -20,7 +20,8 @@ public class ControllerManager {
 	public void loadView(String lang, String path, String title) {
 		try {
 			Main.lang = lang;
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+            loader.setResources(ResourceBundle.getBundle("Client.bundles.UIResources", new Locale(lang, lang.toUpperCase())));
 			Parent root = loader.load();
 			Main.switchPage(root, title);
 		} catch (IOException e) {
