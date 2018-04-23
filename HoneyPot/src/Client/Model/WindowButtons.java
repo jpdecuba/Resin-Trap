@@ -106,6 +106,7 @@ public class WindowButtons extends HBox {
         final PopupMenu popup = new PopupMenu();
         final TrayIcon trayIcon =
                 new TrayIcon(createImage("/Client/resources/ResinTrapTiniest.png", "tray icon"));
+        trayIcon.setToolTip("ResinTrap");
         final SystemTray tray = SystemTray.getSystemTray();
         trayIcon.setImageAutoSize(true);
 
