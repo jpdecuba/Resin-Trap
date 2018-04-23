@@ -36,7 +36,7 @@ public class BaseController {
             String title = "";
 
             if (source == overviewBtn){
-                path = "/View/OverView.fxml";
+                path = "/View/HelpView.fxml";
                 title = "Achmea";
             } else if (source == loginBtn){
                 if(!Main.CheckForLogout(loginBtn.getText(), snackbar))

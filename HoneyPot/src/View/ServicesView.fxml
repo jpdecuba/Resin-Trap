@@ -28,7 +28,7 @@
                                 <JFXButton fx:id="overviewBtn" alignment="BASELINE_LEFT" graphicTextGap="17.0"
                                            layoutX="0" layoutY="0" mnemonicParsing="false" onAction="#changePage"
                                            prefHeight="50.0" prefWidth="210.0"
-                                           style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
+                                           style="-fx-background-color: achmea; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"
                                            text="%overview" textFill="WHITE">
                                     <graphic>
                                         <FontAwesomeIconView fill="WHITE" glyphName="HOME" size="22"
@@ -38,7 +38,7 @@
                                 <JFXButton fx:id="servicesBtn" alignment="BASELINE_LEFT" graphicTextGap="15.0"
                                            layoutX="0" layoutY="50.0" mnemonicParsing="false" onAction="#changePage"
                                            prefHeight="50.0" prefWidth="210.0"
-                                           style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
+                                           style="-fx-background-color: achmea; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"
                                            text="%services" textFill="WHITE">
                                     <graphic>
                                         <FontAwesomeIconView fill="WHITE" glyphName="SERVER" size="22"
@@ -48,7 +48,7 @@
                                 <JFXButton fx:id="adminBtn" alignment="BASELINE_LEFT" graphicTextGap="12.0"
                                            layoutX="0" layoutY="0" mnemonicParsing="false" onAction="#changePage"
                                            prefHeight="50.0" prefWidth="210.0"
-                                           style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
+                                           style="-fx-background-color: achmea; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"
                                            text="%admin" textFill="WHITE">
                                     <graphic>
                                         <FontAwesomeIconView fill="WHITE" glyphName="BAR_CHART" size="22"
@@ -59,7 +59,7 @@
                                 <JFXButton fx:id="loginBtn" alignment="BASELINE_LEFT" graphicTextGap="20.0" layoutX="0"
                                            layoutY="50.0" mnemonicParsing="false" onAction="#changePage"
                                            prefHeight="50.0" prefWidth="210.0"
-                                           style="-fx-background-color: achmea; -fx-font-family: Roboto-Thin; -fx-font-size: 16;"
+                                           style="-fx-background-color: achmea; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"
                                            text="%login2" textFill="WHITE">
                                     <graphic>
                                         <FontAwesomeIconView fill="WHITE" glyphName="USER" size="22"
@@ -80,7 +80,7 @@
                                       minWidth="315" prefWidth="315"
                                       alignment="TOP_CENTER" style="-fx-background-color: WHITE">
                                     <Region prefHeight="100"/>
-                                    <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 28; -fx-text-fill: #424242"
+                                    <Label style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 28; -fx-text-fill: #424242"
                                            text="%services2"/>
                                     <Region prefHeight="50"/>
                                     <HBox prefHeight="200.0">
@@ -94,7 +94,7 @@
                                                          style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"/>
                                         </children>
                                     </HBox>
-                                    <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
+                                    <Label style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 12; -fx-text-fill: grey"
                                            text="%selectproto"/>
                                 </VBox>
                                 <VBox fx:id="vb2" minHeight="${vb2.parent.height}" prefHeight="${vb2.parent.height}"
@@ -104,25 +104,25 @@
                                     <HBox alignment="CENTER">
                                         <children>
                                             <Label fx:id="protocolLbl"
-                                                   style=" -fx-font-family: Roboto-Thin; -fx-font-size: 28; -fx-text-fill: #424242"
+                                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 28; -fx-text-fill: #424242"
                                                    text="%protocol"/>
                                             <Region prefWidth="25"></Region>
-                                            <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
+                                            <Label style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 12; -fx-text-fill: grey"
                                                    text="%off"/>
                                             <JFXToggleButton fx:id="protoToggle"
                                                              onAction="#toggleMod"></JFXToggleButton>
-                                            <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
+                                            <Label style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 12; -fx-text-fill: grey"
                                                    text="%on"/>
                                         </children>
                                     </HBox>
                                     <Region prefHeight="50"/>
                                     <HBox fx:id="hb" prefWidth="${hb.parent.width}">
                                         <TableView fx:id="table"
-                                                     style="-fx-font-family: Roboto-Thin;-fx-background-color: transparent"
+                                                     style="-fx-font-family: 'Roboto Condensed';-fx-background-color: transparent"
                                         onMouseClicked="#clickLog"/>
 
                                     </HBox>
-                                    <Label style=" -fx-font-family: Roboto-Thin; -fx-font-size: 12; -fx-text-fill: grey"
+                                    <Label style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 12; -fx-text-fill: grey"
                                            text="%selectlog"/>
                                 </VBox>
                             </children>
