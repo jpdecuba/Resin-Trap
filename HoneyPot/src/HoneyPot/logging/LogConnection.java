@@ -17,6 +17,10 @@ public class LogConnection implements Serializable, Comparable<LogConnection> {
 
     private String Protocol;
 
+    private int UserId;
+
+    private String Username;
+
     private ArrayList<LogRecord> LogRecords = new ArrayList();
 
 	public InetAddress getDstIP() {
@@ -30,6 +34,14 @@ public class LogConnection implements Serializable, Comparable<LogConnection> {
 	public String getProtocol() {
 		return Protocol;
 	}
+
+	public int getUserId() {return UserId;}
+
+	public String getUsername() {return Username; }
+
+	public void SetUsername(String username) {
+	    this.Username = username;
+    }
 
     /**
      * LogConnection Constructor
@@ -45,8 +57,12 @@ public class LogConnection implements Serializable, Comparable<LogConnection> {
         this.srcPort = srcPort;
         this.dstPort = dstPort;
         Protocol = protocol;
-
         date = new Date();
+    }
+
+    public LogConnection(InetAddress srcIP, InetAddress dstIP, int srcPort, int dstPort, String protocol, int userId) {
+	    this(srcIP,dstIP,srcPort,dstPort,protocol);
+        this.UserId = userId;
     }
 
 

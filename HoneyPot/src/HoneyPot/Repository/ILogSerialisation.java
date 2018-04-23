@@ -3,6 +3,7 @@ package HoneyPot.Repository;
 import HoneyPot.logging.LogConnection;
 import Model.User;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public interface ILogSerialisation {

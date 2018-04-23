@@ -29,6 +29,11 @@ public class User implements Serializable{
 		this.code = code;
 	}
 
+	public User(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
 	public User(int id, String name, UserRole role, int session)
 	{
 		this(name, "", role);

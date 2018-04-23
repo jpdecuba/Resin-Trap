@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -46,11 +47,21 @@ public class LogDatabase implements ILogSerialisation{
             PreparedStatement statement = Database.connection().prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
-                LogConnection log = new LogConnection(null, InetAddress.getByName(rs.getString("RemoteIP").substring(1)), 0, rs.getInt("Port"), rs.getString("Service"));
+                LogConnection log = new LogConnection(null,
+                        InetAddress.getByName(rs.getString("RemoteIP").substring(1)), 0, rs.getInt("Port"),
+                        rs.getString("Service"),rs.getInt("accountID"));
                 if(log != null){
+                    String sql2 = "SELECT name FROM Account WHERE id = ?";
+                    PreparedStatement statement2 = Database.connection().prepareStatement(sql2);
+                    statement2.setInt(1, log.getUserId());
+                    ResultSet rs2 = statement2.executeQuery();
+                    while(rs2.next()){
+                        log.SetUsername(rs2.getString(1));
+                    }
                     logs.add(log);
                 }
             }
+            return logs;
         } catch (SQLException | UnknownHostException sqle){
             sqle.printStackTrace();
         }
