@@ -36,8 +36,6 @@ public class AdminController extends BaseController implements Initializable  {
     @FXML
     VBox vb;
 
-    static JFXSnackbar snackbar;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resource = resources;
