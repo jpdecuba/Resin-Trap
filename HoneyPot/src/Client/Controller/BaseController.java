@@ -45,26 +45,26 @@ public class BaseController {
             String title = "";
 
             if (source == overviewBtn){
-                path = "/View/OverView.fxml";
+                path = "/Client/View/OverView.fxml";
                 title = "Achmea";
             } else if (source == loginBtn){
                 if(!Main.CheckForLogout(loginBtn.getText(), snackbar))
                 {
                     return;
                 }
-                path = "/View/LoginView.fxml";
+                path = "/Client/View/LoginView.fxml";
                 title = "Login";
             }
             else if (source == servicesBtn){
-                path = "/View/ServicesView.fxml";
+                path = "/Client/View/ServicesView.fxml";
                 title = "Achmea";
             }
             else if (source == adminBtn){
-                path = "/View/AdminView.fxml";
+                path = "/Client/View/AdminView.fxml";
                 title = "Achmea";
             }
             Main.manager.currentView = path;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("Client/bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
             Parent root = loader.load();
             Main.switchPage(root, title);
         } catch (IOException e) {
