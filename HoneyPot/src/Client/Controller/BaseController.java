@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -88,6 +89,17 @@ public class BaseController {
         }
         if (currentConnections < i)
         {
+        	if(SystemTray.isSupported())
+			{
+				for (TrayIcon t: SystemTray.getSystemTray().getTrayIcons())
+				{
+					if(t.getToolTip() == "ResinTrap")
+					{
+						t.displayMessage("Threat!", "There is an active connection! Open the application to see more.", TrayIcon.MessageType.WARNING);
+					}
+				}
+
+			}
             Platform.runLater(() -> {
                 snackbar.show("New connection has been made!", "Help", 3000, event -> {
                     try {
