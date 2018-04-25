@@ -16,7 +16,7 @@ import javax.mail.*;
 public class EmailSend {
 
 
-    final String username = "noreply.achemahoneypot@gmail.com";
+    final String username = "noreply.achmeahoneypot@gmail.com";
     final String password = "achemahoneypot";
 
     Properties props = new Properties();
