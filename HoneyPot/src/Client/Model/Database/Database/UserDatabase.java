@@ -35,6 +35,14 @@ public class UserDatabase implements ILoginRepo {
 						user1.setCode(sk.getString(1));
 					}
 				}
+				sql = "SELECT address FROM email WHERE userId = ?";
+				statement = Database.connection().prepareStatement(sql);
+				statement.setInt(1, user1.getId());
+				ResultSet rs2 = statement.executeQuery();
+				while (rs2.next()) {
+					user1.getMsgEmail().add(rs2.getString(1));
+				}
+
 				sql = "UPDATE Account SET [online] = ? WHERE name = ?";
 				statement = Database.connection().prepareStatement(sql);
 				statement.setInt(1, 1);

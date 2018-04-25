@@ -7,6 +7,7 @@ import Server.Database.Interface.ILoginRepo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Random;
 
 public class UserDatabase implements ILoginRepo {
@@ -98,12 +99,27 @@ public class UserDatabase implements ILoginRepo {
 	public boolean RegisterAdmin(User user) {
 		try{
 			String sql = "INSERT INTO Account (name, password, roleID, [online]) VALUES (?, ?, ?, ?)";
-			PreparedStatement statement = Database.connection().prepareStatement(sql);
+			PreparedStatement statement = Database.connection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, user.getName());
 			statement.setString(2, user.getPassword());
 			statement.setInt(3, user.getRole().getValue());
 			statement.setInt(4, 0);
-			statement.execute();
+			int idd = 0;
+			statement.executeUpdate();
+			ResultSet result = statement.getGeneratedKeys();
+
+			if(result.next() && result != null){
+				idd = result.getInt(1);
+				System.out.println("Key: " + idd);
+			}
+			for (String email :
+					user.getMsgEmail()) {
+				String sql2 = "INSERT INTO Email (address, userId) VALUES (?, ?)";
+				PreparedStatement statement2 = Database.connection().prepareStatement(sql2);
+				statement2.setString(1, email);
+				statement2.setInt(2, idd);
+				statement2.execute();
+			}
 
 			String newCode = "";
 			while (newCode == "")
