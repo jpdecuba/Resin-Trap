@@ -114,8 +114,12 @@ public class LIModuleThread implements Runnable {
 		System.out.println("localPort:  " + localPort);
 		System.out.println("remotePort:  " + remotePort);
 
+
 		logs = new LogConnection(localIP, remoteIP,localPort,remotePort,_parent.getProtocol().toString());
+
 		_startTime = new Date();
+
+		Main.SendEmail(logs);
 		try {
 			_logFile = new LogFile(this);
 	} catch (Exception e) {

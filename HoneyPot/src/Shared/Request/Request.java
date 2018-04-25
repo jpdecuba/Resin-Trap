@@ -2,7 +2,9 @@ package Shared.Request;
 
 import Shared.Mail.MailMsg;
 
-public class Request {
+import java.io.Serializable;
+
+public class Request implements Serializable{
 
     private RequestType msg;
 

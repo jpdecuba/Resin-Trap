@@ -24,19 +24,16 @@ public class ServerHandler {
         this.output = out;
     }
 
-    public void DBGet(Request object){
+    public void Handler(Request object){
 
 
         try {
-            //ObjectOutputStream output = new ObjectOutputStream(Socket.getOutputStream());
-
             RequestType msg = object.getMsg();
-
             switch (msg){
                 case Mail:
                     EmailSend send = new EmailSend();
                     boolean mail = send.SendEmail(object.Getemail());
-                    output.writeUTF(String.valueOf(mail));
+                    output.writeObject(mail);
                     break;
             }
             output.flush();

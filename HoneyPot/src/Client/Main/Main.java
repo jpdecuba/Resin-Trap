@@ -2,6 +2,7 @@ package Client.Main;
 
 import Client.FileSave.*;
 import Client.HoneyPot.honeyrj.*;
+import Client.HoneyPot.logging.LogConnection;
 import Client.HoneyPot.lowinteraction.*;
 
 import Client.HoneyPot.protocol.*;
@@ -9,6 +10,8 @@ import Client.HoneyPot.protocol.*;
 import Client.Model.*;
 import Client.Model.Database.*;
 import Client.Model.Preset.Preset;
+import Client.Sockets.SocketClient;
+import Shared.Mail.MailMsg;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXToolbar;
@@ -36,6 +39,8 @@ public class Main extends Application {
     public static JFXToolbar toolbar;
     public static ControllerManager manager;
     public static LoginModel loginModel;
+
+    private static SocketClient client;
 
     public static Preferences pref;
 
@@ -127,6 +132,14 @@ public class Main extends Application {
 
 
         Stage.show();
+        client = new SocketClient(null);
+    }
+
+
+    public static void SendEmail(LogConnection log){
+
+        MailMsg msg = new MailMsg(log.getProtocol(),log.getDstIP().toString(),log.getDstPort(),GetAccount().getMsgEmail());
+        client.SendEmail(msg);
     }
 
     public static void switchPage(Parent parent, String title)

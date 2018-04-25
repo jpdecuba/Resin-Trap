@@ -1,6 +1,7 @@
 package Client.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class User implements Serializable{
 	private int id;
@@ -8,6 +9,8 @@ public class User implements Serializable{
 	private String password;
 	private UserRole role;
 	private int session;
+
+	private ArrayList<String> msgEmail = new ArrayList();
 
 	private String code;
 
@@ -45,6 +48,7 @@ public class User implements Serializable{
 		return id;
 	}
 
+
 	public String getName() {
 		return name;
 	}
@@ -70,5 +74,14 @@ public class User implements Serializable{
 	}
 
 	public void setCode(String code) {this.code = code; }
+
+	public ArrayList<String> getMsgEmail() {
+		return msgEmail;
+	}
+
+	public void setMsgEmail(ArrayList<String> msgEmail) {
+		this.msgEmail = msgEmail;
+	}
+
 	//
 }

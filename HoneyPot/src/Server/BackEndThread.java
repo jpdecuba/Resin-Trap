@@ -2,7 +2,6 @@ package Server;
 
 import Shared.Request.Request;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -45,7 +44,7 @@ public class BackEndThread extends Thread{
                 if(msg.getClass() == Request.class){
 
                     Request item = (Request) msg;
-                    handler.DBGet(item);
+                    handler.Handler(item);
 
                 }else {
                     output.writeUTF("No valid request");
