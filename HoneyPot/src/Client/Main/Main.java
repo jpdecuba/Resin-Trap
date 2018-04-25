@@ -223,7 +223,7 @@ public class Main extends Application {
 	{
 		if(Main.GetAccount() != null)
 		{
-			button.setText(ResourceBundle.getBundle("bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("logout"));
+			button.setText(ResourceBundle.getBundle("Client.bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("logout"));
 		}
 	}
 
