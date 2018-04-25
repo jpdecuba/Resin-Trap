@@ -137,9 +137,16 @@ public class Main extends Application {
 
 
     public static void SendEmail(LogConnection log){
+        try {
+            ArrayList<String> t = new ArrayList<>();
+            //t.add("dotter5380@gmail.com");
+            if(GetAccount() != null && GetAccount().getMsgEmail().size() != 0) {
+                MailMsg msg = new MailMsg(log.getProtocol(), log.getDstIP().toString(), log.getDstPort(), GetAccount().getMsgEmail());
+                client.SendEmail(msg);
+            }
+        }catch (Exception e){
 
-        MailMsg msg = new MailMsg(log.getProtocol(),log.getDstIP().toString(),log.getDstPort(),GetAccount().getMsgEmail());
-        client.SendEmail(msg);
+        }
     }
 
     public static void switchPage(Parent parent, String title)
