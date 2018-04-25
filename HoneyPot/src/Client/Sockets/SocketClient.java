@@ -28,33 +28,45 @@ public class SocketClient {
             try {
                 this.Socket = (Socket) socketFactory.createSocket("localhost", 7676);
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
 
         try {
-            output = new ObjectOutputStream(Socket.getOutputStream());
+            if(SocketCheck()) {
+                output = new ObjectOutputStream(Socket.getOutputStream());
 
-            BufferedInputStream socketRead = new BufferedInputStream(Socket.getInputStream());
+                BufferedInputStream socketRead = new BufferedInputStream(Socket.getInputStream());
 
-            input = new ObjectInputStream(socketRead);
+                input = new ObjectInputStream(socketRead);
+            }
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
 
     }
 
 
-    public boolean SendEmail(MailMsg msg){
+    public boolean SocketCheck(){
+        if(this.Socket != null) {
+            return true;
+        }
+        return false;
+    }
 
+
+    public boolean SendEmail(MailMsg msg){
         try {
-            Request RequestSets = new Request(RequestType.Mail,msg);
-            output.writeObject(RequestSets);
-            Object obj = input.readObject();
-            if(obj instanceof Boolean) {
-                boolean results = ((boolean) obj);
-                output.flush();
-                return results;
+            if(SocketCheck()) {
+                Request RequestSets = new Request(RequestType.Mail, msg);
+                output.writeObject(RequestSets);
+                Object obj = input.readObject();
+                if (obj instanceof Boolean) {
+                    boolean results = ((boolean) obj);
+                    output.flush();
+                    return results;
+                }
+            }else{
+                return false;
             }
 
         } catch (IOException e) {
@@ -73,13 +85,17 @@ public class SocketClient {
     public boolean Register(User usr){
 
         try {
-            Request RequestSets = new Request(RequestType.Register,usr);
-            output.writeObject(RequestSets);
-            Object obj = input.readObject();
-            if(obj instanceof Boolean) {
-                boolean results = ((boolean) obj);
-                output.flush();
-                return results;
+            if(SocketCheck()) {
+                Request RequestSets = new Request(RequestType.Register, usr);
+                output.writeObject(RequestSets);
+                Object obj = input.readObject();
+                if (obj instanceof Boolean) {
+                    boolean results = ((boolean) obj);
+                    output.flush();
+                    return results;
+                }
+            }else {
+                return false;
             }
 
         } catch (IOException e) {
@@ -98,14 +114,17 @@ public class SocketClient {
     public boolean RegisterAdmin(User usr){
 
         try {
-            Request RequestSets = new Request(RequestType.RegisterAdmin,usr);
-            output.writeObject(RequestSets);
-            Object obj = input.readObject();
-            if(obj instanceof Boolean) {
-                boolean results = ((boolean) obj);
-                output.flush();
-                return results;
+            if(SocketCheck()) {
+                Request RequestSets = new Request(RequestType.RegisterAdmin, usr);
+                output.writeObject(RequestSets);
+                Object obj = input.readObject();
+                if (obj instanceof Boolean) {
+                    boolean results = ((boolean) obj);
+                    output.flush();
+                    return results;
+                }
             }
+            return false;
 
         } catch (IOException e) {
             //e.printStackTrace();
@@ -114,10 +133,6 @@ public class SocketClient {
             //e.printStackTrace();
             return false;
         }
-
-
-
-        return false;
     }
 
     public void flush(){
