@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.SocketException;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
@@ -152,7 +153,10 @@ public class LIModule implements ILIModule,Runnable,Serializable {
         while (_thread == thisThread) { //while running (so we can stop later)
             while (listening) { //allow us to temporary stop listening subject to limitation mentioned above
                 try {
-                    cachedPool.submit(new LIModuleThread(_server.accept(), this));
+					Socket soc = _server.accept();
+					if(soc != null) {
+						cachedPool.submit(new LIModuleThread(_server.accept(), this));
+					}
                     //new Thread(new LIModuleThread(_server.accept(), this)).start();
                     synchronized (this) {
                         numberConnections++;
@@ -181,6 +185,10 @@ public class LIModule implements ILIModule,Runnable,Serializable {
                     //e.printStackTrace();
 
                 }
+                catch (NullPointerException ne)
+				{
+					//
+				}
                 try {
 
                     Thread.sleep(_parent.TIME_WAIT_CONNECTION);
