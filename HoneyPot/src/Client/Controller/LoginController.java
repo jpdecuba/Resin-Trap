@@ -63,7 +63,7 @@ public class LoginController implements Initializable {
 		if(button == loginBtn)
 		{
 			if(Login()) {
-				path = "/View/OverView.fxml";
+				path = "/Client/View/OverView.fxml";
 				title = "Overview";
 			}
 			else
@@ -72,28 +72,28 @@ public class LoginController implements Initializable {
 			}
 		}
 		else if (button == overviewBtn){
-			path = "/View/OverView.fxml";
+			path = "/Client/View/OverView.fxml";
 			title = "Achmea";
 		}
 		else if (button == servicesBtn){
-			path = "/View/ServicesView.fxml";
+			path = "/Client/View/ServicesView.fxml";
 			title = "Achmea";
 		}
 		else if (button == goToRegisterBtn)
 		{
-			path = "/view/RegisterView.fxml";
+			path = "/Client/view/RegisterView.fxml";
 			title = "Register";
 		}
 		else if (button == goToLoginBtn)
 		{
-			path = "/view/LoginView.fxml";
+			path = "/Client/view/LoginView.fxml";
 			title = "Login";
 		}
 		else if (button == registerBtn)
 		{
 			if(Register())
 			{
-				path = "/view/LoginView.fxml";
+				path = "/Client/view/LoginView.fxml";
 				title = "Login";
 			}
 			else
