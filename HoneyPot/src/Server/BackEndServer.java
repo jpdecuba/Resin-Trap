@@ -13,7 +13,6 @@ public class BackEndServer {
     private ServerSocket serverSocket;
     private Socket socket = null;
 
-
     private ExecutorService executor = Executors.newCachedThreadPool();
 
     public BackEndServer() throws Exception {
