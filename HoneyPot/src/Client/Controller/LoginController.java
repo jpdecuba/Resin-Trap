@@ -182,11 +182,11 @@ public class LoginController implements Initializable {
 						return false;
 					}
 					user = new User(username, password, role, code);
-					register = Main.loginModel.Register(user);
+					register = Main.Register(user);
 					break;
 				case Admin:
 					user = new User(username, password, role);
-					register = Main.loginModel.RegisterAdmin(user);
+					register = Main.RegisterAdmin(user);
 					break;
 			}
 			if (register) {

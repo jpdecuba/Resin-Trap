@@ -1,5 +1,8 @@
 package Server;
 
+import Client.Model.Database.Database.Database;
+import Server.Database.Database.UserDatabase;
+import Server.Database.LoginModel;
 import Server.Mail.EmailSend;
 import Shared.Request.Request;
 import Shared.Request.RequestType;
@@ -26,7 +29,7 @@ public class ServerHandler {
 
     public void Handler(Request object){
 
-
+        LoginModel LM = new LoginModel();
         try {
             RequestType msg = object.getMsg();
             switch (msg){
@@ -34,6 +37,14 @@ public class ServerHandler {
                     EmailSend send = new EmailSend();
                     boolean mail = send.SendEmail(object.Getemail());
                     output.writeObject(mail);
+                    break;
+                case Register:
+                    boolean register =LM.Register(object.getAccount());
+                    output.writeObject(register);
+                    break;
+                case RegisterAdmin:
+                    boolean registeradmin = LM.RegisterAdmin(object.getAccount());
+                    output.writeObject(registeradmin);
                     break;
             }
             output.flush();

@@ -1,5 +1,6 @@
 package Client.Sockets;
 
+import Client.Model.User;
 import Shared.Mail.MailMsg;
 import Shared.Request.Request;
 import Shared.Request.RequestType;
@@ -48,6 +49,56 @@ public class SocketClient {
 
         try {
             Request RequestSets = new Request(RequestType.Mail,msg);
+            output.writeObject(RequestSets);
+            Object obj = input.readObject();
+            if(obj instanceof Boolean) {
+                boolean results = ((boolean) obj);
+                output.flush();
+                return results;
+            }
+
+        } catch (IOException e) {
+            //e.printStackTrace();
+            return false;
+        } catch (ClassNotFoundException e) {
+            //e.printStackTrace();
+            return false;
+        }
+
+
+
+        return false;
+    }
+
+    public boolean Register(User usr){
+
+        try {
+            Request RequestSets = new Request(RequestType.Register,usr);
+            output.writeObject(RequestSets);
+            Object obj = input.readObject();
+            if(obj instanceof Boolean) {
+                boolean results = ((boolean) obj);
+                output.flush();
+                return results;
+            }
+
+        } catch (IOException e) {
+            //e.printStackTrace();
+            return false;
+        } catch (ClassNotFoundException e) {
+            //e.printStackTrace();
+            return false;
+        }
+
+
+
+        return false;
+    }
+
+    public boolean RegisterAdmin(User usr){
+
+        try {
+            Request RequestSets = new Request(RequestType.RegisterAdmin,usr);
             output.writeObject(RequestSets);
             Object obj = input.readObject();
             if(obj instanceof Boolean) {

@@ -149,6 +149,25 @@ public class Main extends Application {
         }
     }
 
+
+
+    public static boolean Register(User urs){
+        try {
+            return client.Register(urs);
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    public static boolean RegisterAdmin(User urs){
+        try {
+            return client.RegisterAdmin(urs);
+        }catch (Exception e){
+            return false;
+
+        }
+    }
+
     public static void switchPage(Parent parent, String title)
     {
         Main.Stage.getScene().setRoot(parent);
