@@ -86,7 +86,7 @@
                             style="-fx-background-color: WHITE;">
                     <HBox AnchorPane.topAnchor="60" AnchorPane.leftAnchor="75" AnchorPane.rightAnchor="75"
                           alignment="TOP_CENTER">
-                        <Label text="Support"
+                        <Label text="%support"
                                style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 28;"></Label>
                     </HBox>
                     <ScrollPane AnchorPane.rightAnchor="75" AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="75"
