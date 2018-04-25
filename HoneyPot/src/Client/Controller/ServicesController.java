@@ -5,6 +5,8 @@ import Client.HoneyPot.lowinteraction.ILIModule;
 import Client.HoneyPot.lowinteraction.LIModule;
 import Client.Main.Main;
 import Client.Model.Status;
+import Client.Model.User;
+import Client.Model.UserRole;
 import Client.Model.WindowButtons;
 import com.jfoenix.controls.*;
 import com.sun.javafx.scene.control.skin.TableColumnHeader;
@@ -143,13 +145,22 @@ public class ServicesController extends BaseController implements Initializable 
         messagesColumn.setCellValueFactory(
                 new PropertyValueFactory<TableObject, String>("message"));
 
+        table.getColumns().addAll(ipColumn, timeColumn, portColumn, messagesColumn);
 
-        accountColumn = new TableColumn(resource.getString("account"));
-        accountColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
-        accountColumn.setCellValueFactory(
-                new PropertyValueFactory<TableObject, String>("account"));
 
-        table.getColumns().addAll(ipColumn, timeColumn, portColumn, messagesColumn,accountColumn);
+        //add extra column if user is admin
+        User user = Main.GetAccount();
+
+        if (user != null) {
+            if (user.getRole() == UserRole.Admin) {
+                accountColumn = new TableColumn(resource.getString("account"));
+                accountColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
+                accountColumn.setCellValueFactory(
+                        new PropertyValueFactory<TableObject, String>("account"));
+
+                table.getColumns().addAll(accountColumn);
+            }
+        }
     }
 
     public void fillListView() {
