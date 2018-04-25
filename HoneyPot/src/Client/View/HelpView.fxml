@@ -9,6 +9,10 @@
 <?import javafx.scene.layout.Region?>
 
 <?import javafx.scene.control.Label?>
+<?import com.jfoenix.controls.JFXScrollPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Controller.HelpController">
     <children>
@@ -80,9 +84,39 @@
 
                 <AnchorPane fx:id="mainPane" prefHeight="${mainPane.parent.height}" HBox.hgrow="ALWAYS"
                             style="-fx-background-color: WHITE;">
-                    <VBox alignment="TOP_CENTER" AnchorPane.topAnchor="75" AnchorPane.bottomAnchor="75" AnchorPane.leftAnchor="75" AnchorPane.rightAnchor="75">
-                        <Label text="Help" style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 28;"></Label>
-                    </VBox>
+                    <HBox AnchorPane.topAnchor="60" AnchorPane.leftAnchor="75" AnchorPane.rightAnchor="75"
+                          alignment="TOP_CENTER">
+                        <Label text="Support"
+                               style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 28;"></Label>
+                    </HBox>
+                    <ScrollPane AnchorPane.rightAnchor="75" AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="75"
+                                AnchorPane.topAnchor="100" style="-fx-background-color: WHITE; -fx-border-radius: 0"
+                                vbarPolicy="NEVER" hbarPolicy="NEVER" fitToWidth="true">
+                        <VBox alignment="TOP_LEFT" style="-fx-background-color: WHITE" spacing="25">
+                            <Label text="%block"
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 22;"></Label>
+                            <Label wrapText="true" text="%step1"
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
+                            <Label wrapText="true" text="%step12"
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
+                            <Label wrapText="true" text="%step13"
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
+                            <ImageView fx:id="img">
+                                <image>
+                                    <Image fx:id="img2" requestedWidth="500" preserveRatio="true"
+                                           url="/Client/Resources/cmd.PNG"/>
+                                </image>
+                            </ImageView>
+                            <Label wrapText="true" text="%step2"
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
+                            <Label wrapText="true" text="%step3"
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
+                            <Label wrapText="true" text="%step4"
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
+                            <Label wrapText="true" text="%step5"
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
+                        </VBox>
+                    </ScrollPane>
                 </AnchorPane>
             </children>
         </HBox>
