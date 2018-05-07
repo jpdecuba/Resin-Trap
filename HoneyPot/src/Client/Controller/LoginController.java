@@ -33,6 +33,7 @@ public class LoginController implements Initializable {
     @FXML JFXButton registerBtn;
 	@FXML JFXComboBox registerUserRoleField;
     @FXML JFXTextField registerUsernameField;
+	@FXML JFXTextField registerEmailField;
     @FXML JFXPasswordField registerPasswordField;
     @FXML JFXPasswordField registerConfirmField;
     @FXML JFXTextField codeField;
@@ -142,7 +143,7 @@ public class LoginController implements Initializable {
     public boolean Login(){
         String username = loginUsernameField.getText();
         String password = loginPasswordField.getText();
-		User user = Main.loginModel.Login( new User(username, password));
+		User user = Main.Login( new User(username, password));
 
         if(user != null) {
 			Main.setAccount(user);
@@ -162,6 +163,7 @@ public class LoginController implements Initializable {
 		String username = registerUsernameField.getText();
 		String password = registerPasswordField.getText();
 		String confirm = registerConfirmField.getText();
+		String email = registerEmailField.getText();
 		String code = codeField.getText();
 		UserRole role = (UserRole) registerUserRoleField.getSelectionModel().getSelectedItem();
 		if(role == null)
@@ -182,10 +184,12 @@ public class LoginController implements Initializable {
 						return false;
 					}
 					user = new User(username, password, role, code);
+					user.getMsgEmail().add(email);
 					register = Main.Register(user);
 					break;
 				case Admin:
 					user = new User(username, password, role);
+					user.getMsgEmail().add(email);
 					register = Main.RegisterAdmin(user);
 					break;
 			}

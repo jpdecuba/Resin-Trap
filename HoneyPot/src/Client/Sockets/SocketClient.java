@@ -1,5 +1,6 @@
 package Client.Sockets;
 
+import Client.HoneyPot.logging.LogConnection;
 import Client.Model.User;
 import Shared.Mail.MailMsg;
 import Shared.Request.Request;
@@ -82,6 +83,35 @@ public class SocketClient {
         return false;
     }
 
+    public User Login(User usr){
+
+        try {
+            if(SocketCheck()) {
+                Request RequestSets = new Request(RequestType.Login, usr);
+                output.writeObject(RequestSets);
+                Object obj = input.readObject();
+                if (obj instanceof User) {
+                    User results = ((User) obj);
+                    output.flush();
+                    return results;
+                }
+            }else {
+                return null;
+            }
+
+        } catch (IOException e) {
+            //e.printStackTrace();
+            return null;
+        } catch (ClassNotFoundException e) {
+            //e.printStackTrace();
+            return null;
+        }
+
+
+
+        return null;
+    }
+
     public boolean Register(User usr){
 
         try {
@@ -133,6 +163,36 @@ public class SocketClient {
             //e.printStackTrace();
             return false;
         }
+    }
+
+    public void SaveLogs(User usr, Iterable<LogConnection> logs){
+
+        try {
+            if(SocketCheck()) {
+                Request RequestSets = new Request(RequestType.SaveLogs, usr,logs);
+                output.writeObject(RequestSets);
+            }
+
+        } catch (IOException e) {
+            //e.printStackTrace();
+        }
+
+
+    }
+
+    public void SaveLog(User usr, LogConnection log){
+
+        try {
+            if(SocketCheck()) {
+                Request RequestSets = new Request(RequestType.SaveLog, usr, log);
+                output.writeObject(RequestSets);
+            }
+
+        } catch (IOException e) {
+            //e.printStackTrace();
+        }
+
+
     }
 
     public void flush(){

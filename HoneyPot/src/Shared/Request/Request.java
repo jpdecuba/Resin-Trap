@@ -1,5 +1,6 @@
 package Shared.Request;
 
+import Client.HoneyPot.logging.LogConnection;
 import Client.Model.User;
 import Shared.Mail.MailMsg;
 
@@ -12,6 +13,9 @@ public class Request implements Serializable{
     private MailMsg email;
 
     private User Account;
+
+    private LogConnection log;
+    private Iterable<LogConnection> logs;
 
 
 
@@ -29,6 +33,19 @@ public class Request implements Serializable{
         this.Account = Account;
     }
 
+    public Request(RequestType msg, User Account, LogConnection log) {
+        this.msg = msg;
+        this.Account = Account;
+        this.log = log;
+    }
+
+    public Request(RequestType msg, User Account, Iterable<LogConnection> logs) {
+        this.msg = msg;
+        this.Account = Account;
+        this.logs = logs;
+
+    }
+
 
 
     public RequestType getMsg() {
@@ -41,5 +58,13 @@ public class Request implements Serializable{
 
     public User getAccount() {
         return Account;
+    }
+
+    public LogConnection getLog() {
+        return log;
+    }
+
+    public Iterable<LogConnection> getLogs() {
+        return logs;
     }
 }

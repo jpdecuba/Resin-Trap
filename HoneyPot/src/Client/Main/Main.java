@@ -71,6 +71,8 @@ public class Main extends Application {
 
     public static void setAccount(User account) {
         pref.setAccount(account);
+        SaveFiles file = new SaveFiles();
+        file.WritePreferences(Main.pref);
     }
 
     public static User GetAccount() {
@@ -159,6 +161,15 @@ public class Main extends Application {
         }
     }
 
+    public static User Login(User urs){
+        try {
+
+            return client.Login(urs);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
     public static boolean RegisterAdmin(User urs){
         try {
             return client.RegisterAdmin(urs);
@@ -166,6 +177,14 @@ public class Main extends Application {
             return false;
 
         }
+    }
+
+    public static void SaveLogs(Iterable<LogConnection> logs){
+        client.SaveLogs(pref.getAccount(),logs);
+    }
+
+    public static void SaveLog(LogConnection log){
+        client.SaveLog(pref.getAccount(),log);
     }
 
     public static void switchPage(Parent parent, String title)
@@ -177,7 +196,6 @@ public class Main extends Application {
     }
 
     public static void launchHoneypot(){
-
         try {
             honeypot = new HoneyRJ();
         } catch (HoneyRJException e) {

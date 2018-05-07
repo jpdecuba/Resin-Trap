@@ -12,11 +12,12 @@ public class LISerializeDBThread implements Runnable {
 
     public LISerializeDBThread(LogConnection log){
         this.log = log;
-        repository = new LogRepository(new LogDatabase());
+        //repository = new LogRepository(new LogDatabase());
     }
 
     @Override
     public void run() {
-        repository.SaveLog(log, Main.GetAccount());
+        //repository.SaveLog(log, Main.GetAccount());
+        Main.SaveLog(log);
     }
 }
