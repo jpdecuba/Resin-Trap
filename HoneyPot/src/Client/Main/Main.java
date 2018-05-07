@@ -71,8 +71,7 @@ public class Main extends Application {
 
     public static void setAccount(User account) {
         pref.setAccount(account);
-        SaveFiles file = new SaveFiles();
-        file.WritePreferences(Main.pref);
+        SavePref();
     }
 
     public static User GetAccount() {
@@ -236,6 +235,29 @@ public class Main extends Application {
         for(ILIModule item : Services) {
             honeypot.ShutdownService(item);
         }
+    }
+
+    public static void SavePref(){
+
+        ArrayList<Integer> ports = new ArrayList<>();
+        for(ILIModule item : Services) {
+            if(item.OnorOff()){
+                ports.add(item.getPort());
+            }
+            honeypot.ShutdownService(item);
+
+        }
+
+        SaveFiles file = new SaveFiles();
+        file.WritePreferences(pref);
+
+        for(ILIModule item : Services){
+            honeypot.RegisterService(item);
+            if(ports.contains(item.getPort())) {
+                honeypot.startPort(item.getPort());
+            }
+        }
+        
     }
 
     public static boolean CheckForLogout(String buttonText, JFXSnackbar snackbar)

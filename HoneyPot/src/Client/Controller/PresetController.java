@@ -108,8 +108,6 @@ public class PresetController implements Initializable {
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Client/View/OverView.fxml"), ResourceBundle.getBundle("Client.bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
             Parent root = loader.load();
-            SaveFiles file = new SaveFiles();
-            file.WritePreferences(Main.pref);
             Main.switchPage(root, "Achmea");
         } catch(IOException IOE){
             IOE.printStackTrace();

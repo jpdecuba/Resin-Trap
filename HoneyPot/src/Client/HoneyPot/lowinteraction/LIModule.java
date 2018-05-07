@@ -31,7 +31,7 @@ public class LIModule implements ILIModule,Runnable,Serializable {
     /**
      * the socket that listens for connections
      */
-    private ServerSocket _server;
+    private transient ServerSocket _server;
 
     private Set<LogConnection> logsFile;
 
@@ -98,7 +98,7 @@ public class LIModule implements ILIModule,Runnable,Serializable {
      *
      * @see Thread
      */
-    private volatile Thread _thread; //we start ourselves in a thread object so we can "safely" stop later (Java claims this is the right way)
+    private transient volatile Thread _thread; //we start ourselves in a thread object so we can "safely" stop later (Java claims this is the right way)
     /**
      * true if the module is currently listening for client connections
      * NOTE: this is limited in the fact that if accept has already been called, that socket will still connect but another socket will not be created until listening = true.
