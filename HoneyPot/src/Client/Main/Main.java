@@ -167,6 +167,14 @@ public class Main extends Application {
         }
     }
 
+    public static boolean Logout(User urs){
+        try {
+            return client.Logout(urs);
+        }catch (Exception e){
+            return false;
+        }
+    }
+
     public static boolean RegisterAdmin(User urs){
         try {
             return client.RegisterAdmin(urs);
@@ -239,7 +247,7 @@ public class Main extends Application {
     {
         if(buttonText.equals("LOGOUT"))
         {
-            if(Main.loginModel.Logout(Main.GetAccount().getName()))
+            if(Main.Logout(Main.GetAccount()))
             {
                 Main.setAccount(null);
                 return true;
