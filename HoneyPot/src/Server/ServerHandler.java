@@ -2,6 +2,7 @@ package Server;
 
 import Client.Model.Database.Database.Database;
 import Server.Database.Database.UserDatabase;
+import Server.Database.LogDB.Repository.LogModel;
 import Server.Database.LoginModel;
 import Server.Mail.EmailSend;
 import Shared.Request.Request;
@@ -32,6 +33,7 @@ public class ServerHandler {
         LoginModel LM = new LoginModel();
         try {
             RequestType msg = object.getMsg();
+            LogModel LogM = new LogModel();
             switch (msg){
                 case Mail:
                     EmailSend send = new EmailSend();
@@ -45,6 +47,15 @@ public class ServerHandler {
                 case RegisterAdmin:
                     boolean registeradmin = LM.RegisterAdmin(object.getAccount());
                     output.writeObject(registeradmin);
+                    break;
+                case GetAllLogs:
+                    output.writeObject(LogM.GetAllLogs());
+                    break;
+                case SaveLog:
+                    LogM.SaveLog(object.getLog(),object.getAccount());
+                    break;
+                case SaveLogs:
+                    LogM.SaveLogs(object.getLogs(),object.getAccount());
                     break;
             }
             output.flush();

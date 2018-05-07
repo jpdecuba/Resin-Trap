@@ -3,6 +3,9 @@ package Shared.Request;
 public enum RequestType {
     Mail,
     Register,
-    RegisterAdmin
+    RegisterAdmin,
+    GetAllLogs,
+    SaveLogs,
+    SaveLog,
 
 }
