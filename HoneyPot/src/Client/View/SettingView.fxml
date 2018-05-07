@@ -110,12 +110,16 @@
                                       AnchorPane.topAnchor="115">
                                     <children>
                                         <HBox HBox.hgrow="ALWAYS" alignment="BASELINE_LEFT" spacing="5">
-                                            <TextField VBox.vgrow="ALWAYS" minHeight="100" maxHeight="Infinity" HBox.hgrow="ALWAYS" fx:id="keylbl" style=" -fx-font-family: 'Roboto Condensed'; -fx-text-box-border: transparent; -fx-background-color: transparent; -fx-text-fill: #424242"
+                                            <children>
+                                            <FontAwesomeIconView fill="#cc0000" glyphName="KEY" size="25"
+                                                                 strokeType="OUTSIDE" strokeWidth="0.0"/>
+                                            <TextField VBox.vgrow="ALWAYS" maxHeight="Infinity" HBox.hgrow="ALWAYS" fx:id="keylbl" style=" -fx-font-family: 'Roboto Condensed'; -fx-text-box-border: transparent; -fx-background-color: transparent; -fx-text-fill: #424242"
                                                       text="Key: ">
                                                 <font>
-                                                    <Font size="26"/>
+                                                    <Font size="16"/>
                                                 </font>
                                             </TextField>
+                                            </children>
                                         </HBox>
                                         <HBox alignment="BASELINE_LEFT" spacing="5">
                                             <children>

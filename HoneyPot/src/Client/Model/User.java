@@ -9,7 +9,7 @@ public class User implements Serializable{
 	private String password;
 	private UserRole role;
 	private int session;
-
+	private String token;
 	private ArrayList<String> msgEmail = new ArrayList();
 
 	private String code;
@@ -84,4 +84,12 @@ public class User implements Serializable{
 	}
 
 	//
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
 }

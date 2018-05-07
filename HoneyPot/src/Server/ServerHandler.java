@@ -13,13 +13,13 @@ import Shared.Request.RequestType;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Random;
 import java.util.Set;
 
 public class ServerHandler {
 
     private java.net.Socket Socket;
     private ObjectOutputStream output;
-    private User user;
 
     public ServerHandler(Socket socket,ObjectOutputStream out ) {
         this.Socket = socket;
@@ -40,8 +40,13 @@ public class ServerHandler {
                     break;
                 case Login:
                     User u =LM.Login(object.getAccount());
-
+                    u.setToken(getSaltString());
+                    BackEndServer.sessions.add(u);
                     output.writeObject(u);
+                    break;
+                case Logout:
+                    BackEndServer.sessions.removeIf(x -> x.getName().equals(object.getAccount().getName()) && x.getToken().equals(object.getAccount().getToken()));
+                    output.writeObject(true);
                     break;
                 case Register:
                     boolean register =LM.Register(object.getAccount());
@@ -73,7 +78,17 @@ public class ServerHandler {
 
     }
 
-
+    protected String getSaltString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 18) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+    }
 
 
 

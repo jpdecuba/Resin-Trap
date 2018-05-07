@@ -107,10 +107,29 @@ public class SocketClient {
             //e.printStackTrace();
             return null;
         }
-
-
-
         return null;
+    }
+
+    public boolean Logout(User usr){
+        try {
+            if(SocketCheck()) {
+                Request RequestSets = new Request(RequestType.Logout, usr);
+                output.writeObject(RequestSets);
+                Object obj = input.readObject();
+                if (obj instanceof Boolean) {
+                    boolean results = ((boolean) obj);
+                    output.flush();
+                    return results;
+                }
+            }else {
+                return false;
+            }
+        } catch (IOException e) {
+            return false;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+        return false;
     }
 
     public boolean Register(User usr){
