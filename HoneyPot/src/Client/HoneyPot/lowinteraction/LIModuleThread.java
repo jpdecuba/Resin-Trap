@@ -276,7 +276,7 @@ public class LIModuleThread implements Runnable {
 		_parent.addLog(logs);
 		_logFile.setEndingLogInfo();
 		new Thread(new LISerializeThread(logs)).start();
-		if(Database.connection() != null && Main.GetAccount() != null){
+		if(Main.GetAccount() != null){
 			new Thread(new LISerializeDBThread(logs)).start();
 		}
 	}

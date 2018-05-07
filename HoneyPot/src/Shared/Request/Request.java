@@ -37,6 +37,12 @@ public class Request implements Serializable{
         this.msg = msg;
         this.Account = Account;
         this.log = log;
+    }
+
+    public Request(RequestType msg, User Account, Iterable<LogConnection> logs) {
+        this.msg = msg;
+        this.Account = Account;
+        this.logs = logs;
 
     }
 
