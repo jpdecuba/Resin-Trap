@@ -9,22 +9,10 @@ import java.util.Properties;
 public class Database {
 	public static Connection connection(){
 		Connection con = null;
-		Properties properties = new Properties();
 		try
 		{
-			InputStream input = new FileInputStream(new File("config.properties").getAbsolutePath());
-			properties.load(input);
-
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con = DriverManager.getConnection(properties.getProperty("path"), properties.getProperty("user"), properties.getProperty("password"));
-		}
-		catch (FileNotFoundException ex)
-		{
-			ex.printStackTrace();
-		}
-		catch (IOException ex)
-		{
-			ex.printStackTrace();
+			con = DriverManager.getConnection("jdbc:sqlserver://bp4.database.windows.net;database=achmeaHoneypot", "dbi365995", "typo123T");
 		}
 		catch (ClassNotFoundException ex)
 		{
