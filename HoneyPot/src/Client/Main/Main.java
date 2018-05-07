@@ -176,6 +176,14 @@ public class Main extends Application {
         }
     }
 
+    public static void SaveLogs(Iterable<LogConnection> logs){
+        client.SaveLogs(pref.getAccount(),logs);
+    }
+
+    public static void SaveLog(LogConnection log){
+        client.SaveLog(pref.getAccount(),log);
+    }
+
     public static void switchPage(Parent parent, String title)
     {
         Main.Stage.getScene().setRoot(parent);
@@ -185,7 +193,6 @@ public class Main extends Application {
     }
 
     public static void launchHoneypot(){
-
         try {
             honeypot = new HoneyRJ();
         } catch (HoneyRJException e) {
