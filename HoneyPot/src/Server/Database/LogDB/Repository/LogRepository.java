@@ -20,8 +20,15 @@ public class LogRepository implements ILogSerialisation {
         context.SaveLogs(logs, user);
     }
 
+
+
     @Override
     public Set<LogConnection> GetAllLogs() {
         return context.GetAllLogs();
+    }
+
+    @Override
+    public Set<LogConnection> GetLogs(User usr) {
+        return context.GetLogs(usr);
     }
 }

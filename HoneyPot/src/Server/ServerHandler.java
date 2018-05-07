@@ -1,5 +1,6 @@
 package Server;
 
+import Client.HoneyPot.logging.LogConnection;
 import Client.Model.User;
 import Client.Model.Database.Database.Database;
 import Server.Database.Database.UserDatabase;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Random;
+import java.util.Set;
 
 public class ServerHandler {
 
@@ -62,6 +64,10 @@ public class ServerHandler {
                     break;
                 case SaveLogs:
                     LogM.SaveLogs(object.getLogs(),object.getAccount());
+                    break;
+                case GetLogs:
+                    Set<LogConnection> logs = LogM.GetLogs(object.getAccount());
+                    output.writeObject(logs);
                     break;
             }
             output.flush();

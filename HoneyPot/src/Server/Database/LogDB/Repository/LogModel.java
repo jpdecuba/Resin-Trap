@@ -22,4 +22,8 @@ public class LogModel {
     public Set<LogConnection> GetAllLogs(){
         return  LogDB.GetAllLogs();
     }
+
+    public Set<LogConnection> GetLogs(User usr) {
+        return LogDB.GetLogs(usr);
+    }
 }

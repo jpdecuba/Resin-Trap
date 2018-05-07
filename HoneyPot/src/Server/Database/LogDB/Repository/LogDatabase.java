@@ -65,4 +65,36 @@ public class LogDatabase implements ILogSerialisation {
         }
         return null;
     }
+
+    @Override
+    public Set<LogConnection> GetLogs(User usr) {
+        Set<LogConnection> logs = new HashSet<LogConnection>();
+
+        try{
+            String sql = "SELECT * FROM ServerLogs WHERE accountID = ?";
+            PreparedStatement statement = Database.connection().prepareStatement(sql);
+            statement.setInt(1,usr.getId());
+            ResultSet rs = statement.executeQuery();
+
+            while(rs.next()){
+                LogConnection log = new LogConnection(null,
+                        InetAddress.getByName(rs.getString("RemoteIP").substring(1)), 0, rs.getInt("Port"),
+                        rs.getString("Service"),rs.getInt("accountID"));
+                if(log != null){
+                    String sql2 = "SELECT name FROM Account WHERE id = ?";
+                    PreparedStatement statement2 = Database.connection().prepareStatement(sql2);
+                    statement2.setInt(1, log.getUserId());
+                    ResultSet rs2 = statement2.executeQuery();
+                    while(rs2.next()){
+                        log.SetUsername(rs2.getString(1));
+                    }
+                    logs.add(log);
+                }
+            }
+            return logs;
+        } catch (SQLException | UnknownHostException sqle){
+            sqle.printStackTrace();
+        }
+        return null;
+    }
 }

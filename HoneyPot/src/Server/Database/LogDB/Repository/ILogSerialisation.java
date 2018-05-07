@@ -9,4 +9,6 @@ public interface ILogSerialisation {
     void SaveLog(LogConnection log, User user);
     void SaveLogs(Iterable<LogConnection> logs, User user);
     Set<LogConnection> GetAllLogs();
+
+    Set<LogConnection> GetLogs(User usr);
 }

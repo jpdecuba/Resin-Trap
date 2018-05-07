@@ -71,6 +71,7 @@ public class Main extends Application {
 
     public static void setAccount(User account) {
         pref.setAccount(account);
+        SavePref();
     }
 
     public static User GetAccount() {
@@ -121,14 +122,14 @@ public class Main extends Application {
         rh.addResizeListener(Stage);
 		SetupRoot(root);
 
-		Main.Stage.setOnHiding(new EventHandler<WindowEvent>() {
+		/*Main.Stage.setOnHiding(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
 				if(Main.GetAccount() != null)
 				{
 					Main.loginModel.Logout(Main.GetAccount().getName());
 				}
 			}
-		});
+		});*/
 
 
         Stage.show();
@@ -161,6 +162,7 @@ public class Main extends Application {
 
     public static User Login(User urs){
         try {
+
             return client.Login(urs);
         }catch (Exception e){
             return null;
@@ -241,6 +243,29 @@ public class Main extends Application {
         for(ILIModule item : Services) {
             honeypot.ShutdownService(item);
         }
+    }
+
+    public static void SavePref(){
+
+        ArrayList<Integer> ports = new ArrayList<>();
+        for(ILIModule item : Services) {
+            if(item.OnorOff()){
+                ports.add(item.getPort());
+            }
+            honeypot.ShutdownService(item);
+
+        }
+
+        SaveFiles file = new SaveFiles();
+        file.WritePreferences(pref);
+
+        for(ILIModule item : Services){
+            honeypot.RegisterService(item);
+            if(ports.contains(item.getPort())) {
+                honeypot.startPort(item.getPort());
+            }
+        }
+        
     }
 
     public static boolean CheckForLogout(String buttonText, JFXSnackbar snackbar)

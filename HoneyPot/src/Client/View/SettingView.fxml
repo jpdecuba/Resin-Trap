@@ -3,18 +3,20 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.layout.AnchorPane?>
+
 <?import javafx.scene.layout.VBox?>
 <?import com.jfoenix.controls.JFXToolbar?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-
 <?import javafx.scene.control.Label?>
-<?import com.jfoenix.controls.JFXScrollPane?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Controller.HelpController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Controller.SettingsController">
     <children>
         <HBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0">
             <children>
@@ -94,48 +96,47 @@
                         </VBox>
                     </children>
                 </AnchorPane>
-
-                <AnchorPane fx:id="mainPane" prefHeight="${mainPane.parent.height}" HBox.hgrow="ALWAYS"
-                            style="-fx-background-color: WHITE;">
-                    <HBox AnchorPane.topAnchor="60" AnchorPane.leftAnchor="75" AnchorPane.rightAnchor="75"
-                          alignment="TOP_CENTER">
-                        <Label text="%support"
-                               style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 28;"></Label>
-                    </HBox>
-                    <ScrollPane AnchorPane.rightAnchor="75" AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="75"
-                                AnchorPane.topAnchor="100" style="-fx-background-color: WHITE; -fx-border-radius: 0"
-                                vbarPolicy="NEVER" hbarPolicy="NEVER" fitToWidth="true">
-                        <VBox alignment="TOP_LEFT" style="-fx-background-color: WHITE" spacing="25">
-                            <Label text="%block"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 22;"></Label>
-                            <Label wrapText="true" text="%step1"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
-                            <Label wrapText="true" text="%step12"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
-                            <Label wrapText="true" text="%step13"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
-                            <ImageView fx:id="img">
-                                <image>
-                                    <Image fx:id="img2" requestedWidth="500" preserveRatio="true"
-                                           url="/Client/Resources/cmd.PNG"/>
-                                </image>
-                            </ImageView>
-                            <Label wrapText="true" text="%step2"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
-                            <Label wrapText="true" text="%step3"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
-                            <Label wrapText="true" text="%step4"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
-                            <Label wrapText="true" text="%step5"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
-                        </VBox>
-                    </ScrollPane>
-                </AnchorPane>
+                <VBox fx:id="VB" prefHeight="${VB.parent.height}" HBox.hgrow="ALWAYS" >
+                    <children>
+                        <JFXToolbar fx:id="toolbar" prefWidth="${toolbar.parent.width}"
+                                    prefHeight="25" style="-fx-background-color: WHITE">
+                        </JFXToolbar>
+                        <AnchorPane fx:id="mainPane" prefWidth="${mainPane.parent.width}"
+                                    VBox.vgrow="ALWAYS"
+                                    style="-fx-background-color: WHITE;">
+                            <children>
+                                <VBox alignment="CENTER" spacing="15" AnchorPane.bottomAnchor="125"
+                                      AnchorPane.leftAnchor="175" AnchorPane.rightAnchor="175"
+                                      AnchorPane.topAnchor="115">
+                                    <children>
+                                        <HBox HBox.hgrow="ALWAYS" alignment="BASELINE_LEFT" spacing="5">
+                                            <TextField VBox.vgrow="ALWAYS" minHeight="100" maxHeight="Infinity" HBox.hgrow="ALWAYS" fx:id="keylbl" style=" -fx-font-family: 'Roboto Condensed'; -fx-text-box-border: transparent; -fx-background-color: transparent; -fx-text-fill: #424242"
+                                                      text="Key: ">
+                                                <font>
+                                                    <Font size="26"/>
+                                                </font>
+                                            </TextField>
+                                        </HBox>
+                                        <HBox alignment="BASELINE_LEFT" spacing="5">
+                                            <children>
+                                                <FontAwesomeIconView fill="#cc0000" glyphName="USER" size="25"
+                                                                     strokeType="OUTSIDE" strokeWidth="0.0"/>
+                                                <JFXTextField fx:id="loginUsernameField" alignment="BASELINE_LEFT"
+                                                              focusColor="#cc0000" labelFloat="true" promptText="%username"
+                                                              HBox.hgrow="ALWAYS">
+                                                    <font>
+                                                        <Font size="16.0"/>
+                                                    </font>
+                                                </JFXTextField>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </VBox>
             </children>
         </HBox>
-        <JFXToolbar AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0"
-                    fx:id="toolbar" prefWidth="${toolbar.parent.width}"
-                    prefHeight="25" style="-fx-background-color: transparent">
-        </JFXToolbar>
     </children>
 </AnchorPane>
