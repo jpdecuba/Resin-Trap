@@ -185,7 +185,6 @@ public class Main extends Application {
     }
 
     public static void launchHoneypot(){
-
         try {
             honeypot = new HoneyRJ();
         } catch (HoneyRJException e) {
