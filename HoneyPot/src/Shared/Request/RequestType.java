@@ -6,6 +6,7 @@ public enum RequestType {
     Login,
     RegisterAdmin,
     GetAllLogs,
+    GetLogs,
     SaveLogs,
     SaveLog,
 

@@ -14,6 +14,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
+import java.util.Set;
 
 public class SocketClient {
     private java.net.Socket Socket;
@@ -177,7 +178,6 @@ public class SocketClient {
             //e.printStackTrace();
         }
 
-
     }
 
     public void SaveLog(User usr, LogConnection log){
@@ -193,6 +193,30 @@ public class SocketClient {
         }
 
 
+    }
+
+
+    public Set<LogConnection> GetLogs(User usr){
+
+        try {
+            if(SocketCheck()) {
+                Request RequestSets = new Request(RequestType.GetLogs, usr);
+                output.writeObject(RequestSets);
+                Object obj = input.readObject();
+                    Set<LogConnection> results = ((Set<LogConnection>) obj);
+                    output.flush();
+                    return results;
+
+            }
+            return null;
+
+        } catch (IOException e) {
+            //e.printStackTrace();
+            return null;
+        } catch (ClassNotFoundException e) {
+            //e.printStackTrace();
+            return null;
+        }
     }
 
     public void flush(){
