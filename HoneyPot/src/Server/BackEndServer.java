@@ -1,9 +1,12 @@
 package Server;
 
+import Client.Model.User;
+
 import javax.net.ServerSocketFactory;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -12,8 +15,8 @@ public class BackEndServer {
 
     private ServerSocket serverSocket;
     private Socket socket = null;
-
     private ExecutorService executor = Executors.newCachedThreadPool();
+    public static ArrayList<User> sessions = new ArrayList<>();
 
     public BackEndServer() throws Exception {
         ServerSocketFactory socketFactory = (ServerSocketFactory) ServerSocketFactory.getDefault();
@@ -38,5 +41,6 @@ public class BackEndServer {
     public static void main(String args[]) throws Exception {
         BackEndServer server = new BackEndServer();
         server.runServer();
+
     }
 }
