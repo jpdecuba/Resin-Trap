@@ -30,15 +30,17 @@ public class SettingsController extends BaseController implements Initializable 
 		snackbar = new JFXSnackbar(anchor);
 		Main.ChangeLoginButton(loginBtn);
 		Main.ChangeAdminButton(adminBtn);
-		if(Main.GetAccount().getRole() == UserRole.Admin)
+		keylbl.setEditable(false);
+		if(Main.GetAccount() != null && Main.GetAccount().getRole() == UserRole.Admin)
 		{
+			keylbl.setDisable(false);
 			keylbl.setText("Key: " + Main.GetAccount().getCode());
 			keylbl.setEditable(false);
 			keylbl.setStyle("-fx-text-box-border: transparent; -fx-background-color: transparent;");
 		}
 		else
 		{
-			keylbl = null;
+			keylbl.setDisable(true);
 		}
 	}
 
