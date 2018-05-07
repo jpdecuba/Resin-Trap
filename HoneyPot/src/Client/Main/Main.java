@@ -84,6 +84,7 @@ public class Main extends Application {
 
     public static void setPreset(Preset preset) {
        pref.setPreset(preset);
+        SavePref();
     }
 
     @Override
