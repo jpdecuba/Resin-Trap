@@ -24,7 +24,7 @@ public class UserDatabase implements ILoginRepo {
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				User user1 = new User(rs.getInt(1), user.getName(), UserRole.values()[rs.getInt(2)], 1);
-				if(user.getRole() == UserRole.Admin)
+				if(user1.getRole() == UserRole.Admin)
 				{
 					sql = "SELECT code FROM Code WHERE id IN (SELECT codeID FROM AccountCode WHERE accountID = ?)";
 					statement = Database.connection().prepareStatement(sql);

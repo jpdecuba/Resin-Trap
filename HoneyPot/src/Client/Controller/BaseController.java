@@ -28,6 +28,8 @@ public class BaseController {
     JFXButton loginBtn;
     @FXML
     JFXButton adminBtn;
+    @FXML
+    JFXButton settingBtn;
 
     static JFXSnackbar snackbar;
     int currentConnections = 0;
@@ -64,8 +66,13 @@ public class BaseController {
             }
             else if (source == adminBtn){
                 path = "/Client/View/AdminView.fxml";
-                title = "Achmea";
+                title = "Admin";
             }
+            else if (source == settingBtn)
+			{
+				path = "/Client/View/SettingView.fxml";
+				title = "Setting";
+			}
             Main.manager.currentView = path;
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("Client/bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
             Parent root = loader.load();

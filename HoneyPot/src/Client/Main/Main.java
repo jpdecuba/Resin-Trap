@@ -122,14 +122,14 @@ public class Main extends Application {
         rh.addResizeListener(Stage);
 		SetupRoot(root);
 
-		Main.Stage.setOnHiding(new EventHandler<WindowEvent>() {
+		/*Main.Stage.setOnHiding(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent we) {
 				if(Main.GetAccount() != null)
 				{
 					Main.loginModel.Logout(Main.GetAccount().getName());
 				}
 			}
-		});
+		});*/
 
 
         Stage.show();
