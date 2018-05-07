@@ -159,6 +159,14 @@ public class Main extends Application {
         }
     }
 
+    public static User Login(User urs){
+        try {
+            return client.Login(urs);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
     public static boolean RegisterAdmin(User urs){
         try {
             return client.RegisterAdmin(urs);

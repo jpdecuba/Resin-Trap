@@ -1,7 +1,6 @@
 package Server;
 
-import Client.Model.Database.Database.Database;
-import Server.Database.Database.UserDatabase;
+import Client.Model.User;
 import Server.Database.LoginModel;
 import Server.Mail.EmailSend;
 import Shared.Request.Request;
@@ -10,17 +9,12 @@ import Shared.Request.RequestType;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.List;
-import java.util.Set;
-
-import static Shared.Request.RequestType.Mail;
 
 public class ServerHandler {
 
-
-
     private java.net.Socket Socket;
     private ObjectOutputStream output;
+    private User user;
 
     public ServerHandler(Socket socket,ObjectOutputStream out ) {
         this.Socket = socket;
@@ -37,6 +31,11 @@ public class ServerHandler {
                     EmailSend send = new EmailSend();
                     boolean mail = send.SendEmail(object.Getemail());
                     output.writeObject(mail);
+                    break;
+                case Login:
+                    User u =LM.Login(object.getAccount());
+
+                    output.writeObject(u);
                     break;
                 case Register:
                     boolean register =LM.Register(object.getAccount());

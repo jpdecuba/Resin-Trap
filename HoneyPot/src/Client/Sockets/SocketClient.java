@@ -82,6 +82,35 @@ public class SocketClient {
         return false;
     }
 
+    public User Login(User usr){
+
+        try {
+            if(SocketCheck()) {
+                Request RequestSets = new Request(RequestType.Login, usr);
+                output.writeObject(RequestSets);
+                Object obj = input.readObject();
+                if (obj instanceof User) {
+                    User results = ((User) obj);
+                    output.flush();
+                    return results;
+                }
+            }else {
+                return null;
+            }
+
+        } catch (IOException e) {
+            //e.printStackTrace();
+            return null;
+        } catch (ClassNotFoundException e) {
+            //e.printStackTrace();
+            return null;
+        }
+
+
+
+        return null;
+    }
+
     public boolean Register(User usr){
 
         try {

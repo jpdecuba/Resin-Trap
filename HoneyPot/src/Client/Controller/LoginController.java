@@ -143,7 +143,7 @@ public class LoginController implements Initializable {
     public boolean Login(){
         String username = loginUsernameField.getText();
         String password = loginPasswordField.getText();
-		User user = Main.loginModel.Login( new User(username, password));
+		User user = Main.Login( new User(username, password));
 
         if(user != null) {
 			Main.setAccount(user);
