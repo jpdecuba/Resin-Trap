@@ -1,8 +1,9 @@
-package Server.Database.LogDB.Repository;
+package Server.Repositories.Database;
 
 import Client.HoneyPot.logging.LogConnection;
 import Client.Model.Repositories.Database.Database;
 import Client.Model.User;
+import Server.Repositories.Interface.ILogSerialisation;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

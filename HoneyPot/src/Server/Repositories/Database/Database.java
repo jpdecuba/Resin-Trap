@@ -1,10 +1,8 @@
-package Server.Database.Database;
+package Server.Repositories.Database;
 
-import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class Database {
 	public static Connection connection(){

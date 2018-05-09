@@ -1,7 +1,7 @@
-package Server.Database.Repository;
+package Server.Repositories.Repository;
 
 import Client.Model.User;
-import Server.Database.Interface.ILoginRepo;
+import Server.Repositories.Interface.ILoginRepo;
 
 
 public class LoginRepo implements ILoginRepo {

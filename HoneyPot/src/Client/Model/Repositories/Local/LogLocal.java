@@ -1,6 +1,7 @@
 package Client.Model.Repositories.Local;
 
 import Client.HoneyPot.logging.LogConnection;
+import Client.HoneyPot.lowinteraction.LISerializeThread;
 import Client.Model.Repositories.Interface.ILogSerialisation;
 import Client.Model.User;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -12,7 +13,7 @@ import java.util.Set;
 public class LogLocal implements ILogSerialisation {
     @Override
     public void SaveLog(LogConnection log, User user) {
-        throw new NotImplementedException();
+        new LISerializeThread(log).SerializeLogToFile();
     }
 
     @Override
@@ -25,6 +26,10 @@ public class LogLocal implements ILogSerialisation {
         Set<LogConnection> logs = new HashSet<>();
         ObjectInputStream objectReader = null;
         try {
+            if(new File(System.getenv("APPDATA") + "/Honeypot/AllLogs.txt").exists()) {
+                return logs;
+            }
+
             InputStream inputStream = new FileInputStream(System.getenv("APPDATA") + "/Honeypot/AllLogs.txt");
             BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
             objectReader = new ObjectInputStream(bufferedInputStream);
@@ -36,18 +41,16 @@ public class LogLocal implements ILogSerialisation {
                 objectReader = new ObjectInputStream(bufferedInputStream);
                 object = objectReader.readObject();
             }
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | ClassNotFoundException e) {
             e.printStackTrace();
         } catch (EOFException e) {
             //e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } finally {
             try {
                 objectReader.close();
-            } catch (IOException e) {
+            } catch (IOException | NullPointerException e) {
                 e.printStackTrace();
             }
         }

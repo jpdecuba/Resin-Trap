@@ -1,7 +1,7 @@
-package Server.Database.Database;
+package Server.Repositories.Database;
 
 import Client.Model.User;
-import Server.Database.Interface.ILoginRepo;
+import Server.Repositories.Interface.ILoginRepo;
 
 import java.util.ArrayList;
 

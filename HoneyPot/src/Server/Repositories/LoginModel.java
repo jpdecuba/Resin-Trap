@@ -1,8 +1,8 @@
-package Server.Database;
+package Server.Repositories;
 
 import Client.Model.User;
-import Server.Database.Database.UserDatabase;
-import Server.Database.Repository.LoginRepo;
+import Server.Repositories.Database.UserDatabase;
+import Server.Repositories.Repository.LoginRepo;
 
 
 public class LoginModel {
