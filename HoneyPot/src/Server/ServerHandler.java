@@ -2,8 +2,6 @@ package Server;
 
 import Client.HoneyPot.logging.LogConnection;
 import Client.Model.User;
-import Client.Model.Database.Database.Database;
-import Server.Database.Database.UserDatabase;
 import Server.Database.LogDB.Repository.LogModel;
 import Server.Database.LoginModel;
 import Server.Mail.EmailSend;
