@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -68,7 +69,7 @@ public class LogDatabase implements ILogSerialisation {
     }
 
     @Override
-    public Set<LogConnection> GetLogs(User usr) {
+    public Set<LogConnection> GetLogsByUser(User usr) {
         Set<LogConnection> logs = new HashSet<LogConnection>();
 
         try{
@@ -94,6 +95,38 @@ public class LogDatabase implements ILogSerialisation {
             }
             return logs;
         } catch (SQLException | UnknownHostException sqle){
+            sqle.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Set<LogConnection> GetLogsAdmin(User usr) {
+        Set<LogConnection> logs = new HashSet<>();
+
+        try {
+            String sql1 = "SELECT codeID FROM AccountCode WHERE accountID = ?";
+            PreparedStatement statement = Database.connection().prepareStatement(sql1);
+            statement.setInt(1,usr.getId());
+            ResultSet rs1 = statement.executeQuery();
+            while (rs1.next()) {
+                int codeID = rs1.getInt("codeID");
+                String sql2 = "SELECT ServerLogs.*\n" +
+                        "FROM AccountCode\n" +
+                        "INNER JOIN ServerLogs ON ServerLogs.accountID = AccountCode.accountID\n" +
+                        "WHERE codeID = ?";
+                statement = Database.connection().prepareStatement(sql2);
+                statement.setInt(1,codeID);
+                ResultSet rs2 = statement.executeQuery();
+                while (rs2.next()) {
+                    LogConnection log = new LogConnection(null,
+                            InetAddress.getByName(rs2.getString("RemoteIP").substring(1)), 0, rs2.getInt("Port"),
+                            rs2.getString("Service"),rs2.getInt("accountID"));
+                    logs.add(log);
+                }
+            }
+            return logs;
+        }catch (SQLException | UnknownHostException sqle){
             sqle.printStackTrace();
         }
         return null;

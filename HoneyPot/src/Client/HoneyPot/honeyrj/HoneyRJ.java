@@ -254,12 +254,13 @@ public class HoneyRJ  implements Serializable{
 		}
         LinkedList<LogConnection> list = new LinkedList<>(logs);
 
-		Collections.sort(list);
 
 		if(list.size() <= 0)
 		{
 			return null;
 		}
+
+		Collections.sort(list);
 
 		return list;
 	}
