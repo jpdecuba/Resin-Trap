@@ -49,7 +49,7 @@ public class LogLocal implements ILogSerialisation {
             e.printStackTrace();
         } finally {
             try {
-                objectReader.close();
+                if(objectReader != null) objectReader.close();
             } catch (IOException | NullPointerException e) {
                 e.printStackTrace();
             }

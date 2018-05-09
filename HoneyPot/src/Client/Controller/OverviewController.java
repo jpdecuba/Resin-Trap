@@ -45,13 +45,13 @@ public class OverviewController extends BaseController implements Initializable 
 		Main.ChangeLoginButton(loginBtn);
 		Main.ChangeAdminButton(adminBtn);
 
-		/*if(Main.GetAccount() != null) {
+		if(Main.GetAccount() != null) {
             snackbar.show("Staring Synchronisation of log files", 5);
             if(dbSync.SyncLocalAndCloud())
                 snackbar.show("Files Synchronised", 5);
             else
                 snackbar.show("File Synchronisation FAILED", 5);
-        }*/
+        }
 	}
 
     /**
@@ -69,7 +69,6 @@ public class OverviewController extends BaseController implements Initializable 
                 if (item.getDate().after(date)) {
                     date = item.getDate();
                 }
-
             }
             return ft.format(date);
         }
