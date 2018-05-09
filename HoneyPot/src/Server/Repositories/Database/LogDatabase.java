@@ -110,7 +110,7 @@ public class LogDatabase implements ILogSerialisation {
         Set<LogConnection> logs = new HashSet<>();
 
         try {
-            String sql1 = "SELECT TOP 1 codeID FROM AccountCode WHERE accountID = ? LIMIT 1";
+            String sql1 = "SELECT TOP 1 codeID FROM AccountCode WHERE accountID = ? ";
             PreparedStatement statement = Database.connection().prepareStatement(sql1);
             statement.setInt(1, usr.getId());
             ResultSet rs1 = statement.executeQuery();
