@@ -2,8 +2,8 @@ package Client.HoneyPot.lowinteraction;
 
 
 
-import Client.HoneyPot.Repository.LogDatabase;
-import Client.HoneyPot.Repository.LogRepository;
+import Client.Model.Repositories.Database.LogDatabase;
+import Client.Model.Repositories.Repository.LogRepository;
 import Client.HoneyPot.logging.LogConnection;
 import Client.Main.Main;
 

@@ -1,7 +1,7 @@
-package Client.Model.Database;
+package Client.Model.Repositories;
 
-import Client.Model.Database.Database.UserDatabase;
-import Client.Model.Database.Repository.LoginRepo;
+import Client.Model.Repositories.Database.UserDatabase;
+import Client.Model.Repositories.Repository.LoginRepo;
 import Client.Model.User;
 
 

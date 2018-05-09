@@ -1,7 +1,7 @@
 package Server.Database.LogDB.Repository;
 
 import Client.HoneyPot.logging.LogConnection;
-import Client.Model.Database.Database.Database;
+import Client.Model.Repositories.Database.Database;
 import Client.Model.User;
 
 import java.net.InetAddress;

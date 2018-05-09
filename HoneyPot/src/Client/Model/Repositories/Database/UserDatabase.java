@@ -1,6 +1,6 @@
-package Client.Model.Database.Database;
+package Client.Model.Repositories.Database;
 
-import Client.Model.Database.Interface.ILoginRepo;
+import Client.Model.Repositories.Interface.ILoginRepo;
 import Client.Model.User;
 import Client.Model.UserRole;
 
@@ -8,7 +8,6 @@ import Client.Model.UserRole;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Random;
 
 public class UserDatabase implements ILoginRepo {

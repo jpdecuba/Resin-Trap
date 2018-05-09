@@ -8,7 +8,7 @@ import Client.HoneyPot.lowinteraction.*;
 import Client.HoneyPot.protocol.*;
 
 import Client.Model.*;
-import Client.Model.Database.*;
+import Client.Model.Repositories.*;
 import Client.Model.Preset.Preset;
 import Client.Sockets.SocketClient;
 import Shared.Mail.MailMsg;

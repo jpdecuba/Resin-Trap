@@ -1,4 +1,4 @@
-package Client.HoneyPot.Repository;
+package Client.Model.Repositories.Interface;
 
 import Client.Model.User;
 import Client.HoneyPot.logging.LogConnection;

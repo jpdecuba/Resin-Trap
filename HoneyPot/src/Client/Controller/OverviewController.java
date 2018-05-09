@@ -3,30 +3,20 @@ package Client.Controller;
 import Client.HoneyPot.logging.LogConnection;
 import Client.HoneyPot.lowinteraction.*;
 import Client.Main.Main;
+import Client.Model.Repositories.DatabaseSynchronisation;
 import Client.Model.Status;
-import Client.HoneyPot.logging.LogConnection;
 
-import Client.Main.Main;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXToolbar;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
-import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.Timer;
-
-import Client.Model.*;
 
 public class OverviewController extends BaseController implements Initializable {
     @FXML
@@ -44,6 +34,7 @@ public class OverviewController extends BaseController implements Initializable 
     @FXML
     Label connectionsLbl;
 
+    private DatabaseSynchronisation dbSync = new DatabaseSynchronisation();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -54,6 +45,13 @@ public class OverviewController extends BaseController implements Initializable 
 		Main.ChangeLoginButton(loginBtn);
 		Main.ChangeAdminButton(adminBtn);
 
+		if(Main.GetAccount() != null) {
+            snackbar.show("Staring Synchronisation of log files", 5);
+            if(dbSync.SyncLocalAndCloud())
+                snackbar.show("Files Synchronised", 5);
+            else
+                snackbar.show("File Synchronisation FAILED", 5);
+        }
 	}
 
     /**
@@ -62,8 +60,7 @@ public class OverviewController extends BaseController implements Initializable 
      */
     public String getDatelastlog() {
         if (Main.honeypot.getLogs() != null) {
-            SimpleDateFormat ft =
-                    new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
+            SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yy 'at' hh:mm:ss");
             Date date = null;
             for (LogConnection item : Main.honeypot.getLogs()) {
                 if (date == null) {

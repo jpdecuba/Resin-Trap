@@ -40,9 +40,14 @@ public class ServerHandler {
                     break;
                 case Login:
                     User u =LM.Login(object.getAccount());
-                    u.setToken(getSaltString());
-                    BackEndServer.sessions.add(u);
-                    output.writeObject(u);
+                    if (u != null) {
+                        u.setToken(getSaltString());
+                        BackEndServer.sessions.add(u);
+                        output.writeObject(u);
+                    }else {
+                        output.writeObject(null);
+                    }
+
                     break;
                 case Logout:
                     BackEndServer.sessions.removeIf(x -> x.getName().equals(object.getAccount().getName()) && x.getToken().equals(object.getAccount().getToken()));
