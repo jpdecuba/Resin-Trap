@@ -147,7 +147,7 @@ public class LogDatabase implements ILogSerialisation {
 
                     if (log != null) {
                         String sql3 = "SELECT name FROM Account WHERE id = ?";
-                        PreparedStatement statement2 = Database.connection().prepareStatement(sql2);
+                        PreparedStatement statement2 = Database.connection().prepareStatement(sql3);
                         statement2.setInt(1, log.getUserId());
                         ResultSet rs3 = statement2.executeQuery();
                         while (rs3.next()) {
