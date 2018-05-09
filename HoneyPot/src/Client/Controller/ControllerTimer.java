@@ -31,8 +31,8 @@ public class ControllerTimer extends TimerTask {
 				OverviewController overviewController = (OverviewController)controller;
 				overviewController.statusLbl.setText(overviewController.StatusCheck().toString());
 				overviewController.connectionsLbl.setText(String.valueOf(finalConnections));
-				//overviewController.threatLbl.setText(overviewController.getDatelastlog());
-				//overviewController.timeframeLbl.setText(String.valueOf(overviewController.Timeframes()));
+				overviewController.threatLbl.setText(overviewController.getDatelastlog());
+				overviewController.timeframeLbl.setText(String.valueOf(overviewController.Timeframes()));
 			});
 		}
 	}
