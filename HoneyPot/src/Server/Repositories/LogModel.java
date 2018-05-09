@@ -25,7 +25,8 @@ public class LogModel {
         return  LogDB.GetAllLogs();
     }
 
-    public Set<LogConnection> GetLogs(User usr) {
-        return LogDB.GetLogs(usr);
+    public Set<LogConnection> GetLogsByUser(User usr) {
+        return LogDB.GetLogsByUser(usr);
     }
+    public Set<LogConnection> GetLogsAdmin(User usr) {return LogDB.GetLogsAdmin(usr);}
 }

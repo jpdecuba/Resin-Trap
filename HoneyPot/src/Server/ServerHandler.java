@@ -69,7 +69,7 @@ public class ServerHandler {
                     LogM.SaveLogs(object.getLogs(),object.getAccount());
                     break;
                 case GetLogs:
-                    Set<LogConnection> logs = LogM.GetLogs(object.getAccount());
+                    Set<LogConnection> logs = LogM.GetLogsByUser(object.getAccount());
                     output.writeObject(logs);
                     break;
             }

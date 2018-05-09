@@ -29,7 +29,10 @@ public class LogRepository implements ILogSerialisation {
     }
 
     @Override
-    public Set<LogConnection> GetLogs(User usr) {
-        return context.GetLogs(usr);
+    public Set<LogConnection> GetLogsByUser(User usr) {
+        return context.GetLogsByUser(usr);
     }
+
+    @Override
+    public Set<LogConnection> GetLogsAdmin(User usr) { return context.GetLogsAdmin(usr); }
 }
