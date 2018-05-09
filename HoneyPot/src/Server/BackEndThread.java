@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class BackEndThread extends Thread{
     protected Socket socket;
@@ -66,6 +67,8 @@ public class BackEndThread extends Thread{
 
             socket.close();
 
+        } catch (SocketException e) {
+            System.out.println("Client disconnected");
         } catch (IOException ioException) {
             try {
                 socket.close();
