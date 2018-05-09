@@ -2,7 +2,6 @@ package Server.Repositories.Database;
 
 import Client.HoneyPot.logging.LogConnection;
 import Client.HoneyPot.logging.LogRecord;
-import Client.Model.Repositories.Database.Database;
 import Client.Model.User;
 import Server.Repositories.Interface.ILogSerialisation;
 
