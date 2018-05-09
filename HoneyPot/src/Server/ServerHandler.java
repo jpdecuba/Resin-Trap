@@ -52,10 +52,6 @@ public class ServerHandler {
                     boolean register =LM.Register(object.getAccount());
                     output.writeObject(register);
                     break;
-                case RegisterAdmin:
-                    boolean registeradmin = LM.RegisterAdmin(object.getAccount());
-                    output.writeObject(registeradmin);
-                    break;
                 case GetAllLogs:
                     output.writeObject(LogM.GetAllLogs());
                     break;

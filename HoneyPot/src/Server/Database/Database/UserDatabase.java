@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class UserDatabase implements ILoginRepo {
@@ -34,11 +36,17 @@ public class UserDatabase implements ILoginRepo {
 						user1.setCode(sk.getString(1));
 					}
 				}
-//				sql = "UPDATE Account SET [online] = ? WHERE name = ?";
-//				statement = Database.connection().prepareStatement(sql);
-//				statement.setInt(1, 1);
-//				statement.setString(2, user.getName());
-//				statement.execute();
+
+				ArrayList<String> emails = new ArrayList<>();
+				sql = "SELECT address FROM Email WHERE userId = ?";
+				statement = Database.connection().prepareStatement(sql);
+				statement.setInt(1, user1.getId());
+				ResultSet resultSet = statement.executeQuery();
+				while (resultSet.next())
+				{
+					emails.add(resultSet.getString(1));
+				}
+				user1.setMsgEmail(emails);
 				return user1;
 			}
 		}
@@ -69,85 +77,73 @@ public class UserDatabase implements ILoginRepo {
 	@Override
 	public boolean Register(User user) {
 		try{
-			if(SearchCode(user.getCode())) {
-				String sql = "INSERT INTO Account (name, password, roleID, [online]) VALUES (?, ?, ?, ?)";
-				PreparedStatement statement = Database.connection().prepareStatement(sql);
-				statement.setString(1, user.getName());
-				statement.setString(2, user.getPassword());
-				statement.setInt(3, user.getRole().getValue());
-				statement.setInt(4, 0);
-				statement.execute();
-
-				int id = GetID(user.getName());
-				if(id == 0)
-				{
-					return false;
-				}
-				if(!CreateAccountCode(id, user.getCode()))
-				{
-					return false;
-				}
-
-				return true;
-			}
-		} catch(SQLException sqle){
-		}
-		return false;
-	}
-
-	@Override
-	public boolean RegisterAdmin(User user) {
-		try{
+			int id = 0;
 			String sql = "INSERT INTO Account (name, password, roleID, [online]) VALUES (?, ?, ?, ?)";
 			PreparedStatement statement = Database.connection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, user.getName());
 			statement.setString(2, user.getPassword());
 			statement.setInt(3, user.getRole().getValue());
 			statement.setInt(4, 0);
-			int idd = 0;
 			statement.executeUpdate();
 			ResultSet result = statement.getGeneratedKeys();
 
 			if(result.next() && result != null){
-				idd = result.getInt(1);
-				System.out.println("Key: " + idd);
-			}
-			for (String email :
-					user.getMsgEmail()) {
-				String sql2 = "INSERT INTO Email (address, userId) VALUES (?, ?)";
-				PreparedStatement statement2 = Database.connection().prepareStatement(sql2);
-				statement2.setString(1, email);
-				statement2.setInt(2, idd);
-				statement2.execute();
-			}
-
-			String newCode = "";
-			while (newCode == "")
-			{
-				String code = StringGenerator();
-				if(!SearchCode(code))
+				id = result.getInt(1);
+				System.out.println("Key: " + id);
+				if(id == 0)
 				{
-					newCode = code;
+					return false;
 				}
 			}
 
-			int id = GetID(user.getName());
-			if(id == 0)
+			String newCode = user.getCode();
+			if(newCode == null)
 			{
+				newCode = "";
+			}
+
+			if(user.getRole() == UserRole.Admin)
+			{
+				while (newCode == "") {
+					String code = StringGenerator();
+					if (!SearchCode(code)) {
+						newCode = code;
+					}
+				}
+
+				sql = "INSERT INTO Code (code) VALUES (?)";
+				statement = Database.connection().prepareStatement(sql);
+				statement.setString(1, newCode);
+				statement.execute();
+			}
+
+			if(!CreateAccountCode(id, newCode)) {
 				return false;
 			}
-
-			sql = "INSERT INTO Code (code) VALUES (?)";
-			statement = Database.connection().prepareStatement(sql);
-			statement.setString(1, newCode);
-			statement.execute();
-
-			if(CreateAccountCode(id, newCode)) {
-				return true;
+			if(!AddEmail(id, user.getMsgEmail()))
+			{
+				return  false;
 			}
+
+			return true;
+
 		} catch(SQLException sql){
 
 		}
+		return false;
+	}
+
+	private boolean AddEmail(int id, ArrayList<String> emails)
+	{
+		try {
+			String sql = "INSERT INTO Email (address, userId) VALUES (?, ?)";
+			PreparedStatement statement = Database.connection().prepareStatement(sql);
+			statement.setString(1, emails.get(0));
+			statement.setInt(2, id);
+			statement.execute();
+			return true;
+		}
+		catch (SQLException e) {}
 		return false;
 	}
 

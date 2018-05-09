@@ -178,14 +178,14 @@ public class Main extends Application {
         }
     }
 
-    public static boolean RegisterAdmin(User urs){
+    /*public static boolean RegisterAdmin(User urs){
         try {
             return client.RegisterAdmin(urs);
         }catch (Exception e){
             return false;
 
         }
-    }
+    }*/
 
     public static void SaveLogs(Iterable<LogConnection> logs){
         client.SaveLogs(pref.getAccount(),logs);
