@@ -2,15 +2,19 @@ package Client.Controller;
 
 import Client.Main.Main;
 import Client.Model.UserRole;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToolbar;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -22,6 +26,12 @@ public class SettingsController extends BaseController implements Initializable 
 	JFXToolbar toolbar;
 	@FXML
 	TextField keylbl;
+	@FXML
+	ListView<String> emailList;
+	@FXML
+	JFXButton addEmail;
+	@FXML
+	JFXTextField addEmailField;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -31,18 +41,45 @@ public class SettingsController extends BaseController implements Initializable 
 		Main.ChangeLoginButton(loginBtn);
 		Main.ChangeAdminButton(adminBtn);
 		keylbl.setEditable(false);
-		if(Main.GetAccount() != null && Main.GetAccount().getRole() == UserRole.Admin)
+		if(Main.GetAccount() != null)
 		{
-			keylbl.setDisable(false);
-			keylbl.setText("Key: " + Main.GetAccount().getCode());
-			keylbl.setEditable(false);
-			keylbl.setStyle("-fx-text-box-border: transparent; -fx-background-color: transparent;");
+			emailList.getItems().addAll(Main.GetAccount().getMsgEmail());
+			if(Main.GetAccount().getRole() == UserRole.Admin)
+			{
+				keylbl.setDisable(false);
+				keylbl.setText("Key: " + Main.GetAccount().getCode());
+				keylbl.setEditable(false);
+				keylbl.setStyle("-fx-text-box-border: transparent; -fx-background-color: transparent;");
+			}
 		}
 		else
 		{
+			addEmail.setDisable(true);
 			keylbl.setDisable(true);
 		}
 	}
 
-
+	@FXML
+	public void addEmail()
+	{
+		String email = addEmailField.getText();
+		if(!email.trim().equals("") && !email.contains("@") && !email.contains("."))
+		{
+			snackbar.show("Please fill in a correct email address.",3000);
+		}
+		else
+		{
+			if(Main.AddEmail(email, Main.GetAccount().getId()))
+			{
+				Main.GetAccount().addEmail(email);
+				emailList.getItems().clear();
+				emailList.getItems().addAll(Main.GetAccount().getMsgEmail());
+				addEmailField.setText("");
+			}
+			else
+			{
+				snackbar.show("Something went wrong while adding your Email.",3000);
+			}
+		}
+	}
 }

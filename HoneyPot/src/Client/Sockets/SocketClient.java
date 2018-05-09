@@ -30,7 +30,7 @@ public class SocketClient {
         }else {
             SocketFactory socketFactory = (SocketFactory) SocketFactory.getDefault();
             try {
-                this.Socket = (Socket) socketFactory.createSocket("188.166.118.138", 7676);
+                this.Socket = (Socket) socketFactory.createSocket("localhost", 7676);
             } catch (IOException e) {
             }
         }
@@ -134,6 +134,31 @@ public class SocketClient {
         return false;
     }
 
+    public boolean AddEmail(String email, int userId) {
+		try {
+			if(SocketCheck()) {
+				Request RequestSets = new Request(RequestType.AddMail, email, userId);
+				output.writeObject(RequestSets);
+				Object obj = input.readObject();
+				if (obj instanceof Boolean) {
+					boolean results = ((boolean) obj);
+					output.flush();
+					return results;
+				}
+			}else {
+				return false;
+			}
+
+		} catch (IOException e) {
+			//e.printStackTrace();
+			return false;
+		} catch (ClassNotFoundException e) {
+			//e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
+
     public boolean Register(User usr){
 
         try {
@@ -157,9 +182,6 @@ public class SocketClient {
             //e.printStackTrace();
             return false;
         }
-
-
-
         return false;
     }
 

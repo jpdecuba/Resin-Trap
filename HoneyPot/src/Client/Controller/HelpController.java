@@ -24,6 +24,8 @@ public class HelpController extends BaseController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Main.manager.setToolbar(this.toolbar);
+        Main.ChangeLoginButton(loginBtn);
+        Main.ChangeAdminButton(adminBtn);
     }
 
     @FXML

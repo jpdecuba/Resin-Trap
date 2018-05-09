@@ -9,6 +9,6 @@ public enum RequestType {
     GetLogs,
     SaveLogs,
     SaveLog,
-    GetLogsAdmin
-
+    GetLogsAdmin,
+    AddMail
 }

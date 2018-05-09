@@ -15,6 +15,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ListView?>
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Controller.SettingsController">
     <children>
@@ -96,7 +97,7 @@
                         </VBox>
                     </children>
                 </AnchorPane>
-                <VBox fx:id="VB" prefHeight="${VB.parent.height}" HBox.hgrow="ALWAYS" >
+                <VBox fx:id="VB" prefHeight="${VB.parent.height}" HBox.hgrow="ALWAYS">
                     <children>
                         <JFXToolbar fx:id="toolbar" prefWidth="${toolbar.parent.width}"
                                     prefHeight="25" style="-fx-background-color: WHITE">
@@ -113,25 +114,36 @@
                                             <children>
                                             <FontAwesomeIconView fill="#cc0000" glyphName="KEY" size="25"
                                                                  strokeType="OUTSIDE" strokeWidth="0.0"/>
-                                            <TextField VBox.vgrow="ALWAYS" maxHeight="Infinity" HBox.hgrow="ALWAYS" fx:id="keylbl" style=" -fx-font-family: 'Roboto Condensed'; -fx-text-box-border: transparent; -fx-background-color: transparent; -fx-text-fill: #424242"
+                                            <TextField VBox.vgrow="ALWAYS" maxHeight="Infinity" HBox.hgrow="ALWAYS" fx:id="keylbl" style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16; -fx-text-box-border: transparent; -fx-background-color: transparent; -fx-text-fill: #424242"
                                                       text="Key: ">
-                                                <font>
-                                                    <Font size="16"/>
-                                                </font>
                                             </TextField>
                                             </children>
                                         </HBox>
                                         <HBox alignment="BASELINE_LEFT" spacing="5">
                                             <children>
+                                                <Label style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 21; -fx-text-fill: #424242" text="Emails:"/>
+                                                <ListView fx:id="emailList" minHeight="60" style="fx-font-family: 'Roboto Condensed'; -fx-font-size: 20; -fx-text-fill: #424242"/>
+                                            </children>
+                                        </HBox>
+                                        <Region prefHeight="25"></Region>
+                                        <HBox alignment="BASELINE_LEFT" spacing="5">
+                                            <children>
                                                 <FontAwesomeIconView fill="#cc0000" glyphName="USER" size="25"
                                                                      strokeType="OUTSIDE" strokeWidth="0.0"/>
-                                                <JFXTextField fx:id="loginUsernameField" alignment="BASELINE_LEFT"
-                                                              focusColor="#cc0000" labelFloat="true" promptText="%username"
+                                                <JFXTextField fx:id="addEmailField" alignment="BASELINE_LEFT"
+                                                              focusColor="#cc0000" labelFloat="true" promptText="Email"
                                                               HBox.hgrow="ALWAYS">
                                                     <font>
                                                         <Font size="16.0"/>
                                                     </font>
                                                 </JFXTextField>
+                                                <JFXButton fx:id="addEmail" HBox.hgrow="ALWAYS" onAction="#addEmail" alignment="BASELINE_LEFT"
+                                                           graphicTextGap="17.0"
+                                                           layoutX="0"
+                                                           layoutY="0" mnemonicParsing="false" prefHeight="50.0"
+                                                           prefWidth="210.0"
+                                                           style="-fx-background-color: achmea; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"
+                                                           text="%addEmail" textFill="WHITE"/>
                                             </children>
                                         </HBox>
                                     </children>

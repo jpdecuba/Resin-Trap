@@ -118,7 +118,7 @@ public class UserDatabase implements ILoginRepo {
 			if(!CreateAccountCode(id, newCode)) {
 				return false;
 			}
-			if(!AddEmail(id, user.getMsgEmail()))
+			if(!AddEmail(user.getMsgEmail().get(0), id))
 			{
 				return false;
 			}
@@ -201,12 +201,13 @@ public class UserDatabase implements ILoginRepo {
 		return returnstring.toString();
 	}
 
-	private boolean AddEmail(int id, ArrayList<String> emails)
+	@Override
+	public boolean AddEmail(String email, int id)
 	{
 		try {
 			String sql = "INSERT INTO Email (address, userId) VALUES (?, ?)";
 			PreparedStatement statement = Database.connection().prepareStatement(sql);
-			statement.setString(1, emails.get(0));
+			statement.setString(1, email);
 			statement.setInt(2, id);
 			statement.execute();
 			return true;

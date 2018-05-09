@@ -52,7 +52,7 @@ public class ServerHandler {
                     output.writeObject(true);
                     break;
                 case Register:
-                    boolean register =LM.Register(object.getAccount());
+                    boolean register = LM.Register(object.getAccount());
                     output.writeObject(register);
                     break;
                 case GetAllLogs:
@@ -71,6 +71,10 @@ public class ServerHandler {
                 case GetLogsAdmin:
                     Set<LogConnection> logs2 = LogM.GetLogsAdmin(object.getAccount());
                     output.writeObject(logs2);
+                    break;
+                case AddMail:
+                    boolean added = LM.AddEmail(object.getEmailAccount(), object.getId());
+                    output.writeObject(added);
                     break;
             }
             output.flush();

@@ -186,6 +186,15 @@ public class Main extends Application {
         }
     }
 
+    public static boolean AddEmail(String email, int userId)
+    {
+        try {
+            return client.AddEmail(email, userId);
+        }catch (Exception e){
+            return false;
+        }
+    }
+
     public static boolean Logout(User urs){
         try {
             return client.Logout(urs);
