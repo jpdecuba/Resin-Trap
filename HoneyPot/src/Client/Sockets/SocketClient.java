@@ -163,30 +163,6 @@ public class SocketClient {
         return false;
     }
 
-    public boolean RegisterAdmin(User usr){
-
-        try {
-            if(SocketCheck()) {
-                Request RequestSets = new Request(RequestType.RegisterAdmin, usr);
-                output.writeObject(RequestSets);
-                Object obj = input.readObject();
-                if (obj instanceof Boolean) {
-                    boolean results = ((boolean) obj);
-                    output.flush();
-                    return results;
-                }
-            }
-            return false;
-
-        } catch (IOException e) {
-            //e.printStackTrace();
-            return false;
-        } catch (ClassNotFoundException e) {
-            //e.printStackTrace();
-            return false;
-        }
-    }
-
     public void SaveLogs(User usr, Iterable<LogConnection> logs){
 
         try {

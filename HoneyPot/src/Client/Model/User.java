@@ -48,7 +48,6 @@ public class User implements Serializable{
 		return id;
 	}
 
-
 	public String getName() {
 		return name;
 	}
@@ -83,13 +82,16 @@ public class User implements Serializable{
 		this.msgEmail = msgEmail;
 	}
 
-	//
-
 	public String getToken() {
 		return token;
 	}
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public void addEmail(String email)
+	{
+		this.msgEmail.add(email);
 	}
 }

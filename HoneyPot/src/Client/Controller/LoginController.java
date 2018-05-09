@@ -4,6 +4,8 @@ import Client.Main.Main;
 import Client.Model.User;
 import Client.Model.UserRole;
 import com.jfoenix.controls.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +54,8 @@ public class LoginController implements Initializable {
 				registerUserRoleField.getItems().add(role);
 			}
 			registerUserRoleField.getSelectionModel().select(0);
+			SetLimiter(registerUsernameField, 50);
+			SetLimiter(registerEmailField, 50);
 		}
 	}
 
@@ -171,38 +175,59 @@ public class LoginController implements Initializable {
 			snackbar.show("The role chosen is invalid",3000);
 			return false;
 		}
-
-		if (password.equals(confirm)) {
-			User user = null;
-			boolean register = false;
-			switch (role)
+		if(!username.trim().equals("") && !password.trim().equals("") && !confirm.trim().equals("") && !email.trim().equals("")) {
+			if(!email.contains("@") || !email.contains("."))
 			{
-				case User:
-					if(code.trim() == "")
-					{
-						snackbar.show("Fill in a code", 3000);
-						return false;
-					}
-					user = new User(username, password, role, code);
-					user.getMsgEmail().add(email);
-					register = Main.Register(user);
-					break;
-				case Admin:
-					user = new User(username, password, role);
-					user.getMsgEmail().add(email);
-					register = Main.RegisterAdmin(user);
-					break;
+				snackbar.show("Please fill in a correct email address.",3000);
+				return false;
 			}
-			if (register) {
+			if (password.equals(confirm)) {
+				User user = null;
+				boolean register = false;
+				switch (role) {
+					case User:
+						if (code.trim() == "") {
+							snackbar.show("Fill in a code", 3000);
+							return false;
+						}
+						user = new User(username, password, role, code);
+						user.addEmail(email);
+						register = Main.Register(user);
+						break;
+					case Admin:
+						user = new User(username, password, role);
+						user.addEmail(email);
+						register = Main.Register(user);
+						break;
+				}
+				if (register) {
 
-				return true;
+					return true;
 
+				} else {
+					snackbar.show("Failed", 3000);
+				}
 			} else {
-				snackbar.show("Failed", 3000);
+				snackbar.show("Password is not equal", 3000);
 			}
-		} else {
-			snackbar.show("Password is not equal", 3000);
+		}
+		else
+		{
+			snackbar.show("Please fill in all the fields.",3000);
+			return false;
 		}
 		return false;
+	}
+
+	private void SetLimiter(JFXTextField tf, int max)
+	{
+		tf.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+				if (newValue.length() > max) {
+					tf.setText(oldValue);
+				}
+			}
+		});
 	}
 }

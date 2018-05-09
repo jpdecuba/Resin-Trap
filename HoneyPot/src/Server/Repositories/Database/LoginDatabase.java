@@ -37,15 +37,6 @@ public class LoginDatabase implements ILoginRepo {
         else return false;
     }
 
-    @Override
-    public boolean RegisterAdmin(User user) {
-        if (!list.contains(user)){
-            list.add(user);
-            return true;
-        }
-        else return false;
-    }
-
     public ArrayList<User> getList() {
         return list;
     }
