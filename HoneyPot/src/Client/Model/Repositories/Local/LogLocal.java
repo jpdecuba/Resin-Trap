@@ -56,4 +56,9 @@ public class LogLocal implements ILogSerialisation {
         }
         return logs;
     }
+
+    @Override
+    public Set<LogConnection> GetLogsByUser() {
+        return null;
+    }
 }

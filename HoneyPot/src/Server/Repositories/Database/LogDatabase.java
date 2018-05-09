@@ -168,5 +168,6 @@ public class LogDatabase implements ILogSerialisation {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return null;
     }
 }
