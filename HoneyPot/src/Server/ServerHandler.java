@@ -2,8 +2,8 @@ package Server;
 
 import Client.HoneyPot.logging.LogConnection;
 import Client.Model.User;
-import Server.Database.LogDB.Repository.LogModel;
-import Server.Database.LoginModel;
+import Server.Repositories.LogModel;
+import Server.Repositories.LoginModel;
 import Server.Mail.EmailSend;
 import Shared.Request.Request;
 import Shared.Request.RequestType;
@@ -69,7 +69,7 @@ public class ServerHandler {
                     LogM.SaveLogs(object.getLogs(),object.getAccount());
                     break;
                 case GetLogs:
-                    Set<LogConnection> logs = LogM.GetLogs(object.getAccount());
+                    Set<LogConnection> logs = LogM.GetLogsByUser(object.getAccount());
                     output.writeObject(logs);
                     break;
             }

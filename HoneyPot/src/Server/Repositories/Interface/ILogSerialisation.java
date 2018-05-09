@@ -1,4 +1,4 @@
-package Server.Database.LogDB.Repository;
+package Server.Repositories.Interface;
 
 import Client.HoneyPot.logging.LogConnection;
 import Client.Model.User;
@@ -10,5 +10,6 @@ public interface ILogSerialisation {
     void SaveLogs(Iterable<LogConnection> logs, User user);
     Set<LogConnection> GetAllLogs();
 
-    Set<LogConnection> GetLogs(User usr);
+    Set<LogConnection> GetLogsByUser(User usr);
+    Set<LogConnection> GetLogsAdmin(User usr);
 }
