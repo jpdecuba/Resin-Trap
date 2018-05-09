@@ -6,6 +6,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToolbar;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -57,6 +59,15 @@ public class SettingsController extends BaseController implements Initializable 
 			addEmail.setDisable(true);
 			keylbl.setDisable(true);
 		}
+
+		addEmailField.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+				if (newValue.length() > 50) {
+					addEmailField.setText(oldValue);
+				}
+			}
+		});
 	}
 
 	@FXML
