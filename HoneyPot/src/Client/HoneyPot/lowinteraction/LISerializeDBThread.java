@@ -1,9 +1,10 @@
 package Client.HoneyPot.lowinteraction;
 
 import Client.Main.Main;
-import Client.HoneyPot.Repository.*;
 
 import Client.HoneyPot.logging.LogConnection;
+import Client.Model.Repositories.Database.LogDatabase;
+import Client.Model.Repositories.Repository.LogRepository;
 
 
 public class LISerializeDBThread implements Runnable {

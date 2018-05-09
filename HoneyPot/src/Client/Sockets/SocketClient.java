@@ -2,6 +2,7 @@ package Client.Sockets;
 
 import Client.HoneyPot.logging.LogConnection;
 import Client.Model.User;
+import Client.Model.UserRole;
 import Shared.Mail.MailMsg;
 import Shared.Request.Request;
 import Shared.Request.RequestType;
@@ -22,14 +23,14 @@ public class SocketClient {
     private ObjectOutputStream output;
     private ObjectInputStream input;
 
+    //188.166.118.138
     public SocketClient(java.net.Socket socket) {
         if(socket != null) {
             Socket = socket;
         }else {
             SocketFactory socketFactory = (SocketFactory) SocketFactory.getDefault();
             try {
-                //this.Socket = (Socket) socketFactory.createSocket("188.166.118.138", 7676);
-                this.Socket = (Socket) socketFactory.createSocket("localhost", 7676);
+                this.Socket = (Socket) socketFactory.createSocket("Localhost", 7676);
             } catch (IOException e) {
             }
         }
@@ -192,7 +193,20 @@ public class SocketClient {
     }
 
 
-    public Set<LogConnection> GetLogs(User usr){
+    public Set<LogConnection> GetlogFiles(User usr){
+        if(usr.getRole().equals(UserRole.Admin)){
+            //Edit to admin get logs
+            return GetLogs(usr);
+        }else if(usr.getRole().equals(UserRole.User)){
+            return GetLogs(usr);
+        }
+
+        return null;
+    }
+
+
+
+    private Set<LogConnection> GetLogs(User usr){
 
         try {
             if(SocketCheck()) {

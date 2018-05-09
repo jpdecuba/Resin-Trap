@@ -8,7 +8,7 @@ import Client.HoneyPot.lowinteraction.LIDeserializeDBThread;
 import Client.HoneyPot.lowinteraction.LIDeserializeThread;
 import Client.HoneyPot.lowinteraction.LIModule;
 import Client.Main.Main;
-import Client.Model.Database.Database.Database;
+import Client.Model.Repositories.Database.Database;
 
 
 import java.io.File;
@@ -68,27 +68,29 @@ public class HoneyRJ  implements Serializable{
 	 */
 	public HoneyRJ() throws HoneyRJException {
 		this(DEFAULT_LOG_DIR);
-		if(Database.connection() != null || Main.GetAccount().getName() != null){
-		    try{
-                Future<Set<LogConnection>> future = null;
-                ExecutorService executorService = Executors.newSingleThreadExecutor();
-                future = executorService.submit(new LIDeserializeDBThread());
-                logs = future.get();
-            } catch (InterruptedException | ExecutionException e){
-		        e.printStackTrace();
-            }
-
-        }
-
-        if(logs == null){
-            getLogsfromdir();
-        }
+		//SetDBLog();
 
 	}
 
 
+	public void SetDBLog() {
+		if(Main.GetAccount().getName() != null && Main.SocketCheck()){
+			try{
+				Future<Set<LogConnection>> future = null;
+				ExecutorService executorService = Executors.newSingleThreadExecutor();
+				future = executorService.submit(new LIDeserializeDBThread());
+				logs = future.get();
+			} catch (InterruptedException | ExecutionException e){
+				e.printStackTrace();
+			}
 
-	
+		}
+
+		if(logs == null){
+			getLogsfromdir();
+		}
+	}
+
 	/**
 	 * 
 	 * @param logDir logging directory to use -  C:\\tmp\\ is the default
@@ -252,12 +254,13 @@ public class HoneyRJ  implements Serializable{
 		}
         LinkedList<LogConnection> list = new LinkedList<>(logs);
 
-		Collections.sort(list);
 
 		if(list.size() <= 0)
 		{
 			return null;
 		}
+
+		Collections.sort(list);
 
 		return list;
 	}
