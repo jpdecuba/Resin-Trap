@@ -1,4 +1,4 @@
-package Client.Model.Database.Interface;
+package Client.Model.Repositories.Interface;
 
 import Client.Model.User;
 

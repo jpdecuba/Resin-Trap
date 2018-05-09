@@ -9,8 +9,7 @@ import Client.HoneyPot.logging.LogFile;
 import Client.HoneyPot.logging.LogRecord;
 import Client.HoneyPot.protocol.BlankProtocol;
 import Client.HoneyPot.protocol.DNSProtocol;
-import Client.Main.Main;
-import Client.Model.Database.Database.Database;
+import Client.Model.Repositories.Database.Database;
 
 import java.io.*;
 import java.net.InetAddress;

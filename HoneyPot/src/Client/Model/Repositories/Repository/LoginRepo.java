@@ -1,6 +1,6 @@
-package Client.Model.Database.Repository;
+package Client.Model.Repositories.Repository;
 
-import Client.Model.Database.Interface.ILoginRepo;
+import Client.Model.Repositories.Interface.ILoginRepo;
 import Client.Model.User;
 
 

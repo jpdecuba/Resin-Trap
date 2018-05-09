@@ -1,4 +1,4 @@
-package Client.Model.Database.Database;
+package Client.Model.Repositories.Database;
 
 import java.io.*;
 import java.sql.Connection;

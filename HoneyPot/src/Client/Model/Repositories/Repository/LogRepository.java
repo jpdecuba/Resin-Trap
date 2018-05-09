@@ -1,12 +1,13 @@
-package Client.HoneyPot.Repository;
+package Client.Model.Repositories.Repository;
 
+import Client.Model.Repositories.Interface.ILogSerialisation;
 import Client.Model.User;
 import Client.HoneyPot.logging.LogConnection;
 
 
 import java.util.Set;
 
-public class LogRepository implements ILogSerialisation{
+public class LogRepository implements ILogSerialisation {
 
     private ILogSerialisation context;
     public LogRepository(ILogSerialisation context){ this.context = context; }
