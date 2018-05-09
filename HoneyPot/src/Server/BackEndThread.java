@@ -24,7 +24,7 @@ public class BackEndThread extends Thread{
 
 
         try {
-            System.err.println("Connecting started");
+            System.err.println("Connection started");
             // Data streams
             ObjectInputStream input;
             ObjectOutputStream output;
