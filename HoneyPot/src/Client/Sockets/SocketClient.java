@@ -220,7 +220,7 @@ public class SocketClient {
     public Set<LogConnection> GetlogFiles(User usr){
         if(usr.getRole().equals(UserRole.Admin)){
             //Edit to admin get logs
-            return GetLogs(usr);
+            return GetLogsAdmin(usr);
         }else if(usr.getRole().equals(UserRole.User)){
             return GetLogs(usr);
         }
@@ -240,6 +240,31 @@ public class SocketClient {
                     Set<LogConnection> results = ((Set<LogConnection>) obj);
                     output.flush();
                     return results;
+
+            }
+            return null;
+
+        } catch (IOException e) {
+            //e.printStackTrace();
+            return null;
+        } catch (ClassNotFoundException e) {
+            //e.printStackTrace();
+            return null;
+        }
+    }
+
+
+
+    private Set<LogConnection> GetLogsAdmin(User usr){
+
+        try {
+            if(SocketCheck()) {
+                Request RequestSets = new Request(RequestType.GetLogsAdmin, usr);
+                output.writeObject(RequestSets);
+                Object obj = input.readObject();
+                Set<LogConnection> results = ((Set<LogConnection>) obj);
+                output.flush();
+                return results;
 
             }
             return null;

@@ -72,6 +72,10 @@ public class ServerHandler {
                     Set<LogConnection> logs = LogM.GetLogsByUser(object.getAccount());
                     output.writeObject(logs);
                     break;
+                case GetLogsAdmin:
+                    Set<LogConnection> logs2 = LogM.GetLogsAdmin(object.getAccount());
+                    output.writeObject(logs2);
+                    break;
             }
             output.flush();
         } catch (IOException e1) {

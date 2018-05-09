@@ -67,4 +67,9 @@ public class LogDatabase implements ILogSerialisation {
         }
         return null;
     }
+
+    @Override
+    public Set<LogConnection> GetLogsByUser() {
+        return null;
+    }
 }
