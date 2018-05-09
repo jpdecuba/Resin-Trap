@@ -7,14 +7,12 @@
 <?import com.jfoenix.controls.JFXToolbar?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.text.TextFlow?>
-<?import javafx.scene.text.Text?>
 <?import javafx.scene.control.Hyperlink?>
+
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Controller.HelpController">
     <children>
@@ -102,16 +100,16 @@
                     <HBox AnchorPane.topAnchor="60" AnchorPane.leftAnchor="75" AnchorPane.rightAnchor="75"
                           alignment="TOP_CENTER">
                         <Label text="%support"
-                               style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 28;"></Label>
+                               style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 28;"/>
                     </HBox>
                     <ScrollPane AnchorPane.rightAnchor="75" AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="75"
                                 AnchorPane.topAnchor="100" style="-fx-background-color: WHITE; -fx-border-radius: 0"
                                 vbarPolicy="NEVER" hbarPolicy="NEVER" fitToWidth="true">
                         <VBox alignment="TOP_LEFT" style="-fx-background-color: WHITE" spacing="25">
                             <Label text="%block"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 22;"></Label>
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 22;"/>
                             <Label wrapText="true" text="%step1"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
                             <ImageView>
                                 <image>
                                     <Image
@@ -119,35 +117,53 @@
                                 </image>
                             </ImageView>
                             <Label wrapText="true" text="%step12"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
+                            <Label wrapText="true" text="Windows"
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 22;"/>
                             <Label wrapText="true" text="%step13"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
                             <ImageView>
                                 <image>
                                     <Image url="/Client/Resources/run.JPG"/>
                                 </image>
                             </ImageView>
                             <Label wrapText="true" text="%step14"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
                             <ImageView>
                                 <image>
                                     <Image url="/Client/Resources/cmd1.JPG"/>
                                 </image>
                             </ImageView>
                             <Label wrapText="true" text="%step15"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
-                            <ImageView>
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
+                            <ImageView fitWidth="500" preserveRatio="true">
                                 <image>
                                     <Image url="/Client/Resources/cmd.PNG"/>
                                 </image>
                             </ImageView>
+                            <Label wrapText="true" text="Mac OSX"
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 22;"/>
+                            <Label wrapText="true" text="%step16"
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
+                            <Label wrapText="true" text="%step17"
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
+                            <ImageView fitWidth="500" preserveRatio="true">
+                                <image>
+                                    <Image url="/Client/Resources/mac.png"/>
+                                </image>
+                            </ImageView>
                             <Label wrapText="true" text="%step2"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Label>
-                            <Hyperlink fx:id="linksys" text="Linksys" onAction="#OpenLink" style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Hyperlink>
-                            <Hyperlink fx:id="netgear" text="Netgear" onAction="#OpenLink" style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Hyperlink>
-                            <Hyperlink fx:id="ddwrt" text="DD-WRT" onAction="#OpenLink" style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Hyperlink>
-                            <Hyperlink fx:id="tplink" text="TP-Link" onAction="#OpenLink" style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Hyperlink>
-                            <Hyperlink fx:id="asus" text="Asus" onAction="#OpenLink" style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"></Hyperlink>
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
+                            <Hyperlink fx:id="linksys" text="Linksys" onAction="#OpenLink"
+                                       style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
+                            <Hyperlink fx:id="netgear" text="Netgear" onAction="#OpenLink"
+                                       style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
+                            <Hyperlink fx:id="ddwrt" text="DD-WRT" onAction="#OpenLink"
+                                       style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
+                            <Hyperlink fx:id="tplink" text="TP-Link" onAction="#OpenLink"
+                                       style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
+                            <Hyperlink fx:id="asus" text="Asus" onAction="#OpenLink"
+                                       style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
                         </VBox>
                     </ScrollPane>
                 </AnchorPane>
