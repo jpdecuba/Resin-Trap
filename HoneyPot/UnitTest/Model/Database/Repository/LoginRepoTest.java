@@ -1,14 +1,12 @@
 package Model.Database.Repository;
 
-import Client.Model.Database.Database.LoginDatabase;
-import Client.Model.Database.Repository.LoginRepo;
+import Client.Model.Repositories.Database.LoginDatabase;
+import Client.Model.Repositories.Repository.LoginRepo;
 import Client.Model.User;
 import Client.Model.UserRole;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class LoginRepoTest {
     LoginRepo repo;

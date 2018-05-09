@@ -8,7 +8,7 @@ import Client.HoneyPot.lowinteraction.*;
 import Client.HoneyPot.protocol.*;
 
 import Client.Model.*;
-import Client.Model.Database.*;
+import Client.Model.Repositories.*;
 import Client.Model.Preset.Preset;
 import Client.Sockets.SocketClient;
 import Shared.Mail.MailMsg;
@@ -16,6 +16,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXToolbar;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,11 +26,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import sun.rmi.runtime.Log;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Main extends Application {
     public static Stage Stage;
@@ -72,6 +71,13 @@ public class Main extends Application {
     public static void setAccount(User account) {
         pref.setAccount(account);
         SavePref();
+        if(honeypot != null && GetAccount() != null){
+            honeypot.SetDBLog();
+        }
+    }
+
+    public static boolean SocketCheck(){
+        return client.SocketCheck();
     }
 
     public static User GetAccount() {
@@ -85,6 +91,12 @@ public class Main extends Application {
     public static void setPreset(Preset preset) {
        pref.setPreset(preset);
         SavePref();
+    }
+
+
+    public static Set<LogConnection> GetLogs(){
+
+        return client.GetlogFiles(GetAccount());
     }
 
     @Override

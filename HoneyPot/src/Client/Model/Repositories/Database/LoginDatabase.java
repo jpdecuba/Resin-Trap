@@ -1,6 +1,6 @@
-package Client.Model.Database.Database;
+package Client.Model.Repositories.Database;
 
-import Client.Model.Database.Interface.ILoginRepo;
+import Client.Model.Repositories.Interface.ILoginRepo;
 import Client.Model.User;
 
 import java.util.ArrayList;
