@@ -26,4 +26,9 @@ public class LogRepository implements ILogSerialisation {
     public Set<LogConnection> GetAllLogs() {
         return context.GetAllLogs();
     }
+
+    @Override
+    public Set<LogConnection> GetLogsByUser() {
+        return null;
+    }
 }
