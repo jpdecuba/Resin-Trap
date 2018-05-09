@@ -115,7 +115,7 @@ public class Main extends Application {
             loader = new FXMLLoader(getClass().getResource("/Client/View/PresetView.fxml"));
         }else {
             manager.currentView = "/Client/View/OverView.fxml";
-            loader = new FXMLLoader(getClass().getResource("/Client/View/HelpView.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/Client/View/OverView.fxml"));
             getPreset().Start();
         }
         loader.setResources(ResourceBundle.getBundle("Client.bundles.UIResources", new Locale(lang, lang.toUpperCase())));
