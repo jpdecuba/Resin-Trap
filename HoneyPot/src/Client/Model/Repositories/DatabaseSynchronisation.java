@@ -44,13 +44,26 @@ public class DatabaseSynchronisation {
 
         dbLogs = dbRepo.GetAllLogs().toArray(new LogConnection[0]);
         localLogs = localRepo.GetAllLogs().toArray(new LogConnection[0]);
+
+        if(dbLogs.length < 1 && localLogs.length < 1){
+            return Integer.MAX_VALUE;
+        }
+
         latestDbLog = GetLatestLog(dbLogs);
         latestLocalLog = GetLatestLog(localLogs);
 
-        if(latestDbLog != null || latestLocalLog != null)
-            return latestDbLog.compareTo(latestLocalLog);
-        else
+        if(latestDbLog == null && latestLocalLog == null){
             return Integer.MAX_VALUE;
+        }
+        else if(latestDbLog == null) {
+            return Integer.MAX_VALUE;
+        }
+        else if(latestLocalLog == null) {
+            return cloudToLocal;
+        }
+        else{
+            return latestDbLog.compareTo(latestLocalLog);
+        }
     }
 
     private LogConnection GetLatestLog(LogConnection[] logs){
@@ -65,7 +78,7 @@ public class DatabaseSynchronisation {
 
     private void SyncLocalToCloud(){
         for(int i = 0; i < localLogs.length; i++){
-            if(localLogs[i].compareTo(latestDbLog) > 0){
+            if(latestDbLog != null && localLogs[i].compareTo(latestDbLog) > 0){
                 dbRepo.SaveLog(localLogs[i], Main.GetAccount());
             }
         }
@@ -73,7 +86,9 @@ public class DatabaseSynchronisation {
 
     private void SyncCloudToLocal(){
         for(int i = 0; i < dbLogs.length; i++){
-            if(dbLogs[i].compareTo(latestLocalLog) > 0){
+            if(latestLocalLog != null && dbLogs[i].compareTo(latestLocalLog) > 0){
+                localRepo.SaveLog(dbLogs[i], Main.GetAccount());
+            } else {
                 localRepo.SaveLog(dbLogs[i], Main.GetAccount());
             }
         }

@@ -1,11 +1,8 @@
 package Client.HoneyPot.lowinteraction;
 
 import Client.HoneyPot.logging.LogConnection;
-import com.sun.corba.se.impl.orbutil.ObjectWriter;
 
 import java.io.*;
-import java.util.HashSet;
-import java.util.Set;
 
 public class LISerializeThread implements Runnable {
 
@@ -21,20 +18,17 @@ public class LISerializeThread implements Runnable {
 		this.fileName = "AllLogs.txt";
 	}
 
-	@Override
-	public void run()
-	{
+	public void SerializeLogToFile(){
 		try {
 			File file = new File(path + fileName);
-			if(!file.exists())
-			{
+
+			if(!file.exists()) {
 				file.createNewFile();
 			}
 
 			OutputStream outputStream = new FileOutputStream(this.path + this.fileName, true);
 			BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream);
 			ObjectOutputStream objectWriter = new ObjectOutputStream(bufferedOutputStream);
-
 
 			objectWriter.writeObject(this.log);
 			objectWriter.close();
@@ -44,8 +38,14 @@ public class LISerializeThread implements Runnable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		finally {
+	}
 
+	@Override
+	public void run() {
+		try{
+			SerializeLogToFile();
+		}
+		finally {
 			Thread.currentThread().interrupt();
 		}
 	}

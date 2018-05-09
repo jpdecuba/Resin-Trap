@@ -1,8 +1,8 @@
-package Server.Database.Database;
+package Server.Repositories.Database;
 
 import Client.Model.User;
 import Client.Model.UserRole;
-import Server.Database.Interface.ILoginRepo;
+import Server.Repositories.Interface.ILoginRepo;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,7 +35,7 @@ public class UserDatabase implements ILoginRepo {
 					}
 				}
 //				sql = "UPDATE Account SET [online] = ? WHERE name = ?";
-//				statement = Database.connection().prepareStatement(sql);
+//				statement = Repositories.connection().prepareStatement(sql);
 //				statement.setInt(1, 1);
 //				statement.setString(2, user.getName());
 //				statement.execute();

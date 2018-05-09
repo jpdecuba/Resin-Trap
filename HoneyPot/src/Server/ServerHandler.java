@@ -2,8 +2,8 @@ package Server;
 
 import Client.HoneyPot.logging.LogConnection;
 import Client.Model.User;
-import Server.Database.LogDB.Repository.LogModel;
-import Server.Database.LoginModel;
+import Server.Repositories.LogModel;
+import Server.Repositories.LoginModel;
 import Server.Mail.EmailSend;
 import Shared.Request.Request;
 import Shared.Request.RequestType;

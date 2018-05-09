@@ -1,7 +1,8 @@
-package Server.Database.LogDB.Repository;
+package Server.Repositories.Repository;
 
 import Client.HoneyPot.logging.LogConnection;
 import Client.Model.User;
+import Server.Repositories.Interface.ILogSerialisation;
 
 import java.util.Set;
 

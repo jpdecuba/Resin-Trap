@@ -1,4 +1,4 @@
-package Server.Database.LogDB.Repository;
+package Server.Repositories.Interface;
 
 import Client.HoneyPot.logging.LogConnection;
 import Client.Model.User;
