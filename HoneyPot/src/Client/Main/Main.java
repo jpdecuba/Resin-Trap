@@ -147,6 +147,10 @@ public class Main extends Application {
 
         Stage.show();
         client = new SocketClient(null);
+
+        if(honeypot != null && GetAccount() != null){
+            honeypot.SetDBLog();
+        }
     }
 
 
