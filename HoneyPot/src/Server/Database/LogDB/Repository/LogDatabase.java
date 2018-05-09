@@ -6,6 +6,7 @@ import Server.Database.Database.Database;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,13 +18,14 @@ public class LogDatabase implements ILogSerialisation {
     @Override
     public void SaveLog(LogConnection log, User user) {
         try{
-            String sql = "INSERT INTO ServerLogs (accountID, Service, RemoteIP, Port, Item) VALUES (?,?,?,?,?)";
+            String sql = "INSERT INTO ServerLogs (accountID, Service, RemoteIP, Port, Item, Date) VALUES (?,?,?,?,?,?)";
             PreparedStatement statement = Database.connection().prepareStatement(sql);
             statement.setInt(1, user.getId());
             statement.setString(2, log.getProtocol());
             statement.setString(3, log.getDstIP().toString());
             statement.setInt(4, log.getDstPort());
             statement.setString(5, log.message());
+            statement.setDate(6, (Date) log.getDate());
             statement.execute();
         } catch (SQLException sqle){
             sqle.printStackTrace();
@@ -47,7 +49,7 @@ public class LogDatabase implements ILogSerialisation {
             while(rs.next()){
                 LogConnection log = new LogConnection(null,
                         InetAddress.getByName(rs.getString("RemoteIP").substring(1)), 0, rs.getInt("Port"),
-                        rs.getString("Service"),rs.getInt("accountID"));
+                        rs.getString("Service"),rs.getInt("accountID"),rs.getDate("Date"));
                 if(log != null){
                     String sql2 = "SELECT name FROM Account WHERE id = ?";
                     PreparedStatement statement2 = Database.connection().prepareStatement(sql2);
@@ -79,7 +81,7 @@ public class LogDatabase implements ILogSerialisation {
             while(rs.next()){
                 LogConnection log = new LogConnection(null,
                         InetAddress.getByName(rs.getString("RemoteIP").substring(1)), 0, rs.getInt("Port"),
-                        rs.getString("Service"),rs.getInt("accountID"));
+                        rs.getString("Service"),rs.getInt("accountID"),rs.getDate("Date"));
                 if(log != null){
                     String sql2 = "SELECT name FROM Account WHERE id = ?";
                     PreparedStatement statement2 = Database.connection().prepareStatement(sql2);

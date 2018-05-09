@@ -60,9 +60,10 @@ public class LogConnection implements Serializable, Comparable<LogConnection> {
         date = new Date();
     }
 
-    public LogConnection(InetAddress srcIP, InetAddress dstIP, int srcPort, int dstPort, String protocol, int userId) {
+    public LogConnection(InetAddress srcIP, InetAddress dstIP, int srcPort, int dstPort, String protocol, int userId, Date date) {
 	    this(srcIP,dstIP,srcPort,dstPort,protocol);
         this.UserId = userId;
+        this.date = date;
     }
 
 

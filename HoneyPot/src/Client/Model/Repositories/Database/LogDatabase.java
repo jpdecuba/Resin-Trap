@@ -46,13 +46,9 @@ public class LogDatabase implements ILogSerialisation {
             PreparedStatement statement = Database.connection().prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
-                LogConnection log = new LogConnection(
-                        null,
-                        InetAddress.getByName(rs.getString("RemoteIP").substring(1)),
-                        0,
-                        rs.getInt("Port"),
-                        rs.getString("Service"),rs.getInt("accountID")
-                );
+                LogConnection log = new LogConnection(null,
+                        InetAddress.getByName(rs.getString("RemoteIP").substring(1)), 0, rs.getInt("Port"),
+                        rs.getString("Service"),rs.getInt("accountID"),rs.getDate("Date"));
 
                 if(log != null){
                     String sql2 = "SELECT name FROM Account WHERE id = ?";
