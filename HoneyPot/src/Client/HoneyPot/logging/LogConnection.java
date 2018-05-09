@@ -75,6 +75,10 @@ public class LogConnection implements Serializable, Comparable<LogConnection> {
         LogRecords.add(Record);
     }
 
+    public void AddLogRecord(ArrayList<LogRecord> Records) {
+        LogRecords.addAll(Records);
+    }
+
 
     public String message(){
         StringBuilder sb = new StringBuilder();
@@ -98,6 +102,9 @@ public class LogConnection implements Serializable, Comparable<LogConnection> {
      * @return Date
      */
     public Date getDate() {
+        if(date == null){
+            return new Date(0);
+        }
         return date;
     }
 
@@ -109,6 +116,7 @@ public class LogConnection implements Serializable, Comparable<LogConnection> {
      */
     @Override
     public int compareTo(LogConnection o) {
+
         return getDate().compareTo(o.getDate());
     }
 
