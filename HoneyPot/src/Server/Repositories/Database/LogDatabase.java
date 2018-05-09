@@ -110,7 +110,7 @@ public class LogDatabase implements ILogSerialisation {
         Set<LogConnection> logs = new HashSet<>();
 
         try {
-            String sql1 = "SELECT codeID FROM AccountCode WHERE accountID = ?";
+            String sql1 = "SELECT TOP 1 codeID FROM AccountCode WHERE accountID = ? LIMIT 1";
             PreparedStatement statement = Database.connection().prepareStatement(sql1);
             statement.setInt(1, usr.getId());
             ResultSet rs1 = statement.executeQuery();
@@ -154,9 +154,8 @@ public class LogDatabase implements ILogSerialisation {
                         }
                         logs.add(log);
                     }
-                    return logs;
                 }
-                return null;
+                return logs;
             }
         } catch (UnknownHostException e) {
             e.printStackTrace();
