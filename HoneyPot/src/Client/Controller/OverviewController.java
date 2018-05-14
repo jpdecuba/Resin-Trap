@@ -1,6 +1,6 @@
 package Client.Controller;
 
-import Client.HoneyPot.logging.LogConnection;
+import Shared.Logging.LogConnection;
 import Client.HoneyPot.lowinteraction.*;
 import Client.Main.Main;
 import Client.Model.Repositories.DatabaseSynchronisation;

@@ -1,7 +1,7 @@
 package Shared.Request;
 
-import Client.HoneyPot.logging.LogConnection;
-import Client.Model.User;
+import Shared.Logging.LogConnection;
+import Shared.Model.User;
 import Shared.Mail.MailMsg;
 
 import java.io.Serializable;

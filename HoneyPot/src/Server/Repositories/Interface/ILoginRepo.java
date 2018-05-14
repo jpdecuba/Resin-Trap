@@ -1,6 +1,6 @@
 package Server.Repositories.Interface;
 
-import Client.Model.User;
+import Shared.Model.User;
 
 
 public interface ILoginRepo {

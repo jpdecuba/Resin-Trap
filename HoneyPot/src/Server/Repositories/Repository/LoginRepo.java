@@ -1,6 +1,6 @@
 package Server.Repositories.Repository;
 
-import Client.Model.User;
+import Shared.Model.User;
 import Server.Repositories.Interface.ILoginRepo;
 
 

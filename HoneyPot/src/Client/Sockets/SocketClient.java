@@ -1,12 +1,11 @@
 package Client.Sockets;
 
-import Client.HoneyPot.logging.LogConnection;
-import Client.Model.User;
-import Client.Model.UserRole;
+import Shared.Logging.LogConnection;
+import Shared.Model.User;
+import Shared.Model.UserRole;
 import Shared.Mail.MailMsg;
 import Shared.Request.Request;
 import Shared.Request.RequestType;
-import com.sun.scenario.Settings;
 
 import javax.net.SocketFactory;
 import java.io.BufferedInputStream;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.List;
 import java.util.Set;
 
 public class SocketClient {

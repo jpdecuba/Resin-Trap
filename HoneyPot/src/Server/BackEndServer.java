@@ -1,6 +1,6 @@
 package Server;
 
-import Client.Model.User;
+import Shared.Model.User;
 
 import javax.net.ServerSocketFactory;
 import java.io.IOException;

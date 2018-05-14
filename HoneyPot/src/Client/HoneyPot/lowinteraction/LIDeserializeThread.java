@@ -1,11 +1,9 @@
 package Client.HoneyPot.lowinteraction;
 
-import Client.HoneyPot.logging.LogConnection;
+import Shared.Logging.LogConnection;
 import Client.Model.Repositories.Local.LogLocal;
 import Client.Model.Repositories.Repository.LogRepository;
 
-import java.io.*;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Callable;
 

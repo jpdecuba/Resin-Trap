@@ -1,6 +1,6 @@
 package Server.Repositories;
 
-import Client.Model.User;
+import Shared.Model.User;
 import Server.Repositories.Database.UserDatabase;
 import Server.Repositories.Repository.LoginRepo;
 

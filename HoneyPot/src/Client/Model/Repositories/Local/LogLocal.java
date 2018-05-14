@@ -1,9 +1,9 @@
 package Client.Model.Repositories.Local;
 
-import Client.HoneyPot.logging.LogConnection;
+import Shared.Logging.LogConnection;
 import Client.HoneyPot.lowinteraction.LISerializeThread;
 import Client.Model.Repositories.Interface.ILogSerialisation;
-import Client.Model.User;
+import Shared.Model.User;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.*;

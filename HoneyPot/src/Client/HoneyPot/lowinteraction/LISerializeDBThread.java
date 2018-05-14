@@ -2,7 +2,7 @@ package Client.HoneyPot.lowinteraction;
 
 import Client.Main.Main;
 
-import Client.HoneyPot.logging.LogConnection;
+import Shared.Logging.LogConnection;
 import Client.Model.Repositories.Repository.LogRepository;
 
 

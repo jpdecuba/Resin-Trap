@@ -1,7 +1,7 @@
 package Server.Repositories.Repository;
 
-import Client.HoneyPot.logging.LogConnection;
-import Client.Model.User;
+import Shared.Logging.LogConnection;
+import Shared.Model.User;
 import Server.Repositories.Interface.ILogSerialisation;
 
 import java.util.Set;

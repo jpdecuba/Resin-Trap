@@ -1,12 +1,12 @@
 package Client.Controller;
 
-import Client.HoneyPot.logging.LogConnection;
+import Shared.Logging.LogConnection;
 import Client.HoneyPot.lowinteraction.ILIModule;
 import Client.HoneyPot.lowinteraction.LIModule;
 import Client.Main.Main;
 import Client.Model.Status;
-import Client.Model.User;
-import Client.Model.UserRole;
+import Shared.Model.User;
+import Shared.Model.UserRole;
 import Client.Model.WindowButtons;
 import com.jfoenix.controls.*;
 import com.sun.javafx.scene.control.skin.TableColumnHeader;

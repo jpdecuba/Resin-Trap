@@ -2,21 +2,21 @@ package Client.Main;
 
 import Client.FileSave.*;
 import Client.HoneyPot.honeyrj.*;
-import Client.HoneyPot.logging.LogConnection;
+import Shared.Logging.LogConnection;
 import Client.HoneyPot.lowinteraction.*;
 
 import Client.HoneyPot.protocol.*;
 
 import Client.Model.*;
-import Client.Model.Repositories.*;
 import Client.Model.Preset.Preset;
 import Client.Sockets.SocketClient;
 import Shared.Mail.MailMsg;
+import Shared.Model.User;
+import Shared.Model.UserRole;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXToolbar;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,8 +25,6 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
-import sun.rmi.runtime.Log;
 
 import java.util.*;
 

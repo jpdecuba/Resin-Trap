@@ -3,6 +3,7 @@ package Client.HoneyPot.logging;
 
 import Client.HoneyPot.lowinteraction.LIModuleThread;
 import Client.HoneyPot.honeyrj.HoneyRJ;
+import Shared.Logging.LogRecord;
 
 
 import java.io.File;

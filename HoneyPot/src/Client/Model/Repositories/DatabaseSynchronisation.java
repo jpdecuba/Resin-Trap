@@ -3,7 +3,7 @@ package Client.Model.Repositories;
 import Client.Main.Main;
 import Client.Model.Repositories.Local.LogLocal;
 import Client.Model.Repositories.Repository.LogRepository;
-import Client.HoneyPot.logging.LogConnection;
+import Shared.Logging.LogConnection;
 
 public class DatabaseSynchronisation {
     private LogRepository localRepo = new LogRepository(new LogLocal());

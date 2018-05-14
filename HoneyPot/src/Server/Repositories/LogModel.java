@@ -1,7 +1,7 @@
 package Server.Repositories;
 
-import Client.HoneyPot.logging.LogConnection;
-import Client.Model.User;
+import Shared.Logging.LogConnection;
+import Shared.Model.User;
 import Server.Repositories.Database.LogDatabase;
 import Server.Repositories.Repository.LogRepository;
 

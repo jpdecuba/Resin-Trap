@@ -2,7 +2,7 @@ package Client.HoneyPot.lowinteraction;
 
 
 import Client.HoneyPot.honeyrj.HoneyRJ;
-import Client.HoneyPot.logging.LogConnection;
+import Shared.Logging.LogConnection;
 
 import java.io.File;
 import java.io.IOException;

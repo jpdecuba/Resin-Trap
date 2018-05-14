@@ -4,9 +4,9 @@ package Client.HoneyPot.lowinteraction;
 
 import Client.Main.Main;
 import Client.HoneyPot.honeyrj.HoneyRJ;
-import Client.HoneyPot.logging.LogConnection;
+import Shared.Logging.LogConnection;
 import Client.HoneyPot.logging.LogFile;
-import Client.HoneyPot.logging.LogRecord;
+import Shared.Logging.LogRecord;
 import Client.HoneyPot.protocol.BlankProtocol;
 import Client.HoneyPot.protocol.DNSProtocol;
 

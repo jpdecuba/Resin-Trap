@@ -1,8 +1,8 @@
 package Client.Controller;
 
 import Client.Main.Main;
-import Client.Model.User;
-import Client.Model.UserRole;
+import Shared.Model.User;
+import Shared.Model.UserRole;
 import com.jfoenix.controls.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,11 +12,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.rmi.registry.Registry;
 import java.util.Locale;
 import java.util.ResourceBundle;
 

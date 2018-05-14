@@ -1,7 +1,7 @@
 package Server.Repositories.Database;
 
-import Client.Model.User;
-import Client.Model.UserRole;
+import Shared.Model.User;
+import Shared.Model.UserRole;
 import Server.Repositories.Interface.ILoginRepo;
 
 import java.sql.PreparedStatement;

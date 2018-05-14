@@ -2,7 +2,7 @@ package Client.HoneyPot.honeyrj;
 
 
 
-import Client.HoneyPot.logging.LogConnection;
+import Shared.Logging.LogConnection;
 import Client.HoneyPot.lowinteraction.ILIModule;
 import Client.HoneyPot.lowinteraction.LIDeserializeDBThread;
 import Client.HoneyPot.lowinteraction.LIDeserializeThread;

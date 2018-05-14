@@ -1,6 +1,6 @@
 package Client.HoneyPot.lowinteraction;
 
-import Client.HoneyPot.logging.LogConnection;
+import Shared.Logging.LogConnection;
 
 import java.io.*;
 

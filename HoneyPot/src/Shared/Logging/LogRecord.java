@@ -1,4 +1,4 @@
-package Client.HoneyPot.logging;
+package Shared.Logging;
 
 import java.io.Serializable;
 import java.net.InetAddress;

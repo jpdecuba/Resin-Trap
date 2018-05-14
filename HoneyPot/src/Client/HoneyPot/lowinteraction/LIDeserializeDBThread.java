@@ -1,7 +1,6 @@
 package Client.HoneyPot.lowinteraction;
 
-import Client.Model.Repositories.Repository.LogRepository;
-import Client.HoneyPot.logging.LogConnection;
+import Shared.Logging.LogConnection;
 import Client.Main.Main;
 
 import java.util.Set;

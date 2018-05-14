@@ -1,4 +1,4 @@
-package Client.Model;
+package Shared.Model;
 
 public enum UserRole {
 	User(0),

@@ -1,7 +1,7 @@
 package Client.FileSave;
 
 import Client.Model.Preset.Preset;
-import Client.Model.User;
+import Shared.Model.User;
 
 import java.io.Serializable;
 
