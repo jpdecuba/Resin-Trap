@@ -146,6 +146,33 @@
                                                            text="%addEmail" textFill="WHITE"/>
                                             </children>
                                         </HBox>
+                                        <Region VBox.vgrow="ALWAYS"/>
+                                        <VBox alignment="BASELINE_LEFT" spacing="5">
+                                            <children>
+                                                <HBox alignment="BASELINE_LEFT" spacing="5">
+                                                <FontAwesomeIconView fill="#cc0000" glyphName="KEY" size="25"
+                                                                     strokeType="OUTSIDE" strokeWidth="0.0"/>
+                                                <JFXPasswordField fx:id="passwordField" alignment="BASELINE_LEFT"
+                                                                  focusColor="#cc0000" labelFloat="true"
+                                                                  promptText="%password" HBox.hgrow="ALWAYS" style="-fx-font-size: 16;">
+                                                </JFXPasswordField>
+                                                </HBox>
+                                            </children>
+                                        </VBox>
+                                        <VBox alignment="BASELINE_LEFT" spacing="5">
+                                            <children>
+                                                <Region VBox.vgrow="ALWAYS" prefHeight="10"/>
+                                                <HBox alignment="BASELINE_LEFT" spacing="5">
+                                                <FontAwesomeIconView fill="#cc0000" glyphName="KEY" size="25"
+                                                                     strokeType="OUTSIDE" strokeWidth="0.0"/>
+                                                <JFXPasswordField fx:id="confirmPasswordField" alignment="BASELINE_LEFT"
+                                                                  focusColor="#cc0000" labelFloat="true"
+                                                                  promptText="%confirmpassword" HBox.hgrow="ALWAYS" style="-fx-font-size: 16;">
+                                                </JFXPasswordField>
+                                                </HBox>
+                                            </children>
+                                        </VBox>
+
                                     </children>
                                 </VBox>
                             </children>
