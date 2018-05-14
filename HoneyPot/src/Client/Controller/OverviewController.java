@@ -46,11 +46,11 @@ public class OverviewController extends BaseController implements Initializable 
 		Main.ChangeAdminButton(adminBtn);
 
 		if(Main.GetAccount() != null) {
-            snackbar.show("Staring Synchronisation of log files", 5);
+            snackbar.show("Staring Synchronisation of log files", 1000);
             if(dbSync.SyncLocalAndCloud())
-                snackbar.show("Files Synchronised", 5);
+                snackbar.show("Files Synchronised", 1000);
             else
-                snackbar.show("File Synchronisation FAILED", 5);
+                snackbar.show("File Synchronisation FAILED", 1000);
         }
 	}
 

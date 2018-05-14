@@ -7,7 +7,6 @@ import Client.Model.Repositories.Repository.LogRepository;
 import Client.HoneyPot.logging.LogConnection;
 
 public class DatabaseSynchronisation {
-    private LogRepository dbRepo = new LogRepository(new LogDatabase());
     private LogRepository localRepo = new LogRepository(new LogLocal());
     private LogConnection latestDbLog = null;
     private LogConnection latestLocalLog = null;
@@ -42,7 +41,7 @@ public class DatabaseSynchronisation {
             latestLocalLog = null;
         }
 
-        dbLogs = dbRepo.GetAllLogs().toArray(new LogConnection[0]);
+        dbLogs = Main.GetLogs().toArray(new LogConnection[0]);
         localLogs = localRepo.GetAllLogs().toArray(new LogConnection[0]);
 
         if(dbLogs.length < 1 && localLogs.length < 1){
@@ -79,7 +78,7 @@ public class DatabaseSynchronisation {
     private void SyncLocalToCloud(){
         for(int i = 0; i < localLogs.length; i++){
             if(latestDbLog != null && localLogs[i].compareTo(latestDbLog) > 0){
-                dbRepo.SaveLog(localLogs[i], Main.GetAccount());
+                Main.SaveLog(localLogs[i]);
             }
         }
     }
