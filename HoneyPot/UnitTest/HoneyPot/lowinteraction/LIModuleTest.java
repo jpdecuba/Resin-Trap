@@ -2,9 +2,10 @@ package HoneyPot.lowinteraction;
 
 import Client.HoneyPot.honeyrj.HoneyRJ;
 import Client.HoneyPot.honeyrj.HoneyRJException;
-import Client.HoneyPot.logging.LogConnection;
+
 import Client.HoneyPot.lowinteraction.LIModule;
 import Client.HoneyPot.protocol.FtpProtocol;
+import Shared.Logging.LogConnection;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
