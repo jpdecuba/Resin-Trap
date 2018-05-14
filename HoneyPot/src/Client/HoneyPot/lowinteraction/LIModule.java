@@ -155,9 +155,10 @@ public class LIModule implements ILIModule,Runnable,Serializable {
                 try {
 					Socket soc = _server.accept();
 					if(soc != null) {
-						cachedPool.submit(new LIModuleThread(_server.accept(), this));
+                        //new LIModuleThread(_server.accept(), this);
+						cachedPool.submit(new LIModuleThread(soc, this));
 					}
-                    //new Thread(new LIModuleThread(_server.accept(), this)).start();
+
                     synchronized (this) {
                         numberConnections++;
                     }
