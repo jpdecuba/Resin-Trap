@@ -4,6 +4,7 @@ import Client.Main.Main;
 import Client.Model.Repositories.Local.LogLocal;
 import Client.Model.Repositories.Repository.LogRepository;
 import Shared.Logging.LogConnection;
+import jdk.nashorn.internal.ir.CatchNode;
 
 public class DatabaseSynchronisation {
     private LogRepository localRepo = new LogRepository(new LogLocal());
@@ -40,7 +41,11 @@ public class DatabaseSynchronisation {
             latestLocalLog = null;
         }
 
-        dbLogs = Main.GetLogs().toArray(new LogConnection[0]);
+        try {
+            dbLogs = Main.GetLogs().toArray(new LogConnection[0]);
+        }catch (NullPointerException npe){
+            dbLogs = null;
+        }
         localLogs = localRepo.GetAllLogs().toArray(new LogConnection[0]);
 
         if(dbLogs.length < 1 && localLogs.length < 1){
