@@ -1,9 +1,9 @@
 package Model.Database.Repository;
 
-import Client.Model.User;
-import Client.Model.UserRole;
 import Server.Repositories.Database.LoginDatabase;
 import Server.Repositories.Repository.LoginRepo;
+import Shared.Model.User;
+import Shared.Model.UserRole;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
