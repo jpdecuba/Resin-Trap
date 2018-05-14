@@ -80,6 +80,7 @@ public class SettingsController extends BaseController implements Initializable 
 			if(Main.AddEmail(email, Main.GetAccount().getId()))
 			{
 				Main.GetAccount().addEmail(email);
+				Main.setAccount(Main.GetAccount() );
 				emailList.getItems().clear();
 				emailList.getItems().addAll(Main.GetAccount().getMsgEmail());
 				addEmailField.setText("");
