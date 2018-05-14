@@ -1,7 +1,6 @@
 package Client.Model.Repositories;
 
 import Client.Main.Main;
-import Client.Model.Repositories.Database.LogDatabase;
 import Client.Model.Repositories.Local.LogLocal;
 import Client.Model.Repositories.Repository.LogRepository;
 import Client.HoneyPot.logging.LogConnection;

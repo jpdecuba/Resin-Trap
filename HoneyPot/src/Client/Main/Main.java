@@ -37,7 +37,7 @@ public class Main extends Application {
     public static String lang = "en";
     public static JFXToolbar toolbar;
     public static ControllerManager manager;
-    public static LoginModel loginModel;
+    //public static LoginModel loginModel;
 
     private static SocketClient client;
 
@@ -95,14 +95,13 @@ public class Main extends Application {
 
 
     public static Set<LogConnection> GetLogs(){
-
         return client.GetlogFiles(GetAccount());
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
     	//account = null;
-		loginModel = new LoginModel();
+		//loginModel = new LoginModel();
         launchHoneypot();
         SaveFiles file = new SaveFiles();
         pref = file.ReadPreferences();
