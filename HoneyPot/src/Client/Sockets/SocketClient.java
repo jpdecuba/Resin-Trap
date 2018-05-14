@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.Set;
 
 public class SocketClient {
@@ -59,7 +60,7 @@ public class SocketClient {
                 return this.Socket.isConnected();
             }
         }
-        return false;
+        return ReConnect();
     }
 
 
@@ -77,6 +78,10 @@ public class SocketClient {
             }else{
                 return false;
             }
+
+        }catch (SocketException e){
+            ReConnect();
+            return SendEmail(msg);
 
         } catch (IOException e) {
             //e.printStackTrace();
@@ -107,7 +112,12 @@ public class SocketClient {
                 return null;
             }
 
-        } catch (IOException e) {
+        }catch (SocketException e){
+            ReConnect();
+            return Login(usr);
+
+        }
+        catch (IOException e) {
             //e.printStackTrace();
             return null;
         } catch (ClassNotFoundException e) {
@@ -131,6 +141,10 @@ public class SocketClient {
             }else {
                 return false;
             }
+        }catch (SocketException e){
+            ReConnect();
+            return Logout(usr);
+
         } catch (IOException e) {
             return false;
         } catch (ClassNotFoundException e) {
@@ -154,7 +168,10 @@ public class SocketClient {
 				return false;
 			}
 
-		} catch (IOException e) {
+		}catch (SocketException e){
+            ReConnect();
+
+        } catch (IOException e) {
 			//e.printStackTrace();
 			return false;
 		} catch (ClassNotFoundException e) {
@@ -180,7 +197,10 @@ public class SocketClient {
                 return false;
             }
 
-        } catch (IOException e) {
+        } catch (SocketException e){
+            ReConnect();
+
+        }catch (IOException e) {
             //e.printStackTrace();
             return false;
         } catch (ClassNotFoundException e) {
@@ -198,7 +218,11 @@ public class SocketClient {
                 output.writeObject(RequestSets);
             }
 
-        } catch (IOException e) {
+        } catch (SocketException e){
+            ReConnect();
+            SaveLogs(usr,logs);
+
+        }catch (IOException e) {
             //e.printStackTrace();
         }
 
@@ -212,7 +236,11 @@ public class SocketClient {
                 output.writeObject(RequestSets);
             }
 
-        } catch (IOException e) {
+        } catch (SocketException e){
+            ReConnect();
+            SaveLog(usr,log);
+
+        }catch (IOException e) {
             //e.printStackTrace();
         }
 
@@ -247,6 +275,10 @@ public class SocketClient {
             }
             return null;
 
+        }catch (SocketException e){
+            ReConnect();
+            GetLogs(usr);
+
         } catch (IOException e) {
             //e.printStackTrace();
             return null;
@@ -254,6 +286,7 @@ public class SocketClient {
             //e.printStackTrace();
             return null;
         }
+        return null;
     }
 
 
@@ -285,6 +318,12 @@ public class SocketClient {
 
         try {
             this.Socket = (Socket) socketFactory.createSocket("localhost", 7676);
+
+            output = new ObjectOutputStream(Socket.getOutputStream());
+
+            BufferedInputStream socketRead = new BufferedInputStream(Socket.getInputStream());
+
+            input = new ObjectInputStream(socketRead);
             return true;
         } catch (IOException e) {
             return false;
