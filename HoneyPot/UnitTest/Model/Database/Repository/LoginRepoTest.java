@@ -1,9 +1,9 @@
 package Model.Database.Repository;
 
-import Client.Model.Repositories.Database.LoginDatabase;
-import Client.Model.Repositories.Repository.LoginRepo;
 import Client.Model.User;
 import Client.Model.UserRole;
+import Server.Repositories.Database.LoginDatabase;
+import Server.Repositories.Repository.LoginRepo;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class LoginRepoTest {
         repo = new LoginRepo(new LoginDatabase());
         admin = new User("testadmin", "testpassword2", UserRole.Admin, "123456789");
         user = new User("testuser", "testpassword", UserRole.User, "123456789");
-        repo.RegisterAdmin(admin);
+        repo.Register(admin);
         repo.Register(user);
     }
 

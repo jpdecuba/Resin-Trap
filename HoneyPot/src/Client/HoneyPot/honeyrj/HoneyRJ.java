@@ -8,7 +8,6 @@ import Client.HoneyPot.lowinteraction.LIDeserializeDBThread;
 import Client.HoneyPot.lowinteraction.LIDeserializeThread;
 import Client.HoneyPot.lowinteraction.LIModule;
 import Client.Main.Main;
-import Client.Model.Repositories.Database.Database;
 
 
 import java.io.File;
