@@ -41,7 +41,6 @@ public class DatabaseSynchronisation {
             latestDbLog = null;
             latestLocalLog = null;
         }
-
         dbLogs = dbRepo.GetAllLogs().toArray(new LogConnection[0]);
         localLogs = localRepo.GetAllLogs().toArray(new LogConnection[0]);
 

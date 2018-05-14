@@ -23,12 +23,14 @@ public class SocketClient {
     private ObjectOutputStream output;
     private ObjectInputStream input;
 
+    private SocketFactory socketFactory = (SocketFactory) SocketFactory.getDefault();
+
     //188.166.118.138
     public SocketClient(java.net.Socket socket) {
         if(socket != null) {
             Socket = socket;
         }else {
-            SocketFactory socketFactory = (SocketFactory) SocketFactory.getDefault();
+
             try {
                 this.Socket = (Socket) socketFactory.createSocket("localhost", 7676);
             } catch (IOException e) {
@@ -52,7 +54,12 @@ public class SocketClient {
 
     public boolean SocketCheck(){
         if(this.Socket != null) {
-            return true;
+            if(this.Socket.isConnected()){
+                return true;
+            }else {
+                ReConnect();
+                return this.Socket.isConnected();
+            }
         }
         return false;
     }
@@ -274,6 +281,17 @@ public class SocketClient {
             //e.printStackTrace();
             return null;
         }
+    }
+
+    public boolean ReConnect() {
+
+        try {
+            this.Socket = (Socket) socketFactory.createSocket("localhost", 7676);
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+
     }
 
     public void flush(){

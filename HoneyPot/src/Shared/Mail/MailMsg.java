@@ -9,10 +9,10 @@ public class MailMsg  implements Serializable{
     private String Services;
     private String IP;
     private int Port;
-    private ArrayList<String> Emails;
+    private List<String> Emails;
 
 
-    public MailMsg(String services, String IP, int port, ArrayList<String> emails) {
+    public MailMsg(String services, String IP, int port, List<String> emails) {
         Services = services;
         this.IP = IP;
         Port = port;

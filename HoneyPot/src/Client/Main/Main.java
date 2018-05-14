@@ -95,7 +95,6 @@ public class Main extends Application {
 
 
     public static Set<LogConnection> GetLogs(){
-
         return client.GetlogFiles(GetAccount());
     }
 
@@ -156,10 +155,13 @@ public class Main extends Application {
 
     public static void SendEmail(LogConnection log){
         try {
-            ArrayList<String> t = new ArrayList<>();
-            //t.add("dotter5380@gmail.com");
-            if(GetAccount() != null && GetAccount().getMsgEmail().size() != 0) {
-                MailMsg msg = new MailMsg(log.getProtocol(), log.getDstIP().toString(), log.getDstPort(), GetAccount().getMsgEmail());
+            if(GetAccount() != null) {
+                ArrayList<String> emails = new ArrayList<>();
+
+                //emails.add("dotter5380@gmail.com");
+                emails.addAll(GetAccount().getMsgEmail());
+
+                MailMsg msg = new MailMsg(log.getProtocol(), log.getDstIP().toString(), log.getDstPort(), emails);
                 client.SendEmail(msg);
             }
         }catch (Exception e){
