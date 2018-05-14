@@ -98,6 +98,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        client = new SocketClient(null);
     	//account = null;
 		//loginModel = new LoginModel();
         launchHoneypot();
@@ -143,7 +144,7 @@ public class Main extends Application {
 
 
         Stage.show();
-        client = new SocketClient(null);
+
 
         if(honeypot != null && GetAccount() != null){
             honeypot.SetDBLog();
