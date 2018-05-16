@@ -47,6 +47,11 @@ public class LoginDatabase implements ILoginRepo {
         return false;
     }
 
+    @Override
+    public boolean DeleteEmail(String email, int userId) {
+        return false;
+    }
+
     public ArrayList<User> getList() {
         return list;
     }

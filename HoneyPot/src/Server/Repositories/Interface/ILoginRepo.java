@@ -9,4 +9,5 @@ public interface ILoginRepo {
 	boolean Register(User user);
 	boolean AddEmail(String email, int userId);
 	boolean ChangePassword(String password, int userId);
+	boolean DeleteEmail(String email, int userId);
 }

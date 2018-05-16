@@ -25,8 +25,9 @@ public class LoginRepo implements ILoginRepo {
 
 	public boolean AddEmail(String email, int userId) { return this.context.AddEmail(email, userId); }
 
-	@Override
 	public boolean ChangePassword(String password, int userId) {
-		return  this.context.ChangePassword(password, userId);
+		return this.context.ChangePassword(password, userId);
 	}
+
+	public boolean DeleteEmail(String email, int userId) { return this.context.DeleteEmail(email, userId); }
 }

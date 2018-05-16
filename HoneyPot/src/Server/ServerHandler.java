@@ -80,6 +80,10 @@ public class ServerHandler {
                     boolean changed = LM.ChangePassword(object.getAttachment(), object.getId());
                     output.writeObject(changed);
                     break;
+                case DeleteEmail:
+                    boolean deleted = LM.DeleteEmail(object.getAttachment(), object.getId());
+                    output.writeObject(deleted);
+                    break;
             }
             output.flush();
         } catch (IOException e1) {

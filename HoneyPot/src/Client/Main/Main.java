@@ -36,8 +36,8 @@ public class Main extends Application {
     public static JFXToolbar toolbar;
     public static ControllerManager manager;
     //public static LoginModel loginModel;
-
-    private static SocketClient client;
+    public static int currentConnections = 0;
+    public static SocketClient client;
 
     public static Preferences pref;
 

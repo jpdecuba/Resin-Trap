@@ -230,4 +230,18 @@ public class UserDatabase implements ILoginRepo {
 		return false;
 	}
 
+
+	@Override
+	public boolean DeleteEmail(String email, int userId) {
+		try {
+			String sql = "DELETE FROM Email WHERE address = ? AND userId = ?";
+			PreparedStatement statement = Database.connection().prepareStatement(sql);
+			statement.setString(1, email);
+			statement.setInt(2, userId);
+			statement.execute();
+			return true;
+		}
+		catch (SQLException e) {}
+		return false;
+	}
 }
