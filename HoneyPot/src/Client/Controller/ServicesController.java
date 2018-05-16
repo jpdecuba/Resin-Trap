@@ -92,8 +92,7 @@ public class ServicesController extends BaseController implements Initializable 
         timer.schedule(new ServicesTimer(this), 0, 2000);
         Main.manager.setToolbar(this.toolbar);
         snackbar = new JFXSnackbar(anchor);
-        Main.ChangeLoginButton(loginBtn);
-        Main.ChangeAdminButton(adminBtn);
+        Main.manager.ChangeNavButtons(loginBtn, adminBtn, settingBtn);
 
         createTable();
 

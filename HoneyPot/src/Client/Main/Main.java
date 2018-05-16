@@ -332,41 +332,4 @@ public class Main extends Application {
 			}
 		});
 	}
-
-	public static void ChangeLoginButton(JFXButton button)
-	{
-		if(Main.GetAccount() != null)
-		{
-			button.setText(ResourceBundle.getBundle("Client.bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("logout"));
-		}
-	}
-
-	public static void ChangeAdminButton(JFXButton button)
-	{
-		boolean enable = false;
-		User account = Main.GetAccount();
-		if(account != null) {
-			if (account.getRole() == UserRole.Admin) {
-				enable = true;
-			}
-		}
-		button.setDisable(!enable);
-		button.setVisible(enable);
-	}
-
-//
-//	public static void ChangeButtons(String view, String title)
-//	{
-//		for (int i = 0; i < toolbar.getLeftItems().size(); i++)
-//		{
-//			Button btn = (Button)toolbar.getLeftItems().get(i);
-//			btn.setOnAction(actionEvent -> {
-//				if (lang.equals("en.png")) {
-//					manager.loadView("en", view, title);
-//				} else {
-//					manager.loadView("nl", view, title);
-//				}
-//			});
-//		}
-//	}
 }

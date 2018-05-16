@@ -49,19 +49,6 @@
                                                              strokeWidth="0.0"/>
                                     </graphic>
                                 </JFXButton>
-                                <JFXButton fx:id="settingBtn" onAction="#changePage" alignment="BASELINE_LEFT"
-                                           graphicTextGap="17.0"
-                                           layoutX="0"
-                                           layoutY="0" mnemonicParsing="false" prefHeight="50.0"
-                                           prefWidth="210.0"
-                                           style="-fx-background-color: achmea; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"
-                                           text="%settings" textFill="WHITE">
-                                    <graphic>
-                                        <FontAwesomeIconView fill="WHITE" glyphName="COG" size="22"
-                                                             strokeType="OUTSIDE"
-                                                             strokeWidth="0.0"/>
-                                    </graphic>
-                                </JFXButton>
                             </children>
                         </VBox>
                     </children>

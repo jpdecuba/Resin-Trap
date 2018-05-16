@@ -2,6 +2,9 @@ package Client.Model;
 
 import Client.Controller.OverviewController;
 import Client.Main.Main;
+import Shared.Model.User;
+import Shared.Model.UserRole;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToolbar;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
@@ -56,7 +59,7 @@ public class ControllerManager {
         btn.setStyle("-fx-background-color: transparent; -fx-alignment: center");
         btn.setOnAction(actionEvent -> {
             currentView = "/Client/View/HelpView.fxml";
-            loadView(Main.lang ,currentView, "Achmea");
+            loadView(Main.lang, currentView, "Achmea");
         });
         return btn;
     }
@@ -80,5 +83,24 @@ public class ControllerManager {
             }
         });
         return btn;
+    }
+
+    public void ChangeNavButtons(JFXButton log, JFXButton admin, JFXButton settings) {
+        boolean enable = false;
+        User account = Main.GetAccount();
+        if (account != null) {
+            ChangeLoginButton(log);
+            if (account.getRole() == UserRole.Admin) {
+                enable = true;
+            }
+        }
+        admin.setDisable(!enable);
+        admin.setVisible(enable);
+        settings.setDisable(!enable);
+        settings.setVisible(enable);
+    }
+
+    public void ChangeLoginButton(JFXButton log) {
+        log.setText(ResourceBundle.getBundle("Client.bundles.UIResources", new Locale(Main.lang.toUpperCase())).getString("logout"));
     }
 }

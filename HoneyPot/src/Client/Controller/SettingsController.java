@@ -14,6 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -37,8 +38,7 @@ public class SettingsController extends BaseController implements Initializable 
 		Main.manager.setToolbar(this.toolbar);
 		Main.manager.currentView = "/Client/View/Settings.fxml";
 		snackbar = new JFXSnackbar(anchor);
-		Main.ChangeLoginButton(loginBtn);
-		Main.ChangeAdminButton(adminBtn);
+		Main.manager.ChangeNavButtons(loginBtn, adminBtn, settingBtn);
 		keylbl.setEditable(false);
 		if(Main.GetAccount() != null)
 		{
@@ -90,5 +90,11 @@ public class SettingsController extends BaseController implements Initializable 
 				snackbar.show("Something went wrong while adding your Email.",3000);
 			}
 		}
+	}
+
+	@FXML
+	public void deleteEmail()
+	{
+
 	}
 }
