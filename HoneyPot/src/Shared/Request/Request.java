@@ -18,7 +18,7 @@ public class Request implements Serializable{
     private Iterable<LogConnection> logs;
 
     private int id;
-    private String emailAccount;
+    private String attachment;
 
     public Request(RequestType msg) {
         this.msg = msg;
@@ -47,10 +47,10 @@ public class Request implements Serializable{
 
     }
 
-    public Request(RequestType msg, String emailAccount, int id)
+    public Request(RequestType msg, String attachment, int id)
     {
         this.msg = msg;
-        this.emailAccount = emailAccount;
+        this.attachment = attachment;
         this.id = id;
     }
 
@@ -68,7 +68,7 @@ public class Request implements Serializable{
 
     public int getId() { return id; }
 
-    public String getEmailAccount() { return emailAccount; }
+    public String getAttachment() { return attachment; }
 
     public LogConnection getLog() {
         return log;

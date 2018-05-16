@@ -10,5 +10,6 @@ public enum RequestType {
     SaveLogs,
     SaveLog,
     GetLogsAdmin,
-    AddMail
+    AddMail,
+    ChangePassword
 }

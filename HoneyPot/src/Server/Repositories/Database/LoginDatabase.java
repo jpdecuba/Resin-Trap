@@ -42,6 +42,11 @@ public class LoginDatabase implements ILoginRepo {
         return false;
     }
 
+    @Override
+    public boolean ChangePassword(String password, int userId) {
+        return false;
+    }
+
     public ArrayList<User> getList() {
         return list;
     }

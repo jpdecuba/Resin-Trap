@@ -73,8 +73,12 @@ public class ServerHandler {
                     output.writeObject(logs2);
                     break;
                 case AddMail:
-                    boolean added = LM.AddEmail(object.getEmailAccount(), object.getId());
+                    boolean added = LM.AddEmail(object.getAttachment(), object.getId());
                     output.writeObject(added);
+                    break;
+                case ChangePassword:
+                    boolean changed = LM.ChangePassword(object.getAttachment(), object.getId());
+                    output.writeObject(changed);
                     break;
             }
             output.flush();

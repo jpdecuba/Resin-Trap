@@ -215,4 +215,19 @@ public class UserDatabase implements ILoginRepo {
 		catch (SQLException e) {}
 		return false;
 	}
+
+	@Override
+	public boolean ChangePassword(String password, int userId) {
+		try {
+			String sql = "UPDATE Account SET password = ? WHERE id = ?";
+			PreparedStatement statement = Database.connection().prepareStatement(sql);
+			statement.setString(1, password);
+			statement.setInt(2, userId);
+			statement.execute();
+			return true;
+		}
+		catch (SQLException e) {}
+		return false;
+	}
+
 }
