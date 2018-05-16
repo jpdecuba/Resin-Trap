@@ -32,7 +32,6 @@ public class BaseController {
     JFXButton settingBtn;
 
     static JFXSnackbar snackbar;
-    int currentConnections = 0;
     Timer timer;
 
 	public BaseController()
@@ -86,16 +85,14 @@ public class BaseController {
      * Get Total Connection of all services
      * @return int of the totaal amount of connections
      */
-    private int i = 0;
     public int GetTotalConnections() {
-
-
+        int i = 0;
         for (ILIModule item : Main.Services) {
 
             i += item.getNumberOfActiveConnections();
 
         }
-        if (currentConnections < i)
+        if (Main.currentConnections < i)
         {
         	if(SystemTray.isSupported())
 			{
@@ -126,7 +123,7 @@ public class BaseController {
                 });
             });
         }
-        currentConnections = i;
+        Main.currentConnections = i;
         return i;
     }
 }
