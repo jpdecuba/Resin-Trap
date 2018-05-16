@@ -81,7 +81,7 @@ public class ServerHandler {
                     output.writeObject(changed);
                     break;
                 case DeleteEmail:
-                    boolean deleted = LM.DeleteEmail(object.getEmailAccount(), object.getId());
+                    boolean deleted = LM.DeleteEmail(object.getAttachment(), object.getId());
                     output.writeObject(deleted);
                     break;
             }
