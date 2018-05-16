@@ -76,6 +76,10 @@ public class ServerHandler {
                     boolean added = LM.AddEmail(object.getEmailAccount(), object.getId());
                     output.writeObject(added);
                     break;
+                case DeleteEmail:
+                    boolean deleted = LM.DeleteEmail(object.getEmailAccount(), object.getId());
+                    output.writeObject(deleted);
+                    break;
             }
             output.flush();
         } catch (IOException e1) {

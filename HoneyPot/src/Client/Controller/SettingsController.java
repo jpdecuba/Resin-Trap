@@ -36,7 +36,6 @@ public class SettingsController extends BaseController implements Initializable 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Main.manager.setToolbar(this.toolbar);
-		Main.manager.currentView = "/Client/View/Settings.fxml";
 		snackbar = new JFXSnackbar(anchor);
 		Main.manager.ChangeNavButtons(loginBtn, adminBtn, settingBtn);
 		keylbl.setEditable(false);
@@ -95,6 +94,18 @@ public class SettingsController extends BaseController implements Initializable 
 	@FXML
 	public void deleteEmail()
 	{
-
+		String email = emailList.getSelectionModel().getSelectedItem();
+		if(email == null)
+		{
+			snackbar.show("Please select an email to delete",3000);
+		} else {
+			if (Main.client.DeleteEmail(email, Main.GetAccount().getId())) {
+				Main.GetAccount().getMsgEmail().remove(email);
+				Main.setAccount(Main.GetAccount());
+				emailList.getItems().remove(email);
+			} else {
+				snackbar.show("Something went wrong while deleting your Email.", 3000);
+			}
+		}
 	}
 }

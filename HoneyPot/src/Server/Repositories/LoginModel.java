@@ -24,5 +24,6 @@ public class LoginModel {
 	public boolean Register(User user){ return loginRepo.Register(user); }
 
 	public boolean AddEmail(String email, int userId) { return loginRepo.AddEmail(email, userId); }
+	public boolean DeleteEmail(String email, int userId) { return loginRepo.DeleteEmail(email, userId); }
 
 }

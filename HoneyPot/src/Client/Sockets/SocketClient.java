@@ -65,7 +65,6 @@ public class SocketClient {
         return ReConnect();
     }
 
-
     public boolean SendEmail(MailMsg msg){
         try {
             if(SocketCheck()) {
@@ -85,6 +84,40 @@ public class SocketClient {
             if(failedAttempt < 5) {
                 ReConnect();
                 return SendEmail(msg);
+            }else {
+
+                failedAttempt = 0;
+            }
+        } catch (IOException e) {
+            //e.printStackTrace();
+            return false;
+        } catch (ClassNotFoundException e) {
+            //e.printStackTrace();
+            return false;
+        }
+        return false;
+    }
+
+
+    public boolean DeleteEmail(String email, int userId) {
+        try {
+            if(SocketCheck()) {
+                Request RequestSets = new Request(RequestType.DeleteEmail, email, userId);
+                output.writeObject(RequestSets);
+                Object obj = input.readObject();
+                if (obj instanceof Boolean) {
+                    boolean results = ((boolean) obj);
+                    output.flush();
+                    return results;
+                }
+            }else{
+                return false;
+            }
+
+        }catch (SocketException e){
+            if(failedAttempt < 5) {
+                ReConnect();
+                return DeleteEmail(email, userId);
             }else {
 
                 failedAttempt = 0;

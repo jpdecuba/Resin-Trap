@@ -37,7 +37,7 @@ public class Main extends Application {
     public static ControllerManager manager;
     //public static LoginModel loginModel;
 
-    private static SocketClient client;
+    public static SocketClient client;
 
     public static Preferences pref;
 
