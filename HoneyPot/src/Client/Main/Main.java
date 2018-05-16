@@ -196,6 +196,15 @@ public class Main extends Application {
         }
     }
 
+    public static boolean ChangePassword(String password, int userId)
+    {
+        try {
+            return client.ChangePassword(password, userId);
+        }catch (Exception e){
+            return false;
+        }
+    }
+
     public static boolean Logout(User urs){
         try {
             return client.Logout(urs);
