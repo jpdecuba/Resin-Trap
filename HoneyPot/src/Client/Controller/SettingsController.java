@@ -9,13 +9,17 @@ import com.jfoenix.controls.JFXToolbar;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class SettingsController extends BaseController implements Initializable {
@@ -88,6 +92,17 @@ public class SettingsController extends BaseController implements Initializable 
 			{
 				snackbar.show("Something went wrong while adding your Email.",3000);
 			}
+		}
+	}
+
+	public void changePassw() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/Client/View/PasswordView.fxml"), ResourceBundle.getBundle("Client/bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+			Parent root = loader.load();
+			Main.switchPage(root, "Change Password");
+		}
+		catch(IOException e) {
+			snackbar.show("Something went wrong.", 3000);
 		}
 	}
 

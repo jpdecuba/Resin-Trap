@@ -26,6 +26,7 @@ public class PasswordController extends BaseController implements Initializable 
 	public void initialize(URL location, ResourceBundle resources) {
 		Main.manager.setToolbar(this.toolbar);
 		Main.manager.currentView = "/Client/View/Password.fxml";
+		Main.manager.ChangeNavButtons(loginBtn, adminBtn, settingBtn);
 	}
 
 	@FXML

@@ -121,7 +121,7 @@
                                         <HBox alignment="BASELINE_LEFT" spacing="5">
                                             <children>
                                                 <Label style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 21; -fx-text-fill: #424242" text="Emails:"/>
-                                                <ListView fx:id="emailList" minHeight="60" style="fx-font-family: 'Roboto Condensed'; -fx-font-size: 20; -fx-text-fill: #424242"/>
+                                                <ListView fx:id="emailList" minHeight="100" style="fx-font-family: 'Roboto Condensed'; -fx-font-size: 20; -fx-text-fill: #424242"/>
                                             </children>
                                         </HBox>
                                         <HBox alignment="BASELINE_RIGHT" spacing="5">
@@ -149,6 +149,18 @@
                                                            prefWidth="120.0"
                                                            style="-fx-background-color: achmea; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"
                                                            text="%addEmail" textFill="WHITE"/>
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="BASELINE_LEFT" spacing="5">
+                                            <children>
+
+                                                <JFXButton VBox.vgrow="ALWAYS" fx:id="changePassword" HBox.hgrow="ALWAYS" onAction="#changePassw" alignment="CENTER"
+                                                           graphicTextGap="17.0"
+                                                           layoutX="0"
+                                                           layoutY="0" mnemonicParsing="false" prefHeight="50.0"
+                                                           prefWidth="150.0"
+                                                           style="-fx-background-color: achmea; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"
+                                                           text="%changePassw" textFill="WHITE"/>
                                             </children>
                                         </HBox>
                                     </children>

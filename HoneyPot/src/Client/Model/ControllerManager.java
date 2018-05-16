@@ -86,18 +86,20 @@ public class ControllerManager {
     }
 
     public void ChangeNavButtons(JFXButton log, JFXButton admin, JFXButton settings) {
-        boolean enable = false;
+        boolean enableAdmin = false;
+        boolean enableSettings = false;
         User account = Main.GetAccount();
         if (account != null) {
             ChangeLoginButton(log);
             if (account.getRole() == UserRole.Admin) {
-                enable = true;
+                enableAdmin = true;
             }
+            enableSettings = true;
         }
-        admin.setDisable(!enable);
-        admin.setVisible(enable);
-        settings.setDisable(!enable);
-        settings.setVisible(enable);
+        admin.setDisable(!enableAdmin);
+        admin.setVisible(enableAdmin);
+        settings.setDisable(!enableSettings);
+        settings.setVisible(enableSettings);
     }
 
     public void ChangeLoginButton(JFXButton log) {

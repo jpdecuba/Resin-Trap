@@ -39,7 +39,7 @@ public class AdminController extends BaseController implements Initializable  {
         LineChart lc = CreateLineChart();
         vb.getChildren().addAll(lc, bc);
         Main.manager.ChangeLoginButton(loginBtn);
-
+        Main.manager.ChangeNavButtons(loginBtn, adminBtn, settingBtn);
     }
 
     public BarChart<String,Number> CreateBarChart() {
