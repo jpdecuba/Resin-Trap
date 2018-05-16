@@ -86,9 +86,10 @@ public class BaseController {
      * Get Total Connection of all services
      * @return int of the totaal amount of connections
      */
+    private int i = 0;
     public int GetTotalConnections() {
 
-        int i = 0;
+
         for (ILIModule item : Main.Services) {
 
             i += item.getNumberOfActiveConnections();
