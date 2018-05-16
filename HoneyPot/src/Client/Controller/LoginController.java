@@ -1,6 +1,7 @@
 package Client.Controller;
 
 import Client.Main.Main;
+import Client.Model.Repositories.DatabaseSynchronisation;
 import Shared.Model.User;
 import Shared.Model.UserRole;
 import com.jfoenix.controls.*;
@@ -43,6 +44,8 @@ public class LoginController implements Initializable {
 	@FXML JFXButton servicesBtn;
 
     JFXSnackbar snackbar;
+	private DatabaseSynchronisation dbSync = new DatabaseSynchronisation();
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Main.manager.setToolbar(this.toolbar);
@@ -66,6 +69,14 @@ public class LoginController implements Initializable {
 		if(button == loginBtn)
 		{
 			if(Login()) {
+				if(Main.GetAccount() != null) {
+					snackbar.show("Staring Synchronisation of log files", 1000);
+					if(dbSync.SyncLocalAndCloud())
+						snackbar.show("Files Synchronised", 1000);
+					else
+						snackbar.show("File Synchronisation FAILED", 1000);
+				}
+
 				path = "/Client/View/OverView.fxml";
 				title = "Overview";
 			}
