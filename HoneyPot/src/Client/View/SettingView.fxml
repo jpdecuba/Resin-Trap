@@ -98,9 +98,6 @@
 
                 <VBox fx:id="VB" prefHeight="${VB.parent.height}" HBox.hgrow="ALWAYS">
                     <children>
-                        <JFXToolbar fx:id="toolbar" prefWidth="${toolbar.parent.width}"
-                                    prefHeight="25" style="-fx-background-color: WHITE">
-                        </JFXToolbar>
                         <AnchorPane fx:id="mainPane" prefWidth="${mainPane.parent.width}"
                                     VBox.vgrow="ALWAYS"
                                     style="-fx-background-color: WHITE;">
@@ -154,13 +151,11 @@
                                         <HBox alignment="BASELINE_LEFT" spacing="5">
                                             <children>
 
-                                                <JFXButton VBox.vgrow="ALWAYS" fx:id="changePassword" HBox.hgrow="ALWAYS" onAction="#changePassw" alignment="CENTER"
-                                                           graphicTextGap="17.0"
-                                                           layoutX="0"
-                                                           layoutY="0" mnemonicParsing="false" prefHeight="50.0"
-                                                           prefWidth="150.0"
-                                                           style="-fx-background-color: achmea; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"
-                                                           text="%changePassw" textFill="WHITE"/>
+                                                <JFXButton fx:id="changePasswordBtn" alignment="CENTER" buttonType="RAISED"
+                                                           contentDisplay="CENTER" mnemonicParsing="false"
+                                                           onAction="#changePassw" minWidth="100" VBox.vgrow="ALWAYS"
+                                                           style="-fx-background-color: achmea; -fx-font-family: 'Roboto-Condensed'; -fx-font-size: 13pt;"
+                                                           text="%changePassw" textFill="white"/>
                                             </children>
                                         </HBox>
                                     </children>
@@ -171,5 +166,9 @@
                 </VBox>
             </children>
         </HBox>
+        <JFXToolbar AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0"
+                    fx:id="toolbar" prefWidth="${toolbar.parent.width}"
+                    prefHeight="25" style="-fx-background-color: transparent">
+        </JFXToolbar>
     </children>
 </AnchorPane>

@@ -2,11 +2,13 @@ package Client.Controller;
 
 import Client.Main.Main;
 import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXToolbar;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,6 +17,8 @@ import java.util.ResourceBundle;
 
 public class PasswordController extends BaseController implements Initializable {
 
+	@FXML
+	AnchorPane anchor;
 	@FXML
 	JFXToolbar toolbar;
 	@FXML
@@ -25,7 +29,8 @@ public class PasswordController extends BaseController implements Initializable 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Main.manager.setToolbar(this.toolbar);
-		Main.manager.currentView = "/Client/View/Password.fxml";
+		snackbar = new JFXSnackbar(anchor);
+		Main.manager.currentView = "/Client/View/PasswordView.fxml";
 		Main.manager.ChangeNavButtons(loginBtn, adminBtn, settingBtn);
 	}
 
@@ -47,18 +52,23 @@ public class PasswordController extends BaseController implements Initializable 
 					}
 					catch (IOException e)
 					{
-						snackbar.show("Something went wrong.", 3000);
+						ErrorMessage("Something went wrong.");
 					}
 				}
 			}
 			else
 			{
-				snackbar.show("Password is not equal", 3000);
+				ErrorMessage("Password is not equal");
 			}
 		}
 		else
 		{
-			snackbar.show("Fill in all the fields.", 3000);
+			ErrorMessage("Fill in all the fields.");
 		}
+	}
+
+	private void ErrorMessage(String message)
+	{
+		snackbar.show(message, 3000);
 	}
 }
