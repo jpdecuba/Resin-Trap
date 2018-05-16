@@ -22,6 +22,8 @@ public class SocketClient {
     private ObjectOutputStream output;
     private ObjectInputStream input;
 
+    private int failedAttempt = 0;
+
     private SocketFactory socketFactory = (SocketFactory) SocketFactory.getDefault();
 
     //188.166.118.138
@@ -80,8 +82,13 @@ public class SocketClient {
             }
 
         }catch (SocketException e){
-            ReConnect();
-            return SendEmail(msg);
+            if(failedAttempt < 5) {
+                ReConnect();
+                return SendEmail(msg);
+            }else {
+
+                failedAttempt = 0;
+            }
 
         } catch (IOException e) {
             //e.printStackTrace();
@@ -113,8 +120,12 @@ public class SocketClient {
             }
 
         }catch (SocketException e){
-            ReConnect();
-            return Login(usr);
+            if(failedAttempt < 5) {
+                ReConnect();
+                return Login(usr);
+            }else {
+                failedAttempt  = 0;
+            }
 
         }
         catch (IOException e) {
@@ -142,8 +153,10 @@ public class SocketClient {
                 return false;
             }
         }catch (SocketException e){
-            ReConnect();
-            return Logout(usr);
+            if(failedAttempt < 5) {
+                ReConnect();
+                return Logout(usr);
+            }
 
         } catch (IOException e) {
             return false;
@@ -169,7 +182,11 @@ public class SocketClient {
 			}
 
 		}catch (SocketException e){
-            ReConnect();
+		    if(failedAttempt < 5) {
+                ReConnect();
+            }else {
+		        failedAttempt = 0;
+            }
 
         } catch (IOException e) {
 			//e.printStackTrace();
@@ -198,7 +215,12 @@ public class SocketClient {
             }
 
         } catch (SocketException e){
-            ReConnect();
+            if(failedAttempt < 5) {
+                ReConnect();
+                Register(usr);
+            }else {
+                failedAttempt = 0;
+            }
 
         }catch (IOException e) {
             //e.printStackTrace();
@@ -219,8 +241,12 @@ public class SocketClient {
             }
 
         } catch (SocketException e){
-            ReConnect();
-            SaveLogs(usr,logs);
+            if (failedAttempt < 5) {
+                ReConnect();
+                SaveLogs(usr, logs);
+            }else {
+                failedAttempt = 0;
+            }
 
         }catch (IOException e) {
             //e.printStackTrace();
@@ -236,9 +262,13 @@ public class SocketClient {
                 output.writeObject(RequestSets);
             }
 
-        } catch (SocketException e){
-            ReConnect();
-            SaveLog(usr,log);
+        } catch (SocketException e) {
+            if (failedAttempt < 5){
+                ReConnect();
+                SaveLog(usr,log);
+            }else {
+                failedAttempt = 0;
+            }
 
         }catch (IOException e) {
             //e.printStackTrace();
@@ -275,9 +305,13 @@ public class SocketClient {
             }
             return null;
 
-        }catch (SocketException e){
-            ReConnect();
-            GetLogs(usr);
+        }catch (SocketException e) {
+            if (failedAttempt < 5){
+                ReConnect();
+                return GetLogs(usr);
+        }else {
+                failedAttempt = 0;
+            }
 
         } catch (IOException e) {
             //e.printStackTrace();
@@ -305,30 +339,40 @@ public class SocketClient {
             }
             return null;
 
-        } catch (IOException e) {
+        }catch (SocketException e) {
+            if (failedAttempt < 5){
+                ReConnect();
+                return GetLogsAdmin(usr);
+            }else {
+                failedAttempt = 0;
+            }
+
+        }
+        catch (IOException e) {
             //e.printStackTrace();
             return null;
         } catch (ClassNotFoundException e) {
             //e.printStackTrace();
             return null;
         }
+        return null;
     }
 
     public boolean ReConnect() {
+        failedAttempt++;
+            try {
+                this.Socket = (Socket) socketFactory.createSocket("localhost", 7676);
 
-        try {
-            this.Socket = (Socket) socketFactory.createSocket("localhost", 7676);
+                output = new ObjectOutputStream(Socket.getOutputStream());
 
-            output = new ObjectOutputStream(Socket.getOutputStream());
+                BufferedInputStream socketRead = new BufferedInputStream(Socket.getInputStream());
 
-            BufferedInputStream socketRead = new BufferedInputStream(Socket.getInputStream());
+                input = new ObjectInputStream(socketRead);
 
-            input = new ObjectInputStream(socketRead);
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
-
+                return true;
+            } catch (IOException e) {
+                return false;
+            }
     }
 
     public void flush(){

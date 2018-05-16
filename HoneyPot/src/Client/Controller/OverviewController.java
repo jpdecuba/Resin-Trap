@@ -34,8 +34,6 @@ public class OverviewController extends BaseController implements Initializable 
     @FXML
     Label connectionsLbl;
 
-    private DatabaseSynchronisation dbSync = new DatabaseSynchronisation();
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		overviewBtn.setDefaultButton(true);
@@ -43,14 +41,6 @@ public class OverviewController extends BaseController implements Initializable 
 		Main.manager.currentView = "/Client/View/OverView.fxml";
 		snackbar = new JFXSnackbar(anchor);
         Main.manager.ChangeNavButtons(loginBtn, adminBtn, settingBtn);
-
-		if(Main.GetAccount() != null) {
-            snackbar.show("Staring Synchronisation of log files", 1000);
-            if(dbSync.SyncLocalAndCloud())
-                snackbar.show("Files Synchronised", 1000);
-            else
-                snackbar.show("File Synchronisation FAILED", 1000);
-        }
 	}
 
     /**
