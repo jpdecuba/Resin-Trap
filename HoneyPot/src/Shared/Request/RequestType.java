@@ -12,4 +12,5 @@ public enum RequestType {
     GetLogsAdmin,
     AddMail,
     DeleteEmail
+    ChangePassword
 }

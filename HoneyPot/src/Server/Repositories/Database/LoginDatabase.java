@@ -43,6 +43,11 @@ public class LoginDatabase implements ILoginRepo {
     }
 
     @Override
+    public boolean ChangePassword(String password, int userId) {
+        return false;
+    }
+
+    @Override
     public boolean DeleteEmail(String email, int userId) {
         return false;
     }
