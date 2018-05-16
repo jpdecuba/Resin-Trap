@@ -42,8 +42,7 @@ public class OverviewController extends BaseController implements Initializable 
 		Main.manager.setToolbar(this.toolbar);
 		Main.manager.currentView = "/Client/View/OverView.fxml";
 		snackbar = new JFXSnackbar(anchor);
-		Main.ChangeLoginButton(loginBtn);
-		Main.ChangeAdminButton(adminBtn);
+        Main.manager.ChangeNavButtons(loginBtn, adminBtn, settingBtn);
 
 		if(Main.GetAccount() != null) {
             snackbar.show("Staring Synchronisation of log files", 1000);
