@@ -1,6 +1,5 @@
 package Model;
 
-
 import Shared.Model.User;
 import Shared.Model.UserRole;
 import org.junit.Assert;

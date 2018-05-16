@@ -1,6 +1,5 @@
 package HoneyPot.logging;
 
-
 import Shared.Logging.LogConnection;
 import Shared.Logging.LogRecord;
 import org.junit.Assert;

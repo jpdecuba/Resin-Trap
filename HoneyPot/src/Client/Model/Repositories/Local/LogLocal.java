@@ -26,7 +26,7 @@ public class LogLocal implements ILogSerialisation {
         Set<LogConnection> logs = new HashSet<>();
         ObjectInputStream objectReader = null;
         try {
-            if(new File(System.getenv("APPDATA") + "/Honeypot/AllLogs.txt").exists()) {
+            if(!new File(System.getenv("APPDATA") + "/Honeypot/AllLogs.txt").exists()) {
                 return logs;
             }
 
@@ -47,7 +47,8 @@ public class LogLocal implements ILogSerialisation {
             //e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
+        }
+        finally {
             try {
                 if(objectReader != null) objectReader.close();
             } catch (IOException | NullPointerException e) {
