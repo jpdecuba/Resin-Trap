@@ -17,7 +17,7 @@ public class UserDatabase implements ILoginRepo {
 	public User Validate(User user) {
 		try
 		{
-			String sql = "SELECT id, roleId FROM Account WHERE name = ? AND password = ?";
+			String sql = "SELECT id, roleId FROM Account WHERE name COLLATE Latin1_General_CS_AS = ? AND password COLLATE Latin1_General_CS_AS = ?";
 			PreparedStatement statement = Database.connection().prepareStatement(sql);
 			statement.setString(1, user.getName());
 			statement.setString(2, user.getPassword());
