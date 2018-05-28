@@ -58,7 +58,7 @@ public class ControllerManager {
         btn.setGraphic(fa);
         btn.setStyle("-fx-background-color: transparent; -fx-alignment: center");
         btn.setOnAction(actionEvent -> {
-            currentView = "/Client/View/HelpView.fxml";
+            currentView = "/Client/View/OSView.fxml";
             loadView(Main.lang, currentView, "Achmea");
         });
         return btn;

@@ -14,7 +14,7 @@
 <?import javafx.scene.control.Hyperlink?>
 
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Controller.HelpController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Controller.OSController">
     <children>
         <HBox AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.rightAnchor="0">
             <children>
@@ -97,74 +97,34 @@
 
                 <AnchorPane fx:id="mainPane" prefHeight="${mainPane.parent.height}" HBox.hgrow="ALWAYS"
                             style="-fx-background-color: WHITE;">
-                    <HBox AnchorPane.topAnchor="60" AnchorPane.leftAnchor="75" AnchorPane.rightAnchor="75"
-                          alignment="TOP_CENTER">
-                        <Label fx:id="os"
-                               style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 28;"/>
-                    </HBox>
-                    <ScrollPane AnchorPane.rightAnchor="75" AnchorPane.leftAnchor="75" AnchorPane.bottomAnchor="75"
-                                AnchorPane.topAnchor="100" style="-fx-background-color: WHITE; -fx-border-radius: 0"
-                                vbarPolicy="NEVER" hbarPolicy="NEVER" fitToWidth="true">
-                        <VBox fx:id="box" alignment="TOP_LEFT" style="-fx-background-color: WHITE" spacing="25">
-                            <Label text="%block"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 22;"/>
-                            <Label wrapText="true" text="%step1"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
-                            <ImageView>
-                                <image>
-                                    <Image
-                                            url="/Client/Resources/URL.png"/>
-                                </image>
-                            </ImageView>
-                            <Label wrapText="true" text="%step12"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
-                            <Label fx:id="win1" wrapText="true" text="%step13"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
-                            <ImageView fx:id="win2">
-                                <image>
-                                    <Image url="/Client/Resources/run.JPG"/>
-                                </image>
-                            </ImageView>
-                            <Label fx:id="win3" wrapText="true" text="%step14"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
-                            <ImageView fx:id="win4">
-                                <image>
-                                    <Image url="/Client/Resources/cmd1.JPG"/>
-                                </image>
-                            </ImageView>
-                            <Label fx:id="win5" wrapText="true" text="%step15"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
-                            <ImageView fx:id="win6" fitWidth="500" preserveRatio="true">
-                                <image>
-                                    <Image url="/Client/Resources/cmd.PNG"/>
-                                </image>
-                            </ImageView>
-
-                            <Label fx:id="mac1" wrapText="true" text="%step16"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
-                            <Label fx:id="mac2" wrapText="true" text="%step17"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
-                            <ImageView fx:id="mac3" fitWidth="500" preserveRatio="true">
-                                <image>
-                                    <Image url="/Client/Resources/mac.png"/>
-                                </image>
-                            </ImageView>
-                            <Label wrapText="true" text="%step2"
-                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
-                            <Hyperlink fx:id="linksys" text="Linksys" onAction="#OpenLink"
-                                       style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
-                            <Hyperlink fx:id="netgear" text="Netgear" onAction="#OpenLink"
-                                       style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
-                            <Hyperlink fx:id="ddwrt" text="DD-WRT" onAction="#OpenLink"
-                                       style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
-                            <Hyperlink fx:id="tplink" text="TP-Link" onAction="#OpenLink"
-                                       style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
-                            <Hyperlink fx:id="asus" text="Asus" onAction="#OpenLink"
-                                       style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"/>
-                        </VBox>
-                    </ScrollPane>
-                    <JFXButton AnchorPane.bottomAnchor="25" AnchorPane.leftAnchor="75" text="%back" onAction="#back" prefWidth="100.0"
-                               style="-fx-background-color: achmea; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;" textFill="WHITE"></JFXButton>
+                    <VBox AnchorPane.rightAnchor="75" AnchorPane.leftAnchor="75" AnchorPane.topAnchor="60" alignment="CENTER" spacing="50">
+                        <HBox alignment="TOP_CENTER">
+                            <Label text="%os"
+                                   style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 28;"/>
+                        </HBox>
+                        <JFXButton fx:id="windows" onAction="#chooseOS" alignment="CENTER"
+                                   graphicTextGap="17.0" prefHeight="50.0"
+                                   prefWidth="210.0"
+                                   style="-fx-background-color: achmea; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"
+                                   text="Windows" textFill="WHITE">
+                            <graphic>
+                                <FontAwesomeIconView fill="WHITE" glyphName="WINDOWS" size="22"
+                                                     strokeType="OUTSIDE"
+                                                     strokeWidth="0.0"/>
+                            </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="mac" onAction="#chooseOS" alignment="CENTER"
+                                   graphicTextGap="17.0" prefHeight="50.0"
+                                   prefWidth="210.0"
+                                   style="-fx-background-color: achmea; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"
+                                   text="Mac OS X" textFill="WHITE">
+                            <graphic>
+                                <FontAwesomeIconView fill="WHITE" glyphName="APPLE" size="22"
+                                                     strokeType="OUTSIDE"
+                                                     strokeWidth="0.0"/>
+                            </graphic>
+                        </JFXButton>
+                    </VBox>
                 </AnchorPane>
             </children>
         </HBox>
