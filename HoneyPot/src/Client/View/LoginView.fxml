@@ -12,6 +12,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import javafx.scene.layout.Region?>
+<?import com.jfoenix.controls.JFXSpinner?>
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Controller.LoginController">
     <children>
@@ -139,5 +140,22 @@
                 </VBox>
             </children>
         </HBox>
+        <AnchorPane fx:id="loadPane" style="-fx-background-color: rgba(255, 255, 255, 0.1);" visible="false"
+                    AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+                    AnchorPane.topAnchor="0">
+            <children>
+                <HBox alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+                      AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                    <children>
+                        <VBox alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+                              AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                            <children>
+                                <JFXSpinner/>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
     </children>
 </AnchorPane>

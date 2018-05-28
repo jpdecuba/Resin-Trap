@@ -5,12 +5,14 @@ import Client.Main.Main;
 import Client.Controller.ControllerTimer;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSnackbar;
+import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXToolbar;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
 
 import java.awt.*;
 import java.io.IOException;
@@ -20,16 +22,12 @@ import java.util.Timer;
 
 public class BaseController {
 
-    @FXML
-    JFXButton overviewBtn;
-    @FXML
-    JFXButton servicesBtn;
-    @FXML
-    JFXButton loginBtn;
-    @FXML
-    JFXButton adminBtn;
-    @FXML
-    JFXButton settingBtn;
+    @FXML JFXButton overviewBtn;
+    @FXML JFXButton servicesBtn;
+    @FXML JFXButton loginBtn;
+    @FXML JFXButton adminBtn;
+    @FXML JFXButton settingBtn;
+    @FXML AnchorPane loadPane;
 
     static JFXSnackbar snackbar;
     Timer timer;
@@ -39,6 +37,18 @@ public class BaseController {
 		timer = new Timer();
 		timer.schedule(new ControllerTimer(this), 0,5000);
 	}
+
+    public void LoadPaneOn() {
+        Platform.runLater(() -> {
+            loadPane.setVisible(true);
+        });
+    }
+
+    public void LoadPaneOff() {
+        Platform.runLater(() -> {
+            loadPane.setVisible(false);
+        });
+    }
 
     @FXML
     public void changePage(ActionEvent event) {
