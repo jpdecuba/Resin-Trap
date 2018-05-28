@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class LoginController implements Initializable {
+public class LoginController extends BaseController implements Initializable {
     //Login GUI elements
     @FXML AnchorPane anchor;
     @FXML JFXToolbar toolbar;
@@ -70,6 +70,7 @@ public class LoginController implements Initializable {
 		if(button == loginBtn)
 		{
 			if(Login()) {
+				LoadPaneOn();
 				if(Main.GetAccount() != null) {
 					snackbar.show("Staring Synchronisation of log files", 1000);
 					if(dbSync.SyncLocalAndCloud())
@@ -116,6 +117,7 @@ public class LoginController implements Initializable {
 				return;
 			}
 		}
+		LoadPaneOff();
 		switchPage(path, title);
 	}
 
@@ -161,7 +163,6 @@ public class LoginController implements Initializable {
 
         if(user != null) {
 			Main.setAccount(user);
-
             return true;
         }else {
             snackbar.show("Username or password is wrong",3000);
