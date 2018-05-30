@@ -2,6 +2,7 @@ package Client.Main;
 
 import Client.FileSave.*;
 import Client.HoneyPot.honeyrj.*;
+import Client.Sockets.LogManager;
 import Shared.Logging.LogConnection;
 import Client.HoneyPot.lowinteraction.*;
 
@@ -99,6 +100,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         client = new SocketClient(null);
+
     	//account = null;
 		//loginModel = new LoginModel();
         launchHoneypot();
@@ -144,6 +146,9 @@ public class Main extends Application {
 
 
         Stage.show();
+
+        LogManager logclient = new LogManager();
+        logclient.getSocket().GetlogFiles(GetAccount());
 
 
         if(honeypot != null && GetAccount() != null){
@@ -321,6 +326,13 @@ public class Main extends Application {
         }
         return true;
     }
+
+
+    public static void SetDBLogs(Set<LogConnection> logs){
+
+
+    }
+
 
     public static void SetupRoot(Parent root)
 	{

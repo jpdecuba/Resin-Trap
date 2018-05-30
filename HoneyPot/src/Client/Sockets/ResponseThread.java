@@ -1,5 +1,6 @@
 package Client.Sockets;
 
+import Shared.Logging.LogConnection;
 import Shared.Request.Response;
 import javafx.beans.Observable;
 
@@ -7,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.Observer;
+import java.util.Set;
 
 public class ResponseThread extends Thread  {
 
@@ -30,7 +32,7 @@ public class ResponseThread extends Thread  {
 
                 System.out.println("in loop");
                 Object obj = input.readObject();
-                Response response = (Response)obj;
+                Set<LogConnection> response = (Set<LogConnection>)obj;
 
                 observer.object(response);
 

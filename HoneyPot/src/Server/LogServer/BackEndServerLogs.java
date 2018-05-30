@@ -1,4 +1,4 @@
-package Server;
+package Server.LogServer;
 
 import Shared.Model.User;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class BackEndServer {
+public class BackEndServerLogs {
 
 
     private ServerSocket serverSocket;
@@ -18,7 +18,7 @@ public class BackEndServer {
     private ExecutorService executor = Executors.newCachedThreadPool();
     public static ArrayList<User> sessions = new ArrayList<>();
 
-    public BackEndServer(int port) throws Exception {
+    public BackEndServerLogs(int port) throws Exception {
         ServerSocketFactory socketFactory = (ServerSocketFactory) ServerSocketFactory.getDefault();
         serverSocket = (ServerSocket) socketFactory.createServerSocket(port);
     }
@@ -34,12 +34,13 @@ public class BackEndServer {
                 System.out.println("I/O error: " + e);
             }
             // new thread for a client
-            executor.submit(new BackEndThread(socket));
+            executor.submit(new BackEndThreadLogs(socket));
         }
     }
 
     public static void main(String args[]) throws Exception {
-        BackEndServer server = new BackEndServer(7676);
-        server.runServer();
+        BackEndServerLogs server2 = new BackEndServerLogs(7677);
+        server2.runServer();
+
     }
 }
