@@ -9,6 +9,7 @@ import java.util.concurrent.Callable;
 public class LIDeserializeDBThread implements Callable<Set<LogConnection>> {
     @Override
     public Set<LogConnection> call() throws Exception {
-        return Main.GetLogs();
+        Main.GetLogs();
+        return Main.logsdb;
     }
 }

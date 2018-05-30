@@ -66,6 +66,10 @@ public class Main extends Application {
 
     public static int ConnectionAlert = 5;
 
+    private static LogManager logclient;
+
+    public static Set<LogConnection> logsdb;
+
 
     public static void setAccount(User account) {
         pref.setAccount(account);
@@ -93,8 +97,8 @@ public class Main extends Application {
     }
 
 
-    public static Set<LogConnection> GetLogs(){
-        return client.GetlogFiles(GetAccount());
+    public static void GetLogs(){
+        logclient.getSocket().GetlogFiles(GetAccount());
     }
 
     @Override
@@ -147,9 +151,9 @@ public class Main extends Application {
 
         Stage.show();
 
-        LogManager logclient = new LogManager();
+        logclient = new LogManager();
         logclient.getSocket().GetlogFiles(GetAccount());
-
+        GetLogs();
 
         if(honeypot != null && GetAccount() != null){
             honeypot.SetDBLog();
@@ -228,11 +232,11 @@ public class Main extends Application {
     }*/
 
     public static void SaveLogs(Iterable<LogConnection> logs){
-        client.SaveLogs(pref.getAccount(),logs);
+        logclient.getSocket().SaveLogs(pref.getAccount(),logs);
     }
 
     public static void SaveLog(LogConnection log){
-        client.SaveLog(pref.getAccount(),log);
+        logclient.getSocket().SaveLog(pref.getAccount(),log);
     }
 
     public static void switchPage(Parent parent, String title)
@@ -329,8 +333,7 @@ public class Main extends Application {
 
 
     public static void SetDBLogs(Set<LogConnection> logs){
-
-
+        logsdb = logs;
     }
 
 

@@ -42,7 +42,8 @@ public class DatabaseSynchronisation {
         }
 
         try {
-            dbLogs = Main.GetLogs().toArray(new LogConnection[0]);
+            Main.GetLogs();
+            dbLogs = Main.logsdb.toArray(new LogConnection[0]);
         }catch (NullPointerException npe){
             dbLogs = null;
         }
