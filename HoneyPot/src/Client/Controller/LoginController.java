@@ -48,7 +48,11 @@ public class LoginController extends BaseController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		loginBtn.setDefaultButton(true);
+		if (loginBtn != null) {
+			loginBtn.setDefaultButton(true);
+		} else {
+			registerBtn.setDefaultButton(true);
+		}
 		Main.manager.setToolbar(this.toolbar);
         snackbar = new JFXSnackbar(anchor);
         if(registerUserRoleField != null) {
@@ -97,12 +101,12 @@ public class LoginController extends BaseController implements Initializable {
 		}
 		else if (button == goToRegisterBtn)
 		{
-			path = "/Client/view/RegisterView.fxml";
+			path = "/Client/View/RegisterView.fxml";
 			title = "Register";
 		}
 		else if (button == goToLoginBtn)
 		{
-			path = "/Client/view/LoginView.fxml";
+			path = "/Client/View/LoginView.fxml";
 			title = "Login";
 		}
 		else if (button == registerBtn)

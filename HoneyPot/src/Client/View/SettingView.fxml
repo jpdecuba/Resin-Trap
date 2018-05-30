@@ -102,7 +102,7 @@
                                     VBox.vgrow="ALWAYS"
                                     style="-fx-background-color: WHITE;">
                             <children>
-                                <VBox alignment="CENTER" spacing="15" AnchorPane.bottomAnchor="125"
+                                <VBox alignment="CENTER_LEFT" spacing="15" AnchorPane.bottomAnchor="125"
                                       AnchorPane.leftAnchor="175" AnchorPane.rightAnchor="175"
                                       AnchorPane.topAnchor="115">
                                     <children>
@@ -115,19 +115,13 @@
                                             </TextField>
                                             </children>
                                         </HBox>
-                                        <HBox alignment="BASELINE_LEFT" spacing="5">
-                                            <children>
-                                                <Label style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 21; -fx-text-fill: #424242" text="Emails:"/>
-                                                <ListView fx:id="emailList" minHeight="100" style="fx-font-family: 'Roboto Condensed'; -fx-font-size: 20; -fx-text-fill: #424242"/>
-                                            </children>
-                                        </HBox>
-                                        <HBox alignment="BASELINE_RIGHT" spacing="5">
+                                        <Label style=" -fx-font-family: 'Roboto Condensed'; -fx-font-size: 21; -fx-text-fill: #424242" text="Emails:"/>
+                                        <ListView fx:id="emailList" minHeight="100" style="fx-font-family: 'Roboto Condensed'; -fx-font-size: 20; -fx-text-fill: #424242"/>
                                         <JFXButton HBox.hgrow="ALWAYS" onAction="#deleteEmail" alignment="CENTER"
                                                    mnemonicParsing="false" prefHeight="50.0"
                                                    prefWidth="120.0"
                                                    style="-fx-background-color: achmea; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"
                                                    text="%deleteEmail" textFill="WHITE"/>
-                                        </HBox>
                                         <Region prefHeight="25"></Region>
                                         <JFXTextField fx:id="addEmailField" alignment="BASELINE_LEFT"
                                                       focusColor="#cc0000" labelFloat="true" promptText="Email"
@@ -136,9 +130,6 @@
                                                 <Font size="16.0"/>
                                             </font>
                                         </JFXTextField>
-                                        <HBox alignment="BASELINE_RIGHT" spacing="5">
-                                            <children>
-
                                                 <JFXButton fx:id="addEmail" HBox.hgrow="ALWAYS" onAction="#addEmail" alignment="CENTER"
                                                            graphicTextGap="17.0"
                                                            layoutX="0"
@@ -146,17 +137,12 @@
                                                            prefWidth="120.0"
                                                            style="-fx-background-color: achmea; -fx-font-family: 'Roboto Condensed'; -fx-font-size: 16;"
                                                            text="%addEmail" textFill="WHITE"/>
-                                            </children>
-                                        </HBox>
-                                        <HBox alignment="BASELINE_LEFT" spacing="5">
-                                            <children>
-
+                                        <HBox alignment="CENTER_RIGHT">
                                                 <JFXButton fx:id="changePasswordBtn" alignment="CENTER" buttonType="RAISED"
                                                            contentDisplay="CENTER" mnemonicParsing="false"
                                                            onAction="#changePassw" minWidth="100" VBox.vgrow="ALWAYS"
                                                            style="-fx-background-color: achmea; -fx-font-family: 'Roboto-Condensed'; -fx-font-size: 13pt;"
                                                            text="%changePassw" textFill="white"/>
-                                            </children>
                                         </HBox>
                                     </children>
                                 </VBox>
