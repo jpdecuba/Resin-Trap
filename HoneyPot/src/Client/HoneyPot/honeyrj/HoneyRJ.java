@@ -71,6 +71,11 @@ public class HoneyRJ  implements Serializable{
 
 	}
 
+	public void setDBLogs(Set<LogConnection> logs){
+		this.logs = logs;
+
+	}
+
 
 	public void SetDBLog() {
 		if(Main.GetAccount().getName() != null && Main.SocketCheck()){

@@ -334,6 +334,8 @@ public class Main extends Application {
 
     public static void SetDBLogs(Set<LogConnection> logs){
         logsdb = logs;
+
+        honeypot.setDBLogs(logs);
     }
 
 

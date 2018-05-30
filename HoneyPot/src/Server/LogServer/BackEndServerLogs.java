@@ -23,7 +23,7 @@ public class BackEndServerLogs {
         serverSocket = (ServerSocket) socketFactory.createServerSocket(port);
     }
 
-    private void runServer() {
+    public void runServer() {
         System.err.println("Waiting for connections...");
 
         while (true) {

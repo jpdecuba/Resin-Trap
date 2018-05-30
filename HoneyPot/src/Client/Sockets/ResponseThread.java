@@ -4,6 +4,7 @@ import Shared.Logging.LogConnection;
 import Shared.Request.Response;
 import javafx.beans.Observable;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
@@ -29,17 +30,18 @@ public class ResponseThread extends Thread  {
             System.err.println("Connecting started");
 
             while (run) {
-
                 System.out.println("in loop");
                 Object obj = input.readObject();
                 Set<LogConnection> response = (Set<LogConnection>)obj;
-
                 observer.object(response);
 
             }
             input.close();
 
-        } catch (IOException e) {
+        } catch (EOFException e){
+
+        }
+        catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

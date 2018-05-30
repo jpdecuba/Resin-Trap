@@ -1,5 +1,6 @@
 package Server;
 
+import Server.LogServer.BackEndServerLogs;
 import Shared.Model.User;
 
 import javax.net.ServerSocketFactory;
@@ -41,5 +42,7 @@ public class BackEndServer {
     public static void main(String args[]) throws Exception {
         BackEndServer server = new BackEndServer(7676);
         server.runServer();
+        BackEndServerLogs server2 = new BackEndServerLogs(7677);
+        server2.runServer();
     }
 }

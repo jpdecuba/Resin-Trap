@@ -112,11 +112,13 @@ public class LogSocket {
 
 
     public void GetlogFiles(User usr){
-        if(usr.getRole().equals(UserRole.Admin)){
-            //Edit to admin get logs
-            GetLogsAdmin(usr);
-        }else if(usr.getRole().equals(UserRole.User)){
-            GetLogs(usr);
+        if(usr != null) {
+            if (usr.getRole().equals(UserRole.Admin)) {
+                //Edit to admin get logs
+                GetLogsAdmin(usr);
+            } else if (usr.getRole().equals(UserRole.User)) {
+                GetLogs(usr);
+            }
         }
     }
 

@@ -156,7 +156,6 @@ public class ServicesController extends BaseController implements Initializable 
                 accountColumn.prefWidthProperty().bind(hb.widthProperty().divide(4));
                 accountColumn.setCellValueFactory(
                         new PropertyValueFactory<TableObject, String>("account"));
-
                 table.getColumns().addAll(accountColumn);
             }
         }
