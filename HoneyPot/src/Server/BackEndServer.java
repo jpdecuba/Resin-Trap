@@ -7,7 +7,7 @@ import javax.net.ServerSocketFactory;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -39,9 +39,22 @@ public class BackEndServer {
         }
     }
 
+
     public static void main(String args[]) throws Exception {
-        BackEndServer server = new BackEndServer(7676);
-        server.runServer();
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                BackEndServer server = null;
+                try {
+                    server = new BackEndServer(7676);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                server.runServer();
+            }
+        });
+        t1.start();
+
         BackEndServerLogs server2 = new BackEndServerLogs(7677);
         server2.runServer();
     }
