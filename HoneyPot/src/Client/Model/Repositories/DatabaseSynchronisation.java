@@ -44,10 +44,15 @@ public class DatabaseSynchronisation {
         try {
             Main.GetLogs();
             dbLogs = Main.logsdb.toArray(new LogConnection[0]);
+            if(dbLogs == null) throw new NullPointerException();
         }catch (NullPointerException npe){
-            dbLogs = null;
+            dbLogs = new LogConnection[0];
         }
         localLogs = localRepo.GetAllLogs().toArray(new LogConnection[0]);
+        if(localLogs == null)
+        {
+            localLogs = new LogConnection[0];
+        }
 
         if(dbLogs.length < 1 && localLogs.length < 1){
             return Integer.MAX_VALUE;
