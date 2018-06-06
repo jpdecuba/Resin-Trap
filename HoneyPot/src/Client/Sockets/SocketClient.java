@@ -33,7 +33,7 @@ public class SocketClient {
         }else {
 
             try {
-                this.Socket = (Socket) socketFactory.createSocket("localhost", 7676);
+                this.Socket = (Socket) socketFactory.createSocket("188.166.118.138", 7676);
             } catch (IOException e) {
             }
         }

@@ -76,11 +76,16 @@ public class LoginController extends BaseController implements Initializable {
 			if(Login()) {
 				LoadPaneOn();
 				if(Main.GetAccount() != null) {
-					snackbar.show("Staring Synchronisation of log files", 1000);
-					if(dbSync.SyncLocalAndCloud())
-						snackbar.show("Files Synchronised", 1000);
-					else
+					try {
+						snackbar.show("Staring Synchronisation of log files", 1000);
+						if (dbSync.SyncLocalAndCloud())
+							snackbar.show("Files Synchronised", 1000);
+						else
+							snackbar.show("File Synchronisation FAILED", 1000);
+					} catch (Exception e) {
+						LoadPaneOff();
 						snackbar.show("File Synchronisation FAILED", 1000);
+					}
 				}
 
 				path = "/Client/View/OverView.fxml";
