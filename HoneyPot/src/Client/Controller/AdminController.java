@@ -15,6 +15,8 @@ import javafx.scene.shape.Rectangle;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -53,7 +55,9 @@ public class AdminController extends BaseController implements Initializable  {
         bc.prefHeightProperty().bind(vb.heightProperty().divide(2));
         bc.prefWidthProperty().bind(vb.widthProperty());
         XYChart.Series series1 = new XYChart.Series();
-        series1.setName("April");
+        YearMonth thisMonth = YearMonth.now();
+        DateTimeFormatter monthYearFormatter = DateTimeFormatter.ofPattern("MMMM");
+        series1.setName(thisMonth.format(monthYearFormatter));
         for (ILIModule mod :
                 Main.Services) {
             series1.getData().add(new XYChart.Data(mod.getProtocol().toString(), GetLogs(mod)));
@@ -73,7 +77,9 @@ public class AdminController extends BaseController implements Initializable  {
         lc.prefHeightProperty().bind(vb.heightProperty().divide(2));
         lc.prefWidthProperty().bind(vb.widthProperty());
         XYChart.Series series1 = new XYChart.Series();
-        series1.setName("April");
+        YearMonth thisMonth = YearMonth.now();
+        DateTimeFormatter monthYearFormatter = DateTimeFormatter.ofPattern("MMMM");
+        series1.setName(thisMonth.format(monthYearFormatter));
         for (int i = 744; i >= 0; i = i - 24){
             Calendar today = Calendar.getInstance();
             today.set(Calendar.HOUR_OF_DAY, -i);
