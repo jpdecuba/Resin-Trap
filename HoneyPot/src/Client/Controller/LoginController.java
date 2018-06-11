@@ -90,56 +90,57 @@ public class LoginController implements Initializable {
     @FXML
     public void changePage(ActionEvent event) {
         LoadPaneOn();
-            JFXButton button = (JFXButton) event.getSource();
-            String path = "";
-            String title = "";
+        JFXButton button = (JFXButton) event.getSource();
+        String path = "";
+        String title = "";
 
-            if (button == loginBtn) {
-                if (Login()) {
-                    if (Main.GetAccount() != null) {
+        if (button == loginBtn) {
+            if (Login()) {
+                if (Main.GetAccount() != null) {
+                    snackbar.show("Staring Synchronisation of log files", 1000);
+
+                    try {
                         snackbar.show("Staring Synchronisation of log files", 1000);
-
-                        try {
-                            snackbar.show("Staring Synchronisation of log files", 1000);
-                            if (dbSync.SyncLocalAndCloud())
-                                snackbar.show("Files Synchronised", 1000);
-                            else
-                                snackbar.show("File Synchronisation FAILED", 1000);
-                        } catch (Exception e) {
+                        if (dbSync.SyncLocalAndCloud())
+                            snackbar.show("Files Synchronised", 1000);
+                        else
                             snackbar.show("File Synchronisation FAILED", 1000);
-                        }
+                    } catch (Exception e) {
+                        snackbar.show("File Synchronisation FAILED", 1000);
                     }
+                }
 
-                    path = "/Client/View/OverView.fxml";
-                    title = "Overview";
-                } else {
-                    return;
-                }
-            } else if (button == overviewBtn) {
                 path = "/Client/View/OverView.fxml";
-                title = "Achmea";
-            } else if (button == servicesBtn) {
-                path = "/Client/View/ServicesView.fxml";
-                title = "Achmea";
-            } else if (button == goToRegisterBtn) {
-                path = "/Client/View/RegisterView.fxml";
-                title = "Register";
-            } else if (button == goToLoginBtn) {
-                path = "/Client/View/LoginView.fxml";
-                title = "Login";
-            } else if (button == registerBtn) {
-                if (Register()) {
-                    path = "/Client/view/LoginView.fxml";
-                    title = "Login";
-                } else {
-                    return;
-                }
+                title = "Overview";
+            } else {
+                return;
             }
-            String finalPath = path;
-            String finalTitle = title;
-            Platform.runLater(() -> {
-                switchPage(finalPath, finalTitle);
-            });
+        } else if (button == overviewBtn) {
+            path = "/Client/View/OverView.fxml";
+            title = "Achmea";
+        } else if (button == servicesBtn) {
+            path = "/Client/View/ServicesView.fxml";
+            title = "Achmea";
+        } else if (button == goToRegisterBtn) {
+            path = "/Client/View/RegisterView.fxml";
+            title = "Register";
+        } else if (button == goToLoginBtn) {
+            path = "/Client/View/LoginView.fxml";
+            title = "Login";
+        } else if (button == registerBtn) {
+            if (Register()) {
+                path = "/Client/view/LoginView.fxml";
+                title = "Login";
+            } else {
+                return;
+            }
+        }
+        String finalPath = path;
+        String finalTitle = title;
+        LoadPaneOff();
+        Platform.runLater(() -> {
+            switchPage(finalPath, finalTitle);
+        });
 
     }
 
@@ -182,6 +183,7 @@ public class LoginController implements Initializable {
             Main.setAccount(user);
             return true;
         } else {
+            LoadPaneOff();
             snackbar.show("Username or password is wrong", 3000);
         }
         return false;
