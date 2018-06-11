@@ -85,6 +85,7 @@ public class ServicesController extends BaseController implements Initializable 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        LoadPaneOn();
         hb2.setVisible(false);
         scrollPane = new ScrollPane();
         this.resource = resources;
@@ -119,6 +120,7 @@ public class ServicesController extends BaseController implements Initializable 
         });
         content.setHeading(new Text("Messages"));
         content.setActions(button);
+        LoadPaneOff();
     }
 
     public void createTable() {
@@ -281,7 +283,7 @@ public class ServicesController extends BaseController implements Initializable 
     private void loadView(String lang) {
         try {
             Main.lang = lang;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("bundles.UIResources", new Locale(lang, lang.toUpperCase())));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OverView.fxml"), ResourceBundle.getBundle("Client.Bundles.UIResources", new Locale(lang, lang.toUpperCase())));
             Parent root = loader.load();
             OverviewController overviewCon = loader.getController();
             Main.switchPage(root, "Achmea");

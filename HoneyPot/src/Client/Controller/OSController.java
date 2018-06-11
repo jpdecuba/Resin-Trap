@@ -31,7 +31,7 @@ public class OSController extends BaseController implements Initializable {
             String path = "/Client/View/HelpView.fxml";
             String title = "Achmea";
             Main.manager.currentView = path;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("Client/bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("Client.Bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
             Parent root = loader.load();
             HelpController helpController = loader.getController();
             helpController.setup(source == windows);

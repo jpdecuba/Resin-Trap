@@ -33,6 +33,7 @@ public class AdminController extends BaseController implements Initializable  {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        LoadPaneOn();
         this.resource = resources;
 
         BarChart bc = CreateBarChart();
@@ -42,6 +43,7 @@ public class AdminController extends BaseController implements Initializable  {
         vb.getChildren().addAll(lc, bc);
         Main.manager.ChangeLoginButton(loginBtn);
         Main.manager.ChangeNavButtons(loginBtn, adminBtn, settingBtn);
+        LoadPaneOff();
     }
 
     public BarChart<String,Number> CreateBarChart() {

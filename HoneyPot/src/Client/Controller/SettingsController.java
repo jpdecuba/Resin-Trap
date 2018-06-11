@@ -39,6 +39,7 @@ public class SettingsController extends BaseController implements Initializable 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		LoadPaneOn();
 		Main.manager.setToolbar(this.toolbar);
 		snackbar = new JFXSnackbar(anchor);
 		Main.manager.ChangeNavButtons(loginBtn, adminBtn, settingBtn);
@@ -68,6 +69,7 @@ public class SettingsController extends BaseController implements Initializable 
 				}
 			}
 		});
+		LoadPaneOff();
 	}
 
 	@FXML
@@ -97,7 +99,7 @@ public class SettingsController extends BaseController implements Initializable 
 
 	public void changePassw() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/Client/View/PasswordView.fxml"), ResourceBundle.getBundle("Client/bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/Client/View/PasswordView.fxml"), ResourceBundle.getBundle("Client.Bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
 			Parent root = loader.load();
 			Main.switchPage(root, "Change Password");
 		}

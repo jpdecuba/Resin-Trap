@@ -68,6 +68,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        LoadPaneOn();
         if (loginBtn != null) {
             loginBtn.setDefaultButton(true);
         } else {
@@ -83,6 +84,7 @@ public class LoginController implements Initializable {
             SetLimiter(registerUsernameField, 50);
             SetLimiter(registerEmailField, 50);
         }
+        LoadPaneOff();
     }
 
     @FXML
@@ -97,16 +99,20 @@ public class LoginController implements Initializable {
                     if (Main.GetAccount() != null) {
                         snackbar.show("Staring Synchronisation of log files", 1000);
 
-                        if (dbSync.SyncLocalAndCloud())
-                            snackbar.show("Files Synchronised", 1000);
-                        else
+                        try {
+                            snackbar.show("Staring Synchronisation of log files", 1000);
+                            if (dbSync.SyncLocalAndCloud())
+                                snackbar.show("Files Synchronised", 1000);
+                            else
+                                snackbar.show("File Synchronisation FAILED", 1000);
+                        } catch (Exception e) {
                             snackbar.show("File Synchronisation FAILED", 1000);
+                        }
                     }
 
                     path = "/Client/View/OverView.fxml";
                     title = "Overview";
                 } else {
-                    LoadPaneOff();
                     return;
                 }
             } else if (button == overviewBtn) {
@@ -154,7 +160,7 @@ public class LoginController implements Initializable {
         try {
             Main.manager.currentView = path;
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("Client.bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(path), ResourceBundle.getBundle("Client.Bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
             Parent root = loader.load();
             Main.switchPage(root, title);
         } catch (IOException e) {

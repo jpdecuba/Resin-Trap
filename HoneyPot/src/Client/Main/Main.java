@@ -122,7 +122,7 @@ public class Main extends Application {
             loader = new FXMLLoader(getClass().getResource("/Client/View/OverView.fxml"));
             getPreset().Start();
         }
-        loader.setResources(ResourceBundle.getBundle("Client.bundles.UIResources", new Locale(lang, lang.toUpperCase())));
+        loader.setResources(ResourceBundle.getBundle("Client.Bundles.UIResources", new Locale(lang, lang.toUpperCase())));
         Parent root = loader.load();
         this.Stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/Client/Resources/ResinTrap.png")));
         Stage.initStyle(StageStyle.UNDECORATED);
@@ -324,7 +324,7 @@ public class Main extends Application {
             }
             else
             {
-                snackbar.show("Failed to logout", 3000);
+                Main.setAccount(null);
 				return false;
             }
         }

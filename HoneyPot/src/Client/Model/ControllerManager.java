@@ -29,7 +29,7 @@ public class ControllerManager {
         try {
             Main.lang = lang;
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-            loader.setResources(ResourceBundle.getBundle("Client.bundles.UIResources", new Locale(lang, lang.toUpperCase())));
+            loader.setResources(ResourceBundle.getBundle("Client.Bundles.UIResources", new Locale(lang, lang.toUpperCase())));
             Parent root = loader.load();
             Main.switchPage(root, title);
         } catch (IOException e) {
@@ -103,6 +103,6 @@ public class ControllerManager {
     }
 
     public void ChangeLoginButton(JFXButton log) {
-        log.setText(ResourceBundle.getBundle("Client.bundles.UIResources", new Locale(Main.lang.toUpperCase())).getString("logout"));
+        log.setText(ResourceBundle.getBundle("Client.Bundles.UIResources", new Locale(Main.lang.toUpperCase())).getString("logout"));
     }
 }

@@ -35,7 +35,7 @@ public class LogSocket {
         this.observer = observer;
 
             try {
-                this.Socket = (java.net.Socket) socketFactory.createSocket("localhost", 7677);
+                this.Socket = (java.net.Socket) socketFactory.createSocket("188.166.118.138", 7677);
             } catch (IOException e) {
             }
 

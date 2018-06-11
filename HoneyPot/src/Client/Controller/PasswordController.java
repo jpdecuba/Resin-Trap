@@ -46,7 +46,7 @@ public class PasswordController extends BaseController implements Initializable 
 				if(Main.ChangePassword(passw, Main.GetAccount().getId()))
 				{
 					try {
-						FXMLLoader loader = new FXMLLoader(getClass().getResource("/Client/View/SettingView.fxml"), ResourceBundle.getBundle("Client/bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/Client/View/SettingView.fxml"), ResourceBundle.getBundle("Client.Bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
 						Parent root = loader.load();
 						Main.switchPage(root, "Settings");
 					}

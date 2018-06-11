@@ -77,7 +77,7 @@ public class PresetController implements Initializable {
     public void toggle2(ActionEvent action) {
         RadioButton rb = (RadioButton) action.getSource();
         Platform.runLater(() ->{
-            presetLbl.setText(ResourceBundle.getBundle("Client.bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString(rb.getText().replaceAll("\\s+","")));
+            presetLbl.setText(ResourceBundle.getBundle("Client.Bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString(rb.getText().replaceAll("\\s+","")));
         });
     }
 
@@ -106,7 +106,7 @@ public class PresetController implements Initializable {
         }
 
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Client/View/OverView.fxml"), ResourceBundle.getBundle("Client.bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Client/View/OverView.fxml"), ResourceBundle.getBundle("Client.Bundles.UIResources", new Locale(Main.lang, Main.lang.toUpperCase())));
             Parent root = loader.load();
             Main.switchPage(root, "Achmea");
         } catch(IOException IOE){

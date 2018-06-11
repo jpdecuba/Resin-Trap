@@ -105,15 +105,15 @@ public class WindowButtons extends HBox {
 
         final PopupMenu popup = new PopupMenu();
         final TrayIcon trayIcon =
-                new TrayIcon(createImage("/Client/resources/ResinTrapTiniest.png", "tray icon"));
+                new TrayIcon(createImage("/Client/Resources/ResinTrapTiniest.png", "tray icon"));
         trayIcon.setToolTip("ResinTrap");
         final SystemTray tray = SystemTray.getSystemTray();
         trayIcon.setImageAutoSize(true);
 
-        MenuItem maximizeItem = new MenuItem(ResourceBundle.getBundle("Client.bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("trayoptionopen"));
+        MenuItem maximizeItem = new MenuItem(ResourceBundle.getBundle("Client.Bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("trayoptionopen"));
         //MenuItem turnOffItem = new MenuItem("Turn off honeypot");
         //MenuItem turnOnItem = new MenuItem("Turn on honeypot");
-        MenuItem exitItem = new MenuItem(ResourceBundle.getBundle("Client.bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("trayoptionexit"));
+        MenuItem exitItem = new MenuItem(ResourceBundle.getBundle("Client.Bundles.UIResources",new Locale(Main.lang.toUpperCase())).getString("trayoptionexit"));
 
         popup.add(maximizeItem);
         //popup.add(turnOffItem);

@@ -9,6 +9,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.Region?>
+<?import com.jfoenix.controls.JFXSpinner?>
 <AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.Controller.OverviewController">
     <children>
@@ -148,6 +149,23 @@
                 </AnchorPane>
             </children>
         </HBox>
+        <AnchorPane fx:id="loadPane" style="-fx-background-color: rgba(255, 255, 255, 0.1);" visible="false"
+                    AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+                    AnchorPane.topAnchor="0">
+            <children>
+                <HBox alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+                      AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                    <children>
+                        <VBox alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+                              AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+                            <children>
+                                <JFXSpinner/>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
         <JFXToolbar AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0"
                     fx:id="toolbar" prefWidth="${toolbar.parent.width}"
                     prefHeight="25" style="-fx-background-color: transparent">
