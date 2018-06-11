@@ -75,6 +75,7 @@ public class SettingsController extends BaseController implements Initializable 
 	@FXML
 	public void addEmail()
 	{
+		LoadPaneOn();
 		String email = addEmailField.getText();
 		if(!email.trim().equals("") && !email.contains("@") && !email.contains("."))
 		{
@@ -95,6 +96,7 @@ public class SettingsController extends BaseController implements Initializable 
 				snackbar.show("Something went wrong while adding your Email.",3000);
 			}
 		}
+		LoadPaneOff();
 	}
 
 	public void changePassw() {
@@ -111,6 +113,7 @@ public class SettingsController extends BaseController implements Initializable 
 	@FXML
 	public void deleteEmail()
 	{
+		LoadPaneOn();
 		String email = emailList.getSelectionModel().getSelectedItem();
 		if(email == null)
 		{
@@ -124,5 +127,6 @@ public class SettingsController extends BaseController implements Initializable 
 				snackbar.show("Something went wrong while deleting your Email.", 3000);
 			}
 		}
+		LoadPaneOff();
 	}
 }
