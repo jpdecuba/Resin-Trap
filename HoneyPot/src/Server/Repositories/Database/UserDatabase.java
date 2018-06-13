@@ -108,12 +108,12 @@ public class UserDatabase implements ILoginRepo {
 						newCode = code;
 					}
 				}
-			}
 
-			sql = "INSERT INTO Code (code) VALUES (?)";
-			statement = Database.connection().prepareStatement(sql);
-			statement.setString(1, newCode);
-			statement.execute();
+				sql = "INSERT INTO Code (code) VALUES (?)";
+				statement = Database.connection().prepareStatement(sql);
+				statement.setString(1, newCode);
+				statement.execute();
+			}
 
 			if(!CreateAccountCode(id, newCode)) {
 				return false;
