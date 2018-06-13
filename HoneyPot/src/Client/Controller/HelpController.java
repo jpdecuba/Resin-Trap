@@ -46,7 +46,7 @@ public class HelpController extends BaseController implements Initializable {
     }
 
     public void setup(boolean isWindows) {
-        if (isWindows == true) {
+        if (isWindows) {
             os.setText("Windows");
             ArrayList<Node> nodeList = new ArrayList();
             for (Node node : box.getChildren()) {

@@ -129,9 +129,10 @@ public class LoginController implements Initializable {
             title = "Login";
         } else if (button == registerBtn) {
             if (Register()) {
-                path = "/Client/view/LoginView.fxml";
+                path = "/Client/View/LoginView.fxml";
                 title = "Login";
             } else {
+                LoadPaneOff();
                 return;
             }
         }
@@ -230,19 +231,23 @@ public class LoginController implements Initializable {
                         break;
                 }
                 if (register) {
-
+                    LoadPaneOff();
                     return true;
 
                 } else {
+                    LoadPaneOff();
                     snackbar.show("Failed", 3000);
                 }
             } else {
+                LoadPaneOff();
                 snackbar.show("Password is not equal", 3000);
             }
         } else {
+            LoadPaneOff();
             snackbar.show("Please fill in all the fields.", 3000);
             return false;
         }
+        LoadPaneOff();
         return false;
     }
 
