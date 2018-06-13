@@ -427,7 +427,7 @@ public class SocketClient {
     public boolean ReConnect() {
         failedAttempt++;
             try {
-                this.Socket = (Socket) socketFactory.createSocket("localhost", 7676);
+                this.Socket = (Socket) socketFactory.createSocket("188.166.118.138", 7676);
 
                 output = new ObjectOutputStream(Socket.getOutputStream());
 
