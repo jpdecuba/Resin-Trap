@@ -72,7 +72,9 @@ public class HoneyRJ  implements Serializable{
 	}
 
 	public void setDBLogs(Set<LogConnection> logs){
-		this.logs = logs;
+		if(logs != null) {
+			this.logs = logs;
+		}
 
 	}
 
