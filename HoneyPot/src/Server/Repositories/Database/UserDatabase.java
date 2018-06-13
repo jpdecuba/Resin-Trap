@@ -77,7 +77,7 @@ public class UserDatabase implements ILoginRepo {
 	@Override
 	public boolean Register(User user) {
 		try{
-			if(user.getCode() == null || user.getCode().equals(""))
+			if(user.getRole() == UserRole.User && (user.getCode() == null || user.getCode().equals("")) && !SearchCode(user.getCode()))
 			{
 				return false;
 			}
