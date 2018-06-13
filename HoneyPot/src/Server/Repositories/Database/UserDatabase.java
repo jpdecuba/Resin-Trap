@@ -77,6 +77,10 @@ public class UserDatabase implements ILoginRepo {
 	@Override
 	public boolean Register(User user) {
 		try{
+			if(user.getCode() == null || user.getCode().equals(""))
+			{
+				return false;
+			}
 			String sql = "INSERT INTO Account (name, password, roleID, [online]) VALUES (?, ?, ?, ?)";
 			PreparedStatement statement = Database.connection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, user.getName());
@@ -114,6 +118,7 @@ public class UserDatabase implements ILoginRepo {
 				statement.setString(1, newCode);
 				statement.execute();
 			}
+
 
 			if(!CreateAccountCode(id, newCode)) {
 				return false;
