@@ -81,12 +81,11 @@ public class UserDatabase implements ILoginRepo {
 			{
 				return false;
 			}
-			String sql = "INSERT INTO Account (name, password, roleID, [online]) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO Account (name, password, roleID) VALUES (?, ?, ?, ?)";
 			PreparedStatement statement = Database.connection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, user.getName());
 			statement.setString(2, user.getPassword());
 			statement.setInt(3, user.getRole().getValue());
-			statement.setInt(4, 0);
 			int id = 0;
 			statement.executeUpdate();
 			ResultSet result = statement.getGeneratedKeys();
