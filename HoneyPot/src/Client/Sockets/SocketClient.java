@@ -26,14 +26,14 @@ public class SocketClient {
 
     private SocketFactory socketFactory = (SocketFactory) SocketFactory.getDefault();
 
-    //188.166.118.138
+
     public SocketClient(java.net.Socket socket) {
         if(socket != null) {
             Socket = socket;
         }else {
 
             try {
-                this.Socket = (Socket) socketFactory.createSocket("188.166.118.138", 7676);
+                this.Socket = (Socket) socketFactory.createSocket("", 7676);
             } catch (IOException e) {
             }
         }
@@ -427,7 +427,7 @@ public class SocketClient {
     public boolean ReConnect() {
         failedAttempt++;
             try {
-                this.Socket = (Socket) socketFactory.createSocket("188.166.118.138", 7676);
+                this.Socket = (Socket) socketFactory.createSocket("", 7676);
 
                 output = new ObjectOutputStream(Socket.getOutputStream());
 

@@ -10,7 +10,7 @@ public class Database {
 		try
 		{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			con = DriverManager.getConnection("jdbc:sqlserver://bp4.database.windows.net;database=achmeaHoneypot", "dbi365995", "typo123T");
+			con = DriverManager.getConnection("jdbc:sqlserver://", "", "");
 		}
 		catch (ClassNotFoundException ex)
 		{
